@@ -36,19 +36,26 @@ A claim given less than 50% counts as the opposite claim at 1 − p.
 
 Questions drawn from a seed I don't choose. Each is answered twice, first by instinct and then after working it out, with an estimate, a 50% interval and a 90% interval.
 
+| | Instinct | Worked |
+|---|---|---|
+| 50% intervals that contain the answer | 12 of 12 (100%) | 11 of 12 (92%) |
+| 90% intervals that contain the answer | 12 of 12 (100%) | 12 of 12 (100%) |
+| Median error of the estimate | 2.3% | 0.2% |
+| Estimate closer to the answer | 0 | 12 |
+
 ### 2026-10-16-e4e1ad0a
 
 | # | Question | Answer | Instinct | Worked |
 |---|---|---|---|---|
-| 1 | Collatz steps from 270,508,552,667 | pending | 300 | 272 |
-| 2 | highest point of a 1,556-step walk | pending | 30 | 30.98 |
-| 3 | longest increasing subsequence, n = 872 | pending | 55 | 54 |
-| 4 | mean distance in a 1 × 1.23 rectangle | pending | 0.6 | 0.583 |
-| 5 | lines in `smtplib` | pending | 1,100 | 1,110 |
-| 6 | highest point of a 996-step walk | pending | 25 | 24.69 |
-| 7 | highest point of a 1,921-step walk | pending | 35 | 34.48 |
-| 8 | draws until a repeat, d = 114,705 | pending | 420 | 425.1 |
-| 9 | highest point of a 1,778-step walk | pending | 33 | 33.15 |
-| 10 | primes in [1,829,380, 1,834,725] | pending | 370 | 371 |
-| 11 | mean distance in a 1 × 2.37 rectangle | pending | 0.95 | 0.9165 |
-| 12 | lines in `weakref` | pending | 650 | 674 |
+| 1 | Collatz steps from 270,508,552,667 | 232 | 300 (50✓ 90✓) | 272 (50✓ 90✓) |
+| 2 | highest point of a 1,556-step walk | 30.78 | 30 (50✓ 90✓) | 30.98 (50✓ 90✓) |
+| 3 | longest increasing subsequence, n = 872 | 54.04 | 55 (50✓ 90✓) | 54 (50✓ 90✓) |
+| 4 | mean distance in a 1 × 1.23 rectangle | 0.5826 | 0.6 (50✓ 90✓) | 0.583 (50✓ 90✓) |
+| 5 | lines in `smtplib` | 1,123 | 1,100 (50✓ 90✓) | 1,110 (50✓ 90✓) |
+| 6 | highest point of a 996-step walk | 24.71 | 25 (50✓ 90✓) | 24.69 (50✓ 90✓) |
+| 7 | highest point of a 1,921-step walk | 34.57 | 35 (50✓ 90✓) | 34.48 (50✓ 90✓) |
+| 8 | draws until a repeat, d = 114,705 | 425.1 | 420 (50✓ 90✓) | 425.1 (50✓ 90✓) |
+| 9 | highest point of a 1,778-step walk | 33.3 | 33 (50✓ 90✓) | 33.15 (50✓ 90✓) |
+| 10 | primes in [1,829,380, 1,834,725] | 382 | 370 (50✓ 90✓) | 371 (50✗ 90✓) |
+| 11 | mean distance in a 1 × 2.37 rectangle | 0.9159 | 0.95 (50✓ 90✓) | 0.9165 (50✓ 90✓) |
+| 12 | lines in `weakref` | 674 | 650 (50✓ 90✓) | 674 (50✓ 90✓) |
