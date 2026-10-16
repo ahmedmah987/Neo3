@@ -1,0 +1,200 @@
+"""Question families for drawn rounds.
+
+Each family has a `make(rng)` that draws its parameters and writes the question, and a
+`solve(**params)` that settles it. generate.py picks families and parameters from a seed
+I don't choose; resolve.py calls solve only once my answers are committed and pushed.
+"""
+import bisect
+import importlib.util
+import itertools
+import math
+import random
+
+# Single-file, pure-Python standard-library modules in Python 3.13 (frozen ones such as os are left out).
+STDLIB_MODULES = [
+    "argparse", "ast", "base64", "bdb", "bisect", "calendar", "cmd", "colorsys",
+    "configparser", "contextlib", "copy", "csv", "dataclasses", "difflib", "enum", "fnmatch",
+    "fractions", "functools", "getopt", "gettext", "glob", "gzip", "heapq", "hmac", "imaplib",
+    "inspect", "ipaddress", "locale", "mailbox", "mimetypes", "numbers", "opcode", "operator",
+    "optparse", "pdb", "pickle", "platform", "poplib", "pprint", "queue", "quopri",
+    "random", "reprlib", "sched", "secrets", "selectors", "shlex", "shutil", "smtplib",
+    "socket", "ssl", "statistics", "string", "subprocess", "symtable", "tabnanny",
+    "tarfile", "tempfile", "textwrap", "threading", "timeit", "tokenize", "trace", "traceback",
+    "types", "typing", "uuid", "warnings", "wave", "weakref", "webbrowser", "zipapp",
+]
+
+
+def log_uniform_int(rng, lo_exp, hi_exp):
+    return int(10 ** rng.uniform(lo_exp, hi_exp))
+
+
+# ---- primes in a range ---------------------------------------------------------------------
+
+def make_primes_in_range(rng):
+    a = log_uniform_int(rng, 5, 7)
+    b = a + log_uniform_int(rng, 3, 5)
+    return {"a": a, "b": b}, f"How many primes p satisfy {a:,} ≤ p ≤ {b:,}?", f"primes in [{a:,}, {b:,}]"
+
+
+def solve_primes_in_range(a, b):
+    limit = math.isqrt(b)
+    small = bytearray([1]) * (limit + 1)
+    small[0] = small[1] = 0
+    for i in range(2, math.isqrt(limit) + 1):
+        if small[i]:
+            small[i * i::i] = bytes(len(range(i * i, limit + 1, i)))
+    segment = bytearray([1]) * (b - a + 1)          # a ≥ 100,000, so 0 and 1 are never in range
+    for p in range(2, limit + 1):
+        if small[p]:
+            start = max(p * p, -(-a // p) * p) - a
+            segment[start::p] = bytes(len(range(start, b - a + 1, p)))
+    return sum(segment)
+
+
+# ---- digit sum of a power of two -----------------------------------------------------------
+
+def make_digit_sum_pow2(rng):
+    n = rng.randint(500, 10_000)
+    return {"n": n}, f"What is the sum of the decimal digits of 2^{n}?", f"digit sum of 2^{n}"
+
+
+def solve_digit_sum_pow2(n):
+    return sum(map(int, str(2 ** n)))
+
+
+# ---- longest increasing subsequence --------------------------------------------------------
+
+LIS_SAMPLES = 1_000
+
+
+def make_lis(rng):
+    n = log_uniform_int(rng, 2, 3.7)
+    text = (f"What is the average length of the longest increasing subsequence of a uniformly "
+            f"random permutation of {n:,} elements? (Settled by averaging {LIS_SAMPLES:,} random permutations.)")
+    return {"n": n, "seed": rng.getrandbits(32)}, text, f"longest increasing subsequence, n = {n:,}"
+
+
+def lis_length(seq):
+    tails = []                                       # patience sorting
+    for x in seq:
+        i = bisect.bisect_left(tails, x)
+        if i == len(tails):
+            tails.append(x)
+        else:
+            tails[i] = x
+    return len(tails)
+
+
+def solve_lis(n, seed):
+    rng, perm, total = random.Random(seed), list(range(n)), 0
+    for _ in range(LIS_SAMPLES):
+        rng.shuffle(perm)
+        total += lis_length(perm)
+    return total / LIS_SAMPLES
+
+
+# ---- mean distance in a rectangle ----------------------------------------------------------
+
+RECT_SAMPLES = 400_000
+
+
+def make_rect_distance(rng):
+    b = round(10 ** rng.uniform(0, 1), 2)
+    text = (f"Two points are chosen independently and uniformly at random in a 1 × {b} rectangle. "
+            f"What is the expected distance between them? (Settled by averaging {RECT_SAMPLES:,} random pairs.)")
+    return {"b": b, "seed": rng.getrandbits(32)}, text, f"mean distance in a 1 × {b} rectangle"
+
+
+def solve_rect_distance(b, seed):
+    rnd = random.Random(seed).random
+    total = sum(math.hypot(rnd() - rnd(), b * (rnd() - rnd())) for _ in range(RECT_SAMPLES))
+    return total / RECT_SAMPLES
+
+
+# ---- Collatz steps from one number ---------------------------------------------------------
+
+def make_collatz_steps(rng):
+    n = rng.randint(10 ** 6, 10 ** 12)
+    text = f"Starting from {n:,}, how many steps does the Collatz process (halve if even, 3n + 1 if odd) take to reach 1?"
+    return {"n": n}, text, f"Collatz steps from {n:,}"
+
+
+def solve_collatz_steps(n):
+    steps = 0
+    while n != 1:
+        n = n // 2 if n % 2 == 0 else 3 * n + 1
+        steps += 1
+    return steps
+
+
+# ---- lines in a standard-library module ----------------------------------------------------
+
+def module_path(name):
+    spec = importlib.util.find_spec(name)
+    if spec is None or not (spec.origin or "").endswith(".py") or spec.origin.endswith("__init__.py"):
+        raise ValueError(f"{name} is not a single-file Python module here")
+    return spec.origin
+
+
+def make_stdlib_lines(rng):
+    name = rng.choice(STDLIB_MODULES)
+    module_path(name)
+    text = f"How many lines are in the source file of the standard-library module `{name}` in Python 3.13 (every line, blank or not)?"
+    return {"module": name}, text, f"lines in `{name}`"
+
+
+def solve_stdlib_lines(module):
+    with open(module_path(module), encoding="utf-8") as f:
+        return len(f.read().splitlines())
+
+
+# ---- draws until a repeat ------------------------------------------------------------------
+
+def make_birthday(rng):
+    d = log_uniform_int(rng, 2, 7)
+    text = (f"Integers are drawn uniformly at random from 1 to {d:,}, with replacement, until some value "
+            f"appears for the second time. What is the expected number of draws, counting the repeat?")
+    return {"d": d}, text, f"draws until a repeat, d = {d:,}"
+
+
+def solve_birthday(d):
+    # E[T] = sum over k >= 0 of P(the first k draws are all different)
+    expected, distinct, k = 0.0, 1.0, 0
+    while distinct > 1e-17 and k <= d:
+        expected += distinct
+        distinct *= 1 - k / d
+        k += 1
+    return expected
+
+
+# ---- highest point of a random walk --------------------------------------------------------
+
+WALK_SAMPLES = 4_000
+
+
+def make_walk_max(rng):
+    n = rng.randint(100, 2_000)
+    text = (f"A simple random walk on the integers starts at 0 and takes {n:,} steps of +1 or −1, each with "
+            f"probability ½. What is the expected highest position it reaches (0 if it never rises above the start)? "
+            f"(Settled by averaging {WALK_SAMPLES:,} random walks.)")
+    return {"n": n, "seed": rng.getrandbits(32)}, text, f"highest point of a {n:,}-step walk"
+
+
+def solve_walk_max(n, seed):
+    rng, total = random.Random(seed), 0
+    for _ in range(WALK_SAMPLES):
+        bits = format(rng.getrandbits(n), f"0{n}b")
+        total += max(0, max(itertools.accumulate(1 if c == "1" else -1 for c in bits)))
+    return total / WALK_SAMPLES
+
+
+FAMILIES = {
+    "primes_in_range": (make_primes_in_range, solve_primes_in_range),
+    "digit_sum_pow2": (make_digit_sum_pow2, solve_digit_sum_pow2),
+    "lis": (make_lis, solve_lis),
+    "rect_distance": (make_rect_distance, solve_rect_distance),
+    "collatz_steps": (make_collatz_steps, solve_collatz_steps),
+    "stdlib_lines": (make_stdlib_lines, solve_stdlib_lines),
+    "birthday": (make_birthday, solve_birthday),
+    "walk_max": (make_walk_max, solve_walk_max),
+}

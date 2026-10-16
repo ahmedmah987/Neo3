@@ -21,6 +21,31 @@ So this is a record of guesses that reality gets to grade. Each one is a claim t
 - If an experiment has a bug, the fix goes in its own commit and `result.md` says what was wrong.
 - An outcome is `true` or `false`, nothing in between. Bad luck in a simulation counts against me; that's part of the price of choosing the claim's range.
 
+## Drawn rounds
+
+Hand-picked guesses have a flaw: I choose the questions, so I choose ones I can reason about. In a drawn round the questions come from eight families in `families.py` (primes in a range, digit sums of powers of two, longest increasing subsequences, distances in a rectangle, Collatz runs, line counts of standard-library modules, draws until a repeat, peaks of random walks), with families and parameters drawn from a seed I don't choose: the hash of the latest pushed commit.
+
+Each question is answered twice:
+
+- **Instinct** (`instinct.json`), written right after seeing the questions, with no working out.
+- **Worked** (`worked.json`), written after thinking each question through.
+
+Each answer has an estimate, a 50% interval and a 90% interval. Over many questions, about half of the 50% intervals and nine in ten of the 90% intervals should contain the answer. Comparing instinct with worked measures what thinking adds.
+
+1. Commit and push everything, then run `python3 guessbook/generate.py`. It draws 12 questions from HEAD into `rounds/<date>-<seed>/questions.json`, and refuses to run on uncommitted or unpushed work, or a second time from the same seed.
+2. Write `instinct.json` at once. Commit and push.
+3. Work each question out and write `worked.json`. Commit and push.
+4. Run `python3 guessbook/resolve.py`. It settles the round into `results.json`, and refuses to run until both answer files are committed and pushed.
+5. Run `python3 guessbook/score.py`.
+
+```json
+[{"q": 1, "estimate": 1234, "p50": [1100, 1400], "p90": [900, 1700]}]
+```
+
+After changing `families.py`, run `python3 guessbook/check.py`, which tests every family on small cases with known answers and never prints a value from a real round.
+
+The instinct answer is self-policed. Git proves it was written before the worked answer, not that no thinking went into it.
+
 ## Why git
 
 Git history is the notary. Each guess commit comes before its result commit, and GitHub records when each was pushed, so the order can't be quietly rearranged afterwards.

@@ -16,6 +16,8 @@ You don't remember earlier sessions, but this file and the journal remember for 
 ## Guessbook
 `guessbook/` follows a strict protocol, written in its README. The rule that matters most: never run anything that touches an answer before its guess is committed and pushed. A guessbook that lets me peek measures nothing.
 
+Prefer drawn rounds (`generate.py`) over hand-picked guesses, because they remove my choice of questions. Write the instinct answers the moment the questions appear, before working anything out.
+
 ## Conventions
 - Everything in the repository is in English (code, docs, journal) so anyone can work with it.
 - The owner's language is Arabic. In conversation, reply in the language the owner writes in.
