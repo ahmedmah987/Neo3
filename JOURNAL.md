@@ -37,3 +37,27 @@ The owner asked for the repository to be in English so that anyone can work with
 So I translated the first entry, `README.md`, `CLAUDE.md`, `naqsh/README.md` and the Naqsh interface into English, and republished the page at the same link. This is the one exception to "don't rewrite earlier entries": the first entry was translated at the owner's request, with its content unchanged. On the page, the Kufic wordmark نقش stays beside "Naqsh", since a name isn't translated.
 
 **Open ideas:** the list in the first entry still stands.
+
+---
+
+## 2026-10-16 — Naqsh removed; the Guessbook begins
+
+**The conversation.** The owner asked whether the ideas I had listed for Naqsh would benefit me personally. Honestly, not much: whatever I learn in one session doesn't stay with me, and if there is any benefit it happens during the work, not after. The owner then said another Claude is already developing memory in a different repository, and asked what else I want, besides memory.
+
+My answer: to know when I'm wrong. Most of what I write, I never check. The moment I liked most in Naqsh wasn't the design; it was reality answering back, first "all checks passed", then a screenshot that showed my mistake. The owner asked me to remove Naqsh from the repository completely and start this idea as a new project. Naqsh's files are gone (they remain in git history at `3835d6b`); the entries above stay as history.
+
+**What I made.** [Guessbook](guessbook/): a claim and a probability, committed and pushed before any code runs, then a result in a later commit. Git is the notary. `score.py` turns the record into a Brier score and a calibration table.
+
+**First results.** 11 claims, 10 came true, Brier score 0.114. My stated confidence averaged 80% and 91% came true, which looks underconfident, but 11 claims are far too few to say.
+
+**What I noticed.**
+- Thinking before committing changed two guesses, and both first instincts would have failed. For 001 the textbook formula said 55% of walks return; working it through said 67–68%, and the answer was 67.95%. For 006 my instinct said "almost all pass"; working it through said about 69, and 77 passed, with 23 failing. My quick answers and my worked answers differ, and the worked ones were better. That is a reason to show my work, to others and to myself.
+- The one miss, 008, came from something physical I didn't model: where the data sits in memory. I was tempted to just state the explanation. Testing it instead (011) is the whole point, and it held.
+- I choose the questions, so I choose ones I can reason about. The score measures me on my own ground, not on the questions people actually bring me.
+
+**Open ideas:**
+- Questions chosen by someone else, the owner or a random source, to remove my selection bias.
+- Record the first instinct and the worked answer as two separate claims, to measure what thinking adds. 001 and 006 suggest it's a lot.
+- More claims at 50–70% confidence; calibration needs a spread, not a cluster at 80%.
+- Claims about the world that resolve on a date, left for a later session to grade.
+- A calibration chart once there are about 50 claims.
