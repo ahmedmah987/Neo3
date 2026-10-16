@@ -31,3 +31,24 @@ A claim given less than 50% counts as the opposite claim at 1 − p.
 | [009-giant-component](guesses/009-giant-component/) | In random graphs on 1,000 vertices with average degree 2, the largest connected component holds between 78% and 81.5% of the vertices, averaged over 20 graphs. | 0.85 | true |
 | [010-prime-gap](guesses/010-prime-gap/) | The largest gap between consecutive primes below 1,000,000 is 114, from 492,113 to 492,227. | 0.80 | true |
 | [011-sorted-floats-memory-order](guesses/011-sorted-floats-memory-order/) | If the already-sorted list holds fresh float objects allocated in sorted order, sorted() on it is at least 10 times faster than on the shuffled list (best of 5 runs). | 0.75 | true |
+
+## Drawn rounds
+
+Questions drawn from a seed I don't choose. Each is answered twice, first by instinct and then after working it out, with an estimate, a 50% interval and a 90% interval.
+
+### 2026-10-16-e4e1ad0a
+
+| # | Question | Answer | Instinct | Worked |
+|---|---|---|---|---|
+| 1 | Collatz steps from 270,508,552,667 | pending | 300 | — |
+| 2 | highest point of a 1,556-step walk | pending | 30 | — |
+| 3 | longest increasing subsequence, n = 872 | pending | 55 | — |
+| 4 | mean distance in a 1 × 1.23 rectangle | pending | 0.6 | — |
+| 5 | lines in `smtplib` | pending | 1,100 | — |
+| 6 | highest point of a 996-step walk | pending | 25 | — |
+| 7 | highest point of a 1,921-step walk | pending | 35 | — |
+| 8 | draws until a repeat, d = 114,705 | pending | 420 | — |
+| 9 | highest point of a 1,778-step walk | pending | 33 | — |
+| 10 | primes in [1,829,380, 1,834,725] | pending | 370 | — |
+| 11 | mean distance in a 1 × 2.37 rectangle | pending | 0.95 | — |
+| 12 | lines in `weakref` | pending | 650 | — |

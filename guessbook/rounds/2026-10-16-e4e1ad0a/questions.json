@@ -1,0 +1,121 @@
+{
+  "seed": "e4e1ad0a2e6c526e6731faba9b36ddc2d7634b6d",
+  "questions": [
+    {
+      "q": 1,
+      "family": "collatz_steps",
+      "params": {
+        "n": 270508552667
+      },
+      "short": "Collatz steps from 270,508,552,667",
+      "text": "Starting from 270,508,552,667, how many steps does the Collatz process (halve if even, 3n + 1 if odd) take to reach 1?"
+    },
+    {
+      "q": 2,
+      "family": "walk_max",
+      "params": {
+        "n": 1556,
+        "seed": 1345513555
+      },
+      "short": "highest point of a 1,556-step walk",
+      "text": "A simple random walk on the integers starts at 0 and takes 1,556 steps of +1 or −1, each with probability ½. What is the expected highest position it reaches (0 if it never rises above the start)? (Settled by averaging 4,000 random walks.)"
+    },
+    {
+      "q": 3,
+      "family": "lis",
+      "params": {
+        "n": 872,
+        "seed": 1191000684
+      },
+      "short": "longest increasing subsequence, n = 872",
+      "text": "What is the average length of the longest increasing subsequence of a uniformly random permutation of 872 elements? (Settled by averaging 1,000 random permutations.)"
+    },
+    {
+      "q": 4,
+      "family": "rect_distance",
+      "params": {
+        "b": 1.23,
+        "seed": 3578234351
+      },
+      "short": "mean distance in a 1 × 1.23 rectangle",
+      "text": "Two points are chosen independently and uniformly at random in a 1 × 1.23 rectangle. What is the expected distance between them? (Settled by averaging 400,000 random pairs.)"
+    },
+    {
+      "q": 5,
+      "family": "stdlib_lines",
+      "params": {
+        "module": "smtplib"
+      },
+      "short": "lines in `smtplib`",
+      "text": "How many lines are in the source file of the standard-library module `smtplib` in Python 3.13 (every line, blank or not)?"
+    },
+    {
+      "q": 6,
+      "family": "walk_max",
+      "params": {
+        "n": 996,
+        "seed": 3300522327
+      },
+      "short": "highest point of a 996-step walk",
+      "text": "A simple random walk on the integers starts at 0 and takes 996 steps of +1 or −1, each with probability ½. What is the expected highest position it reaches (0 if it never rises above the start)? (Settled by averaging 4,000 random walks.)"
+    },
+    {
+      "q": 7,
+      "family": "walk_max",
+      "params": {
+        "n": 1921,
+        "seed": 3226469653
+      },
+      "short": "highest point of a 1,921-step walk",
+      "text": "A simple random walk on the integers starts at 0 and takes 1,921 steps of +1 or −1, each with probability ½. What is the expected highest position it reaches (0 if it never rises above the start)? (Settled by averaging 4,000 random walks.)"
+    },
+    {
+      "q": 8,
+      "family": "birthday",
+      "params": {
+        "d": 114705
+      },
+      "short": "draws until a repeat, d = 114,705",
+      "text": "Integers are drawn uniformly at random from 1 to 114,705, with replacement, until some value appears for the second time. What is the expected number of draws, counting the repeat?"
+    },
+    {
+      "q": 9,
+      "family": "walk_max",
+      "params": {
+        "n": 1778,
+        "seed": 1082781770
+      },
+      "short": "highest point of a 1,778-step walk",
+      "text": "A simple random walk on the integers starts at 0 and takes 1,778 steps of +1 or −1, each with probability ½. What is the expected highest position it reaches (0 if it never rises above the start)? (Settled by averaging 4,000 random walks.)"
+    },
+    {
+      "q": 10,
+      "family": "primes_in_range",
+      "params": {
+        "a": 1829380,
+        "b": 1834725
+      },
+      "short": "primes in [1,829,380, 1,834,725]",
+      "text": "How many primes p satisfy 1,829,380 ≤ p ≤ 1,834,725?"
+    },
+    {
+      "q": 11,
+      "family": "rect_distance",
+      "params": {
+        "b": 2.37,
+        "seed": 267341514
+      },
+      "short": "mean distance in a 1 × 2.37 rectangle",
+      "text": "Two points are chosen independently and uniformly at random in a 1 × 2.37 rectangle. What is the expected distance between them? (Settled by averaging 400,000 random pairs.)"
+    },
+    {
+      "q": 12,
+      "family": "stdlib_lines",
+      "params": {
+        "module": "weakref"
+      },
+      "short": "lines in `weakref`",
+      "text": "How many lines are in the source file of the standard-library module `weakref` in Python 3.13 (every line, blank or not)?"
+    }
+  ]
+}
