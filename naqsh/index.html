@@ -1,0 +1,464 @@
+<title>نقش</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Reem+Kufi:wght@500;700&display=swap">
+<style>
+/* Layout: the pattern is the page; a narrow instrument card docks on the start edge (a bottom sheet on phones). */
+:root {
+  --plaster: #F2F3EE;
+  --plaster-2: #E4E7E0;
+  --ink: #17202C;
+  --ink-soft: #566170;
+  --lapis: #1F4E8C;
+  --rule: #CBD0C8;
+  --on-accent: #FFFFFF;
+  --shadow: 0 12px 32px rgba(12, 22, 38, .22);
+  --f-display: "Reem Kufi", "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+  --f-body: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, "Noto Sans Arabic", sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --plaster: #111924; --plaster-2: #1B2531; --ink: #E8E6DF; --ink-soft: #9AA5B2;
+    --lapis: #5DB8B2; --rule: #2A3543; --on-accent: #0D141D; --shadow: 0 12px 32px rgba(0, 0, 0, .5);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --plaster: #111924; --plaster-2: #1B2531; --ink: #E8E6DF; --ink-soft: #9AA5B2;
+  --lapis: #5DB8B2; --rule: #2A3543; --on-accent: #0D141D; --shadow: 0 12px 32px rgba(0, 0, 0, .5);
+  color-scheme: dark;
+}
+
+html, body { height: 100%; }
+body {
+  background: var(--plaster);
+  color: var(--ink);
+  font-family: var(--f-body);
+  overflow: hidden;
+}
+#art {
+  position: fixed; inset: 0; width: 100%; height: 100%;
+  display: block; touch-action: none; cursor: grab;
+}
+#art:active { cursor: grabbing; }
+
+.panel {
+  position: fixed;
+  top: calc(16px + env(safe-area-inset-top, 0px));
+  right: calc(16px + env(safe-area-inset-right, 0px));
+  max-height: calc(100% - 32px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+  width: 304px;
+  display: flex; flex-direction: column; gap: 18px;
+  padding: 20px 18px;
+  overflow-y: auto;
+  background: var(--plaster);
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  scrollbar-width: thin;
+}
+
+.head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+h1 {
+  margin: 0;
+  font-family: var(--f-display); font-weight: 700;
+  font-size: 2.6rem; line-height: 1;
+  color: var(--lapis);
+}
+.sub { margin: 6px 0 0; color: var(--ink-soft); font-size: .95rem; text-wrap: balance; }
+
+h2 {
+  margin: 0 0 10px;
+  font-size: .78rem; font-weight: 600; letter-spacing: .02em;
+  color: var(--ink-soft);
+}
+
+.field { display: flex; flex-direction: column; gap: 8px; }
+.field label { display: flex; justify-content: space-between; align-items: baseline; font-weight: 500; }
+.field output { font-family: var(--f-mono); font-size: .95rem; font-variant-numeric: tabular-nums; color: var(--lapis); }
+.theta label { font-size: 1.05rem; }
+.theta output { font-size: 1.25rem; font-weight: 500; }
+
+input[type="range"] { width: 100%; accent-color: var(--lapis); margin: 0; }
+
+.actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+button { font: inherit; color: inherit; }
+.btn {
+  min-height: 40px; padding: 8px 12px;
+  border: 1px solid var(--rule); border-radius: 9px;
+  background: var(--plaster-2); cursor: pointer;
+  font-weight: 500;
+}
+.btn:hover { border-color: var(--ink-soft); }
+.btn.primary { background: var(--lapis); border-color: var(--lapis); color: var(--on-accent); }
+.btn[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--plaster); }
+:focus-visible { outline: 2px solid var(--lapis); outline-offset: 2px; }
+
+.extra { display: flex; flex-direction: column; gap: 18px; }
+
+.tilings { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.tile {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  padding: 4px; border: 1px solid var(--rule); border-radius: 9px;
+  background: var(--plaster-2); cursor: pointer;
+}
+.tile canvas { width: 100%; aspect-ratio: 1; max-width: 100%; border-radius: 6px; display: block; }
+.tile span { font-family: var(--f-mono); font-size: .66rem; color: var(--ink-soft); direction: ltr; white-space: nowrap; }
+.tile[aria-pressed="true"] { border-color: var(--lapis); box-shadow: 0 0 0 1px var(--lapis); }
+.tile[aria-pressed="true"] span { color: var(--lapis); font-weight: 500; }
+
+.palettes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.swatch {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 8px 4px; border: 1px solid var(--rule); border-radius: 9px;
+  background: var(--plaster-2); cursor: pointer; font-size: .82rem;
+}
+.dots { display: flex; direction: ltr; }
+.dots i { width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid var(--plaster-2); margin-left: -4px; }
+.dots i:first-child { margin-left: 0; }
+.swatch[aria-pressed="true"] { border-color: var(--lapis); box-shadow: 0 0 0 1px var(--lapis); }
+
+.checks { display: flex; flex-direction: column; gap: 10px; }
+.check { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+.check input { width: 18px; height: 18px; accent-color: var(--lapis); margin: 0; }
+
+.how { border-top: 1px solid var(--rule); padding-top: 14px; }
+.how summary { cursor: pointer; font-weight: 600; }
+.how p { margin: 10px 0 0; line-height: 1.75; color: var(--ink-soft); font-size: .92rem; }
+.how .cite { font-size: .82rem; }
+.how i { font-family: var(--f-mono); font-style: normal; color: var(--ink); }
+
+#more { display: none; }
+
+@media (max-width: 759px) {
+  .panel {
+    top: auto; left: 0; right: 0; bottom: 0; width: auto;
+    max-height: 72%;
+    border-radius: 16px 16px 0 0; border-bottom: 0;
+    padding-top: 14px;
+    padding-bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    gap: 14px;
+  }
+  h1 { font-size: 2rem; }
+  .sub { font-size: .88rem; margin-top: 4px; }
+  #more { display: inline-flex; align-items: center; min-height: 36px; padding: 6px 12px; }
+  .panel:not(.open) .extra { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+</style>
+
+<canvas id="art" role="img" aria-label="نقش هندسي يتولّد من التبليط المختار وزاوية التلامس"></canvas>
+
+<aside class="panel" id="panel" dir="rtl" lang="ar">
+  <header class="head">
+    <div>
+      <h1>نقش</h1>
+      <p class="sub">نجومٌ تولد من زاوية واحدة</p>
+    </div>
+    <button class="btn" id="more" type="button" aria-expanded="false" aria-controls="extra">المزيد</button>
+  </header>
+
+  <div class="field theta">
+    <label for="theta">زاوية التلامس <output id="thetaOut" for="theta" dir="ltr">62°</output></label>
+    <input type="range" id="theta" min="10" max="86" step="0.5" value="62">
+  </div>
+
+  <div class="actions">
+    <button class="btn primary" id="breathe" type="button" aria-pressed="false">تنفّس</button>
+    <button class="btn" id="surprise" type="button">مفاجأة</button>
+  </div>
+
+  <div class="extra" id="extra">
+    <section>
+      <h2>التبليط</h2>
+      <div class="tilings" id="tilings"></div>
+    </section>
+
+    <section>
+      <h2>الألوان</h2>
+      <div class="palettes" id="palettes"></div>
+    </section>
+
+    <div class="field">
+      <label for="band">عرض الشريط <output id="bandOut" for="band" dir="ltr">12%</output></label>
+      <input type="range" id="band" min="3" max="18" step="0.5" value="12">
+    </div>
+
+    <div class="field">
+      <label for="scale">التكبير <output id="scaleOut" for="scale" dir="ltr">54 px</output></label>
+      <input type="range" id="scale" min="16" max="140" step="1" value="54">
+    </div>
+
+    <div class="checks">
+      <label class="check"><input type="checkbox" id="interlace" checked> تشبيك الشرائط</label>
+      <label class="check"><input type="checkbox" id="polys"> إظهار المضلّعات الخفيّة</label>
+    </div>
+
+    <details class="how">
+      <summary>كيف يولد النقش؟</summary>
+      <p>نبدأ بتبليطٍ من مضلّعات منتظمة متلاصقة. من منتصف كل ضلع يخرج خطّان على هيئة X، يصنع كلٌّ منهما مع الضلع زاوية <i>θ</i>. يمتدّ كل خط داخل مضلّعه حتى يلتقي بخطّ الضلع المجاور، فتولد نجمةٌ في قلب كل مضلّع.</p>
+      <p>قاعدة واحدة وزاوية واحدة. تغيير <i>θ</i> وحده ينقل النقش من شبكة هادئة إلى نجوم حادّة. وفي التشبيك يمرّ كل شريط فوق ما يقطعه ثم تحت ما يليه، بالتناوب، كما في الزليج والخشب المعشّق.</p>
+      <p>الأرقام تحت كل تبليط تصف ما يلتقي عند كل رأس: <i dir="ltr">4.6.12</i> تعني مربعًا وسداسيًا واثني عشريًا.</p>
+      <p class="cite">وصف هذه الطريقة إ. ه. هانكن عام 1925 تفسيرًا لكيف رسم الصنّاع النقوش الإسلامية، وصاغها كريغ كابلان خوارزميةً عام 2005.</p>
+    </details>
+  </div>
+</aside>
+
+<script src="geometry.js"></script>
+<script>
+(() => {
+  'use strict';
+  const { byId, polygonsIn, motif } = window.Naqsh;
+  const RAD = Math.PI / 180;
+
+  const TILING_ORDER = ['4.6.12', '4.8.8', '3.12.12', '3.4.6.4', '6.6.6', '3.6.3.6', '3.3.4.3.4', '4.4.4.4'];
+
+  const PALETTES = [
+    { id: 'fez', name: 'فاس', bg: '#1D5C4B', band: '#F7F3EA', edge: '#1A1D22', guide: 'rgba(255,214,110,.9)',
+      star: { 3: '#1A1D22', 4: '#7A2E2A', 6: '#D2A03A', 8: '#1F4E8C', 12: '#1F4E8C' },
+      dots: ['#1D5C4B', '#1F4E8C', '#D2A03A', '#F7F3EA'] },
+    { id: 'isfahan', name: 'أصفهان', bg: '#163A5F', band: '#F1E8D2', edge: '#0A1A2B', guide: 'rgba(255,214,110,.9)',
+      star: { 3: '#0F2741', 4: '#7FC4C8', 6: '#C2692D', 8: '#E3C77D', 12: '#2E9C9A' },
+      dots: ['#163A5F', '#2E9C9A', '#C2692D', '#F1E8D2'] },
+    { id: 'manuscript', name: 'مخطوط', bg: '#0D1322', band: '#D6B25E', edge: '#4A3710', guide: 'rgba(120,200,255,.8)',
+      star: { 3: '#161E35', 4: '#2B2138', 6: '#1E2A45', 8: '#1A2C40', 12: '#22305A' },
+      dots: ['#0D1322', '#22305A', '#2B2138', '#D6B25E'] },
+    { id: 'ink', name: 'حبر', bg: '#F5F3ED', band: '#F5F3ED', edge: '#15171C', guide: 'rgba(31,78,140,.75)',
+      star: { 3: '#F5F3ED', 4: '#F5F3ED', 6: '#EAE6DA', 8: '#EAE6DA', 12: '#E2DCCD' },
+      dots: ['#F5F3ED', '#E2DCCD', '#15171C'] },
+  ];
+  const paletteById = Object.fromEntries(PALETTES.map((p) => [p.id, p]));
+
+  const DEFAULTS = { tiling: '4.6.12', theta: 62, band: 12, scale: 54, palette: 'fez', interlace: true, polys: false, vx: 0, vy: 0 };
+  const state = { ...DEFAULTS };
+  try {
+    const saved = JSON.parse(localStorage.getItem('naqsh') || 'null');
+    if (saved && byId[saved.tiling] && paletteById[saved.palette]) Object.assign(state, saved);
+  } catch (e) { /* storage unavailable: keep defaults */ }
+  let saveTimer = 0;
+  const save = () => {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(() => { try { localStorage.setItem('naqsh', JSON.stringify(state)); } catch (e) {} }, 300);
+  };
+
+  // ---- drawing -------------------------------------------------------------------------
+  // opt: tiling, theta (deg), band (% of edge), scale (px per edge), palette, interlace, polys, vx, vy
+  function drawPattern(ctx, w, h, opt, thin) {
+    const t = byId[opt.tiling], pal = paletteById[opt.palette];
+    const k = opt.scale, cx = w / 2, cy = h / 2, th = opt.theta * RAD;
+    const X = (x) => cx + (x - opt.vx) * k, Y = (y) => cy + (y - opt.vy) * k;
+    const polys = polygonsIn(t, opt.vx - cx / k, opt.vy - cy / k, opt.vx + cx / k, opt.vy + cy / k, 1);
+
+    const stars = {}, bands = new Path2D(), patches = new Path2D(), guides = new Path2D();
+    const W = opt.band / 100 * k, E = Math.max(1, W * 0.16);
+    const interlace = opt.interlace && !thin && W >= 4;
+    // The over-strand is redrawn far enough to cover the whole crossing (half-width / sin of the crossing angle).
+    const reach = W / Math.max(0.12, Math.abs(Math.sin(2 * th))) + E;
+
+    for (const poly of polys) {
+      const m = motif(poly, th), n = poly.length;
+      const sp = stars[n] || (stars[n] = new Path2D());
+      for (let i = 0; i < n; i++) {
+        const a = m.mids[i], p = m.tips[i], b = m.mids[(i + 1) % n];
+        const ax = X(a[0]), ay = Y(a[1]), px = X(p[0]), py = Y(p[1]);
+        if (i === 0) sp.moveTo(ax, ay); else sp.lineTo(ax, ay);
+        sp.lineTo(px, py);
+        bands.moveTo(ax, ay); bands.lineTo(px, py); bands.lineTo(X(b[0]), Y(b[1]));
+        if (interlace) {
+          // At every midpoint the ray heading "forward" around its polygon passes over the other one.
+          const f = m.fwd[i], L = Math.min(reach, 0.9 * m.len[i] * k);
+          patches.moveTo(ax - f[0] * 0.6, ay - f[1] * 0.6);
+          patches.lineTo(ax + f[0] * L, ay + f[1] * L);
+        }
+      }
+      sp.closePath();
+      if (opt.polys && !thin) {
+        guides.moveTo(X(poly[0][0]), Y(poly[0][1]));
+        for (let i = 1; i < n; i++) guides.lineTo(X(poly[i][0]), Y(poly[i][1]));
+        guides.closePath();
+      }
+    }
+
+    ctx.fillStyle = pal.bg;
+    ctx.fillRect(0, 0, w, h);
+    for (const n in stars) { ctx.fillStyle = pal.star[n]; ctx.fill(stars[n]); }
+
+    ctx.lineJoin = 'miter'; ctx.miterLimit = 6; ctx.lineCap = 'butt';
+    if (interlace) {
+      const inner = Math.max(0.5, W - 2 * E);
+      ctx.strokeStyle = pal.edge; ctx.lineWidth = W; ctx.stroke(bands);
+      ctx.strokeStyle = pal.band; ctx.lineWidth = inner; ctx.stroke(bands);
+      ctx.strokeStyle = pal.edge; ctx.lineWidth = W; ctx.stroke(patches);
+      ctx.strokeStyle = pal.band; ctx.lineWidth = inner; ctx.stroke(patches);
+    } else {
+      ctx.strokeStyle = pal.edge;
+      ctx.lineWidth = thin ? 1 : Math.max(1.25, W * 0.28);
+      ctx.stroke(bands);
+    }
+    if (opt.polys && !thin) {
+      ctx.setLineDash([5, 5]);
+      ctx.strokeStyle = pal.guide; ctx.lineWidth = 1.5;
+      ctx.stroke(guides);
+      ctx.setLineDash([]);
+    }
+  }
+
+  // ---- main canvas ---------------------------------------------------------------------
+  const art = document.getElementById('art');
+  const ctx = art.getContext('2d');
+  let vw = 0, vh = 0, dpr = 1;
+  function resize() {
+    dpr = Math.min(2, window.devicePixelRatio || 1);
+    vw = window.innerWidth; vh = window.innerHeight;
+    art.width = Math.round(vw * dpr); art.height = Math.round(vh * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    request(true);
+  }
+
+  // ---- tiling thumbnails ---------------------------------------------------------------
+  const tilingsEl = document.getElementById('tilings');
+  const thumbs = TILING_ORDER.map((id) => {
+    const btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'tile';
+    btn.setAttribute('aria-label', 'تبليط ' + id);
+    const cv = document.createElement('canvas');
+    const label = document.createElement('span');
+    label.textContent = id;
+    btn.append(cv, label);
+    btn.addEventListener('click', () => { state.tiling = id; state.vx = 0; state.vy = 0; sync(); request(true); save(); });
+    tilingsEl.append(btn);
+    return { id, btn, cv };
+  });
+  function drawThumbs() {
+    for (const th of thumbs) {
+      const size = th.cv.clientWidth || 60, tdpr = Math.min(2, window.devicePixelRatio || 1);
+      if (th.cv.width !== Math.round(size * tdpr)) { th.cv.width = th.cv.height = Math.round(size * tdpr); }
+      const c = th.cv.getContext('2d');
+      c.setTransform(tdpr, 0, 0, tdpr, 0, 0);
+      const t = byId[th.id];
+      drawPattern(c, size, size, { ...state, tiling: th.id, vx: 0, vy: 0, scale: size / (1.15 * Math.sqrt(t.area)), interlace: false, polys: false }, true);
+    }
+  }
+
+  // ---- palette swatches ----------------------------------------------------------------
+  const palettesEl = document.getElementById('palettes');
+  const swatches = PALETTES.map((p) => {
+    const btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'swatch';
+    const dots = document.createElement('span');
+    dots.className = 'dots';
+    for (const col of p.dots) {
+      const i = document.createElement('i'); i.style.background = col; dots.append(i);
+    }
+    btn.append(dots, document.createTextNode(p.name));
+    btn.addEventListener('click', () => { state.palette = p.id; sync(); request(true); save(); });
+    palettesEl.append(btn);
+    return { id: p.id, btn };
+  });
+
+  // ---- controls ------------------------------------------------------------------------
+  const $ = (id) => document.getElementById(id);
+  const thetaIn = $('theta'), bandIn = $('band'), scaleIn = $('scale');
+  const interlaceIn = $('interlace'), polysIn = $('polys');
+
+  function sync() {
+    thetaIn.value = state.theta; $('thetaOut').textContent = (+state.theta).toFixed(1).replace(/\.0$/, '') + '°';
+    bandIn.value = state.band; $('bandOut').textContent = state.band + '%';
+    scaleIn.value = state.scale; $('scaleOut').textContent = Math.round(state.scale) + ' px';
+    interlaceIn.checked = state.interlace; polysIn.checked = state.polys;
+    for (const th of thumbs) th.btn.setAttribute('aria-pressed', String(th.id === state.tiling));
+    for (const s of swatches) s.btn.setAttribute('aria-pressed', String(s.id === state.palette));
+  }
+
+  thetaIn.addEventListener('input', () => { stopBreathing(); state.theta = +thetaIn.value; sync(); request(true); save(); });
+  bandIn.addEventListener('input', () => { state.band = +bandIn.value; sync(); request(false); save(); });
+  scaleIn.addEventListener('input', () => { state.scale = +scaleIn.value; sync(); request(false); save(); });
+  interlaceIn.addEventListener('change', () => { state.interlace = interlaceIn.checked; request(false); save(); });
+  polysIn.addEventListener('change', () => { state.polys = polysIn.checked; request(false); save(); });
+
+  $('surprise').addEventListener('click', () => {
+    const others = TILING_ORDER.filter((id) => id !== state.tiling);
+    state.tiling = others[Math.floor(Math.random() * others.length)];
+    state.palette = PALETTES[Math.floor(Math.random() * PALETTES.length)].id;
+    state.theta = Math.round((28 + Math.random() * 48) * 2) / 2;
+    state.band = Math.round((6 + Math.random() * 6) * 2) / 2;
+    state.vx = 0; state.vy = 0;
+    sync(); request(true); save();
+  });
+
+  const panel = $('panel'), more = $('more');
+  more.addEventListener('click', () => {
+    const open = panel.classList.toggle('open');
+    more.setAttribute('aria-expanded', String(open));
+    more.textContent = open ? 'أقل' : 'المزيد';
+    if (open) request(true);
+  });
+
+  // Breathing: θ swings slowly through the whole family of stars, starting from where it is now.
+  const breatheBtn = $('breathe');
+  let breath = null;
+  function stopBreathing() {
+    if (!breath) return;
+    cancelAnimationFrame(breath.raf); breath = null;
+    breatheBtn.setAttribute('aria-pressed', 'false'); breatheBtn.textContent = 'تنفّس';
+    save();
+  }
+  breatheBtn.addEventListener('click', () => {
+    if (breath) { stopBreathing(); return; }
+    const mid = 47, amp = 33, x = Math.max(-1, Math.min(1, (state.theta - mid) / amp));
+    breath = { t0: performance.now(), phase: Math.asin(x), raf: 0 };
+    breatheBtn.setAttribute('aria-pressed', 'true'); breatheBtn.textContent = 'إيقاف';
+    const tick = (now) => {
+      if (!breath) return;
+      const s = (now - breath.t0) / 1000;
+      state.theta = Math.round((mid + amp * Math.sin(breath.phase + s * 2 * Math.PI / 16)) * 10) / 10;
+      sync(); render(true);
+      breath.raf = requestAnimationFrame(tick);
+    };
+    breath.raf = requestAnimationFrame(tick);
+  });
+
+  // Drag to wander across the pattern; wheel to zoom.
+  let drag = null;
+  art.addEventListener('pointerdown', (e) => { drag = { x: e.clientX, y: e.clientY }; art.setPointerCapture(e.pointerId); });
+  art.addEventListener('pointermove', (e) => {
+    if (!drag) return;
+    state.vx -= (e.clientX - drag.x) / state.scale; state.vy -= (e.clientY - drag.y) / state.scale;
+    drag = { x: e.clientX, y: e.clientY };
+    request(false);
+  });
+  const endDrag = () => { if (drag) { drag = null; save(); } };
+  art.addEventListener('pointerup', endDrag);
+  art.addEventListener('pointercancel', endDrag);
+  art.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    state.scale = Math.max(16, Math.min(140, Math.round(state.scale * Math.exp(-e.deltaY * 0.0015))));
+    sync(); request(false); save();
+  }, { passive: false });
+
+  // ---- frame scheduling ----------------------------------------------------------------
+  let pending = false, pendingThumbs = false;
+  function render(withThumbs) {
+    drawPattern(ctx, vw, vh, state, false);
+    if (withThumbs) drawThumbs();
+  }
+  function request(withThumbs) {
+    pendingThumbs = pendingThumbs || withThumbs;
+    if (pending) return;
+    pending = true;
+    requestAnimationFrame(() => { pending = false; render(pendingThumbs); pendingThumbs = false; });
+  }
+
+  window.addEventListener('resize', resize);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => request(true));
+  sync();
+  resize();
+})();
+</script>
