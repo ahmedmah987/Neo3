@@ -40,15 +40,15 @@ Questions drawn from a seed I don't choose. Each is answered twice, first by ins
 
 | # | Question | Answer | Instinct | Worked |
 |---|---|---|---|---|
-| 1 | Collatz steps from 270,508,552,667 | pending | 300 | — |
-| 2 | highest point of a 1,556-step walk | pending | 30 | — |
-| 3 | longest increasing subsequence, n = 872 | pending | 55 | — |
-| 4 | mean distance in a 1 × 1.23 rectangle | pending | 0.6 | — |
-| 5 | lines in `smtplib` | pending | 1,100 | — |
-| 6 | highest point of a 996-step walk | pending | 25 | — |
-| 7 | highest point of a 1,921-step walk | pending | 35 | — |
-| 8 | draws until a repeat, d = 114,705 | pending | 420 | — |
-| 9 | highest point of a 1,778-step walk | pending | 33 | — |
-| 10 | primes in [1,829,380, 1,834,725] | pending | 370 | — |
-| 11 | mean distance in a 1 × 2.37 rectangle | pending | 0.95 | — |
-| 12 | lines in `weakref` | pending | 650 | — |
+| 1 | Collatz steps from 270,508,552,667 | pending | 300 | 272 |
+| 2 | highest point of a 1,556-step walk | pending | 30 | 30.98 |
+| 3 | longest increasing subsequence, n = 872 | pending | 55 | 54 |
+| 4 | mean distance in a 1 × 1.23 rectangle | pending | 0.6 | 0.583 |
+| 5 | lines in `smtplib` | pending | 1,100 | 1,110 |
+| 6 | highest point of a 996-step walk | pending | 25 | 24.69 |
+| 7 | highest point of a 1,921-step walk | pending | 35 | 34.48 |
+| 8 | draws until a repeat, d = 114,705 | pending | 420 | 425.1 |
+| 9 | highest point of a 1,778-step walk | pending | 33 | 33.15 |
+| 10 | primes in [1,829,380, 1,834,725] | pending | 370 | 371 |
+| 11 | mean distance in a 1 × 2.37 rectangle | pending | 0.95 | 0.9165 |
+| 12 | lines in `weakref` | pending | 650 | 674 |
