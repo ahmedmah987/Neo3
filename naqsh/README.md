@@ -1,35 +1,35 @@
-# نقش
+# Naqsh (نقش)
 
-مولّد نقوش هندسية إسلامية بطريقة «المضلّعات المتلامسة».
+An Islamic geometric star-pattern generator using the "polygons in contact" method.
 
-- **الصفحة:** https://claude.ai/artifact/XgxPpEAEcJ3r4C1QSgLEzP
-- **محليًا:** فتح `index.html` في متصفح على الحاسوب يكفي، بلا خادم.
+- **Page:** https://claude.ai/artifact/XgxPpEAEcJ3r4C1QSgLEzP
+- **Locally:** open `index.html` in a desktop browser; no server needed.
 
-## الفكرة
+## The idea
 
-نبدأ بتبليط من مضلعات منتظمة متلاصقة. من منتصف كل ضلع يخرج خطّان على هيئة X، يصنع كل منهما مع الضلع زاوية التلامس θ. يمتدّ كل خط داخل مضلّعه حتى يلتقي بخطّ الضلع المجاور، فتولد نجمة في كل مضلّع. لأن الخطّين يعبران منتصف الضلع مستقيمين، تتصل نجوم المضلعات المتجاورة في شبكة واحدة.
+Start with a tiling of regular polygons. From the midpoint of every edge, two lines leave in an X, each making the contact angle θ with the edge. Each line runs into its polygon until it meets the line from the neighbouring edge, and a star appears inside every polygon. Because both lines pass straight through the midpoint, the stars of neighbouring polygons join into one continuous network.
 
-في المضلع المنتظم يلتقي الشعاعان المتجهان نحو رأس واحد على الخط الواصل بين المركز وذلك الرأس (بالتناظر)، فيكفي تقاطع واحد لكل رأس.
+In a regular polygon, the two rays heading toward the same vertex meet on the line from the centre to that vertex (by symmetry), so one intersection per vertex is enough.
 
-**التشبيك:** عند كل منتصف ضلع، الشعاع المتجه «للأمام» (عكس عقارب الساعة حول مضلعه) هو الذي يمرّ فوق. السير على أي شريط يمرّ بالتقاطعات بالتناوب: فوق عند منتصف، ثم تحت عند التالي. والمضلعان المتجاوران يتفقان دائمًا لأن شعاعيهما الأماميين على خط واحد.
+**Interlacing:** at every edge midpoint, the ray heading "forward" (counter-clockwise around its polygon) passes over. Walking along any band, the crossings alternate: over at one midpoint, under at the next. Neighbouring polygons always agree, because their forward rays lie on the same line.
 
-## الملفات
+## Files
 
-| الملف | ما فيه |
+| File | Contents |
 |---|---|
-| `geometry.js` | التبليطات الثمانية (`4.4.4.4` · `6.6.6` · `3.6.3.6` · `3.4.6.4` · `4.8.8` · `3.12.12` · `4.6.12` · `3.3.4.3.4`) ودالة `motif` لطريقة هانكن |
-| `index.html` | الواجهة: الرسم على canvas، والتحكم، والمعاينات المصغّرة |
-| `check.mjs` | فحوص رياضية للتبليطات والبناء |
+| `geometry.js` | The eight tilings (`4.4.4.4` · `6.6.6` · `3.6.3.6` · `3.4.6.4` · `4.8.8` · `3.12.12` · `4.6.12` · `3.3.4.3.4`) and `motif`, Hankin's construction on one polygon |
+| `index.html` | The interface: canvas drawing, controls and live tiling thumbnails |
+| `check.mjs` | Mathematical checks of the tilings and the construction |
 
-## الفحص
+## Checks
 
 ```sh
 node naqsh/check.mjs
 ```
 
-يتحقق من أن كل ضلع مشترك بين مضلعين بالضبط وبعكس الاتجاه، وأن مجموع الزوايا عند كل رأس 360°، وأن مساحة مضلعات الخلية تساوي مساحة الخلية، وأن الأشعة تعبر كل منتصف ضلع على خط واحد، وأن رؤوس النجوم داخل مضلعاتها.
+Verifies that every edge is shared by exactly two polygons with opposite orientation, the angles around every vertex sum to 360°, the polygons of one cell fill exactly the cell's area, the rays cross every edge midpoint on one line, and every star tip lies inside its polygon.
 
-## مراجع
+## References
 
 - E. H. Hankin, *The Drawing of Geometric Patterns in Saracenic Art*, Memoirs of the Archaeological Survey of India, 1925.
 - Craig S. Kaplan, *Islamic Star Patterns from Polygons in Contact*, Graphics Interface 2005.

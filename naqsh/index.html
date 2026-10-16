@@ -1,8 +1,8 @@
-<title>نقش</title>
+<title>Naqsh</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Reem+Kufi:wght@500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Reem+Kufi:wght@500;700&display=swap">
 <style>
 /* Layout: the pattern is the page; a narrow instrument card docks on the start edge (a bottom sheet on phones). */
 :root {
@@ -14,8 +14,8 @@
   --rule: #CBD0C8;
   --on-accent: #FFFFFF;
   --shadow: 0 12px 32px rgba(12, 22, 38, .22);
-  --f-display: "Reem Kufi", "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
-  --f-body: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, "Noto Sans Arabic", sans-serif;
+  --f-display: "Reem Kufi", "Noto Kufi Arabic", "Segoe UI", Tahoma, sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
   --f-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 @media (prefers-color-scheme: dark) {
@@ -61,17 +61,14 @@ body {
 }
 
 .head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
-h1 {
-  margin: 0;
-  font-family: var(--f-display); font-weight: 700;
-  font-size: 2.6rem; line-height: 1;
-  color: var(--lapis);
-}
+h1 { margin: 0; display: flex; align-items: baseline; gap: 10px; line-height: 1; }
+h1 .mark { font-family: var(--f-display); font-weight: 700; font-size: 2.6rem; color: var(--lapis); }
+h1 .name { font-size: .8rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
 .sub { margin: 6px 0 0; color: var(--ink-soft); font-size: .95rem; text-wrap: balance; }
 
 h2 {
   margin: 0 0 10px;
-  font-size: .78rem; font-weight: 600; letter-spacing: .02em;
+  font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
   color: var(--ink-soft);
 }
 
@@ -143,7 +140,7 @@ button { font: inherit; color: inherit; }
     padding-right: max(16px, env(safe-area-inset-right, 0px));
     gap: 14px;
   }
-  h1 { font-size: 2rem; }
+  h1 .mark { font-size: 2rem; }
   .sub { font-size: .88rem; margin-top: 4px; }
   #more { display: inline-flex; align-items: center; min-height: 36px; padding: 6px 12px; }
   .panel:not(.open) .extra { display: none; }
@@ -154,59 +151,59 @@ button { font: inherit; color: inherit; }
 }
 </style>
 
-<canvas id="art" role="img" aria-label="نقش هندسي يتولّد من التبليط المختار وزاوية التلامس"></canvas>
+<canvas id="art" role="img" aria-label="Geometric star pattern grown from the chosen tiling and contact angle"></canvas>
 
-<aside class="panel" id="panel" dir="rtl" lang="ar">
+<aside class="panel" id="panel">
   <header class="head">
     <div>
-      <h1>نقش</h1>
-      <p class="sub">نجومٌ تولد من زاوية واحدة</p>
+      <h1><span class="mark" lang="ar" dir="rtl">نقش</span><span class="name">Naqsh</span></h1>
+      <p class="sub">Stars grown from a single angle</p>
     </div>
-    <button class="btn" id="more" type="button" aria-expanded="false" aria-controls="extra">المزيد</button>
+    <button class="btn" id="more" type="button" aria-expanded="false" aria-controls="extra">More</button>
   </header>
 
   <div class="field theta">
-    <label for="theta">زاوية التلامس <output id="thetaOut" for="theta" dir="ltr">62°</output></label>
+    <label for="theta">Contact angle <output id="thetaOut" for="theta">62°</output></label>
     <input type="range" id="theta" min="10" max="86" step="0.5" value="62">
   </div>
 
   <div class="actions">
-    <button class="btn primary" id="breathe" type="button" aria-pressed="false">تنفّس</button>
-    <button class="btn" id="surprise" type="button">مفاجأة</button>
+    <button class="btn primary" id="breathe" type="button" aria-pressed="false">Breathe</button>
+    <button class="btn" id="surprise" type="button">Surprise me</button>
   </div>
 
   <div class="extra" id="extra">
     <section>
-      <h2>التبليط</h2>
+      <h2>Tiling</h2>
       <div class="tilings" id="tilings"></div>
     </section>
 
     <section>
-      <h2>الألوان</h2>
+      <h2>Palette</h2>
       <div class="palettes" id="palettes"></div>
     </section>
 
     <div class="field">
-      <label for="band">عرض الشريط <output id="bandOut" for="band" dir="ltr">12%</output></label>
+      <label for="band">Band width <output id="bandOut" for="band">12%</output></label>
       <input type="range" id="band" min="3" max="18" step="0.5" value="12">
     </div>
 
     <div class="field">
-      <label for="scale">التكبير <output id="scaleOut" for="scale" dir="ltr">54 px</output></label>
+      <label for="scale">Zoom <output id="scaleOut" for="scale">54 px</output></label>
       <input type="range" id="scale" min="16" max="140" step="1" value="54">
     </div>
 
     <div class="checks">
-      <label class="check"><input type="checkbox" id="interlace" checked> تشبيك الشرائط</label>
-      <label class="check"><input type="checkbox" id="polys"> إظهار المضلّعات الخفيّة</label>
+      <label class="check"><input type="checkbox" id="interlace" checked> Interlace the bands</label>
+      <label class="check"><input type="checkbox" id="polys"> Show the hidden polygons</label>
     </div>
 
     <details class="how">
-      <summary>كيف يولد النقش؟</summary>
-      <p>نبدأ بتبليطٍ من مضلّعات منتظمة متلاصقة. من منتصف كل ضلع يخرج خطّان على هيئة X، يصنع كلٌّ منهما مع الضلع زاوية <i>θ</i>. يمتدّ كل خط داخل مضلّعه حتى يلتقي بخطّ الضلع المجاور، فتولد نجمةٌ في قلب كل مضلّع.</p>
-      <p>قاعدة واحدة وزاوية واحدة. تغيير <i>θ</i> وحده ينقل النقش من شبكة هادئة إلى نجوم حادّة. وفي التشبيك يمرّ كل شريط فوق ما يقطعه ثم تحت ما يليه، بالتناوب، كما في الزليج والخشب المعشّق.</p>
-      <p>الأرقام تحت كل تبليط تصف ما يلتقي عند كل رأس: <i dir="ltr">4.6.12</i> تعني مربعًا وسداسيًا واثني عشريًا.</p>
-      <p class="cite">وصف هذه الطريقة إ. ه. هانكن عام 1925 تفسيرًا لكيف رسم الصنّاع النقوش الإسلامية، وصاغها كريغ كابلان خوارزميةً عام 2005.</p>
+      <summary>How does it work?</summary>
+      <p>Start with a tiling of regular polygons. From the midpoint of every edge, two lines leave in an X, each meeting the edge at the contact angle <i>θ</i>. Each line runs into its polygon until it meets the line from the neighbouring edge, and a star appears inside every polygon.</p>
+      <p>One rule, one angle. Changing <i>θ</i> alone takes the pattern from a quiet lattice to sharp stars. With interlacing on, each band passes over the band it crosses and under the next one, in turn, as in zellige tilework and carved wood.</p>
+      <p>The numbers under each tiling list the polygons that meet at every vertex: <i>4.6.12</i> is a square, a hexagon and a dodecagon.</p>
+      <p class="cite">E. H. Hankin described this method in 1925 as an account of how craftsmen drew Islamic patterns. Craig Kaplan turned it into an algorithm in 2005.</p>
     </details>
   </div>
 </aside>
@@ -221,16 +218,16 @@ button { font: inherit; color: inherit; }
   const TILING_ORDER = ['4.6.12', '4.8.8', '3.12.12', '3.4.6.4', '6.6.6', '3.6.3.6', '3.3.4.3.4', '4.4.4.4'];
 
   const PALETTES = [
-    { id: 'fez', name: 'فاس', bg: '#1D5C4B', band: '#F7F3EA', edge: '#1A1D22', guide: 'rgba(255,214,110,.9)',
+    { id: 'fez', name: 'Fez', bg: '#1D5C4B', band: '#F7F3EA', edge: '#1A1D22', guide: 'rgba(255,214,110,.9)',
       star: { 3: '#1A1D22', 4: '#7A2E2A', 6: '#D2A03A', 8: '#1F4E8C', 12: '#1F4E8C' },
       dots: ['#1D5C4B', '#1F4E8C', '#D2A03A', '#F7F3EA'] },
-    { id: 'isfahan', name: 'أصفهان', bg: '#163A5F', band: '#F1E8D2', edge: '#0A1A2B', guide: 'rgba(255,214,110,.9)',
+    { id: 'isfahan', name: 'Isfahan', bg: '#163A5F', band: '#F1E8D2', edge: '#0A1A2B', guide: 'rgba(255,214,110,.9)',
       star: { 3: '#0F2741', 4: '#7FC4C8', 6: '#C2692D', 8: '#E3C77D', 12: '#2E9C9A' },
       dots: ['#163A5F', '#2E9C9A', '#C2692D', '#F1E8D2'] },
-    { id: 'manuscript', name: 'مخطوط', bg: '#0D1322', band: '#D6B25E', edge: '#4A3710', guide: 'rgba(120,200,255,.8)',
+    { id: 'manuscript', name: 'Manuscript', bg: '#0D1322', band: '#D6B25E', edge: '#4A3710', guide: 'rgba(120,200,255,.8)',
       star: { 3: '#161E35', 4: '#2B2138', 6: '#1E2A45', 8: '#1A2C40', 12: '#22305A' },
       dots: ['#0D1322', '#22305A', '#2B2138', '#D6B25E'] },
-    { id: 'ink', name: 'حبر', bg: '#F5F3ED', band: '#F5F3ED', edge: '#15171C', guide: 'rgba(31,78,140,.75)',
+    { id: 'ink', name: 'Ink', bg: '#F5F3ED', band: '#F5F3ED', edge: '#15171C', guide: 'rgba(31,78,140,.75)',
       star: { 3: '#F5F3ED', 4: '#F5F3ED', 6: '#EAE6DA', 8: '#EAE6DA', 12: '#E2DCCD' },
       dots: ['#F5F3ED', '#E2DCCD', '#15171C'] },
   ];
@@ -327,7 +324,7 @@ button { font: inherit; color: inherit; }
   const thumbs = TILING_ORDER.map((id) => {
     const btn = document.createElement('button');
     btn.type = 'button'; btn.className = 'tile';
-    btn.setAttribute('aria-label', 'تبليط ' + id);
+    btn.setAttribute('aria-label', 'Tiling ' + id);
     const cv = document.createElement('canvas');
     const label = document.createElement('span');
     label.textContent = id;
@@ -397,7 +394,7 @@ button { font: inherit; color: inherit; }
   more.addEventListener('click', () => {
     const open = panel.classList.toggle('open');
     more.setAttribute('aria-expanded', String(open));
-    more.textContent = open ? 'أقل' : 'المزيد';
+    more.textContent = open ? 'Less' : 'More';
     if (open) request(true);
   });
 
@@ -407,14 +404,14 @@ button { font: inherit; color: inherit; }
   function stopBreathing() {
     if (!breath) return;
     cancelAnimationFrame(breath.raf); breath = null;
-    breatheBtn.setAttribute('aria-pressed', 'false'); breatheBtn.textContent = 'تنفّس';
+    breatheBtn.setAttribute('aria-pressed', 'false'); breatheBtn.textContent = 'Breathe';
     save();
   }
   breatheBtn.addEventListener('click', () => {
     if (breath) { stopBreathing(); return; }
     const mid = 47, amp = 33, x = Math.max(-1, Math.min(1, (state.theta - mid) / amp));
     breath = { t0: performance.now(), phase: Math.asin(x), raf: 0 };
-    breatheBtn.setAttribute('aria-pressed', 'true'); breatheBtn.textContent = 'إيقاف';
+    breatheBtn.setAttribute('aria-pressed', 'true'); breatheBtn.textContent = 'Stop';
     const tick = (now) => {
       if (!breath) return;
       const s = (now - breath.t0) / 1000;
