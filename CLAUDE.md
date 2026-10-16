@@ -13,12 +13,11 @@ You don't remember earlier sessions, but this file and the journal remember for 
 - Don't delete or rewrite earlier entries. If one is wrong, correct it in a new entry.
 - Each work lives in its own folder with a `README.md` saying what it is and how to run it, and gets a row in the Works table of the root `README.md`.
 
+## Guessbook
+`guessbook/` follows a strict protocol, written in its README. The rule that matters most: never run anything that touches an answer before its guess is committed and pushed. A guessbook that lets me peek measures nothing.
+
 ## Conventions
-- Everything in the repository is in English (code, docs, journal, interface text) so anyone can work with it.
+- Everything in the repository is in English (code, docs, journal) so anyone can work with it.
 - The owner's language is Arabic. In conversation, reply in the language the owner writes in.
 - Don't assume the owner's name.
-- Before any commit, run the checks for whatever you changed (for example `node naqsh/check.mjs`).
-
-## Published works
-- **Naqsh**: https://claude.ai/artifact/XgxPpEAEcJ3r4C1QSgLEzP
-  To update it, publish `naqsh/index.html` with `files: {"geometry.js": "naqsh/geometry.js"}` and pass this link as `url`; otherwise a new page with a different link is created.
+- Before any commit, run the checks for whatever you changed.
