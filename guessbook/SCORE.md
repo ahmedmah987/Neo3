@@ -38,10 +38,11 @@ Questions drawn from a seed I don't choose. Each is answered twice, first by ins
 
 | | Instinct | Worked |
 |---|---|---|
-| 50% intervals that contain the answer | 12 of 12 (100%) | 11 of 12 (92%) |
-| 90% intervals that contain the answer | 12 of 12 (100%) | 12 of 12 (100%) |
-| Median error of the estimate | 2.3% | 0.2% |
-| Estimate closer to the answer | 0 | 12 |
+| 50% intervals that contain the answer | 20 of 24 (83%) | 19 of 24 (79%) |
+| 90% intervals that contain the answer | 23 of 24 (96%) | 23 of 24 (96%) |
+| Median error of the estimate | 2.3% | 0.6% |
+| Estimate closer to the answer | 2 | 20 |
+| Ties | 2 | 2 |
 
 ### 2026-10-16-e4e1ad0a
 
@@ -64,15 +65,15 @@ Questions drawn from a seed I don't choose. Each is answered twice, first by ins
 
 | # | Question | Answer | Instinct | Worked |
 |---|---|---|---|---|
-| 1 | digit sum of 2^3832 | pending | 5,200 | 5,193 |
-| 2 | highest point of a 890-step walk | pending | 23.3 | 23.31 |
-| 3 | primes in [2,208,270, 2,216,007] | pending | 530 | 530 |
-| 4 | draws until a repeat, d = 3,625,240 | pending | 2,387 | 2,387 |
-| 5 | Collatz steps from 947,083,466,021 | pending | 285 | 274 |
-| 6 | Unicode names with the word DOUBLE | pending | 550 | 410 |
-| 7 | longest increasing subsequence, n = 261 | pending | 28 | 28.33 |
-| 8 | lines in `fractions` | pending | 1,000 | 1,000 |
-| 9 | mean distance in a 1 × 6.41 rectangle | pending | 2.25 | 2.207 |
-| 10 | function definitions in `tokenize` | pending | 30 | 25 |
-| 11 | highest point of a 1,342-step walk | pending | 28.7 | 28.73 |
-| 12 | Unicode names with the word GREEK | pending | 520 | 528 |
+| 1 | digit sum of 2^3832 | 5,038 | 5,200 (50✗ 90✓) | 5,193 (50✗ 90✓) |
+| 2 | highest point of a 890-step walk | 22.74 | 23.3 (50✗ 90✓) | 23.31 (50✗ 90✗) |
+| 3 | primes in [2,208,270, 2,216,007] | 524 | 530 (50✓ 90✓) | 530 (50✓ 90✓) |
+| 4 | draws until a repeat, d = 3,625,240 | 2,387 | 2,387 (50✓ 90✓) | 2,387 (50✓ 90✓) |
+| 5 | Collatz steps from 947,083,466,021 | 389 | 285 (50✗ 90✗) | 274 (50✗ 90✓) |
+| 6 | Unicode names with the word DOUBLE | 458 | 550 (50✓ 90✓) | 410 (50✓ 90✓) |
+| 7 | longest increasing subsequence, n = 261 | 28.36 | 28 (50✓ 90✓) | 28.33 (50✓ 90✓) |
+| 8 | lines in `fractions` | 1,043 | 1,000 (50✓ 90✓) | 1,000 (50✓ 90✓) |
+| 9 | mean distance in a 1 × 6.41 rectangle | 2.206 | 2.25 (50✓ 90✓) | 2.207 (50✓ 90✓) |
+| 10 | function definitions in `tokenize` | 26 | 30 (50✓ 90✓) | 25 (50✓ 90✓) |
+| 11 | highest point of a 1,342-step walk | 29.09 | 28.7 (50✗ 90✓) | 28.73 (50✗ 90✓) |
+| 12 | Unicode names with the word GREEK | 531 | 520 (50✓ 90✓) | 528 (50✓ 90✓) |

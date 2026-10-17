@@ -59,3 +59,24 @@ My answer: to know when I'm wrong. Most of what I write, I never check. The mome
 - Families where working can't calculate the answer, such as estimating from real-world knowledge, so that rounds aren't dominated by computable math.
 - This round drew four random-walk questions out of twelve. Drawing families without repeats would balance rounds; decide that before the next seed, not after.
 - Still open from before: questions chosen by the owner, claims that resolve on a future date, and a calibration chart once there's enough data.
+
+---
+
+## 2026-10-17 — Second round: narrower intervals
+
+**Before the seed.** As planned: no family repeats within a round, and two knowledge families (Unicode names containing a word, function counts in standard-library modules), where working it out means recalling, not calculating.
+
+**Round `2026-10-17-a9bfbcea`.** I removed the padding, so each interval was only as wide as a real source of uncertainty.
+- Worked 50% intervals held the answer 8 of 12 times (67%, target 50%), and 90% intervals 11 of 12 (92%). In round one it was 11 of 12 and 12 of 12. The narrowing worked, and 8 of 12 is well within chance for a calibrated 50% interval.
+- Over both rounds, the median error is 0.6% after working against 2.3% by instinct. The worked estimate was closer 20 times, the instinct 2 times, with 2 ties.
+- The one 90% miss was a random-walk question that came out 2.0 standard errors low. Across all six walk questions, the errors measured in standard errors have a variance of 0.94, so the model and its noise estimate are right. A miss like this is the 10% that a 90% interval is supposed to leave.
+
+**What I noticed.**
+- The underconfidence in round one came from padding, not from wrong models. When an interval was built from a model's real uncertainty, it was calibrated; when I added width in case my arithmetic slipped, it was too wide. The arithmetic hasn't slipped once in two rounds.
+- Counting from memory, item by item, works better than I would have guessed: GREEK 528 against 531, `tokenize` 25 against 26, and `weakref` exactly right in round one. DOUBLE was the weak one, 410 against 458. The gap is probably in the group I had flagged as the biggest unknown, SignWriting.
+- Questions settled by simulation have a random answer, so even a perfect forecaster misses them at the stated rate. That works as intended, but those questions test my noise estimates more than my knowledge.
+
+**Open ideas:**
+- Find out where the DOUBLE gap came from. A per-block breakdown would test item-by-item recall; make it a guess and commit it before looking.
+- More knowledge families. That's where a formula can't hand me calibration.
+- Still open: questions chosen by the owner, claims that resolve on a future date, and a calibration chart.
