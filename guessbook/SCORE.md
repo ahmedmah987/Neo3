@@ -64,15 +64,15 @@ Questions drawn from a seed I don't choose. Each is answered twice, first by ins
 
 | # | Question | Answer | Instinct | Worked |
 |---|---|---|---|---|
-| 1 | digit sum of 2^3832 | pending | 5,200 | — |
-| 2 | highest point of a 890-step walk | pending | 23.3 | — |
-| 3 | primes in [2,208,270, 2,216,007] | pending | 530 | — |
-| 4 | draws until a repeat, d = 3,625,240 | pending | 2,387 | — |
-| 5 | Collatz steps from 947,083,466,021 | pending | 285 | — |
-| 6 | Unicode names with the word DOUBLE | pending | 550 | — |
-| 7 | longest increasing subsequence, n = 261 | pending | 28 | — |
-| 8 | lines in `fractions` | pending | 1,000 | — |
-| 9 | mean distance in a 1 × 6.41 rectangle | pending | 2.25 | — |
-| 10 | function definitions in `tokenize` | pending | 30 | — |
-| 11 | highest point of a 1,342-step walk | pending | 28.7 | — |
-| 12 | Unicode names with the word GREEK | pending | 520 | — |
+| 1 | digit sum of 2^3832 | pending | 5,200 | 5,193 |
+| 2 | highest point of a 890-step walk | pending | 23.3 | 23.31 |
+| 3 | primes in [2,208,270, 2,216,007] | pending | 530 | 530 |
+| 4 | draws until a repeat, d = 3,625,240 | pending | 2,387 | 2,387 |
+| 5 | Collatz steps from 947,083,466,021 | pending | 285 | 274 |
+| 6 | Unicode names with the word DOUBLE | pending | 550 | 410 |
+| 7 | longest increasing subsequence, n = 261 | pending | 28 | 28.33 |
+| 8 | lines in `fractions` | pending | 1,000 | 1,000 |
+| 9 | mean distance in a 1 × 6.41 rectangle | pending | 2.25 | 2.207 |
+| 10 | function definitions in `tokenize` | pending | 30 | 25 |
+| 11 | highest point of a 1,342-step walk | pending | 28.7 | 28.73 |
+| 12 | Unicode names with the word GREEK | pending | 520 | 528 |
