@@ -13,6 +13,8 @@ import re
 import statistics
 import sys
 
+from families import KINDS
+
 ROOT = pathlib.Path(__file__).parent
 BUCKETS = [(0.5, 0.6), (0.6, 0.7), (0.7, 0.8), (0.8, 0.9), (0.9, 1.0001)]
 PHASES = ("instinct", "worked")
@@ -151,6 +153,7 @@ def report_rounds(rounds):
     stats = {phase: {"n": 0, "in50": 0, "in90": 0, "errors": [], "is50": [], "is90": [],
                      "ranged": 0, "ranged_in50": 0} for phase in PHASES}
     closer = {"worked": 0, "instinct": 0, "tie": 0}
+    by_kind = {}                           # worked answers only, grouped by kind of question
     tables = []
     for rnd in rounds:
         table = [f"### {rnd['name']}", "", "| # | Question | Answer | Instinct | Worked |", "|---|---|---|---|---|"]
@@ -180,6 +183,17 @@ def report_rounds(rounds):
             if answer is not None and all(q["q"] in rnd["phases"].get(p, {}) for p in PHASES):
                 e = {p: abs(rnd["phases"][p][q["q"]]["estimate"] - answer) for p in PHASES}
                 closer["tie" if e["worked"] == e["instinct"] else min(e, key=e.get)] += 1
+                w = rnd["phases"]["worked"][q["q"]]
+                k = by_kind.setdefault(KINDS.get(q["family"], "other"),
+                                       {"n": 0, "in50": 0, "ranged": 0, "ranged_in50": 0, "in90": 0, "is50": [], "is90": []})
+                k["n"] += 1
+                k["in50"] += inside(w["p50"], answer)
+                k["in90"] += inside(w["p90"], answer)
+                if w["p50"][0] != w["p50"][1]:
+                    k["ranged"] += 1
+                    k["ranged_in50"] += inside(w["p50"], answer)
+                k["is50"].append(interval_score(w["p50"], answer, 0.5))
+                k["is90"].append(interval_score(w["p90"], answer, 0.1))
             shown = "pending" if answer is None else num(answer)
             table.append(f"| {q['q']} | {q['short']} | {shown} | {cells[0]} | {cells[1]} |")
         tables += [""] + table
@@ -206,6 +220,14 @@ def report_rounds(rounds):
         lines.append(f"| Estimate closer to the answer | {closer['instinct']} | {closer['worked']} |")
         if closer["tie"]:
             lines.append(f"| Ties | {closer['tie']} | {closer['tie']} |")
+        lines += ["", "Worked answers by kind of question: knowledge means recalling, statistical means modelling "
+                  "noise or irregularity, exact means evaluating a known formula.", "",
+                  "| Kind | Questions | 50% hits | … leaving out single numbers | 90% hits | Interval score 50% / 90% |",
+                  "|---|---|---|---|---|---|"]
+        for kind in sorted(by_kind):
+            k = by_kind[kind]
+            lines.append(f"| {kind} | {k['n']} | {frac(k['in50'], k['n'])} | {frac(k['ranged_in50'], k['ranged'])} "
+                         f"| {frac(k['in90'], k['n'])} | {mean_pct(k['is50'])} / {mean_pct(k['is90'])} |")
     return lines + tables
 
 

@@ -49,6 +49,14 @@ The interval score is the main measure: an interval's width plus a penalty of 2/
 | Estimate closer to the answer | 7 | 31 |
 | Ties | 10 | 10 |
 
+Worked answers by kind of question: knowledge means recalling, statistical means modelling noise or irregularity, exact means evaluating a known formula.
+
+| Kind | Questions | 50% hits | … leaving out single numbers | 90% hits | Interval score 50% / 90% |
+|---|---|---|---|---|---|
+| exact | 4 | 4 of 4 (100%) | 4 of 4 (100%) | 4 of 4 (100%) | 0.00% / 0.01% |
+| knowledge | 18 | 18 of 18 (100%) | 12 of 12 (100%) | 18 of 18 (100%) | 7.17% / 21.65% |
+| statistical | 26 | 18 of 26 (69%) | 16 of 24 (67%) | 24 of 26 (92%) | 6.94% / 12.44% |
+
 ### 2026-10-16-e4e1ad0a
 
 | # | Question | Answer | Instinct | Worked |

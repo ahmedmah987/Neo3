@@ -328,3 +328,13 @@ FAMILIES = {
     "unicode_block": (make_unicode_block, solve_unicode_block),
     "module_all": (make_module_all, solve_module_all),
 }
+
+# What working a question out means for each family: recalling what I know (knowledge),
+# modelling noise or irregularity (statistical), or evaluating a known formula (exact).
+KINDS = {
+    "stdlib_lines": "knowledge", "stdlib_defs": "knowledge", "unicode_word": "knowledge",
+    "unicode_category": "knowledge", "unicode_block": "knowledge", "module_all": "knowledge",
+    "walk_max": "statistical", "lis": "statistical", "rect_distance": "statistical",
+    "digit_sum_pow2": "statistical", "collatz_steps": "statistical", "primes_in_range": "statistical",
+    "birthday": "exact",
+}

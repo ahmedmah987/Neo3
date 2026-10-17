@@ -64,6 +64,7 @@ check("function definitions are counted, nested and async included, lambdas not"
 check("exactly one code point is a line separator (Zl)", F.solve_unicode_category("Zl") == 1)
 check("Basic Latin, U+0000–U+007F, is fully assigned", F.solve_unicode_block(0x00, 0x7F) == 128)
 check("json.__all__ has 7 names", F.solve_module_all("json") == 7)
+check("every family has a kind", set(F.KINDS) == set(F.FAMILIES))
 bad_blocks = [name for name, lo, hi in F.UNICODE_BLOCKS if not lo < hi or (hi + 1) % 16]
 check("block ranges are well formed", not bad_blocks)
 
