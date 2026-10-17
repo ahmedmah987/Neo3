@@ -1,0 +1,118 @@
+{
+  "seed": "31643da83d9ce4d13911ebfe207cfd52049bd17a",
+  "questions": [
+    {
+      "q": 1,
+      "family": "walk_max",
+      "params": {
+        "n": 1362,
+        "seed": 3821884444
+      },
+      "short": "highest point of a 1,362-step walk",
+      "text": "A simple random walk on the integers starts at 0 and takes 1,362 steps of +1 or −1, each with probability ½. What is the expected highest position it reaches (0 if it never rises above the start)? (Settled by averaging 4,000 random walks.)"
+    },
+    {
+      "q": 2,
+      "family": "unicode_block",
+      "params": {
+        "lo": 6144,
+        "hi": 6319
+      },
+      "short": "assigned in the Mongolian block",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points in U+1800–U+18AF (the Mongolian block) are assigned, that is, have a category other than Cn?"
+    },
+    {
+      "q": 3,
+      "family": "lis",
+      "params": {
+        "n": 185,
+        "seed": 1302619798
+      },
+      "short": "longest increasing subsequence, n = 185",
+      "text": "What is the average length of the longest increasing subsequence of a uniformly random permutation of 185 elements? (Settled by averaging 1,000 random permutations.)"
+    },
+    {
+      "q": 4,
+      "family": "module_all",
+      "params": {
+        "module": "inspect"
+      },
+      "short": "names in `inspect.__all__`",
+      "text": "How many names are listed in `inspect.__all__` in Python 3.13?"
+    },
+    {
+      "q": 5,
+      "family": "collatz_steps",
+      "params": {
+        "n": 772456875771
+      },
+      "short": "Collatz steps from 772,456,875,771",
+      "text": "Starting from 772,456,875,771, how many steps does the Collatz process (halve if even, 3n + 1 if odd) take to reach 1?"
+    },
+    {
+      "q": 6,
+      "family": "rect_distance",
+      "params": {
+        "b": 3.2,
+        "seed": 1406567583
+      },
+      "short": "mean distance in a 1 × 3.2 rectangle",
+      "text": "Two points are chosen independently and uniformly at random in a 1 × 3.2 rectangle. What is the expected distance between them? (Settled by averaging 400,000 random pairs.)"
+    },
+    {
+      "q": 7,
+      "family": "birthday",
+      "params": {
+        "d": 1190973
+      },
+      "short": "draws until a repeat, d = 1,190,973",
+      "text": "Integers are drawn uniformly at random from 1 to 1,190,973, with replacement, until some value appears for the second time. What is the expected number of draws, counting the repeat?"
+    },
+    {
+      "q": 8,
+      "family": "stdlib_defs",
+      "params": {
+        "module": "argparse"
+      },
+      "short": "function definitions in `argparse`",
+      "text": "How many function definitions (def and async def, counting methods and nested functions) are in the source file of the standard-library module `argparse` in Python 3.13?"
+    },
+    {
+      "q": 9,
+      "family": "unicode_word",
+      "params": {
+        "word": "SMALL"
+      },
+      "short": "Unicode names with the word SMALL",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have a name containing the whole word SMALL? (Names are split into words at spaces and hyphens.)"
+    },
+    {
+      "q": 10,
+      "family": "stdlib_lines",
+      "params": {
+        "module": "shutil"
+      },
+      "short": "lines in `shutil`",
+      "text": "How many lines are in the source file of the standard-library module `shutil` in Python 3.13 (every line, blank or not)?"
+    },
+    {
+      "q": 11,
+      "family": "digit_sum_pow2",
+      "params": {
+        "n": 8832
+      },
+      "short": "digit sum of 2^8832",
+      "text": "What is the sum of the decimal digits of 2^8832?"
+    },
+    {
+      "q": 12,
+      "family": "primes_in_range",
+      "params": {
+        "a": 314525,
+        "b": 387797
+      },
+      "short": "primes in [314,525, 387,797]",
+      "text": "How many primes p satisfy 314,525 ≤ p ≤ 387,797?"
+    }
+  ]
+}

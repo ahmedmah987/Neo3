@@ -74,6 +74,23 @@ Worked answers by kind of question: knowledge means recalling, statistical means
 | 11 | mean distance in a 1 × 2.37 rectangle | 0.9159 | 0.95 (50✓ 90✓) | 0.9165 (50✓ 90✓) |
 | 12 | lines in `weakref` | 674 | 650 (50✓ 90✓) | 674 (50✓ 90✓) |
 
+### 2026-10-17-31643da8
+
+| # | Question | Answer | Instinct | Worked |
+|---|---|---|---|---|
+| 1 | highest point of a 1,362-step walk | pending | 28.95 | — |
+| 2 | assigned in the Mongolian block | pending | 158 | — |
+| 3 | longest increasing subsequence, n = 185 | pending | 23.5 | — |
+| 4 | names in `inspect.__all__` | pending | 90 | — |
+| 5 | Collatz steps from 772,456,875,771 | pending | 285 | — |
+| 6 | mean distance in a 1 × 3.2 rectangle | pending | 1.17 | — |
+| 7 | draws until a repeat, d = 1,190,973 | pending | 1,368 | — |
+| 8 | function definitions in `argparse` | pending | 180 | — |
+| 9 | Unicode names with the word SMALL | pending | 3,500 | — |
+| 10 | lines in `shutil` | pending | 1,600 | — |
+| 11 | digit sum of 2^8832 | pending | 11,965 | — |
+| 12 | primes in [314,525, 387,797] | pending | 5,770 | — |
+
 ### 2026-10-17-61dc17e5
 
 | # | Question | Answer | Instinct | Worked |
