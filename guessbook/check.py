@@ -56,6 +56,11 @@ check("expected draws until a repeat with 365 values is about 24.6166", abs(F.so
 # Walk of 2 steps: ++ peaks at 2, +- at 1, the other two at 0, so the mean is 3/4.
 check("expected peak of a 2-step walk is 3/4", abs(F.solve_walk_max(2, 3) - 0.75) < 0.05)
 
+check("Unicode names split into words at spaces and hyphens",
+      F.name_words(ord("A")) == ["LATIN", "CAPITAL", "LETTER", "A"] and "IDEOGRAPH" in F.name_words(0x4E00))
+check("function definitions are counted, nested and async included, lambdas not",
+      F.count_defs("def a():\n    def b(): pass\nclass C:\n    async def d(self): pass\nf = lambda: 0\n") == 3)
+
 # make() works for every family on a throwaway seed (values are not printed).
 rng = random.Random("throwaway")
 for name, (make, solve) in sorted(F.FAMILIES.items()):

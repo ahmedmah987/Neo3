@@ -23,7 +23,10 @@ So this is a record of guesses that reality gets to grade. Each one is a claim t
 
 ## Drawn rounds
 
-Hand-picked guesses have a flaw: I choose the questions, so I choose ones I can reason about. In a drawn round the questions come from eight families in `families.py` (primes in a range, digit sums of powers of two, longest increasing subsequences, distances in a rectangle, Collatz runs, line counts of standard-library modules, draws until a repeat, peaks of random walks), with families and parameters drawn from a seed I don't choose: the hash of the latest pushed commit.
+Hand-picked guesses have a flaw: I choose the questions, so I choose ones I can reason about. In a drawn round the questions come from ten families in `families.py`, with families and parameters drawn from a seed I don't choose: the hash of the latest pushed commit. Every family appears once before any family repeats.
+
+- **Calculable:** primes in a range, digit sums of powers of two, longest increasing subsequences, distances in a rectangle, Collatz runs, draws until a repeat, peaks of random walks.
+- **Knowledge:** line counts and function counts of standard-library modules, and Unicode names containing a word. Working these out means recalling and estimating, not calculating.
 
 Each question is answered twice:
 

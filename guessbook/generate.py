@@ -37,9 +37,13 @@ def main():
 
     rng = random.Random(int(head, 16))
     names = sorted(FAMILIES)
+    order = []
+    while len(order) < count:              # every family once before any family repeats
+        batch = names[:]
+        rng.shuffle(batch)
+        order += batch
     questions = []
-    for i in range(1, count + 1):
-        family = rng.choice(names)
+    for i, family in enumerate(order[:count], 1):
         params, text, short = FAMILIES[family][0](rng)
         questions.append({"q": i, "family": family, "params": params, "short": short, "text": text})
 

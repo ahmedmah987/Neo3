@@ -4,11 +4,14 @@ Each family has a `make(rng)` that draws its parameters and writes the question,
 `solve(**params)` that settles it. generate.py picks families and parameters from a seed
 I don't choose; resolve.py calls solve only once my answers are committed and pushed.
 """
+import ast
 import bisect
 import importlib.util
 import itertools
 import math
 import random
+import re
+import unicodedata
 
 # Single-file, pure-Python standard-library modules in Python 3.13 (frozen ones such as os are left out).
 STDLIB_MODULES = [
@@ -188,6 +191,50 @@ def solve_walk_max(n, seed):
     return total / WALK_SAMPLES
 
 
+# ---- Unicode names containing a word -------------------------------------------------------
+
+UNICODE_WORDS = [
+    "ARROW", "LATIN", "GREEK", "ARABIC", "CYRILLIC", "HEBREW", "DIGIT", "CIRCLED", "MATHEMATICAL",
+    "FRACTION", "MUSICAL", "CHESS", "FACE", "HAND", "STAR", "BLACK", "WHITE", "SQUARE", "TRIANGLE",
+    "SMALL", "CAPITAL", "SIGN", "DOUBLE", "HEART",
+]
+NAME_SPLIT = re.compile(r"[ -]")
+
+
+def name_words(cp):
+    return NAME_SPLIT.split(unicodedata.name(chr(cp), ""))
+
+
+def make_unicode_word(rng):
+    word = rng.choice(UNICODE_WORDS)
+    text = (f"In Python's Unicode database (Unicode {unicodedata.unidata_version}), how many code points have a "
+            f"name containing the whole word {word}? (Names are split into words at spaces and hyphens.)")
+    return {"word": word}, text, f"Unicode names with the word {word}"
+
+
+def solve_unicode_word(word):
+    return sum(word in name_words(cp) for cp in range(0x110000))
+
+
+# ---- function definitions in a standard-library module -------------------------------------
+
+def count_defs(source):
+    return sum(isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) for node in ast.walk(ast.parse(source)))
+
+
+def make_stdlib_defs(rng):
+    name = rng.choice(STDLIB_MODULES)
+    module_path(name)
+    text = (f"How many function definitions (def and async def, counting methods and nested functions) are in "
+            f"the source file of the standard-library module `{name}` in Python 3.13?")
+    return {"module": name}, text, f"function definitions in `{name}`"
+
+
+def solve_stdlib_defs(module):
+    with open(module_path(module), encoding="utf-8") as f:
+        return count_defs(f.read())
+
+
 FAMILIES = {
     "primes_in_range": (make_primes_in_range, solve_primes_in_range),
     "digit_sum_pow2": (make_digit_sum_pow2, solve_digit_sum_pow2),
@@ -197,4 +244,6 @@ FAMILIES = {
     "stdlib_lines": (make_stdlib_lines, solve_stdlib_lines),
     "birthday": (make_birthday, solve_birthday),
     "walk_max": (make_walk_max, solve_walk_max),
+    "unicode_word": (make_unicode_word, solve_unicode_word),
+    "stdlib_defs": (make_stdlib_defs, solve_stdlib_defs),
 }
