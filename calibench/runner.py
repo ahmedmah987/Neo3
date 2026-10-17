@@ -93,11 +93,14 @@ def run(model, model_spec, seed, count=26, families=None, out=None, workers=4, s
     questions = draw(rng_from_seed(seed), count, families)
     if (out / "questions.json").exists():
         old = read_json(out / "questions.json")
-        earlier = read_json(out / "run.json").get("prompts", "standard") if (out / "run.json").exists() else prompt_set
+        # questions.json records the prompts from 2.3.2; before that only a finished run's run.json did
+        earlier = old.get("prompts") or (read_json(out / "run.json").get("prompts", "standard")
+                                         if (out / "run.json").exists() else prompt_set)
         if old["questions"] != questions or old["model"] != model_spec or earlier != prompt_set:
             sys.exit(f"{out} holds a different run; choose another --out")
     else:
-        write_json(out / "questions.json", {"seed": str(seed), "model": model_spec, "questions": questions})
+        write_json(out / "questions.json", {"seed": str(seed), "model": model_spec, "prompts": prompt_set,
+                                            "questions": questions})
 
     answers_path = out / "answers.jsonl"
     records = load_records(answers_path)

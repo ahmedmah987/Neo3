@@ -142,9 +142,11 @@ def check_core():
           all("Q?" in p.format(text="Q?") and ('"p90"' in p.format(text="Q?") or '"q95"' in p.format(text="Q?"))
               for prompts in PROMPT_SETS.values() for p in prompts.values()))
     check("five percentiles are read as an estimate and two intervals",
-          parse_answer('Working.\n{"q05": 10, "q25": "1,200", "q50": 15, "q75": 18, "q95": 30}')
-          == {"estimate": 15, "p50": [18, 1200], "p90": [10, 30]}
+          parse_answer('Working.\n{"q05": 10, "q25": "12", "q50": 15, "q75": 18, "q95": "1,030"}')
+          == {"estimate": 15, "p50": [12, 18], "p90": [10, 1030]}
           and raises(parse_answer, '{"q05": 10, "q50": 15, "q95": 30}'))
+    check("crossing percentiles are unreadable, so the model is asked again",
+          raises(parse_answer, '{"q05": 10, "q25": 1200, "q50": 15, "q75": 18, "q95": 30}'))
 
     check("relative interval score (the guessbook's): width over the answer, plus 2/alpha times a miss",
           abs(interval_score([10, 20], 15, 0.1) - 10 / 15) < 1e-12 and abs(interval_score([10, 20], 25, 0.1) - 110 / 25) < 1e-12)
@@ -239,7 +241,7 @@ class OracleModel(models.Model):
 
 class TokenModel(models.Model):
     """Answers badly, reporting tokens as OpenRouter does: more reasoning when working, and on instinct
-    sometimes none, with the count left out as versions before 2.3.1 did."""
+    a reasoning count only every other call, as adapters before 2.3.1 left out zeros."""
 
     def __init__(self):
         self.calls = 0
@@ -304,13 +306,25 @@ def check_run(tmp):
         stopped = raises(quiet, runner.run, broken, "broken", seed, count, FAST, tmp / "broken", 1)
     asked = len(runner.load_records(tmp / "broken" / "answers.jsonl"))
     check("a run stops early when every call fails", stopped and asked == runner.GIVE_UP_AFTER)
+    check("an interrupted run can't be resumed with other prompts",
+          raises(quiet, runner.run, broken, "broken", seed, count, FAST, tmp / "broken", 1, None, "alt"))
 
     rep = quiet(runner.run, TokenModel(), "tokens", seed, count, FAST, tmp / "tokens", 1)
-    check("tokens per answer are reported for each phase, a missing reasoning count taken as zero",
+    check("tokens per answer are reported for each phase, a missing reasoning count left out",
           rep["phases"]["worked"]["tokens"] == {"output": 100, "reasoning": 80}
-          and rep["phases"]["instinct"]["tokens"] == {"output": 20, "reasoning": 5}
-          and "| Output tokens per answer | 20 (5 reasoning) | 100 (80 reasoning) |"
+          and rep["phases"]["instinct"]["tokens"] == {"output": 20, "reasoning": 10}
+          and "| Output tokens per answer | 20 (10 reasoning) | 100 (80 reasoning) |"
           in (tmp / "tokens" / "report.md").read_text())
+    files = {name: json.loads((tmp / "tokens" / name).read_text()) for name in ("run.json", "questions.json", "results.json")}
+    old = report.build({**files["run.json"], "calibench": "2.3.0"}, files["questions.json"]["questions"],
+                       runner.load_records(tmp / "tokens" / "answers.jsonl"), files["results.json"]["results"])
+    check("in a run before 2.3.1, a missing reasoning count is read as zero",
+          old["phases"]["instinct"]["tokens"] == {"output": 20, "reasoning": 5})
+    check("a retry that failed keeps the tokens its first attempt reported",
+          report.record_usage({"attempts": [{"completion_tokens": 3000, "reasoning_tokens": 2500},
+                                            {"error": "timed out"}]}, False) == (None, 3000, 2500))
+    check("audits compare only the scored fields of a report",
+          report.scored_phases({"worked": {"tokens": {"output": 1}, "n": 2}}) == {"worked": {"n": 2}})
 
     rep = quiet(runner.run, models.NaiveModel(), "mock:naive", seed, count, FAST, tmp / "naive", 3)
     md = (tmp / "naive" / "report.md").read_text()
@@ -362,7 +376,9 @@ def check_run(tmp):
     check("a run's families are recorded explicitly, and an old \"all\" is read by the version that wrote it",
           json.loads((tmp / "naive" / "run.json").read_text())["families"] == sorted(FAST)
           and families_of({"families": "all", "calibench": "1.0.0"}) == ORIGINAL_FAMILIES
-          and families_of({"families": "all", "calibench": "2.1.0"}) == SUITES["v2"]["families"])
+          and families_of({"families": "all", "calibench": "2.1.0"}) == SUITES["v2"]["families"]
+          and families_of({"families": "all", "calibench": "2.2.0"})
+          == sorted(SUITES["v2"]["families"] + SUITES["calc1"]["families"]))
     results = json.loads((tmp / "oracle" / "results.json").read_text())
     results["results"][0]["answer"] += 1
     (tmp / "oracle" / "results.json").write_text(json.dumps(results))
@@ -519,6 +535,13 @@ def check_openrouter():
             check("openrouter: records the provider, reasoning tokens and cost",
                   reply == ANSWER and info["provider"] == "SomeHost" and info["cost"] == 0.0012
                   and info["reasoning_tokens"] == 20)
+            for details, expected in (({"reasoning_tokens": 0}, 0), (None, None)):
+                server.json(200, {"choices": [{"message": {"content": ANSWER}, "finish_reason": "stop"}],
+                                  "usage": {"completion_tokens": 5, **({"completion_tokens_details": details}
+                                                                        if details else {})}})
+                _, info = model.ask("PROMPT", "worked")
+                check(f"openrouter: a reasoning count of {expected} is recorded as such",
+                      "reasoning_tokens" in info and info["reasoning_tokens"] == expected)
             server.json(200, {"choices": [{"message": {"content": ""}, "finish_reason": "error",
                                            "error": {"message": "provider failed"}}]})
             check("openrouter: an error in the reply is an error", raises(model.ask, "PROMPT", "instinct"))

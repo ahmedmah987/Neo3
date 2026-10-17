@@ -7374,14 +7374,14 @@
     "anthropic/claude-haiku-5.5 via Claude Platform on AWS"
   ],
   "tokens": {
-    "prompt_tokens": 53574,
-    "completion_tokens": 558735,
-    "reasoning_tokens": 485585
+    "input": 53574,
+    "output": 558735,
+    "reasoning": 485585
   },
   "cost": 0.284725,
   "answers_changed_after_run": false,
   "scored_with": {
-    "calibench": "2.3.1",
+    "calibench": "2.3.2",
     "scoring": "log-wis-1"
   }
 }

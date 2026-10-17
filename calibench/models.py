@@ -126,9 +126,8 @@ class OpenAICompatModel(Model):
             info["refused"] = True
         usage = data.get("usage") or {}
         info.update({k: usage[k] for k in ("prompt_tokens", "completion_tokens", "cost") if usage.get(k) is not None})
-        reasoning = (usage.get("completion_tokens_details") or {}).get("reasoning_tokens")
-        if reasoning is not None:                       # zero too: a missing count would skew the average
-            info["reasoning_tokens"] = reasoning
+        if usage:                     # zero is recorded, and None when the server doesn't report reasoning
+            info["reasoning_tokens"] = (usage.get("completion_tokens_details") or {}).get("reasoning_tokens")
         return content, info
 
 

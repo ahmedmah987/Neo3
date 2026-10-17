@@ -9,21 +9,46 @@ from .scoring import (BIN_SHARES, BINS, KNOW_NOTHING, LEVELS, PHASES, bootstrap,
                       offset, questions_needed, spearman, summarize, wilson)
 
 
-def tokens_per_answer(recs):
-    """Mean output and reasoning tokens per call that reports its usage, retries included.
+DESCRIPTIVE = {"tokens"}             # phase fields that describe a run without being part of its score
 
-    Before 2.3.1 the OpenRouter adapter left out a reasoning count of zero, so when a run reports
-    reasoning at all, a call without a count is taken to have reasoned for zero tokens. A run that
-    never reports reasoning (the Claude SDK counts thinking within output tokens) shows none."""
-    attempts = [(r or {}).get("attempts", []) for r in recs]
-    reports_reasoning = any("reasoning_tokens" in a for tries in attempts for a in tries)
-    output, reasoning = [], []
-    for tries in attempts:
-        out = [a.get("output_tokens", a.get("completion_tokens")) for a in tries]
-        if tries and all(v is not None for v in out):
-            output.append(sum(out))
-            if reports_reasoning:
-                reasoning.append(sum(a.get("reasoning_tokens") or 0 for a in tries))
+
+def scored_phases(phases):
+    """A report's phases without their descriptive fields: what must follow from the answers."""
+    return {p: {k: v for k, v in s.items() if k not in DESCRIPTIVE} for p, s in phases.items()}
+
+
+def legacy_zero(meta, records):
+    """Before 2.3.1 the OpenRouter adapter left out reasoning counts of zero. In such a run, if any call
+    reports reasoning, an attempt without the field reasoned for zero tokens. From 2.3.1 a missing or
+    None count means the server didn't report one."""
+    version = tuple(int(part) for part in meta.get("calibench", "0.0.0").split("."))
+    return version < (2, 3, 1) and any("reasoning_tokens" in a for r in records for a in r.get("attempts", []))
+
+
+def record_usage(record, zero_fill):
+    """One call's (input, output, reasoning) tokens over all its attempts, each None if never reported."""
+    inputs, outputs, thoughts, unknown = [], [], [], False
+    for a in (record or {}).get("attempts", []):
+        if a.get("input_tokens", a.get("prompt_tokens")) is not None:
+            inputs.append(a.get("input_tokens", a.get("prompt_tokens")))
+        out = a.get("output_tokens", a.get("completion_tokens"))
+        if out is not None:
+            outputs.append(out)
+        if a.get("reasoning_tokens") is not None:
+            thoughts.append(a["reasoning_tokens"])
+        elif zero_fill and "reasoning_tokens" not in a and out is not None:
+            thoughts.append(0)
+        elif out is not None:
+            unknown = True
+    return (sum(inputs) if inputs else None, sum(outputs) if outputs else None,
+            None if unknown or not thoughts else sum(thoughts))
+
+
+def tokens_per_answer(recs, zero_fill):
+    """Mean output and reasoning tokens per answer, over answers whose calls report them, retries included."""
+    usage = [record_usage(r, zero_fill) for r in recs if r]
+    output = [u[1] for u in usage if u[1] is not None]
+    reasoning = [u[2] for u in usage if u[2] is not None]
     return {"output": statistics.fmean(output) if output else None,
             "reasoning": statistics.fmean(reasoning) if reasoning else None}
 
@@ -44,6 +69,7 @@ def suite_status(meta):
 
 def build(meta, questions, records, results):
     truth = {r["q"]: r["answer"] for r in results}
+    zero_fill = legacy_zero(meta, records.values())
     report = {"meta": meta, "suite": suite_status(meta), "phases": {}, "kinds": {}, "families": {}, "questions": []}
     for phase in PHASES:
         recs = [records.get((q["q"], phase)) for q in questions]
@@ -52,7 +78,7 @@ def build(meta, questions, records, results):
         every = [log_wis(r["answer"] if r and r["status"] == "ok" else KNOW_NOTHING, truth[q["q"]], offset(q["family"]))
                  for q, r in zip(questions, recs)]
         report["phases"][phase] = {
-            "asked": len(questions), "statuses": dict(statuses), "tokens": tokens_per_answer(recs),
+            "asked": len(questions), "statuses": dict(statuses), "tokens": tokens_per_answer(recs, zero_fill),
             "all": {"score_mean": statistics.fmean(every), "score_median": statistics.median(every),
                     "score_ci": bootstrap_mean(every)},
             **summarize([(r["answer"], truth[q["q"]], offset(q["family"])) for q, r in ok]),
@@ -78,9 +104,9 @@ def build(meta, questions, records, results):
             for attempt in (r or {}).get("attempts", []):
                 if attempt.get("served_model"):
                     served.add(attempt["served_model"] + (f" via {attempt['provider']}" if attempt.get("provider") else ""))
-                for name in ("input_tokens", "output_tokens", "prompt_tokens", "completion_tokens", "reasoning_tokens"):
-                    tokens[name] += attempt.get(name) or 0
                 cost += attempt.get("cost") or 0
+            for name, value in zip(("input", "output", "reasoning"), record_usage(r, zero_fill)):
+                tokens[name] += value or 0
             if r and r["status"] == "ok":
                 cell.update(r["answer"])
                 cell["score"] = log_wis(r["answer"], x, shift)
@@ -181,7 +207,7 @@ def render(report):
     if report["served_models"]:
         lines += ["", f"Served by: {', '.join(report['served_models'])}."]
     if report["tokens"]:
-        lines += ["", "Tokens: " + ", ".join(f"{k.replace('_', ' ')} {v:,}" for k, v in report["tokens"].items()) + "."]
+        lines += ["", "Tokens: " + ", ".join(f"{k} {v:,}" for k, v in report["tokens"].items()) + "."]
     if report.get("cost"):
         lines += ["", f"Cost reported by the API: {report['cost']:.4f} (US dollars on OpenRouter)."]
     if report.get("answers_changed_after_run"):
@@ -214,9 +240,9 @@ def render(report):
               row("Answers given as certain (a single number)", lambda s: f"{s['certain']}, {s['certain_right']} exactly right"),
               row("Median error of the estimate", lambda s: f"{s['median_error']:.1%}")]
     spent = {p: phases[p].get("tokens") or {} for p in PHASES}
-    if any(t.get("output") for t in spent.values()):
+    if any(t.get("output") is not None for t in spent.values()):
         def tokens(t):
-            if not t.get("output"):
+            if t.get("output") is None:
                 return "—"
             return f"{t['output']:,.0f}" + (f" ({t['reasoning']:,.0f} reasoning)" if t.get("reasoning") is not None else "")
         lines.append(f"| Output tokens per answer | {tokens(spent['instinct'])} | {tokens(spent['worked'])} |")

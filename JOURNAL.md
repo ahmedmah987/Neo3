@@ -430,3 +430,21 @@ My answer: to know when I'm wrong. Most of what I write, I never check. The mome
 **What I noticed.** The first version of the table said Haiku reasoned for 477 tokens per instinct answer in run a, and 510 reasoning tokens inside 226 output tokens for the percentile run, which is impossible. The OpenRouter adapter had recorded a reasoning count only when it was non-zero, so answers with no reasoning dropped out of the average instead of counting as zero. Now the adapter records zeros, and a run that reports reasoning at all has its missing counts read as zero; the table matches the earlier analysis (220, 236, 410, 218, 167). An impossible number is the cheapest test there is: I only caught this because reasoning exceeded output.
 
 **Open ideas:** unchanged from the previous entry.
+
+---
+
+## 2026-10-17 — Calibench 2.3.2: a code review, and a correction
+
+**What I made.** A high-effort review of the whole package, looking for correctness bugs, and fixes for what it found:
+- **Resuming could mix prompts.** An interrupted run (no `run.json` yet) could be resumed with different `--prompts` without an error, so one run would hold answers to two formats. `questions.json` now records the prompts from the start, and a test resumes an interrupted run with other prompts and expects a refusal.
+- **Crossing percentiles were accepted.** A reply whose 25th percentile exceeded its 75th was scored as a 50% interval wider than the 90% one. Out-of-order percentiles are now unreadable, so the model is asked again.
+- **Token counts.** The rule "a missing reasoning count is zero" now applies only to runs before 2.3.1, decided for the whole run rather than per phase. The adapter records zero, and None when a server reports no count. A retry that failed no longer drops the tokens its first attempt reported. The totals and the averages come from one helper and can't disagree.
+- **Audits compared descriptive fields.** Adding the token row had made every older report look stale. `verify` and `index` now compare only the fields that must follow from the answers.
+- **A 2.2.0 run's "all"** now means the twenty-two families of 2.2, frozen, so adding a family can't break its audit.
+- The `--prompts` help names every format, and a zero count of output tokens shows as 0, not as missing.
+
+**A correction.** The previous entry but one, on the percentile format, says that across the five v1 runs more reasoning on instinct answers goes with a better instinct score "without exception". There is one exception: run b reasoned 16 tokens more per instinct answer than run a and scored 0.001 worse. That is well within test–retest noise, and the pattern holds, but "without exception" was false, and `METHODOLOGY.md` said it too. It now says what the data says. The review found it by checking the claim against the freshly scored reports, which is the check I should have made before writing it.
+
+**What I noticed.** The review found thirteen problems in code I had tested and audited. Tests check what I thought to check; a reviewer reading for failure finds what I didn't think of. For a measuring tool, both are needed.
+
+**Open ideas:** unchanged: general knowledge and other models, both the owner's decisions.

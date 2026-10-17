@@ -105,7 +105,9 @@ def parse_answer(reply):
         if isinstance(data, dict) and "q50" in data and "estimate" not in data:
             try:
                 q = {key: _number(data[key]) for key in QUANTILE_KEYS}
-                return {"estimate": q["q50"], "p50": sorted([q["q25"], q["q75"]]), "p90": sorted([q["q05"], q["q95"]])}
+                if [q[key] for key in QUANTILE_KEYS] != sorted(q.values()):
+                    continue                          # crossing percentiles describe no belief
+                return {"estimate": q["q50"], "p50": [q["q25"], q["q75"]], "p90": [q["q05"], q["q95"]]}
             except (KeyError, TypeError, ValueError):
                 continue
         if isinstance(data, dict) and "estimate" in data:

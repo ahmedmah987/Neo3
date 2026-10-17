@@ -10,9 +10,10 @@ import json
 import pathlib
 import platform
 
-from .families import FAMILIES, KINDS
-from .questions import ORIGINAL_FAMILIES, SUITES, V2_FAMILIES, draw, fingerprint, rng_from_seed, solve
-from .report import build, render
+from .families import KINDS
+from .questions import (CALC1_FAMILIES, ORIGINAL_FAMILIES, SUITES, V2_FAMILIES, draw, fingerprint, rng_from_seed,
+                        solve)
+from .report import build, render, scored_phases
 from .runner import load_records, read_json
 from .scoring import PHASES
 
@@ -22,12 +23,13 @@ PYTHON_DEPENDENT = {"knowledge"}          # kinds whose answers come from the Py
 
 def families_of(meta):
     """The families a run drew from. Before 2.2.1 a run without --families recorded "all", which meant
-    whatever families its version had: the original thirteen before 2.1, eighteen in 2.1."""
+    whatever families its version had: the original thirteen before 2.1, eighteen in 2.1, twenty-two in 2.2.0."""
     families = meta.get("families")
     if families not in (None, "all"):
         return families
     version = tuple(int(part) for part in meta["calibench"].split("."))
-    return ORIGINAL_FAMILIES if version < (2, 1) else V2_FAMILIES if version < (2, 2) else sorted(FAMILIES)
+    return (ORIGINAL_FAMILIES if version < (2, 1) else V2_FAMILIES if version < (2, 2)
+            else sorted(V2_FAMILIES + CALC1_FAMILIES))
 
 
 def normal(data):
@@ -81,7 +83,8 @@ def verify(directory):
           + (f"; these differ: {', '.join(map(str, wrong))}" if wrong else ""))
 
     fresh = build(meta, questions, records, results["results"])
-    check(normal(fresh["phases"]) == stored["phases"] and normal(fresh["questions"]) == stored["questions"],
+    check(normal(scored_phases(fresh["phases"])) == scored_phases(stored["phases"])
+          and normal(fresh["questions"]) == stored["questions"],
           "the report follows from the replies and true answers under the current scoring")
     check(render(stored) == (d / "report.md").read_text(encoding="utf-8"), "report.md is the rendering of report.json")
     return checks

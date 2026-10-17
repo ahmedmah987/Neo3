@@ -38,7 +38,8 @@ def add_draw_options(p):
     p.add_argument("--count", type=int, help="number of questions (default: every family twice)")
     p.add_argument("--families", type=family_list, help="comma-separated families to draw from (default: all)")
     p.add_argument("--prompts", choices=sorted(PROMPT_SETS), default="standard",
-                   help="the wording of the two prompts (default standard; alt measures sensitivity to wording)")
+                   help="how the two prompts ask (default standard; alt is a second wording, quantiles asks for "
+                   "five percentiles instead of an estimate and two intervals)")
 
 
 def resolve_draw(args, seed_required=False):
@@ -124,7 +125,7 @@ def cmd_compare(args):
 def cmd_index(args):
     from .report import index
 
-    from .report import build
+    from .report import build, scored_phases
     from .runner import load_records, read_json
 
     root = pathlib.Path(args.dir)
@@ -135,7 +136,7 @@ def cmd_index(args):
         stored = read_json(d / "report.json")
         fresh = build(read_json(d / "run.json"), read_json(d / "questions.json")["questions"],
                       load_records(d / "answers.jsonl"), read_json(d / "results.json")["results"])
-        if json.loads(json.dumps(fresh["phases"])) != stored["phases"]:
+        if scored_phases(json.loads(json.dumps(fresh["phases"]))) != scored_phases(stored["phases"]):
             stale.append(d)
         runs.append((d.name, stored))
     if stale:

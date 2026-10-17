@@ -1,12 +1,12 @@
 # Calibench report: openrouter:anthropic/claude-haiku-5.5
 
-Seed `calibench-v1`, 104 questions, Calibench 2.0.0, Python 3.13.16 (Unicode 15.1.0), started 2026-10-17T03:18:44+00:00. Scored with Calibench 2.3.1 (log-wis-1).
+Seed `calibench-v1`, 104 questions, Calibench 2.0.0, Python 3.13.16 (Unicode 15.1.0), started 2026-10-17T03:18:44+00:00. Scored with Calibench 2.3.2 (log-wis-1).
 
 **Standard suite v1.**
 
 Served by: anthropic/claude-haiku-5.5 via Claude Platform on AWS.
 
-Tokens: prompt tokens 51,704, completion tokens 439,622, reasoning tokens 364,489.
+Tokens: input 51,704, output 439,622, reasoning 364,489.
 
 Cost reported by the API: 0.2250 (US dollars on OpenRouter).
 
