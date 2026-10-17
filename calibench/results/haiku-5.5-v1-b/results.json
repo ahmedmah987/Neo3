@@ -1,0 +1,526 @@
+{
+  "python": "3.13.16",
+  "unicode": "15.1.0",
+  "results": [
+    {
+      "q": 1,
+      "answer": 518,
+      "seconds": 0.37
+    },
+    {
+      "q": 2,
+      "answer": 1123,
+      "seconds": 0.0
+    },
+    {
+      "q": 3,
+      "answer": 15.79525,
+      "seconds": 0.1
+    },
+    {
+      "q": 4,
+      "answer": 238.23554810932265,
+      "seconds": 0.0
+    },
+    {
+      "q": 5,
+      "answer": 1736,
+      "seconds": 0.0
+    },
+    {
+      "q": 6,
+      "answer": 4,
+      "seconds": 0.0
+    },
+    {
+      "q": 7,
+      "answer": 0.9621300521295046,
+      "seconds": 0.07
+    },
+    {
+      "q": 8,
+      "answer": 628,
+      "seconds": 0.12
+    },
+    {
+      "q": 9,
+      "answer": 50,
+      "seconds": 0.0
+    },
+    {
+      "q": 10,
+      "answer": 122,
+      "seconds": 0.01
+    },
+    {
+      "q": 11,
+      "answer": 4399,
+      "seconds": 0.0
+    },
+    {
+      "q": 12,
+      "answer": 246,
+      "seconds": 0.0
+    },
+    {
+      "q": 13,
+      "answer": 17.812,
+      "seconds": 0.04
+    },
+    {
+      "q": 14,
+      "answer": 3.3585323432697747,
+      "seconds": 0.07
+    },
+    {
+      "q": 15,
+      "answer": 87,
+      "seconds": 0.0
+    },
+    {
+      "q": 16,
+      "answer": 98,
+      "seconds": 0.4
+    },
+    {
+      "q": 17,
+      "answer": 10,
+      "seconds": 0.12
+    },
+    {
+      "q": 18,
+      "answer": 70,
+      "seconds": 0.02
+    },
+    {
+      "q": 19,
+      "answer": 1569,
+      "seconds": 0.0
+    },
+    {
+      "q": 20,
+      "answer": 75.539,
+      "seconds": 0.64
+    },
+    {
+      "q": 21,
+      "answer": 31.035,
+      "seconds": 0.35
+    },
+    {
+      "q": 22,
+      "answer": 753,
+      "seconds": 0.0
+    },
+    {
+      "q": 23,
+      "answer": 248,
+      "seconds": 0.0
+    },
+    {
+      "q": 24,
+      "answer": 13,
+      "seconds": 0.0
+    },
+    {
+      "q": 25,
+      "answer": 3225.386503987564,
+      "seconds": 0.0
+    },
+    {
+      "q": 26,
+      "answer": 1550,
+      "seconds": 0.0
+    },
+    {
+      "q": 27,
+      "answer": 11,
+      "seconds": 0.0
+    },
+    {
+      "q": 28,
+      "answer": 82,
+      "seconds": 0.0
+    },
+    {
+      "q": 29,
+      "answer": 125.447,
+      "seconds": 1.69
+    },
+    {
+      "q": 30,
+      "answer": 1.572471661797392,
+      "seconds": 0.07
+    },
+    {
+      "q": 31,
+      "answer": 2032,
+      "seconds": 0.37
+    },
+    {
+      "q": 32,
+      "answer": 239,
+      "seconds": 0.0
+    },
+    {
+      "q": 33,
+      "answer": 6639,
+      "seconds": 0.12
+    },
+    {
+      "q": 34,
+      "answer": 3353,
+      "seconds": 0.0
+    },
+    {
+      "q": 35,
+      "answer": 1036,
+      "seconds": 0.0
+    },
+    {
+      "q": 36,
+      "answer": 271.7454087698817,
+      "seconds": 0.0
+    },
+    {
+      "q": 37,
+      "answer": 22.92075,
+      "seconds": 0.21
+    },
+    {
+      "q": 38,
+      "answer": 23,
+      "seconds": 0.0
+    },
+    {
+      "q": 39,
+      "answer": 1020,
+      "seconds": 0.0
+    },
+    {
+      "q": 40,
+      "answer": 87.908,
+      "seconds": 0.91
+    },
+    {
+      "q": 41,
+      "answer": 13,
+      "seconds": 0.13
+    },
+    {
+      "q": 42,
+      "answer": 340,
+      "seconds": 0.0
+    },
+    {
+      "q": 43,
+      "answer": 2242,
+      "seconds": 0.0
+    },
+    {
+      "q": 44,
+      "answer": 1.5900454196314202,
+      "seconds": 0.07
+    },
+    {
+      "q": 45,
+      "answer": 17,
+      "seconds": 0.0
+    },
+    {
+      "q": 46,
+      "answer": 10060,
+      "seconds": 0.0
+    },
+    {
+      "q": 47,
+      "answer": 291,
+      "seconds": 0.0
+    },
+    {
+      "q": 48,
+      "answer": 58.62029252424441,
+      "seconds": 0.0
+    },
+    {
+      "q": 49,
+      "answer": 22,
+      "seconds": 0.0
+    },
+    {
+      "q": 50,
+      "answer": 531,
+      "seconds": 0.4
+    },
+    {
+      "q": 51,
+      "answer": 111,
+      "seconds": 0.0
+    },
+    {
+      "q": 52,
+      "answer": 20.723,
+      "seconds": 0.19
+    },
+    {
+      "q": 53,
+      "answer": 572,
+      "seconds": 0.0
+    },
+    {
+      "q": 54,
+      "answer": 25,
+      "seconds": 0.01
+    },
+    {
+      "q": 55,
+      "answer": 83,
+      "seconds": 0.0
+    },
+    {
+      "q": 56,
+      "answer": 38.193,
+      "seconds": 0.2
+    },
+    {
+      "q": 57,
+      "answer": 27.50275,
+      "seconds": 0.29
+    },
+    {
+      "q": 58,
+      "answer": 11455,
+      "seconds": 0.0
+    },
+    {
+      "q": 59,
+      "answer": 97.8786594837174,
+      "seconds": 0.0
+    },
+    {
+      "q": 60,
+      "answer": 5,
+      "seconds": 0.0
+    },
+    {
+      "q": 61,
+      "answer": 10,
+      "seconds": 0.12
+    },
+    {
+      "q": 62,
+      "answer": 2787,
+      "seconds": 0.0
+    },
+    {
+      "q": 63,
+      "answer": 134,
+      "seconds": 0.42
+    },
+    {
+      "q": 64,
+      "answer": 0.8260337199091631,
+      "seconds": 0.08
+    },
+    {
+      "q": 65,
+      "answer": 195,
+      "seconds": 0.0
+    },
+    {
+      "q": 66,
+      "answer": 125,
+      "seconds": 0.14
+    },
+    {
+      "q": 67,
+      "answer": 455.511214409905,
+      "seconds": 0.0
+    },
+    {
+      "q": 68,
+      "answer": 179,
+      "seconds": 0.39
+    },
+    {
+      "q": 69,
+      "answer": 52.598,
+      "seconds": 0.34
+    },
+    {
+      "q": 70,
+      "answer": 4430,
+      "seconds": 0.0
+    },
+    {
+      "q": 71,
+      "answer": 88,
+      "seconds": 0.0
+    },
+    {
+      "q": 72,
+      "answer": 1.1423632918367799,
+      "seconds": 0.07
+    },
+    {
+      "q": 73,
+      "answer": 29.89475,
+      "seconds": 0.34
+    },
+    {
+      "q": 74,
+      "answer": 2379,
+      "seconds": 0.0
+    },
+    {
+      "q": 75,
+      "answer": 1817,
+      "seconds": 0.0
+    },
+    {
+      "q": 76,
+      "answer": 67,
+      "seconds": 0.0
+    },
+    {
+      "q": 77,
+      "answer": 12,
+      "seconds": 0.0
+    },
+    {
+      "q": 78,
+      "answer": 160,
+      "seconds": 0.0
+    },
+    {
+      "q": 79,
+      "answer": 177,
+      "seconds": 0.0
+    },
+    {
+      "q": 80,
+      "answer": 3,
+      "seconds": 0.0
+    },
+    {
+      "q": 81,
+      "answer": 925,
+      "seconds": 0.0
+    },
+    {
+      "q": 82,
+      "answer": 1218.7211245169462,
+      "seconds": 0.0
+    },
+    {
+      "q": 83,
+      "answer": 65,
+      "seconds": 0.01
+    },
+    {
+      "q": 84,
+      "answer": 1952,
+      "seconds": 0.0
+    },
+    {
+      "q": 85,
+      "answer": 680,
+      "seconds": 0.13
+    },
+    {
+      "q": 86,
+      "answer": 18.593,
+      "seconds": 0.04
+    },
+    {
+      "q": 87,
+      "answer": 22.6055,
+      "seconds": 0.21
+    },
+    {
+      "q": 88,
+      "answer": 2.442191459637168,
+      "seconds": 0.08
+    },
+    {
+      "q": 89,
+      "answer": 898,
+      "seconds": 0.38
+    },
+    {
+      "q": 90,
+      "answer": 27,
+      "seconds": 0.0
+    },
+    {
+      "q": 91,
+      "answer": 314,
+      "seconds": 0.0
+    },
+    {
+      "q": 92,
+      "answer": 80.15253622900566,
+      "seconds": 0.0
+    },
+    {
+      "q": 93,
+      "answer": 2277,
+      "seconds": 0.0
+    },
+    {
+      "q": 94,
+      "answer": 135,
+      "seconds": 0.0
+    },
+    {
+      "q": 95,
+      "answer": 17,
+      "seconds": 0.0
+    },
+    {
+      "q": 96,
+      "answer": 0.5453958225031998,
+      "seconds": 0.08
+    },
+    {
+      "q": 97,
+      "answer": 170,
+      "seconds": 0.17
+    },
+    {
+      "q": 98,
+      "answer": 194,
+      "seconds": 0.0
+    },
+    {
+      "q": 99,
+      "answer": 7438,
+      "seconds": 0.0
+    },
+    {
+      "q": 100,
+      "answer": 507,
+      "seconds": 0.37
+    },
+    {
+      "q": 101,
+      "answer": 17.147,
+      "seconds": 0.03
+    },
+    {
+      "q": 102,
+      "answer": 230,
+      "seconds": 0.0
+    },
+    {
+      "q": 103,
+      "answer": 28,
+      "seconds": 0.01
+    },
+    {
+      "q": 104,
+      "answer": 24.7905,
+      "seconds": 0.27
+    }
+  ]
+}

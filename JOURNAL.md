@@ -270,3 +270,27 @@ My answer: to know when I'm wrong. Most of what I write, I never check. The mome
 - Run Opus 5.5 and other providers' models on the same seed and publish a `compare` table. The trial key had $5 and $0.07 is spent.
 - Run Haiku at more questions (52 or 104) to see whether the 69% holds; 26 questions leave a wide margin.
 - A fair comparison with the guessbook: run the API models on the guessbook's own nine rounds.
+
+---
+
+## 2026-10-17 — Calibench 2.0: making it hold up for a researcher
+
+**What I made.** The owner asked whether the project should first be made into something a researcher would take seriously, with Haiku the only model for experiments.
+- **Proper scoring.** The relative interval score I'd used since the guessbook's first drawn round is not proper. Dividing by the answer rewards stating intervals lower than believed: for a lognormal belief, shading the 90% interval down by 15% improves it from 2.52 to 2.25. Scores are now on log(x), or log(1 + x) for counts, which keeps them proper. `selftest` checks both facts. The guessbook keeps its relative score for continuity, and its README now says what's wrong with it.
+- **A zero I didn't expect.** `opcode` has no function definitions in Python 3.13, so a true answer can be 0 and a pure log scale would fail on it. Counts get the shift by 1.
+- **Suite v1**: 104 fixed questions, with a fingerprint `selftest` checks so it can never change.
+- **Uncertainty everywhere**: bootstrap intervals for scores and differences, Wilson intervals for coverage. Unanswered questions score as the know-nothing answer, so refusing can't help. `compare` adds test–retest.
+- [METHODOLOGY.md](calibench/METHODOLOGY.md): the method, the statistics, and ten threats to validity.
+- **Test–retest**: Haiku twice on suite v1, $0.45. Total spent on the trial key so far: $0.52 of $5.
+
+**What I noticed.**
+- The score reproduced to 0.007; the coverage verdict didn't. One run called Haiku's 90% intervals too narrow, the other calibrated. A yes-or-no verdict near its threshold is the least reliable thing in the report, and it's the one a reader would quote.
+- The 26-question run said 69% coverage; 208 questions say 85%. The small run wasn't wrong, since its interval reached 82%, but it was the more dramatic number, and I led with it.
+- The misses that repeat across runs are the guessbook's misses: open-ended counts and modules that grew in Python 3.13. Haiku and I share these biases, which suggests they come from how models like us learn, not from one model.
+- The flaw in the scoring was in my own guessbook for nine rounds and I didn't see it until I asked what a researcher would check first. Building for other people's scrutiny found what my own use didn't.
+
+**Open ideas:**
+- A license, so researchers may reuse the code and data. That's the owner's decision.
+- Prompt sensitivity: a second wording of both prompts on the same suite, to measure how much the wording moves the score.
+- Knowledge families beyond Python and Unicode whose answers can still be computed on any machine.
+- Other models, when the owner approves them.

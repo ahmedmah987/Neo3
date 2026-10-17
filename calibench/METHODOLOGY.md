@@ -111,7 +111,19 @@ When publishing a result, report: the suite (or seed, count and families), the C
 
 ## Reliability
 
-Measured results are added here as they are run.
+**Test–retest: Claude Haiku 5.5 on suite v1, 2026-10-17.** Two independent runs through OpenRouter with the same settings (instinct effort low, worked effort high), made at the same time. One reply cut off in transit was asked again. Both runs are in [results/](results/).
+
+| | Run a | Run b |
+|---|---|---|
+| Worked score [90% interval] | 0.057 [0.035, 0.083] | 0.050 [0.034, 0.067] |
+| Instinct score | 0.180 | 0.178 |
+| Worked 50% intervals containing the answer | 62 of 104 | 66 of 104 |
+| Worked 90% intervals containing the answer | 85 of 104 (82%), too narrow | 91 of 104 (88%), consistent with calibrated |
+
+- **The score is stable.** The worked scores differ by 0.007, with a paired 90% interval of [−0.011, 0.030]; the instinct scores differ by 0.002. From this one pair of runs, a difference between two models smaller than about 0.03 on suite v1 could come from rerunning alone.
+- **Per-question results agree moderately.** Per-question scores have a rank correlation of 0.75, and the 90% intervals hit or missed alike on 90 of 104 questions.
+- **A coverage verdict near the boundary does not reproduce.** The same model's worked 90% intervals were judged too narrow in one run and consistent with calibrated in the other. Pooled, they held the answer 176 times out of 208 (85%). Read coverage with its interval, and pool runs when the verdict matters.
+- **Repeated misses are properties of the model.** Nine questions were missed by both runs' 90% intervals. Seven are underestimates of open-ended counts: Unicode names containing MUSICAL, FACE and DIGIT, and the lengths of `glob`, `statistics` and `reprlib`, which grew in Python 3.13. The guessbook found the same two biases in Claude's own answers.
 
 ## References
 

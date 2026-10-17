@@ -208,7 +208,7 @@ def compare(reports, names=None):
     if any(sorted(k) != sorted(keys[0]) for k in keys):
         return ("These runs weren't asked the same questions. Run every model with the same --suite, "
                 "or the same --seed, --count and --families, on the same Python.\n")
-    order = sorted(keys[0])
+    order = keys[0]                      # the questions' own order, so intervals match each run's report
     models = [rep["meta"]["model"] for rep in reports]
     stats = []
     for rep, name, model in zip(reports, names, models):
