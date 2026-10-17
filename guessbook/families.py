@@ -235,6 +235,84 @@ def solve_stdlib_defs(module):
         return count_defs(f.read())
 
 
+# ---- code points in a Unicode general category ---------------------------------------------
+
+UNICODE_CATEGORIES = {
+    "Lu": "uppercase letters", "Ll": "lowercase letters", "Lt": "titlecase letters", "Lm": "modifier letters",
+    "Lo": "other letters", "Mn": "nonspacing marks", "Mc": "spacing marks", "Me": "enclosing marks",
+    "Nd": "decimal digits", "Nl": "letter numbers", "No": "other numbers", "Pc": "connector punctuation",
+    "Pd": "dash punctuation", "Ps": "opening punctuation", "Pe": "closing punctuation",
+    "Pi": "initial quotes", "Pf": "final quotes", "Po": "other punctuation", "Sm": "math symbols",
+    "Sc": "currency symbols", "Sk": "modifier symbols", "So": "other symbols", "Zs": "space separators",
+    "Cf": "format characters",
+}
+
+
+def make_unicode_category(rng):
+    cat = rng.choice(sorted(UNICODE_CATEGORIES))
+    text = (f"In Python's Unicode database (Unicode {unicodedata.unidata_version}), how many code points have "
+            f"the general category {cat} ({UNICODE_CATEGORIES[cat]})?")
+    return {"category": cat}, text, f"code points in category {cat}"
+
+
+def solve_unicode_category(category):
+    return sum(unicodedata.category(chr(cp)) == category for cp in range(0x110000))
+
+
+# ---- assigned code points in a Unicode block -----------------------------------------------
+
+UNICODE_BLOCKS = [
+    ("Latin Extended-B", 0x0180, 0x024F), ("Greek and Coptic", 0x0370, 0x03FF), ("Armenian", 0x0530, 0x058F),
+    ("Hebrew", 0x0590, 0x05FF), ("Syriac", 0x0700, 0x074F), ("Thaana", 0x0780, 0x07BF),
+    ("Bengali", 0x0980, 0x09FF), ("Tamil", 0x0B80, 0x0BFF), ("Thai", 0x0E00, 0x0E7F), ("Lao", 0x0E80, 0x0EFF),
+    ("Tibetan", 0x0F00, 0x0FFF), ("Georgian", 0x10A0, 0x10FF), ("Ethiopic", 0x1200, 0x137F),
+    ("Cherokee", 0x13A0, 0x13FF), ("Runic", 0x16A0, 0x16FF), ("Khmer", 0x1780, 0x17FF),
+    ("Mongolian", 0x1800, 0x18AF), ("General Punctuation", 0x2000, 0x206F), ("Currency Symbols", 0x20A0, 0x20CF),
+    ("Number Forms", 0x2150, 0x218F), ("Arabic Presentation Forms-A", 0xFB50, 0xFDFF),
+    ("Arabic Presentation Forms-B", 0xFE70, 0xFEFF), ("Linear B Syllabary", 0x10000, 0x1007F),
+    ("Gothic", 0x10330, 0x1034F), ("Cuneiform", 0x12000, 0x123FF), ("Egyptian Hieroglyphs", 0x13000, 0x1342F),
+    ("Musical Symbols", 0x1D100, 0x1D1FF), ("Mathematical Alphanumeric Symbols", 0x1D400, 0x1D7FF),
+    ("Playing Cards", 0x1F0A0, 0x1F0FF), ("Chess Symbols", 0x1FA00, 0x1FA6F),
+]
+
+
+def make_unicode_block(rng):
+    name, lo, hi = rng.choice(UNICODE_BLOCKS)
+    text = (f"In Python's Unicode database (Unicode {unicodedata.unidata_version}), how many code points in "
+            f"U+{lo:04X}–U+{hi:04X} (the {name} block) are assigned, that is, have a category other than Cn?")
+    return {"lo": lo, "hi": hi}, text, f"assigned in the {name} block"
+
+
+def solve_unicode_block(lo, hi):
+    return sum(unicodedata.category(chr(cp)) != "Cn" for cp in range(lo, hi + 1))
+
+
+# ---- names in a module's __all__ -----------------------------------------------------------
+
+def module_all(name):
+    names = getattr(importlib.import_module(name), "__all__", None)
+    if names is None:
+        raise ValueError(f"{name} has no __all__")
+    return names
+
+
+def make_module_all(rng):
+    candidates = []
+    for name in STDLIB_MODULES:
+        try:
+            module_all(name)
+            candidates.append(name)
+        except ValueError:
+            pass
+    name = rng.choice(candidates)
+    text = f"How many names are listed in `{name}.__all__` in Python 3.13?"
+    return {"module": name}, text, f"names in `{name}.__all__`"
+
+
+def solve_module_all(module):
+    return len(module_all(module))
+
+
 FAMILIES = {
     "primes_in_range": (make_primes_in_range, solve_primes_in_range),
     "digit_sum_pow2": (make_digit_sum_pow2, solve_digit_sum_pow2),
@@ -246,4 +324,7 @@ FAMILIES = {
     "walk_max": (make_walk_max, solve_walk_max),
     "unicode_word": (make_unicode_word, solve_unicode_word),
     "stdlib_defs": (make_stdlib_defs, solve_stdlib_defs),
+    "unicode_category": (make_unicode_category, solve_unicode_category),
+    "unicode_block": (make_unicode_block, solve_unicode_block),
+    "module_all": (make_module_all, solve_module_all),
 }
