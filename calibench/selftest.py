@@ -330,6 +330,9 @@ def check_run(tmp):
     svg = ElementTree.parse(tmp / "naive" / "calibration.svg").getroot()
     check("the calibration chart is valid SVG with a bar per bin and series",
           svg.tag.endswith("svg") and len(svg.findall("{http://www.w3.org/2000/svg}rect")) == 3 + 6 * 3)
+    pooled = report.pool([load("naive"), load("naive2")], ["naive", "naive2"])
+    check("pool counts every answer of every run, by family and in all",
+          f"| **all** |  | {2 * count} |" in pooled and pooled.count("| `") == len({q["family"] for q in questions}))
     quiet(runner.run, models.NaiveModel(), "mock:naive", "other-seed", count, FAST, tmp / "naive3", 3)
     check("compare refuses runs asked different questions",
           "weren't asked the same questions" in report.compare([load("naive"), load("naive3")]))

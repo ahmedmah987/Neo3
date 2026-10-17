@@ -142,17 +142,39 @@ def cmd_index(args):
         sys.exit("these reports don't match their answers under the current scoring; re-score them with "
                  "`python3 -m calibench report <dir>` first:\n  " + "\n  ".join(map(str, stale)))
     table = index(runs)
-    if not args.write:
+    if args.write:
+        write_between_markers(args.write, "index", table)
+        print(f"updated the table in {args.write} with {len(runs)} runs", file=sys.stderr)
+    else:
         print(table, end="")
-        return
-    path = pathlib.Path(args.write)
+
+
+def write_between_markers(file, name, content):
+    """Replace what lies between <!-- name:start --> and <!-- name:end --> in a file, keeping the rest."""
+    path = pathlib.Path(file)
     text = path.read_text(encoding="utf-8")
-    start, end = "<!-- index:start -->", "<!-- index:end -->"
+    start, end = f"<!-- {name}:start -->", f"<!-- {name}:end -->"
     if start not in text or end not in text:
-        sys.exit(f"{path} needs the markers {start} and {end} around the table")
+        sys.exit(f"{path} needs the markers {start} and {end}")
     before, rest = text.split(start, 1)
-    path.write_text(f"{before}{start}\n{table}{end}{rest.split(end, 1)[1]}", encoding="utf-8")
-    print(f"updated the table in {path} with {len(runs)} runs", file=sys.stderr)
+    path.write_text(f"{before}{start}\n{content}{end}{rest.split(end, 1)[1]}", encoding="utf-8")
+
+
+def cmd_pool(args):
+    from .report import pool
+
+    reports = []
+    for d in args.dirs:
+        path = pathlib.Path(d) / "report.json"
+        if not path.exists():
+            sys.exit(f"{path} not found; run `python3 -m calibench report {d}` first")
+        reports.append(json.loads(path.read_text(encoding="utf-8")))
+    text = pool(reports, [pathlib.Path(d).name for d in args.dirs])
+    if args.write:
+        write_between_markers(args.write, "pool", text.split("\n", 2)[2])     # without its heading
+        print(f"updated the pooled table in {args.write}", file=sys.stderr)
+    else:
+        print(text, end="")
 
 
 def cmd_families(args):
@@ -209,6 +231,11 @@ def main(argv=None):
     p.add_argument("dir")
     p.add_argument("--write", help="replace the table between <!-- index:start --> and <!-- index:end --> in this file")
     p.set_defaults(func=cmd_index)
+
+    p = sub.add_parser("pool", help="pool the worked answers of several runs of one model, by family")
+    p.add_argument("dirs", nargs="+")
+    p.add_argument("--write", help="replace the text between <!-- pool:start --> and <!-- pool:end --> in this file")
+    p.set_defaults(func=cmd_pool)
 
     p = sub.add_parser("families", help="list the question families")
     p.set_defaults(func=cmd_families)

@@ -6,7 +6,7 @@ import statistics
 from .families import KINDS
 from .questions import SUITES
 from .scoring import (BIN_SHARES, BINS, KNOW_NOTHING, LEVELS, PHASES, bootstrap_mean, inside, log_wis, offset,
-                      questions_needed, spearman, summarize)
+                      questions_needed, spearman, summarize, wilson)
 
 
 def question_key(q):
@@ -305,6 +305,35 @@ def index(runs):
         lines.append(f"| [{name}]({name}/report.md) | {meta['model']} | {meta.get('prompts', 'standard')} "
                      f"| {where(meta)}, {meta['count']} | {sc(worked['all']['score_mean'])}{ci(worked['all']['score_ci'])} "
                      f"| {sc(instinct['all']['score_mean'])} | {hits} | {above} | {cost} |")
+    return "\n".join(lines) + "\n"
+
+
+def pool(reports, names):
+    """Worked answers pooled over several runs, by family: how consistent a model's leans and misses are."""
+    models = sorted({rep["meta"]["model"] for rep in reports})
+    rows = [r for rep in reports for r in rep["questions"] if r["worked"]["status"] == "ok"]
+    lines = ["# Calibench: runs pooled", "",
+             f"Worked answers from {len(reports)} runs ({', '.join(names)}) of {', '.join(models)}: "
+             f"{len(rows)} answered questions. A question asked in several runs counts once per run.", ""]
+    if len(models) > 1:
+        lines += ["**Note:** these runs are of different models, so pooled numbers mix them.", ""]
+    lines += ["| Family | Kind | Answers | Score | 90% intervals containing the answer [90% interval] "
+              "| True answer above the estimate [90% interval] |", "|---|---|---|---|---|---|"]
+
+    def line(label, kind, group):
+        n = len(group)
+        hits = sum(r["worked"]["hits"]["p90"] for r in group)
+        above = sum(1.0 if r["answer"] > r["worked"]["estimate"] else 0.5 if r["answer"] == r["worked"]["estimate"]
+                    else 0.0 for r in group)
+        return (f"| {label} | {kind} | {n} | {sc(statistics.fmean(r['worked']['score'] for r in group))} "
+                f"| {frac(hits, n)}{ci(wilson(hits, n), pct)} | {above / n:.0%}{ci(wilson(round(above), n), pct)} |")
+
+    for family in sorted({r["family"] for r in rows}, key=lambda f: (KINDS[f], f)):
+        lines.append(line(f"`{family}`", KINDS[family], [r for r in rows if r["family"] == family]))
+    lines.append(line("**all**", "", rows))
+    lines += ["", "A family whose interval for *above the estimate* excludes 50% leans consistently: above 50% means "
+              "the model underestimates it, below 50% that it overestimates. An answer equal to the estimate counts "
+              "as half above."]
     return "\n".join(lines) + "\n"
 
 

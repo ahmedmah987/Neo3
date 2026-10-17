@@ -71,7 +71,7 @@ To compare models, use `--suite v2`: 108 questions, all eighteen families 6 time
 
 A run asks every family twice by default (44 questions), each in two phases, so 88 calls. Use `--count` for more or fewer, `--families` to limit the kinds of question, and `--workers` for how many calls run at once. If a run is interrupted or some calls fail, run the same command again: answers already recorded are kept, and only the rest are asked. If the first three calls all fail, which usually means a wrong key, address or model name, the run stops and shows the error.
 
-Other commands: `questions` prints the questions a seed draws, `families` lists the families, `report <dir>` re-scores a run, and `selftest` checks everything without contacting a real model.
+Other commands: `questions` prints the questions a seed draws, `families` lists the families, `report <dir>` re-scores a run, `pool <dirs>` pools several runs of one model by family to show which leans are consistent, `index <dir>` tables every run in a directory, and `selftest` checks everything without contacting a real model.
 
 ## The questions
 
