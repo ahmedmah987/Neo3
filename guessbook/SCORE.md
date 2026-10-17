@@ -78,18 +78,18 @@ Worked answers by kind of question: knowledge means recalling, statistical means
 
 | # | Question | Answer | Instinct | Worked |
 |---|---|---|---|---|
-| 1 | highest point of a 441-step walk | pending | 16.26 | — |
-| 2 | mean distance in a 1 × 8.9 rectangle | pending | 3.03 | — |
-| 3 | longest increasing subsequence, n = 1,078 | pending | 60.5 | — |
-| 4 | code points in category Nl | pending | 236 | — |
-| 5 | Unicode names with the word GREEK | pending | 531 | — |
-| 6 | names in `enum.__all__` | pending | 40 | — |
-| 7 | lines in `optparse` | pending | 1,680 | — |
-| 8 | Collatz steps from 252,385,005,544 | pending | 270 | — |
-| 9 | primes in [224,907, 259,190] | pending | 2,765 | — |
-| 10 | draws until a repeat, d = 562,753 | pending | 940.9 | — |
-| 11 | function definitions in `trace` | pending | 45 | — |
-| 12 | digit sum of 2^4686 | pending | 6,350 | — |
+| 1 | highest point of a 441-step walk | pending | 16.26 | 16.27 |
+| 2 | mean distance in a 1 × 8.9 rectangle | pending | 3.03 | 3.023 |
+| 3 | longest increasing subsequence, n = 1,078 | pending | 60.5 | 60.51 |
+| 4 | code points in category Nl | pending | 236 | 236 |
+| 5 | Unicode names with the word GREEK | pending | 531 | 531 |
+| 6 | names in `enum.__all__` | pending | 40 | 30 |
+| 7 | lines in `optparse` | pending | 1,680 | 1,680 |
+| 8 | Collatz steps from 252,385,005,544 | pending | 270 | 175 |
+| 9 | primes in [224,907, 259,190] | pending | 2,765 | 2,760 |
+| 10 | draws until a repeat, d = 562,753 | pending | 940.9 | 940.9 |
+| 11 | function definitions in `trace` | pending | 45 | 29 |
+| 12 | digit sum of 2^4686 | pending | 6,350 | 6,348 |
 
 ### 2026-10-17-31643da8
 
