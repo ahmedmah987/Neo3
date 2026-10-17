@@ -4,7 +4,7 @@
 
 A model is asked numeric questions it can't look up. For each one it gives an estimate, a 50% interval and a 90% interval, first by instinct and then after working it out. Calibench then computes the true answers and scores the stated uncertainty against them.
 
-- **A standard suite, and fresh questions.** `--suite v1` asks every model the same 104 questions, fixed before any were drawn. Any other seed draws new ones, so there's no fixed answer key to memorise.
+- **A standard suite, and fresh questions.** `--suite v2` asks every model the same 108 questions, fixed before any were drawn. Any other seed draws new ones, so there's no fixed answer key to memorise.
 - **Every answer is computed.** Calibench settles each question itself, exactly or by a seeded simulation, and only after every answer has been recorded.
 - **Proper scores, with their uncertainty.** The score can't be improved by stating intervals other than the ones the model believes, and every headline number comes with a 90% interval over questions.
 - **Any model.** Claude, OpenRouter's hundreds of models, any OpenAI-compatible API, local models, any command-line program, replies collected by your own harness, or a chat window.
@@ -61,21 +61,21 @@ python3 -m calibench export --seed october --out prompts.jsonl
 python3 -m calibench run --model replies:prompts-with-replies.jsonl --seed october
 
 # Compare models on the standard suite
-python3 -m calibench run --model openrouter:<model id> --suite v1
-python3 -m calibench compare calibench-runs/*-calibench-v1
+python3 -m calibench run --model openrouter:<model id> --suite v2
+python3 -m calibench compare calibench-runs/*-calibench-v2
 ```
 
-To compare models, use `--suite v1`: 104 questions, every family 8 times, settled on Python 3.13. A seed you choose is for exploring; a comparison on a seed someone chose can be cherry-picked.
+To compare models, use `--suite v2`: 108 questions, all eighteen families 6 times, settled on Python 3.13. Suite `v1` (104 questions from the original thirteen families) is kept so earlier results stay comparable. A seed you choose is for exploring; a comparison on a seed someone chose can be cherry-picked.
 
 `--prompts alt` asks the same questions in a second wording, to measure how much the wording matters.
 
-A run asks 26 questions by default (every family twice), each in two phases, so 52 calls. Use `--count` for more or fewer, `--families` to limit the kinds of question, and `--workers` for how many calls run at once. If a run is interrupted or some calls fail, run the same command again: answers already recorded are kept, and only the rest are asked. If the first three calls all fail, which usually means a wrong key, address or model name, the run stops and shows the error.
+A run asks 36 questions by default (every family twice), each in two phases, so 72 calls. Use `--count` for more or fewer, `--families` to limit the kinds of question, and `--workers` for how many calls run at once. If a run is interrupted or some calls fail, run the same command again: answers already recorded are kept, and only the rest are asked. If the first three calls all fail, which usually means a wrong key, address or model name, the run stops and shows the error.
 
 Other commands: `questions` prints the questions a seed draws, `families` lists the families, `report <dir>` re-scores a run, and `selftest` checks everything without contacting a real model.
 
 ## The questions
 
-Thirteen families, each with parameters drawn from the seed:
+Eighteen families, each with parameters drawn from the seed:
 
 | Kind | Family | Example |
 |---|---|---|
@@ -86,6 +86,11 @@ Thirteen families, each with parameters drawn from the seed:
 | statistical | `collatz_steps` | Collatz steps from 624,045,563,571 to 1 |
 | statistical | `walk_max` | Expected highest point of a 1,147-step random walk |
 | exact | `birthday` | Expected draws from 1 to 227 until a value repeats |
+| calculation | `days_between` | Days from November 9, 2381 to March 1, 2400 |
+| calculation | `factorial_digits` | Decimal digits of 10,938! |
+| calculation | `friday13` | Friday the 13ths from 1607 to 1713 |
+| calculation | `partitions` | The partition number p(246) |
+| calculation | `multiply` | 21,339 × 2,935 |
 | knowledge | `stdlib_lines` | Lines in the source of the standard-library module `queue` |
 | knowledge | `stdlib_defs` | Function definitions in the source of `dataclasses` |
 | knowledge | `module_all` | Names in `optparse.__all__` |
@@ -93,7 +98,7 @@ Thirteen families, each with parameters drawn from the seed:
 | knowledge | `unicode_category` | Code points in the general category Pi |
 | knowledge | `unicode_block` | Assigned code points in the Tibetan block |
 
-**Statistical** questions need noise or irregularity modelled: a model can know the theory and still not know the exact answer. **Exact** ones have a closed form that has to be evaluated. **Knowledge** questions ask what is known about the Python standard library and the Unicode database. Each question is phrased so a careful model can reason toward it without tools; with a code interpreter most of them become trivial, so Calibench's adapters send no tools.
+**Statistical** questions need noise or irregularity modelled: a model can know the theory and still not know the exact answer. **Exact** ones have a closed form that has to be evaluated. **Calculation** questions have an exact answer that takes long, careful arithmetic, so they ask whether a model knows when its own arithmetic can be trusted. **Knowledge** questions ask what is known about the Python standard library and the Unicode database. Each question is phrased so a careful model can reason toward it without tools; with a code interpreter most of them become trivial, so Calibench's adapters send no tools.
 
 ## How it's scored
 

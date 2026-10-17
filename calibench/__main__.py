@@ -31,9 +31,10 @@ def family_list(value):
 
 def add_draw_options(p):
     p.add_argument("--suite", choices=sorted(SUITES), help="a standard suite: fixed questions every model is asked "
-                   "(v1: 104 questions, every family 8 times). Use this to compare models")
+                   "(v2: 108 questions, all 18 families 6 times; v1: 104 questions, the original 13 families 8 times). "
+                   "Use this to compare models")
     p.add_argument("--seed", help="any string; the same seed gives the same questions (default: a new random seed)")
-    p.add_argument("--count", type=int, help="number of questions (default 26: every family twice)")
+    p.add_argument("--count", type=int, help="number of questions (default: every family twice)")
     p.add_argument("--families", type=family_list, help="comma-separated families to draw from (default: all)")
     p.add_argument("--prompts", choices=sorted(PROMPT_SETS), default="standard",
                    help="the wording of the two prompts (default standard; alt measures sensitivity to wording)")
@@ -53,7 +54,7 @@ def resolve_draw(args, seed_required=False):
     if seed_required and not args.seed:
         sys.exit("give --seed or --suite")
     args.seed = args.seed or secrets.token_hex(4)
-    args.count = args.count or 26
+    args.count = args.count or 2 * len(args.families or FAMILIES)
 
 
 def cmd_run(args):

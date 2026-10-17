@@ -199,7 +199,8 @@ def render(report):
 
     lines += ["", "## By kind of question", "",
               "Knowledge questions ask what is known (the Python standard library, the Unicode database); statistical "
-              "ones need noise or irregularity modelled; exact ones have a closed-form answer that must be evaluated.", "",
+              "ones need noise or irregularity modelled; exact ones have a closed-form answer that must be evaluated; "
+              "calculation ones have an exact answer that takes long, careful arithmetic.", "",
               "| Kind | Phase | Questions | Score | 50% hits | 90% hits |", "|---|---|---|---|---|---|"]
     for kind in sorted(report["kinds"]["worked"]):
         for phase in PHASES:

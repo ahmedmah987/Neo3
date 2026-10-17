@@ -84,6 +84,16 @@ def check_families():
     check("Basic Latin, U+0000–U+007F, is fully assigned", F.solve_unicode_block(0x00, 0x7F) == 128)
     check("json.__all__ has 7 names", F.solve_module_all("json") == 7)
     check("every family has a kind", set(F.KINDS) == set(F.FAMILIES))
+    check("days between dates, with a leap day", F.solve_days_between("2000-01-01", "2000-03-01") == 60
+          and F.solve_days_between("1900-01-01", "1900-03-01") == 59)
+    check("digits of 10!, 100! and 1000! are 7, 158 and 2,568",
+          [F.solve_factorial_digits(n) for n in (1, 10, 100, 1000)] == [1, 7, 158, 2568])
+    check("2015 had three Friday the 13ths, and every 400 years have 688",
+          F.solve_friday13(2015, 2015) == 3 and F.solve_friday13(2000, 2399) == 688)
+    check("partition numbers p(1) to p(10), and p(100) = 190,569,292",
+          [F.solve_partitions(n) for n in range(1, 11)] == [1, 2, 3, 5, 7, 11, 15, 22, 30, 42]
+          and F.solve_partitions(100) == 190_569_292)
+    check("month names don't depend on the locale", F.spell_date(F.datetime.date(1999, 12, 31)) == "December 31, 1999")
     bad_blocks = [name for name, lo, hi in F.UNICODE_BLOCKS if not lo < hi or (hi + 1) % 16]
     check("block ranges are well formed", not bad_blocks)
     rng = random.Random("throwaway")                # values are not printed
@@ -95,10 +105,11 @@ def check_families():
 # ---- drawing, reading replies, scoring -----------------------------------------------------
 
 def check_core():
-    a = draw(rng_from_seed("selftest"), 26)
-    check("the same seed draws the same questions", a == draw(rng_from_seed("selftest"), 26))
-    check("a different seed draws different questions", a != draw(rng_from_seed("selftest2"), 26))
-    check("every family once before any repeats", len({q["family"] for q in a[:13]}) == 13
+    n = len(F.FAMILIES)
+    a = draw(rng_from_seed("selftest"), 2 * n)
+    check("the same seed draws the same questions", a == draw(rng_from_seed("selftest"), 2 * n))
+    check("a different seed draws different questions", a != draw(rng_from_seed("selftest2"), 2 * n))
+    check("every family once before any repeats", len({q["family"] for q in a[:n]}) == n
           and all(sum(q["family"] == f for q in a) == 2 for f in F.FAMILIES))
     many = draw(rng_from_seed("selftest"), 130)
     check("a run doesn't repeat a question", len({(q["family"], json.dumps(q["params"])) for q in many}) == 130)
@@ -167,12 +178,18 @@ def check_core():
           SUITES["v1"]["families"] is ORIGINAL_FAMILIES and len(ORIGINAL_FAMILIES) == 13
           and set(ORIGINAL_FAMILIES) <= set(F.FAMILIES))
     check("suite v1: 104 questions, every family 8 times, none repeated",
-          len(suite) == 104 and all(sum(q["family"] == f for q in suite) == 8 for f in F.FAMILIES)
+          len(suite) == 104 and all(sum(q["family"] == f for q in suite) == 8 for f in ORIGINAL_FAMILIES)
           and len({(q["family"], json.dumps(q["params"])) for q in suite}) == 104)
-    if f"{sys.version_info.major}.{sys.version_info.minor}" == SUITES["v1"]["python"]:
-        check("suite v1 draws exactly the questions it always has", fingerprint(suite) == SUITES["v1"]["sha256"])
-    else:
-        print(f"skip  suite v1 fingerprint: it is fixed on Python {SUITES['v1']['python']}")
+    v2 = draw(rng_from_seed(SUITES["v2"]["seed"]), SUITES["v2"]["count"], SUITES["v2"]["families"])
+    check("suite v2: 108 questions, all 18 families 6 times, none repeated",
+          len(v2) == 108 and len(F.FAMILIES) == 18 and all(sum(q["family"] == f for q in v2) == 6 for f in F.FAMILIES)
+          and len({(q["family"], json.dumps(q["params"])) for q in v2}) == 108)
+    for name, questions in (("v1", suite), ("v2", v2)):
+        if f"{sys.version_info.major}.{sys.version_info.minor}" == SUITES[name]["python"]:
+            check(f"suite {name} draws exactly the questions it always has",
+                  fingerprint(questions) == SUITES[name]["sha256"])
+        else:
+            print(f"skip  suite {name} fingerprint: it is fixed on Python {SUITES[name]['python']}")
     check("coverage verdicts", verdict(13, 26, 0.5) == "consistent with calibrated"
           and verdict(15, 26, 0.9) == "too narrow (overconfident)" and verdict(26, 26, 0.5) == "too wide (underconfident)"
           and verdict(2, 3, 0.9) == "too few to tell")

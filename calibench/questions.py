@@ -15,9 +15,14 @@ ORIGINAL_FAMILIES = [
     "stdlib_defs", "stdlib_lines", "unicode_block", "unicode_category", "unicode_word", "walk_max",
 ]
 
+# Suite v2 adds the five calculation families.
+V2_FAMILIES = sorted(ORIGINAL_FAMILIES + ["days_between", "factorial_digits", "friday13", "multiply", "partitions"])
+
 SUITES = {
     "v1": {"seed": "calibench-v1", "count": 104, "python": "3.13", "families": ORIGINAL_FAMILIES,  # each 8 times
            "sha256": "8a91a6e055e6f0f71efb4e615e42cb16725e35d5faac19b7fe51b78b6681aa51"},
+    "v2": {"seed": "calibench-v2", "count": 108, "python": "3.13", "families": V2_FAMILIES,         # each 6 times
+           "sha256": "a0f879d9bf3c9adb72b220c3d3c2d116ecad2c21d517fe1d529ec0acee13effe"},
 }
 
 

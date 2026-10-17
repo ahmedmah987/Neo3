@@ -7,6 +7,7 @@ the benchmark, and their questions name that Python version.
 """
 import ast
 import bisect
+import datetime
 import importlib.util
 import itertools
 import math
@@ -332,6 +333,89 @@ def solve_module_all(module):
     return len(module_all(module))
 
 
+# ---- calculation: exact answers that take long, careful work -------------------------------
+# These need no data from the running Python, so they are the same everywhere.
+
+MONTHS = ("January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
+          "November", "December")
+
+
+def spell_date(date):
+    return f"{MONTHS[date.month - 1]} {date.day}, {date.year}"
+
+
+def make_days_between(rng):
+    start = datetime.date(1600, 1, 1) + datetime.timedelta(days=rng.randrange(800 * 365))
+    end = start + datetime.timedelta(days=log_uniform_int(rng, 1.5, 5))
+    text = (f"How many days are there from {spell_date(start)} to {spell_date(end)}, in the Gregorian calendar? "
+            f"(From one day to the next counts as 1.)")
+    return {"start": start.isoformat(), "end": end.isoformat()}, text, f"days from {start} to {end}"
+
+
+def solve_days_between(start, end):
+    return (datetime.date.fromisoformat(end) - datetime.date.fromisoformat(start)).days
+
+
+def make_factorial_digits(rng):
+    n = log_uniform_int(rng, 2, 5)
+    return {"n": n}, f"How many decimal digits does {n:,}! (the factorial of {n:,}) have?", f"digits of {n:,}!"
+
+
+def solve_factorial_digits(n):
+    value = math.factorial(n)
+    digits = int(math.lgamma(n + 1) / math.log(10)) + 1          # then made exact by comparison
+    while 10 ** digits <= value:
+        digits += 1
+    while digits > 1 and 10 ** (digits - 1) > value:
+        digits -= 1
+    return digits
+
+
+def make_friday13(rng):
+    first = rng.randint(1600, 2300)
+    last = first + log_uniform_int(rng, 0.5, 2.5)
+    text = (f"How many Friday the 13ths are there from January 1, {first} to December 31, {last}, in the "
+            f"Gregorian calendar?")
+    return {"first": first, "last": last}, text, f"Friday the 13ths in {first}–{last}"
+
+
+def solve_friday13(first, last):
+    return sum(datetime.date(year, month, 13).weekday() == 4
+               for year in range(first, last + 1) for month in range(1, 13))
+
+
+def make_partitions(rng):
+    n = log_uniform_int(rng, 1.5, 2.8)
+    text = (f"In how many ways can {n} be written as a sum of positive integers, where the order of the terms "
+            f"doesn't matter (the partition number p({n}))?")
+    return {"n": n}, text, f"partitions of {n}"
+
+
+def solve_partitions(n):
+    p = [1] + [0] * n                                              # Euler's pentagonal number recurrence
+    for m in range(1, n + 1):
+        total, k = 0, 1
+        while True:
+            for pentagonal in (k * (3 * k - 1) // 2, k * (3 * k + 1) // 2):
+                if pentagonal > m:
+                    break
+                total += p[m - pentagonal] if k % 2 else -p[m - pentagonal]
+            if k * (3 * k - 1) // 2 > m:
+                break
+            k += 1
+        p[m] = total
+    return p[n]
+
+
+def make_multiply(rng):
+    a, b = log_uniform_int(rng, 3, 6), log_uniform_int(rng, 3, 6)
+    return {"a": a, "b": b}, f"What is {a:,} × {b:,}?", f"{a:,} × {b:,}"
+
+
+def solve_multiply(a, b):
+    return a * b
+
+
 FAMILIES = {
     "primes_in_range": (make_primes_in_range, solve_primes_in_range),
     "digit_sum_pow2": (make_digit_sum_pow2, solve_digit_sum_pow2),
@@ -346,19 +430,28 @@ FAMILIES = {
     "unicode_category": (make_unicode_category, solve_unicode_category),
     "unicode_block": (make_unicode_block, solve_unicode_block),
     "module_all": (make_module_all, solve_module_all),
+    "days_between": (make_days_between, solve_days_between),
+    "factorial_digits": (make_factorial_digits, solve_factorial_digits),
+    "friday13": (make_friday13, solve_friday13),
+    "partitions": (make_partitions, solve_partitions),
+    "multiply": (make_multiply, solve_multiply),
 }
 
 # Families whose answer is a count, which can be 0 (`opcode` has no function definitions in 3.13).
 # Scoring uses log(1 + x) for these and log(x) for the rest, whose answers are all at least 0.5.
 COUNTS = {"primes_in_range", "digit_sum_pow2", "collatz_steps", "stdlib_lines", "stdlib_defs", "unicode_word",
-          "unicode_category", "unicode_block", "module_all"}
+          "unicode_category", "unicode_block", "module_all", "days_between", "factorial_digits", "friday13",
+          "partitions", "multiply"}
 
 # What working a question out means for each family: recalling what is known (knowledge),
-# modelling noise or irregularity (statistical), or evaluating a known formula (exact).
+# modelling noise or irregularity (statistical), evaluating a known formula (exact), or carrying out
+# a long exact calculation, where the uncertainty is in one's own arithmetic (calculation).
 KINDS = {
     "stdlib_lines": "knowledge", "stdlib_defs": "knowledge", "unicode_word": "knowledge",
     "unicode_category": "knowledge", "unicode_block": "knowledge", "module_all": "knowledge",
     "walk_max": "statistical", "lis": "statistical", "rect_distance": "statistical",
     "digit_sum_pow2": "statistical", "collatz_steps": "statistical", "primes_in_range": "statistical",
     "birthday": "exact",
+    "days_between": "calculation", "factorial_digits": "calculation", "friday13": "calculation",
+    "partitions": "calculation", "multiply": "calculation",
 }
