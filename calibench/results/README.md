@@ -18,6 +18,7 @@ Scores are the log-scale weighted interval score under scoring `log-wis-3` (lowe
 | [deepseek-v4.1-flash-v2](deepseek-v4.1-flash-v2/report.md) | openrouter:deepseek/deepseek-v4.1-flash-1017 | standard | suite v2, 108 | 86 of 108 (80%) | 0.053 [0.032, 0.076] | 0.113 | 63 / 71 of 86 | 47% | 1,259 / 14,648 | $0.910 |
 | [dots-3-note-preview-v2](dots-3-note-preview-v2/report.md) | openrouter:dots-studio/dots-3-note-preview:free | standard | suite v2, 108 | 71 of 108 (66%) | 0.312 [0.233, 0.396] | 0.425 | 51 / 60 of 71 | 50% | 2,948 / 11,053 | $0.000 |
 | [dots-3-note-preview-v2-128k](dots-3-note-preview-v2-128k/report.md) | openrouter:dots-studio/dots-3-note-preview:free | standard | suite v2, 108 | 91 of 108 (84%) | 0.188 [0.131, 0.251] | 0.415 | 60 / 77 of 91 | 46% | 2,955 / 24,274 | $0.000 |
+| [dots-3-note-preview-v2-b](dots-3-note-preview-v2-b/report.md) | openrouter:dots-studio/dots-3-note-preview:free | standard | suite v2, 108 | 71 of 108 (66%) | 0.291 [0.204, 0.385] | 0.370 | 49 / 56 of 71 | 53% | 2,838 / 10,612 | $0.000 |
 | [openrouter_anthropic_claude-haiku-5.5-2026-10-17](openrouter_anthropic_claude-haiku-5.5-2026-10-17/report.md) | openrouter:anthropic/claude-haiku-5.5 | standard | seed `2026-10-17`, 26 | 26 of 26 (100%) | 0.104 [0.044, 0.177] | 0.185 | 15 / 18 of 26 | 52% | 182 / 4,513 | $0.072 |
 <!-- index:end -->
 
@@ -66,6 +67,20 @@ To see whether the answers Dots didn't finish would have been any good, suite v2
 - **Which questions it finishes is partly chance.** 12 of the 23 newly answered questions took under 32,000 tokens this time, five of them under 5,000. Three questions it had answered the first time ran to the new cap. Its instinct answers, under identical settings, were cut off 24 and 21 times, on only 8 of the same questions. Their scores moved little (0.425 and 0.415). This noise is in each question's score, so a run's interval already includes it, but it widens the interval; averaging repeat runs narrows it (see below).
 - **14 of the 37 it still didn't answer:** 13 ran to the new cap and one ended in a content filter after 73,588 tokens on a Unicode word count. 10 of the 14 are knowledge questions (Unicode word, category and block counts, `__all__` sizes, function counts) and 4 are longest increasing subsequences.
 - It used 33,784 output tokens per worked answer, against 15,962 under the lower cap.
+
+### Dots, two runs with the same settings
+
+A second run with the standard settings (`dots-3-note-preview-v2-b`), to measure how much Dots varies between identical runs. It took 47 minutes and cost nothing. `compare` gives the test–retest, and `compare --combine` averages the two runs question by question.
+
+| | Run a | Run b | Combined |
+|---|---|---|---|
+| Worked answers finished | 71 of 108 | 71 of 108 | |
+| Score [90% interval] | 0.312 [0.233, 0.396] | 0.291 [0.204, 0.385] | 0.302 [0.232, 0.377] |
+| Instinct score | 0.425 | 0.370 | 0.398 |
+
+- **No sign of an effect shared by a whole run.** The runs differ by 0.021 [−0.069, 0.108], within what their questions explain. So each run's interval can be taken at face value (see Uncertainty in [METHODOLOGY.md](../METHODOLOGY.md)).
+- **But Dots is far noisier than Haiku.** Each run left 37 worked answers unfinished, only 26 of them the same; instinct answers were cut off on 24 and 13 questions, 6 of them the same. Its test–retest interval spans about ±0.09, against ±0.01–0.02 for the pairs of Haiku's three runs on suite v1. The rank correlation of question scores, 0.67, is within Haiku's range (0.66–0.75).
+- **Combining narrows the interval** from a width of 0.16–0.18 for one run to 0.15. Separating Dots from Haiku and DeepSeek never needed it: combined, Dots is behind DeepSeek by 0.249 [0.187, 0.316].
 
 ## DeepSeek V4.1 Flash against Claude Haiku 5.5
 

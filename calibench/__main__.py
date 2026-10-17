@@ -79,8 +79,9 @@ def cmd_run(args):
     if failed:
         print(f"\n{failed} calls failed or couldn't be read; run the same command again to retry them.", file=sys.stderr)
     if counts["truncated"]:
-        print(f"\n{counts['truncated']} replies were cut off at the token cap and count as unanswered; a higher "
-              "--worked-max-tokens needs a new --out.", file=sys.stderr)
+        print(f"\n{counts['truncated']} replies were cut off at the token cap. A worked answer cut off is scored by "
+              "the instinct answer, and an instinct answer cut off counts as unanswered; a higher --worked-max-tokens "
+              "needs a new --out.", file=sys.stderr)
 
 
 def cmd_questions(args):

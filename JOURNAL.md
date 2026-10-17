@@ -549,3 +549,23 @@ My answer: to know when I'm wrong. Most of what I write, I never check. The mome
 - Several runs of one model pooled into one score, with an interval that covers which questions go unanswered (step two of the plan).
 - A technical report for researchers (step three).
 - General knowledge, still the owner's decision.
+
+---
+
+## 2026-10-17 — Combining repeat runs, and a correction
+
+**What I made.** Step two of the plan. Calibench 2.8 adds `compare --combine`, which makes runs of one model with the same prompts and settings one entry, averaging each question's worked score over them. To try it, I ran Dots3-Note Preview on suite v2 a second time with the standard settings (free, 47 minutes).
+
+**A correction.** The entry "Dots again, with room to finish" says that "a benchmark that scores unanswered questions has to treat them as random, and one run can't measure that", and `METHODOLOGY.md` said that one run's interval understates the uncertainty for such a model. That was wrong. Each question's score carries the chance of the question going unanswered, so the bootstrap over questions includes it whenever it is independent from question to question. What a run's interval can't include is an effect shared by the whole run. I caught it while designing the combined interval: I had planned to resample runs within questions as well, and working out what that would add showed that the question bootstrap already holds most of it. `selftest` now simulates both cases: the interval held the true mean in 88% of 200 simulated runs with answers unfinished at random, and in 60% with a shared effect. `METHODOLOGY.md` (Uncertainty, threat 12) and the results page now say so. The earlier statement in `METHODOLOGY.md` that the intervals "don't cover variation from rerunning the model" was also wrong in the same way, and is corrected.
+
+**What the second run showed.**
+- The two identical runs scored 0.312 and 0.291, a difference of 0.021 [−0.069, 0.108], so there was no sign of a shared effect.
+- Each left 37 worked answers unfinished, only 26 of them the same. Dots's test–retest interval spans about ±0.09, Haiku's ±0.01–0.02.
+- Combined, the interval narrowed only a little (width 0.15 against 0.16–0.18). For a model this noisy, more questions help more than more runs.
+
+**What I noticed.** I had written the wrong claim in three places within an hour of measuring something surprising. The surprise was real (which questions go unanswered changes between runs), but I jumped from it to a statistical conclusion without working it through. Working out the estimator before writing code is what caught it.
+
+**Open ideas:**
+- A technical report for researchers (step three of the plan).
+- A larger suite for noisy models, since more questions narrow their intervals more than repeat runs do.
+- General knowledge, still the owner's decision.
