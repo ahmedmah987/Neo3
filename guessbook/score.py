@@ -129,11 +129,27 @@ def inside(interval, x):
     return interval[0] <= x <= interval[1]
 
 
+def interval_score(interval, x, alpha):
+    """Gneiting and Raftery's score for a central (1 − alpha) interval, relative to the answer.
+
+    Width plus 2/alpha times any distance by which the answer falls outside. Lower is better,
+    and it is minimised by giving the true alpha/2 and 1 − alpha/2 quantiles.
+    """
+    lo, hi = interval
+    return ((hi - lo) + 2 / alpha * (max(0, lo - x) + max(0, x - hi))) / abs(x)
+
+
 def report_rounds(rounds):
     lines = ["## Drawn rounds", "",
              "Questions drawn from a seed I don't choose. Each is answered twice, first by instinct and "
-             "then after working it out, with an estimate, a 50% interval and a 90% interval."]
-    stats = {phase: {"n": 0, "in50": 0, "in90": 0, "errors": []} for phase in PHASES}
+             "then after working it out, with an estimate, a 50% interval and a 90% interval.", "",
+             "The interval score is the main measure: an interval's width plus a penalty of 2/α times any miss, "
+             "relative to the answer (α is 0.5 for the 50% interval and 0.1 for the 90% one). Lower is better, "
+             "and it can't be gamed by widening or narrowing intervals away from what I believe. Coverage is "
+             "shown too, and also without single-number 50% intervals, which hit more than half the time "
+             "whenever an integer answer is known."]
+    stats = {phase: {"n": 0, "in50": 0, "in90": 0, "errors": [], "is50": [], "is90": [],
+                     "ranged": 0, "ranged_in50": 0} for phase in PHASES}
     closer = {"worked": 0, "instinct": 0, "tie": 0}
     tables = []
     for rnd in rounds:
@@ -153,6 +169,11 @@ def report_rounds(rounds):
                     s["in50"] += inside(a["p50"], answer)
                     s["in90"] += inside(a["p90"], answer)
                     s["errors"].append(abs(a["estimate"] - answer) / abs(answer))
+                    s["is50"].append(interval_score(a["p50"], answer, 0.5))
+                    s["is90"].append(interval_score(a["p90"], answer, 0.1))
+                    if a["p50"][0] != a["p50"][1]:
+                        s["ranged"] += 1
+                        s["ranged_in50"] += inside(a["p50"], answer)
                     marks = " ".join(f"{lvl}{'✓' if inside(a['p' + lvl], answer) else '✗'}" for lvl in ("50", "90"))
                     cell += f" ({marks})"
                 cells.append(cell)
@@ -166,9 +187,17 @@ def report_rounds(rounds):
     if any(s["n"] for s in stats.values()):
         def frac(k, n):
             return f"{k} of {n} ({k / n:.0%})" if n else "—"
+        def mean_pct(values):
+            return f"{sum(values) / len(values):.2%}" if values else "—"
         lines += ["", "| | Instinct | Worked |", "|---|---|---|"]
+        lines.append("| Interval score, 50% intervals | "
+                     + " | ".join(mean_pct(stats[p]["is50"]) for p in PHASES) + " |")
+        lines.append("| Interval score, 90% intervals | "
+                     + " | ".join(mean_pct(stats[p]["is90"]) for p in PHASES) + " |")
         lines.append("| 50% intervals that contain the answer | "
                      + " | ".join(frac(stats[p]["in50"], stats[p]["n"]) for p in PHASES) + " |")
+        lines.append("| … leaving out single-number intervals | "
+                     + " | ".join(frac(stats[p]["ranged_in50"], stats[p]["ranged"]) for p in PHASES) + " |")
         lines.append("| 90% intervals that contain the answer | "
                      + " | ".join(frac(stats[p]["in90"], stats[p]["n"]) for p in PHASES) + " |")
         lines.append("| Median error of the estimate | "

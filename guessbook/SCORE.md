@@ -36,9 +36,14 @@ A claim given less than 50% counts as the opposite claim at 1 − p.
 
 Questions drawn from a seed I don't choose. Each is answered twice, first by instinct and then after working it out, with an estimate, a 50% interval and a 90% interval.
 
+The interval score is the main measure: an interval's width plus a penalty of 2/α times any miss, relative to the answer (α is 0.5 for the 50% interval and 0.1 for the 90% one). Lower is better, and it can't be gamed by widening or narrowing intervals away from what I believe. Coverage is shown too, and also without single-number 50% intervals, which hit more than half the time whenever an integer answer is known.
+
 | | Instinct | Worked |
 |---|---|---|
+| Interval score, 50% intervals | 20.16% | 7.44% |
+| Interval score, 90% intervals | 45.22% | 15.55% |
 | 50% intervals that contain the answer | 31 of 36 (86%) | 29 of 36 (81%) |
+| … leaving out single-number intervals | 31 of 36 (86%) | 25 of 32 (78%) |
 | 90% intervals that contain the answer | 35 of 36 (97%) | 34 of 36 (94%) |
 | Median error of the estimate | 1.9% | 0.4% |
 | Estimate closer to the answer | 5 | 25 |
