@@ -1,0 +1,117 @@
+{
+  "seed": "d8b9f2339cf2148eabcfe44195849a56ede728e5",
+  "questions": [
+    {
+      "q": 1,
+      "family": "birthday",
+      "params": {
+        "d": 2918712
+      },
+      "short": "draws until a repeat, d = 2,918,712",
+      "text": "Integers are drawn uniformly at random from 1 to 2,918,712, with replacement, until some value appears for the second time. What is the expected number of draws, counting the repeat?"
+    },
+    {
+      "q": 2,
+      "family": "unicode_category",
+      "params": {
+        "category": "Mc"
+      },
+      "short": "code points in category Mc",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have the general category Mc (spacing marks)?"
+    },
+    {
+      "q": 3,
+      "family": "walk_max",
+      "params": {
+        "n": 1936,
+        "seed": 3916460803
+      },
+      "short": "highest point of a 1,936-step walk",
+      "text": "A simple random walk on the integers starts at 0 and takes 1,936 steps of +1 or −1, each with probability ½. What is the expected highest position it reaches (0 if it never rises above the start)? (Settled by averaging 4,000 random walks.)"
+    },
+    {
+      "q": 4,
+      "family": "stdlib_lines",
+      "params": {
+        "module": "wave"
+      },
+      "short": "lines in `wave`",
+      "text": "How many lines are in the source file of the standard-library module `wave` in Python 3.13 (every line, blank or not)?"
+    },
+    {
+      "q": 5,
+      "family": "rect_distance",
+      "params": {
+        "b": 1.69,
+        "seed": 3148408520
+      },
+      "short": "mean distance in a 1 × 1.69 rectangle",
+      "text": "Two points are chosen independently and uniformly at random in a 1 × 1.69 rectangle. What is the expected distance between them? (Settled by averaging 400,000 random pairs.)"
+    },
+    {
+      "q": 6,
+      "family": "unicode_word",
+      "params": {
+        "word": "HEBREW"
+      },
+      "short": "Unicode names with the word HEBREW",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have a name containing the whole word HEBREW? (Names are split into words at spaces and hyphens.)"
+    },
+    {
+      "q": 7,
+      "family": "collatz_steps",
+      "params": {
+        "n": 998542385833
+      },
+      "short": "Collatz steps from 998,542,385,833",
+      "text": "Starting from 998,542,385,833, how many steps does the Collatz process (halve if even, 3n + 1 if odd) take to reach 1?"
+    },
+    {
+      "q": 8,
+      "family": "module_all",
+      "params": {
+        "module": "secrets"
+      },
+      "short": "names in `secrets.__all__`",
+      "text": "How many names are listed in `secrets.__all__` in Python 3.13?"
+    },
+    {
+      "q": 9,
+      "family": "unicode_block",
+      "params": {
+        "lo": 1920,
+        "hi": 1983
+      },
+      "short": "assigned in the Thaana block",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points in U+0780–U+07BF (the Thaana block) are assigned, that is, have a category other than Cn?"
+    },
+    {
+      "q": 10,
+      "family": "stdlib_defs",
+      "params": {
+        "module": "textwrap"
+      },
+      "short": "function definitions in `textwrap`",
+      "text": "How many function definitions (def and async def, counting methods and nested functions) are in the source file of the standard-library module `textwrap` in Python 3.13?"
+    },
+    {
+      "q": 11,
+      "family": "digit_sum_pow2",
+      "params": {
+        "n": 7726
+      },
+      "short": "digit sum of 2^7726",
+      "text": "What is the sum of the decimal digits of 2^7726?"
+    },
+    {
+      "q": 12,
+      "family": "primes_in_range",
+      "params": {
+        "a": 106716,
+        "b": 116750
+      },
+      "short": "primes in [106,716, 116,750]",
+      "text": "How many primes p satisfy 106,716 ≤ p ≤ 116,750?"
+    }
+  ]
+}

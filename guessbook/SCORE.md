@@ -99,3 +99,20 @@ The interval score is the main measure: an interval's width plus a penalty of 2/
 | 10 | function definitions in `tokenize` | 26 | 30 (50✓ 90✓) | 25 (50✓ 90✓) |
 | 11 | highest point of a 1,342-step walk | 29.09 | 28.7 (50✗ 90✓) | 28.73 (50✗ 90✓) |
 | 12 | Unicode names with the word GREEK | 531 | 520 (50✓ 90✓) | 528 (50✓ 90✓) |
+
+### 2026-10-17-d8b9f233
+
+| # | Question | Answer | Instinct | Worked |
+|---|---|---|---|---|
+| 1 | draws until a repeat, d = 2,918,712 | pending | 2,142 | — |
+| 2 | code points in category Mc | pending | 450 | — |
+| 3 | highest point of a 1,936-step walk | pending | 34.6 | — |
+| 4 | lines in `wave` | pending | 650 | — |
+| 5 | mean distance in a 1 × 1.69 rectangle | pending | 0.7 | — |
+| 6 | Unicode names with the word HEBREW | pending | 134 | — |
+| 7 | Collatz steps from 998,542,385,833 | pending | 280 | — |
+| 8 | names in `secrets.__all__` | pending | 8 | — |
+| 9 | assigned in the Thaana block | pending | 50 | — |
+| 10 | function definitions in `textwrap` | pending | 22 | — |
+| 11 | digit sum of 2^7726 | pending | 10,467 | — |
+| 12 | primes in [106,716, 116,750] | pending | 863 | — |
