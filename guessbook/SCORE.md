@@ -158,3 +158,20 @@ Worked answers by kind of question: knowledge means recalling, statistical means
 | 10 | function definitions in `textwrap` | 14 | 22 (50✗ 90✗) | 15 (50✓ 90✓) |
 | 11 | digit sum of 2^7726 | 10,474 | 10,467 (50✓ 90✓) | 10,467 (50✓ 90✓) |
 | 12 | primes in [106,716, 116,750] | 853 | 863 (50✓ 90✓) | 858 (50✓ 90✓) |
+
+### 2026-10-17-eb919409
+
+| # | Question | Answer | Instinct | Worked |
+|---|---|---|---|---|
+| 1 | assigned in the Syriac block | pending | 77 | — |
+| 2 | primes in [1,035,950, 1,085,617] | pending | 3,580 | — |
+| 3 | draws until a repeat, d = 2,529,464 | pending | 1,994 | — |
+| 4 | lines in `statistics` | pending | 1,450 | — |
+| 5 | code points in category Sc | pending | 63 | — |
+| 6 | mean distance in a 1 × 2.7 rectangle | pending | 1.03 | — |
+| 7 | highest point of a 167-step walk | pending | 9.84 | — |
+| 8 | Unicode names with the word FACE | pending | 200 | — |
+| 9 | names in `weakref.__all__` | pending | 13 | — |
+| 10 | Collatz steps from 738,443,544,828 | pending | 280 | — |
+| 11 | longest increasing subsequence, n = 1,039 | pending | 59.3 | — |
+| 12 | function definitions in `shlex` | pending | 20 | — |

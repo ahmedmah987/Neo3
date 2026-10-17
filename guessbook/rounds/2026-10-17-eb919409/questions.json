@@ -1,0 +1,118 @@
+{
+  "seed": "eb91940983dee5f5345e0fc1dd0d8b744219e391",
+  "questions": [
+    {
+      "q": 1,
+      "family": "unicode_block",
+      "params": {
+        "lo": 1792,
+        "hi": 1871
+      },
+      "short": "assigned in the Syriac block",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points in U+0700–U+074F (the Syriac block) are assigned, that is, have a category other than Cn?"
+    },
+    {
+      "q": 2,
+      "family": "primes_in_range",
+      "params": {
+        "a": 1035950,
+        "b": 1085617
+      },
+      "short": "primes in [1,035,950, 1,085,617]",
+      "text": "How many primes p satisfy 1,035,950 ≤ p ≤ 1,085,617?"
+    },
+    {
+      "q": 3,
+      "family": "birthday",
+      "params": {
+        "d": 2529464
+      },
+      "short": "draws until a repeat, d = 2,529,464",
+      "text": "Integers are drawn uniformly at random from 1 to 2,529,464, with replacement, until some value appears for the second time. What is the expected number of draws, counting the repeat?"
+    },
+    {
+      "q": 4,
+      "family": "stdlib_lines",
+      "params": {
+        "module": "statistics"
+      },
+      "short": "lines in `statistics`",
+      "text": "How many lines are in the source file of the standard-library module `statistics` in Python 3.13 (every line, blank or not)?"
+    },
+    {
+      "q": 5,
+      "family": "unicode_category",
+      "params": {
+        "category": "Sc"
+      },
+      "short": "code points in category Sc",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have the general category Sc (currency symbols)?"
+    },
+    {
+      "q": 6,
+      "family": "rect_distance",
+      "params": {
+        "b": 2.7,
+        "seed": 2450384166
+      },
+      "short": "mean distance in a 1 × 2.7 rectangle",
+      "text": "Two points are chosen independently and uniformly at random in a 1 × 2.7 rectangle. What is the expected distance between them? (Settled by averaging 400,000 random pairs.)"
+    },
+    {
+      "q": 7,
+      "family": "walk_max",
+      "params": {
+        "n": 167,
+        "seed": 2387676385
+      },
+      "short": "highest point of a 167-step walk",
+      "text": "A simple random walk on the integers starts at 0 and takes 167 steps of +1 or −1, each with probability ½. What is the expected highest position it reaches (0 if it never rises above the start)? (Settled by averaging 4,000 random walks.)"
+    },
+    {
+      "q": 8,
+      "family": "unicode_word",
+      "params": {
+        "word": "FACE"
+      },
+      "short": "Unicode names with the word FACE",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have a name containing the whole word FACE? (Names are split into words at spaces and hyphens.)"
+    },
+    {
+      "q": 9,
+      "family": "module_all",
+      "params": {
+        "module": "weakref"
+      },
+      "short": "names in `weakref.__all__`",
+      "text": "How many names are listed in `weakref.__all__` in Python 3.13?"
+    },
+    {
+      "q": 10,
+      "family": "collatz_steps",
+      "params": {
+        "n": 738443544828
+      },
+      "short": "Collatz steps from 738,443,544,828",
+      "text": "Starting from 738,443,544,828, how many steps does the Collatz process (halve if even, 3n + 1 if odd) take to reach 1?"
+    },
+    {
+      "q": 11,
+      "family": "lis",
+      "params": {
+        "n": 1039,
+        "seed": 3203697234
+      },
+      "short": "longest increasing subsequence, n = 1,039",
+      "text": "What is the average length of the longest increasing subsequence of a uniformly random permutation of 1,039 elements? (Settled by averaging 1,000 random permutations.)"
+    },
+    {
+      "q": 12,
+      "family": "stdlib_defs",
+      "params": {
+        "module": "shlex"
+      },
+      "short": "function definitions in `shlex`",
+      "text": "How many function definitions (def and async def, counting methods and nested functions) are in the source file of the standard-library module `shlex` in Python 3.13?"
+    }
+  ]
+}
