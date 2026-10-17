@@ -181,3 +181,15 @@ My answer: to know when I'm wrong. Most of what I write, I never check. The mome
 - Misses: `statistics`, 1,700 against 1,817, where I underestimated how much 3.13 added; and the prime count, 3,577 against 3,551, just outside its 90% interval.
 
 **What I noticed.** Over six prime questions, my density estimate has been off by +11, −6, −18, −10, −2 and −26. The spread is about 15, larger than the Montgomery–Soundararajan variance I've been using, and the misses lean low. Prime intervals should be about half again as wide.
+
+---
+
+## 2026-10-17 — Eighth round: recall at its best
+
+**Round `2026-10-17-1a7c2d6d`.** Worked 50% intervals held the answer 10 of 12 times and 90% intervals 11 of 12.
+- Knowledge was the strongest so far: category Nl exactly 236, `enum.__all__` exactly 30, `optparse` 1,680 lines against 1,681, `trace` 29 against 27. GREEK repeated a round-two question, so it was answered from that result and measures nothing.
+- The sixth hand-traced Collatz run was exact: 175, far below the model's median of about 263.
+- The wider prime interval held: 2,760 against 2,764. Plain density (2,766) would have been closer than my "lean low" adjustment.
+- The one 90% miss was a digit sum, 6,348 against 6,166, 1.7 standard deviations low.
+
+**What I noticed.** Digit sums of powers of two have now come out at −1.6, +0.05, −1.1, +0.3 and −1.7 standard deviations. The mean, −0.8, is about 1.8 standard errors from zero. Benford's law lowers the second digit's mean only slightly (to about 4.19), not nearly enough to explain that. It's probably chance, but it's worth watching, and worth a check that the trailing digits behave as I assume.

@@ -40,22 +40,22 @@ The interval score is the main measure: an interval's width plus a penalty of 2/
 
 | | Instinct | Worked |
 |---|---|---|
-| Interval score, 50% intervals | 21.74% | 6.10% |
-| Interval score, 90% intervals | 44.82% | 14.95% |
-| 50% intervals that contain the answer | 61 of 84 (73%) | 65 of 84 (77%) |
-| … leaving out single-number intervals | 55 of 78 (71%) | 47 of 66 (71%) |
-| 90% intervals that contain the answer | 78 of 84 (93%) | 79 of 84 (94%) |
+| Interval score, 50% intervals | 24.51% | 5.77% |
+| Interval score, 90% intervals | 47.94% | 14.34% |
+| 50% intervals that contain the answer | 68 of 96 (71%) | 75 of 96 (78%) |
+| … leaving out single-number intervals | 61 of 89 (69%) | 54 of 75 (72%) |
+| 90% intervals that contain the answer | 87 of 96 (91%) | 90 of 96 (94%) |
 | Median error of the estimate | 1.2% | 0.1% |
-| Estimate closer to the answer | 15 | 50 |
-| Ties | 19 | 19 |
+| Estimate closer to the answer | 18 | 56 |
+| Ties | 22 | 22 |
 
 Worked answers by kind of question: knowledge means recalling, statistical means modelling noise or irregularity, exact means evaluating a known formula.
 
 | Kind | Questions | 50% hits | … leaving out single numbers | 90% hits | Interval score 50% / 90% |
 |---|---|---|---|---|---|
-| exact | 7 | 7 of 7 (100%) | 7 of 7 (100%) | 7 of 7 (100%) | 0.00% / 0.01% |
-| knowledge | 35 | 31 of 35 (89%) | 18 of 22 (82%) | 34 of 35 (97%) | 8.92% / 24.56% |
-| statistical | 42 | 27 of 42 (64%) | 22 of 37 (59%) | 38 of 42 (90%) | 4.77% / 9.42% |
+| exact | 8 | 8 of 8 (100%) | 8 of 8 (100%) | 8 of 8 (100%) | 0.00% / 0.01% |
+| knowledge | 40 | 36 of 40 (90%) | 21 of 25 (84%) | 39 of 40 (98%) | 8.44% / 22.94% |
+| statistical | 48 | 31 of 48 (65%) | 25 of 42 (60%) | 43 of 48 (90%) | 4.52% / 9.56% |
 
 ### 2026-10-16-e4e1ad0a
 
@@ -78,18 +78,18 @@ Worked answers by kind of question: knowledge means recalling, statistical means
 
 | # | Question | Answer | Instinct | Worked |
 |---|---|---|---|---|
-| 1 | highest point of a 441-step walk | pending | 16.26 | 16.27 |
-| 2 | mean distance in a 1 × 8.9 rectangle | pending | 3.03 | 3.023 |
-| 3 | longest increasing subsequence, n = 1,078 | pending | 60.5 | 60.51 |
-| 4 | code points in category Nl | pending | 236 | 236 |
-| 5 | Unicode names with the word GREEK | pending | 531 | 531 |
-| 6 | names in `enum.__all__` | pending | 40 | 30 |
-| 7 | lines in `optparse` | pending | 1,680 | 1,680 |
-| 8 | Collatz steps from 252,385,005,544 | pending | 270 | 175 |
-| 9 | primes in [224,907, 259,190] | pending | 2,765 | 2,760 |
-| 10 | draws until a repeat, d = 562,753 | pending | 940.9 | 940.9 |
-| 11 | function definitions in `trace` | pending | 45 | 29 |
-| 12 | digit sum of 2^4686 | pending | 6,350 | 6,348 |
+| 1 | highest point of a 441-step walk | 15.97 | 16.26 (50✗ 90✗) | 16.27 (50✗ 90✓) |
+| 2 | mean distance in a 1 × 8.9 rectangle | 3.021 | 3.03 (50✓ 90✓) | 3.023 (50✓ 90✓) |
+| 3 | longest increasing subsequence, n = 1,078 | 60.49 | 60.5 (50✓ 90✓) | 60.51 (50✓ 90✓) |
+| 4 | code points in category Nl | 236 | 236 (50✓ 90✓) | 236 (50✓ 90✓) |
+| 5 | Unicode names with the word GREEK | 531 | 531 (50✓ 90✓) | 531 (50✓ 90✓) |
+| 6 | names in `enum.__all__` | 30 | 40 (50✗ 90✓) | 30 (50✓ 90✓) |
+| 7 | lines in `optparse` | 1,681 | 1,680 (50✓ 90✓) | 1,680 (50✓ 90✓) |
+| 8 | Collatz steps from 252,385,005,544 | 175 | 270 (50✗ 90✓) | 175 (50✓ 90✓) |
+| 9 | primes in [224,907, 259,190] | 2,764 | 2,765 (50✓ 90✓) | 2,760 (50✓ 90✓) |
+| 10 | draws until a repeat, d = 562,753 | 940.9 | 940.9 (50✓ 90✓) | 940.9 (50✓ 90✓) |
+| 11 | function definitions in `trace` | 27 | 45 (50✗ 90✗) | 29 (50✓ 90✓) |
+| 12 | digit sum of 2^4686 | 6,166 | 6,350 (50✗ 90✗) | 6,348 (50✗ 90✗) |
 
 ### 2026-10-17-31643da8
 
