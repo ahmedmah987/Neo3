@@ -433,6 +433,15 @@ def check_run(tmp):
     pooled = report.pool([load("naive"), load("naive2")], ["naive", "naive2"])
     check("pool counts every answer of every run, by family and in all",
           f"| **all** |  | {2 * count} |" in pooled and pooled.count("| `") == len({q["family"] for q in questions}))
+    partial = load("naive2")
+    for row in partial["questions"][::2]:
+        row["worked"]["status"] = "error"
+    table = report.compare([partial, load("naive")], ["partial", "naive"])
+    check("compare adds a table on the questions every run answered, when some went unanswered",
+          f"## On the {count - (count + 1) // 2} questions every run answered" in table)
+    table = report.compare([load("cut"), load("naive")], ["cut", "naive"])
+    check("compare leaves that table out when no question was answered by every run",
+          "questions every run answered" not in table)
     quiet(runner.run, models.NaiveModel(), "mock:naive", "other-seed", count, FAST, tmp / "naive3", 3)
     check("compare refuses runs asked different questions",
           "weren't asked the same questions" in report.compare([load("naive"), load("naive3")]))

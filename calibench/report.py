@@ -521,6 +521,7 @@ def compare(reports, names=None):
             "hits50": sum(r["worked"]["hits"]["p50"] for r in ok),
             "hits90": sum(r["worked"]["hits"]["p90"] for r in ok),
             "hits90_by_key": [r["worked"].get("hits", {}).get("p90") for r in rows],
+            "rows": rows,
         })
     stats.sort(key=lambda s: s["mean"])
     best, n = stats[0], len(order)
@@ -548,6 +549,30 @@ def compare(reports, names=None):
               "questions don't separate the two runs; more questions would. *Questions needed* is how many questions "
               "a difference this size would need to be separated with 80% power, from the spread of the per-question "
               "differences seen here; heavy tails make it a lower bound."]
+
+    common = [i for i in range(n) if all(s["rows"][i]["worked"]["status"] == "ok" for s in stats)]
+    if 0 < len(common) < n:
+        sub = []
+        for s in stats:
+            rows = [s["rows"][i] for i in common]
+            sub.append({"label": s["label"], "scores": [r["worked"]["score"] for r in rows],
+                        "hits50": sum(r["worked"]["hits"]["p50"] for r in rows),
+                        "hits90": sum(r["worked"]["hits"]["p90"] for r in rows)})
+        sub.sort(key=lambda s: statistics.fmean(s["scores"]))
+        lines += ["", f"## On the {len(common)} questions every run answered", "",
+                  "Unanswered questions (refused, unreadable, cut off at the token cap or failed) can decide a "
+                  "comparison. This compares calibration alone, on the questions every run answered. The subset is "
+                  "chosen by what the runs could answer, so it may be easier than the whole suite.", "",
+                  "| Run | Score [90% interval] | 50% hits | 90% hits | Difference from the best [90% interval] |",
+                  "|---|---|---|---|---|"]
+        for s in sub:
+            if s is sub[0]:
+                diff = "best"
+            else:
+                d = [a - b for a, b in zip(s["scores"], sub[0]["scores"])]
+                diff = f"+{sc(statistics.fmean(d))}{ci(bootstrap_mean(d))}"
+            lines.append(f"| {s['label']} | {sc(statistics.fmean(s['scores']))}{ci(bootstrap_mean(s['scores']))} "
+                         f"| {frac(s['hits50'], len(common))} | {frac(s['hits90'], len(common))} | {diff} |")
 
     pairs = [(a, b) for i, a in enumerate(stats) for b in stats[i + 1:] if a["model"] == b["model"]]
     if pairs:

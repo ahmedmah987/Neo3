@@ -97,7 +97,7 @@ This approximates the continuous ranked probability score of the belief about *g
 
 ## Comparing models
 
-`compare` requires runs asked exactly the same questions. It ranks runs by mean worked score and gives each run's paired difference from the best, with a 90% interval. When that interval includes zero, the questions don't separate the two runs.
+`compare` requires runs asked exactly the same questions. It ranks runs by mean worked score and gives each run's paired difference from the best, with a 90% interval. When that interval includes zero, the questions don't separate the two runs. When some questions went unanswered, it adds the same comparison on the questions every run answered, which measures calibration apart from unanswered questions; that subset is chosen by what the runs could answer, so it may be easier than the whole suite.
 
 When two runs are of the same model, `compare` adds a test–retest table: the paired difference in score, the rank correlation of per-question scores, and how often the 90% interval hit or missed in both runs. This is the measure of how much a single run can be trusted.
 
