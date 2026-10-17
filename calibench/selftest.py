@@ -268,6 +268,10 @@ def check_run(tmp):
           raises(quiet, runner.run, models.NaiveModel(), "mock:naive", seed, count, FAST, tmp / "naive", 3, None, "alt"))
     check("the report shows where answers fell, and each family",
           all(s in md for s in ("## Where the true answers fell", "## By family", "above the estimate")))
+    import xml.etree.ElementTree as ElementTree
+    svg = ElementTree.parse(tmp / "naive" / "calibration.svg").getroot()
+    check("the calibration chart is valid SVG with a bar per bin and series",
+          svg.tag.endswith("svg") and len(svg.findall("{http://www.w3.org/2000/svg}rect")) == 3 + 6 * 3)
     quiet(runner.run, models.NaiveModel(), "mock:naive", "other-seed", count, FAST, tmp / "naive3", 3)
     check("compare refuses runs asked different questions",
           "weren't asked the same questions" in report.compare([load("naive"), load("naive3")]))

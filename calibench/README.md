@@ -120,6 +120,7 @@ Each run is a directory, by default `calibench-runs/<model>-<seed>/`:
 | `answers.jsonl` | Every call: the raw replies, the answer read from them, its status (`ok`, `unparsed`, `refused` or `error`), the model that served it, and tokens |
 | `results.json` | The true answers |
 | `report.json`, `report.md` | The scores |
+| `calibration.svg` | A chart of where the true answers fell |
 
 If `answers.jsonl` changes after its hash was recorded, the report says so.
 
@@ -163,5 +164,6 @@ The code is under the [MIT License](../LICENSE). The questions, results and docu
 | `runner.py` | Running a model, recording answers, then settling them |
 | `scoring.py` | The scores |
 | `report.py` | Reports and comparisons |
+| `chart.py` | The chart of where the true answers fell |
 | `selftest.py` | The checks |
 | `__main__.py` | The command line |

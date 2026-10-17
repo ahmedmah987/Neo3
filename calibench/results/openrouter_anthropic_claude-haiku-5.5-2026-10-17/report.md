@@ -42,6 +42,8 @@ The estimate and the two intervals are five quantiles of the model's belief, so 
 | above the 90% interval | 5% | 15% (4) | 15% (4) |
 | **above the estimate**, with 90% interval | 50% | 54% [38%, 69%] | 52% [38%, 69%] |
 
+![Where the true answers fell](calibration.svg)
+
 ## By kind of question
 
 Knowledge questions ask what is known (the Python standard library, the Unicode database); statistical ones need noise or irregularity modelled; exact ones have a closed-form answer that must be evaluated.

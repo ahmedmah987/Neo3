@@ -7,6 +7,7 @@ A run lives in one directory:
   results.json    the true answers, computed only after every answer is recorded
   report.json     the scores
   report.md       the scores, for reading
+  calibration.svg a chart of where the true answers fell
 
 Running the same command again resumes: calls that already have an answer or a refusal are kept,
 and failed ones are asked again.
@@ -162,6 +163,7 @@ def settle(out, questions):
 
 def finish(out):
     """Settle the questions and write the report. Safe to run again on a finished run."""
+    from .chart import calibration_svg
     from .report import build, render
 
     out = pathlib.Path(out)
@@ -177,4 +179,6 @@ def finish(out):
     report["scored_with"] = {"calibench": __version__, "scoring": SCORING}
     write_json(out / "report.json", report)
     (out / "report.md").write_text(render(report), encoding="utf-8")
+    if any((report["phases"][p].get("fell") or {}).get("n") for p in PHASES):
+        (out / "calibration.svg").write_text(calibration_svg(report), encoding="utf-8")
     return report

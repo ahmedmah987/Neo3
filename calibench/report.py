@@ -195,6 +195,7 @@ def render(report):
             lines.append(f"| {label} | {share:.0%} | {cells[0]} | {cells[1]} |")
         cells = [f"{f['above'] / f['n']:.0%}{ci(f['above_ci'], pct)}" if f and f["n"] else "—" for f in fell.values()]
         lines.append(f"| **above the estimate**, with 90% interval | 50% | {cells[0]} | {cells[1]} |")
+        lines += ["", "![Where the true answers fell](calibration.svg)"]
 
     lines += ["", "## By kind of question", "",
               "Knowledge questions ask what is known (the Python standard library, the Unicode database); statistical "
