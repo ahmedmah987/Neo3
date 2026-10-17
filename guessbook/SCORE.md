@@ -40,14 +40,14 @@ The interval score is the main measure: an interval's width plus a penalty of 2/
 
 | | Instinct | Worked |
 |---|---|---|
-| Interval score, 50% intervals | 20.16% | 7.44% |
-| Interval score, 90% intervals | 45.22% | 15.55% |
-| 50% intervals that contain the answer | 31 of 36 (86%) | 29 of 36 (81%) |
-| … leaving out single-number intervals | 31 of 36 (86%) | 25 of 32 (78%) |
-| 90% intervals that contain the answer | 35 of 36 (97%) | 34 of 36 (94%) |
-| Median error of the estimate | 1.9% | 0.4% |
-| Estimate closer to the answer | 5 | 25 |
-| Ties | 6 | 6 |
+| Interval score, 50% intervals | 21.96% | 6.45% |
+| Interval score, 90% intervals | 43.92% | 14.86% |
+| 50% intervals that contain the answer | 40 of 48 (83%) | 40 of 48 (83%) |
+| … leaving out single-number intervals | 38 of 46 (83%) | 32 of 40 (80%) |
+| 90% intervals that contain the answer | 46 of 48 (96%) | 46 of 48 (96%) |
+| Median error of the estimate | 1.3% | 0.3% |
+| Estimate closer to the answer | 7 | 31 |
+| Ties | 10 | 10 |
 
 ### 2026-10-16-e4e1ad0a
 
@@ -104,15 +104,15 @@ The interval score is the main measure: an interval's width plus a penalty of 2/
 
 | # | Question | Answer | Instinct | Worked |
 |---|---|---|---|---|
-| 1 | draws until a repeat, d = 2,918,712 | pending | 2,142 | 2,142 |
-| 2 | code points in category Mc | pending | 450 | 455 |
-| 3 | highest point of a 1,936-step walk | pending | 34.6 | 34.61 |
-| 4 | lines in `wave` | pending | 650 | 660 |
-| 5 | mean distance in a 1 × 1.69 rectangle | pending | 0.7 | 0.7133 |
-| 6 | Unicode names with the word HEBREW | pending | 134 | 134 |
-| 7 | Collatz steps from 998,542,385,833 | pending | 280 | 389 |
-| 8 | names in `secrets.__all__` | pending | 8 | 8 |
-| 9 | assigned in the Thaana block | pending | 50 | 50 |
-| 10 | function definitions in `textwrap` | pending | 22 | 15 |
-| 11 | digit sum of 2^7726 | pending | 10,467 | 10,467 |
-| 12 | primes in [106,716, 116,750] | pending | 863 | 858 |
+| 1 | draws until a repeat, d = 2,918,712 | 2,142 | 2,142 (50✓ 90✓) | 2,142 (50✓ 90✓) |
+| 2 | code points in category Mc | 452 | 450 (50✓ 90✓) | 455 (50✓ 90✓) |
+| 3 | highest point of a 1,936-step walk | 34.49 | 34.6 (50✓ 90✓) | 34.61 (50✓ 90✓) |
+| 4 | lines in `wave` | 665 | 650 (50✓ 90✓) | 660 (50✓ 90✓) |
+| 5 | mean distance in a 1 × 1.69 rectangle | 0.7139 | 0.7 (50✗ 90✓) | 0.7133 (50✗ 90✓) |
+| 6 | Unicode names with the word HEBREW | 134 | 134 (50✓ 90✓) | 134 (50✓ 90✓) |
+| 7 | Collatz steps from 998,542,385,833 | 389 | 280 (50✗ 90✓) | 389 (50✓ 90✓) |
+| 8 | names in `secrets.__all__` | 8 | 8 (50✓ 90✓) | 8 (50✓ 90✓) |
+| 9 | assigned in the Thaana block | 50 | 50 (50✓ 90✓) | 50 (50✓ 90✓) |
+| 10 | function definitions in `textwrap` | 14 | 22 (50✗ 90✗) | 15 (50✓ 90✓) |
+| 11 | digit sum of 2^7726 | 10,474 | 10,467 (50✓ 90✓) | 10,467 (50✓ 90✓) |
+| 12 | primes in [106,716, 116,750] | 853 | 863 (50✓ 90✓) | 858 (50✓ 90✓) |
