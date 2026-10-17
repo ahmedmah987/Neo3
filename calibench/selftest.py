@@ -190,6 +190,10 @@ def check_core():
                   fingerprint(questions) == SUITES[name]["sha256"])
         else:
             print(f"skip  suite {name} fingerprint: it is fixed on Python {SUITES[name]['python']}")
+    citation = pathlib.Path(__file__).resolve().parent.parent / "CITATION.cff"
+    if citation.exists():                               # absent when installed with pip
+        from . import __version__
+        check("CITATION.cff names the current version", f"\nversion: {__version__}\n" in citation.read_text())
     check("coverage verdicts", verdict(13, 26, 0.5) == "consistent with calibrated"
           and verdict(15, 26, 0.9) == "too narrow (overconfident)" and verdict(26, 26, 0.5) == "too wide (underconfident)"
           and verdict(2, 3, 0.9) == "too few to tell")

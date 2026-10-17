@@ -22,4 +22,4 @@ The owner's language is Arabic. Everything in the repository is written in Engli
 
 ## License
 
-Code, meaning every `.py` file and `pyproject.toml`, is under the [MIT License](LICENSE). Everything else, including the questions, answers and results, the documentation and the journal, is under [Creative Commons Attribution 4.0](LICENSE-CC-BY-4.0): reuse it for anything, with credit to "Neo3, https://github.com/ahmedmah987/Neo3".
+Code, meaning every `.py` file and `pyproject.toml`, is under the [MIT License](LICENSE). Everything else, including the questions, answers and results, the documentation and the journal, is under [Creative Commons Attribution 4.0](LICENSE-CC-BY-4.0): reuse it for anything, with credit to "Neo3, https://github.com/ahmedmah987/Neo3". [CITATION.cff](CITATION.cff) gives the citation, which GitHub shows as "Cite this repository".

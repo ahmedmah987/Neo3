@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use Calibench, its questions or its results, please cite it as below."
+type: software
+title: "Calibench: does a model know what it knows?"
+abstract: >-
+  A benchmark for the calibration of language models' numeric uncertainty. Models answer
+  questions with a computable numeric answer, first by instinct and then after working them
+  out, each with an estimate and 50% and 90% intervals. Answers are settled only after every
+  reply is recorded, and scored with a proper, log-scale weighted interval score, with
+  intervals over questions, coverage, and test-retest reliability.
+authors:
+  - name: "The Neo3 authors"
+repository-code: "https://github.com/ahmedmah987/Neo3"
+url: "https://github.com/ahmedmah987/Neo3/tree/main/calibench"
+license:
+  - MIT
+  - CC-BY-4.0
+version: 2.1.0
+date-released: "2026-10-17"
+keywords:
+  - calibration
+  - uncertainty
+  - language models
+  - benchmark
+  - proper scoring rules
+  - interval score
