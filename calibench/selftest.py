@@ -329,6 +329,23 @@ def check_run(tmp):
     check("the report says where the score comes from, with every 90% miss listed",
           "## Where the score comes from" in md and 0 < conc["top1_share"] <= conc["top5_share"] <= 1
           and len(conc["misses"]) == sum(not r["worked"]["hits"]["p90"] for r in naive["questions"]))
+    from .verify import verify
+    check("a fresh run verifies", all(passed for passed, _ in verify(tmp / "oracle")))
+    from .verify import families_of
+    check("a run's families are recorded explicitly, and an old \"all\" is read by the version that wrote it",
+          json.loads((tmp / "naive" / "run.json").read_text())["families"] == sorted(FAST)
+          and families_of({"families": "all", "calibench": "1.0.0"}) == ORIGINAL_FAMILIES
+          and families_of({"families": "all", "calibench": "2.1.0"}) == SUITES["v2"]["families"])
+    results = json.loads((tmp / "oracle" / "results.json").read_text())
+    results["results"][0]["answer"] += 1
+    (tmp / "oracle" / "results.json").write_text(json.dumps(results))
+    failed = [m for passed, m in verify(tmp / "oracle") if not passed]
+    check("verify catches a changed true answer", any("true answers recompute" in m for m in failed))
+    (tmp / "oracle" / "report.md").write_text("edited")
+    check("verify catches an edited report", any("rendering" in m for passed, m in verify(tmp / "oracle") if not passed))
+    with open(tmp / "oracle" / "answers.jsonl", "a") as f:
+        f.write("\n")
+    check("verify catches changed replies", any("unchanged" in m for passed, m in verify(tmp / "oracle") if not passed))
     import xml.etree.ElementTree as ElementTree
     svg = ElementTree.parse(tmp / "naive" / "calibration.svg").getroot()
     check("the calibration chart is valid SVG with a bar per bin and series",

@@ -177,6 +177,19 @@ def cmd_pool(args):
         print(text, end="")
 
 
+def cmd_verify(args):
+    from .verify import verify
+
+    failed = 0
+    for d in args.dirs:
+        print(d)
+        for passed, message in verify(d):
+            print(("  ok    " if passed else "  FAIL  ") + message)
+            failed += not passed
+    print("\nall runs verified" if not failed else f"\n{failed} check(s) failed")
+    raise SystemExit(1 if failed else 0)
+
+
 def cmd_families(args):
     for name in sorted(FAMILIES, key=lambda n: (KINDS[n], n)):
         print(f"{KINDS[name]:<12} {name}")
@@ -236,6 +249,11 @@ def main(argv=None):
     p.add_argument("dirs", nargs="+")
     p.add_argument("--write", help="replace the text between <!-- pool:start --> and <!-- pool:end --> in this file")
     p.set_defaults(func=cmd_pool)
+
+    p = sub.add_parser("verify", help="audit run directories: replies unchanged, questions as drawn, "
+                       "true answers recompute, reports follow")
+    p.add_argument("dirs", nargs="+")
+    p.set_defaults(func=cmd_verify)
 
     p = sub.add_parser("families", help="list the question families")
     p.set_defaults(func=cmd_families)

@@ -1,6 +1,6 @@
 # Calibench methodology
 
-This document describes what Calibench measures, how, and where the measurement can mislead. It describes Calibench 2.2.0 with scoring `log-wis-1`.
+This document describes what Calibench measures, how, and where the measurement can mislead. It describes Calibench 2.2.1 with scoring `log-wis-1`.
 
 ## What is measured
 
@@ -103,6 +103,8 @@ When two runs are of the same model, `compare` adds a test–retest table: the p
 
 A run directory holds the questions, every raw reply with its status, serving model, provider, tokens and cost, the SHA-256 of the replies recorded before any answer was computed, the true answers, and the report. `python3 -m calibench report <dir>` re-scores a run from its replies with the current scoring, and the report states which version scored it. A changed replies file is flagged.
 
+`python3 -m calibench verify <dirs>` audits run directories end to end: the replies match the hash recorded before any answer was computed, the questions are what the seed draws (and, for a suite, match its fingerprint), every question has a recorded call in both phases, the true answers recompute, the report follows from the replies and true answers under the current scoring, and `report.md` is the rendering of `report.json`. Knowledge answers are rechecked only on the exact Python version that settled them. Every published run in `results/` passes.
+
 When publishing a result, report: the suite (or seed, count and families), the Calibench version and scoring id, the Python version, the model id and the serving model and provider, the effort settings, the date, how many questions were answered, and the score with its interval.
 
 ## Threats to validity
@@ -110,7 +112,7 @@ When publishing a result, report: the suite (or seed, count and families), the C
 1. **Sample size.** Even 104 questions give wide intervals, and a few large misses can dominate a mean. Read intervals, not only means, and report medians.
 2. **A narrow domain.** Half the questions concern Python and Unicode, and the rest are mathematical. Calibration here may not carry over to other domains.
 3. **Contamination.** Suite questions and answers are public once published. Knowledge questions also repeat across seeds. Compare suite results with fresh seeds: a model that does much better on the suite deserves suspicion.
-4. **Python dependence.** Knowledge answers differ between Python versions. Standard results use the suite's version.
+4. **Python dependence.** Knowledge answers differ between Python versions, and can differ between patch releases of one version, since module sources change in bug-fix releases. Each run records the exact version, standard results use the suite's minor version, and `verify` rechecks knowledge answers only on the exact version.
 5. **The instinct phase isn't comparable across providers or wordings,** since effort controls differ, some models always reason, and the wording changes how much they reason (see Reliability).
 6. **Providers.** On OpenRouter one model may be served by different providers, possibly with different quantisation. The provider is recorded for every call.
 7. **Prompt wording.** Measured on one model: the worked score moved by about 0.01, the instinct score by 0.08. See Reliability.

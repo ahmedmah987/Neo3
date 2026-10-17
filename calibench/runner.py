@@ -25,6 +25,7 @@ import unicodedata
 
 from . import __version__
 from .prompts import PROMPT_SETS, RETRY, parse_answer
+from .families import FAMILIES
 from .questions import draw, rng_from_seed, solve
 from .scoring import PHASES, SCORING
 
@@ -133,7 +134,7 @@ def run(model, model_spec, seed, count=26, families=None, out=None, workers=4, s
         "model": model_spec,
         "seed": str(seed),
         "count": count,
-        "families": sorted(families) if families else "all",
+        "families": sorted(families or FAMILIES),          # explicit, since "all" changes as families are added
         "suite": suite,
         "prompts": prompt_set,
         "scoring": SCORING,
