@@ -1,0 +1,28 @@
+{
+  "calibench": "2.2.1",
+  "model": "openrouter:anthropic/claude-haiku-5.5",
+  "seed": "calibench-v1",
+  "count": 104,
+  "families": [
+    "birthday",
+    "collatz_steps",
+    "digit_sum_pow2",
+    "lis",
+    "module_all",
+    "primes_in_range",
+    "rect_distance",
+    "stdlib_defs",
+    "stdlib_lines",
+    "unicode_block",
+    "unicode_category",
+    "unicode_word",
+    "walk_max"
+  ],
+  "suite": "v1",
+  "prompts": "standard",
+  "scoring": "log-wis-1",
+  "python": "3.13.16",
+  "unicode": "15.1.0",
+  "started": "2026-10-17T04:58:42+00:00",
+  "answers_sha256": "c850ae40da111cf947f90d6d7ed235cde6f5669781b9b997b6079ddd2637e1da"
+}

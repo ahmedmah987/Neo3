@@ -1,0 +1,6813 @@
+{
+  "meta": {
+    "calibench": "2.2.1",
+    "model": "openrouter:anthropic/claude-haiku-5.5",
+    "seed": "calibench-v1",
+    "count": 104,
+    "families": [
+      "birthday",
+      "collatz_steps",
+      "digit_sum_pow2",
+      "lis",
+      "module_all",
+      "primes_in_range",
+      "rect_distance",
+      "stdlib_defs",
+      "stdlib_lines",
+      "unicode_block",
+      "unicode_category",
+      "unicode_word",
+      "walk_max"
+    ],
+    "suite": "v1",
+    "prompts": "standard",
+    "scoring": "log-wis-1",
+    "python": "3.13.16",
+    "unicode": "15.1.0",
+    "started": "2026-10-17T04:58:42+00:00",
+    "answers_sha256": "c850ae40da111cf947f90d6d7ed235cde6f5669781b9b997b6079ddd2637e1da"
+  },
+  "suite": "standard suite v1",
+  "phases": {
+    "instinct": {
+      "asked": 104,
+      "statuses": {
+        "ok": 104
+      },
+      "all": {
+        "score_mean": 0.18766801774890704,
+        "score_median": 0.04913422265367992,
+        "score_ci": [
+          0.13361590463720233,
+          0.24848624400195732
+        ]
+      },
+      "n": 104,
+      "score_mean": 0.18766801774890704,
+      "score_median": 0.04913422265367992,
+      "score_ci": [
+        0.13361590463720233,
+        0.24848624400195732
+      ],
+      "p50": {
+        "level": 0.5,
+        "interval_score": 0.9200612992837154,
+        "hits": 66,
+        "hits_ci": [
+          0.5544421507099445,
+          0.7079610266176711
+        ],
+        "ranged": 104,
+        "ranged_hits": 66,
+        "verdict": "too wide (underconfident)"
+      },
+      "p90": {
+        "level": 0.9,
+        "interval_score": 2.5449814597655385,
+        "hits": 83,
+        "hits_ci": [
+          0.7261450767697732,
+          0.8548905301699474
+        ],
+        "ranged": 104,
+        "ranged_hits": 83,
+        "verdict": "too narrow (overconfident)"
+      },
+      "certain": 0,
+      "certain_right": 0,
+      "median_error": 0.025228469864265027,
+      "fell": {
+        "n": 104,
+        "bins": [
+          7.266666666666667,
+          11.066666666666666,
+          29.380952380952383,
+          33.6031746031746,
+          8.615873015873017,
+          14.066666666666666
+        ],
+        "above": 56.0,
+        "above_ci": [
+          0.4580925672311747,
+          0.6168797691481439
+        ]
+      }
+    },
+    "worked": {
+      "asked": 104,
+      "statuses": {
+        "ok": 104
+      },
+      "all": {
+        "score_mean": 0.05055583954741767,
+        "score_median": 0.0064118156800389865,
+        "score_ci": [
+          0.033677550505269715,
+          0.06893895450804358
+        ]
+      },
+      "n": 104,
+      "score_mean": 0.05055583954741767,
+      "score_median": 0.0064118156800389865,
+      "score_ci": [
+        0.033677550505269715,
+        0.06893895450804358
+      ],
+      "p50": {
+        "level": 0.5,
+        "interval_score": 0.24239558074383347,
+        "hits": 58,
+        "hits_ci": [
+          0.477124004319632,
+          0.6353345002493461
+        ],
+        "ranged": 90,
+        "ranged_hits": 45,
+        "verdict": "consistent with calibrated"
+      },
+      "p90": {
+        "level": 0.9,
+        "interval_score": 0.654611340301146,
+        "hits": 88,
+        "hits_ci": [
+          0.7792522623487484,
+          0.8954987650651206
+        ],
+        "ranged": 104,
+        "ranged_hits": 88,
+        "verdict": "consistent with calibrated"
+      },
+      "certain": 0,
+      "certain_right": 0,
+      "median_error": 0.007709855169904525,
+      "fell": {
+        "n": 104,
+        "bins": [
+          5.157894736842104,
+          13.842105263157892,
+          23.624060150375946,
+          26.29072681704261,
+          23.832581453634077,
+          11.25263157894737
+        ],
+        "above": 61.0,
+        "above_ci": [
+          0.5058912996543249,
+          0.6627964571991424
+        ]
+      }
+    }
+  },
+  "kinds": {
+    "instinct": {
+      "calculation": {
+        "n": 0
+      },
+      "exact": {
+        "n": 8,
+        "score_mean": 0.12108525566675955,
+        "score_median": 0.11947587386405871,
+        "score_ci": [
+          0.11933932074205357,
+          0.12415713097120523
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.7869478605522527,
+          "hits": 8,
+          "hits_ci": [
+            0.7472427908584185,
+            1.0
+          ],
+          "ranged": 8,
+          "ranged_hits": 8,
+          "verdict": "too wide (underconfident)"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 2.033955224324601,
+          "hits": 8,
+          "hits_ci": [
+            0.7472427908584185,
+            1.0
+          ],
+          "ranged": 8,
+          "ranged_hits": 8,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.0006674441699885272,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.0,
+            0.0,
+            2.0,
+            6.0,
+            0.0,
+            0.0
+          ],
+          "above": 6.0,
+          "above_ci": [
+            0.46012839880848877,
+            0.9134929966207204
+          ]
+        }
+      },
+      "knowledge": {
+        "n": 48,
+        "score_mean": 0.3011017914170751,
+        "score_median": 0.10003914079104667,
+        "score_ci": [
+          0.19491078455815028,
+          0.4256202361764616
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 1.4053976775985815,
+          "hits": 25,
+          "hits_ci": [
+            0.40431005638822487,
+            0.6351329881020502
+          ],
+          "ranged": 48,
+          "ranged_hits": 25,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 4.164934331723905,
+          "hits": 33,
+          "hits_ci": [
+            0.5699498585295438,
+            0.7850375418829317
+          ],
+          "ranged": 48,
+          "ranged_hits": 33,
+          "verdict": "too narrow (overconfident)"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.16025641025641024,
+        "fell": {
+          "n": 48,
+          "bins": [
+            6.266666666666667,
+            5.066666666666666,
+            11.380952380952381,
+            11.04761904761905,
+            5.171428571428572,
+            9.066666666666666
+          ],
+          "above": 25.0,
+          "above_ci": [
+            0.40431005638822487,
+            0.6351329881020502
+          ]
+        }
+      },
+      "statistical": {
+        "n": 48,
+        "score_mean": 0.08533137109443024,
+        "score_median": 0.014472736745077106,
+        "score_ci": [
+          0.05204448750658416,
+          0.1207510158122152
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.4569104940907595,
+          "hits": 33,
+          "hits_ci": [
+            0.5699498585295438,
+            0.7850375418829317
+          ],
+          "ranged": 48,
+          "ranged_hits": 33,
+          "verdict": "too wide (underconfident)"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 1.010199627047329,
+          "hits": 42,
+          "hits_ci": [
+            0.7760094771979562,
+            0.9339653236269949
+          ],
+          "ranged": 48,
+          "ranged_hits": 42,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.018019318570736513,
+        "fell": {
+          "n": 48,
+          "bins": [
+            1.0,
+            6.0,
+            16.0,
+            16.555555555555557,
+            3.4444444444444446,
+            5.0
+          ],
+          "above": 25.0,
+          "above_ci": [
+            0.40431005638822487,
+            0.6351329881020502
+          ]
+        }
+      }
+    },
+    "worked": {
+      "calculation": {
+        "n": 0
+      },
+      "exact": {
+        "n": 8,
+        "score_mean": 0.03178666190582882,
+        "score_median": 0.0006607822484283421,
+        "score_ci": [
+          0.0005200651868472028,
+          0.06444714928036925
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.19946555195046084,
+          "hits": 8,
+          "hits_ci": [
+            0.7472427908584185,
+            1.0
+          ],
+          "ranged": 8,
+          "ranged_hits": 8,
+          "verdict": "too wide (underconfident)"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.5148943013374003,
+          "hits": 8,
+          "hits_ci": [
+            0.7472427908584185,
+            1.0
+          ],
+          "ranged": 8,
+          "ranged_hits": 8,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 9.34292421303604e-06,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.0,
+            0.0,
+            3.0,
+            5.0,
+            0.0,
+            0.0
+          ],
+          "above": 5.0,
+          "above_ci": [
+            0.34797064700488106,
+            0.8388400507097236
+          ]
+        }
+      },
+      "knowledge": {
+        "n": 48,
+        "score_mean": 0.07398554048836707,
+        "score_median": 0.014763157940447549,
+        "score_ci": [
+          0.04381398612481621,
+          0.1081675282690527
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.34025425301622786,
+          "hits": 31,
+          "hits_ci": [
+            0.5272926794341364,
+            0.7488086319977891
+          ],
+          "ranged": 34,
+          "ranged_hits": 18,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 1.0729266562981499,
+          "hits": 39,
+          "hits_ci": [
+            0.7041263426918858,
+            0.8875193246622401
+          ],
+          "ranged": 48,
+          "ranged_hits": 39,
+          "verdict": "too narrow (overconfident)"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.009828904259191846,
+        "fell": {
+          "n": 48,
+          "bins": [
+            1.1578947368421053,
+            4.842105263157895,
+            12.624060150375945,
+            10.735171261487054,
+            10.388137009189641,
+            8.25263157894737
+          ],
+          "above": 29.0,
+          "above_ci": [
+            0.4854989560279377,
+            0.7117162664234375
+          ]
+        }
+      },
+      "statistical": {
+        "n": 48,
+        "score_mean": 0.030254334880066406,
+        "score_median": 0.005317591637246766,
+        "score_ci": [
+          0.013877296431705837,
+          0.050127532070695785
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.15169191327033452,
+          "hits": 19,
+          "hits_ci": [
+            0.28828373357656234,
+            0.5145010439720622
+          ],
+          "ranged": 48,
+          "ranged_hits": 19,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.25958219746476646,
+          "hits": 41,
+          "hits_ci": [
+            0.7515703370431714,
+            0.9189614192915045
+          ],
+          "ranged": 48,
+          "ranged_hits": 41,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.00944697223028508,
+        "fell": {
+          "n": 48,
+          "bins": [
+            4.0,
+            9.0,
+            8.0,
+            10.555555555555555,
+            13.444444444444445,
+            3.0
+          ],
+          "above": 27.0,
+          "above_ci": [
+            0.4445155650198487,
+            0.6738135684509765
+          ]
+        }
+      }
+    }
+  },
+  "families": {
+    "instinct": {
+      "birthday": {
+        "n": 8,
+        "score_mean": 0.12108525566675955,
+        "score_median": 0.11947587386405871,
+        "score_ci": [
+          0.11933932074205357,
+          0.12415713097120523
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.7869478605522527,
+          "hits": 8,
+          "hits_ci": [
+            0.7472427908584185,
+            1.0
+          ],
+          "ranged": 8,
+          "ranged_hits": 8,
+          "verdict": "too wide (underconfident)"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 2.033955224324601,
+          "hits": 8,
+          "hits_ci": [
+            0.7472427908584185,
+            1.0
+          ],
+          "ranged": 8,
+          "ranged_hits": 8,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.0006674441699885272,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.0,
+            0.0,
+            2.0,
+            6.0,
+            0.0,
+            0.0
+          ],
+          "above": 6.0,
+          "above_ci": [
+            0.46012839880848877,
+            0.9134929966207204
+          ]
+        }
+      },
+      "collatz_steps": {
+        "n": 8,
+        "score_mean": 0.3170677693564339,
+        "score_median": 0.2596576311045944,
+        "score_ci": [
+          0.19681630587439197,
+          0.4403061527594444
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 1.587789306905989,
+          "hits": 3,
+          "hits_ci": [
+            0.16115994929027644,
+            0.652029352995119
+          ],
+          "ranged": 8,
+          "ranged_hits": 3,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 3.1974064556507322,
+          "hits": 4,
+          "hits_ci": [
+            0.2486251757128503,
+            0.7513748242871496
+          ],
+          "ranged": 8,
+          "ranged_hits": 4,
+          "verdict": "too narrow (overconfident)"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.45101281521289793,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.0,
+            1.0,
+            0.0,
+            2.5555555555555554,
+            0.4444444444444445,
+            4.0
+          ],
+          "above": 7.0,
+          "above_ci": [
+            0.5888281744971084,
+            0.9716039186467054
+          ]
+        }
+      },
+      "digit_sum_pow2": {
+        "n": 8,
+        "score_mean": 0.03762548054426104,
+        "score_median": 0.011654536028854336,
+        "score_ci": [
+          0.00986838477420781,
+          0.08304831576369538
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.17388098049686251,
+          "hits": 2,
+          "hits_ci": [
+            0.0865070033792796,
+            0.5398716011915111
+          ],
+          "ranged": 8,
+          "ranged_hits": 2,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.5016308178768727,
+          "hits": 6,
+          "hits_ci": [
+            0.46012839880848877,
+            0.9134929966207204
+          ],
+          "ranged": 8,
+          "ranged_hits": 6,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.021954269220044866,
+        "fell": {
+          "n": 8,
+          "bins": [
+            1.0,
+            4.0,
+            1.0,
+            1.0,
+            0.0,
+            1.0
+          ],
+          "above": 2.0,
+          "above_ci": [
+            0.0865070033792796,
+            0.5398716011915111
+          ]
+        }
+      },
+      "lis": {
+        "n": 8,
+        "score_mean": 0.0106366979490467,
+        "score_median": 0.009665322604861717,
+        "score_ci": [
+          0.008182923730873537,
+          0.013201927881092054
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.050438078825570554,
+          "hits": 7,
+          "hits_ci": [
+            0.5888281744971084,
+            0.9716039186467054
+          ],
+          "ranged": 8,
+          "ranged_hits": 7,
+          "verdict": "too wide (underconfident)"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.11349841398892008,
+          "hits": 8,
+          "hits_ci": [
+            0.7472427908584185,
+            1.0
+          ],
+          "ranged": 8,
+          "ranged_hits": 8,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.01209632462791824,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.0,
+            0.0,
+            1.0,
+            6.0,
+            1.0,
+            0.0
+          ],
+          "above": 7.0,
+          "above_ci": [
+            0.5888281744971084,
+            0.9716039186467054
+          ]
+        }
+      },
+      "module_all": {
+        "n": 8,
+        "score_mean": 0.13666117278331605,
+        "score_median": 0.08485469034405732,
+        "score_ci": [
+          0.0625574843581013,
+          0.2528866695805488
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.703070868096715,
+          "hits": 7,
+          "hits_ci": [
+            0.5888281744971084,
+            0.9716039186467054
+          ],
+          "ranged": 8,
+          "ranged_hits": 7,
+          "verdict": "too wide (underconfident)"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 1.159568744173241,
+          "hits": 7,
+          "hits_ci": [
+            0.5888281744971084,
+            0.9716039186467054
+          ],
+          "ranged": 8,
+          "ranged_hits": 7,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.16025641025641024,
+        "fell": {
+          "n": 8,
+          "bins": [
+            1.0,
+            0.0,
+            1.8571428571428572,
+            3.523809523809524,
+            1.6190476190476193,
+            0.0
+          ],
+          "above": 5.0,
+          "above_ci": [
+            0.34797064700488106,
+            0.8388400507097236
+          ]
+        }
+      },
+      "primes_in_range": {
+        "n": 8,
+        "score_mean": 0.005838351624694782,
+        "score_median": 0.0051887832184693665,
+        "score_ci": [
+          0.004480681552572578,
+          0.007324949894330499
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.02983572076370511,
+          "hits": 5,
+          "hits_ci": [
+            0.34797064700488106,
+            0.8388400507097236
+          ],
+          "ranged": 8,
+          "ranged_hits": 5,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.056272933251095836,
+          "hits": 8,
+          "hits_ci": [
+            0.7472427908584185,
+            1.0
+          ],
+          "ranged": 8,
+          "ranged_hits": 8,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.006751425669869542,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.0,
+            1.0,
+            2.0,
+            3.0,
+            2.0,
+            0.0
+          ],
+          "above": 5.0,
+          "above_ci": [
+            0.34797064700488106,
+            0.8388400507097236
+          ]
+        }
+      },
+      "rect_distance": {
+        "n": 8,
+        "score_mean": 0.013103182344495973,
+        "score_median": 0.011873296196363214,
+        "score_ci": [
+          0.008720780689237822,
+          0.017593273065366264
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.06815213946888916,
+          "hits": 8,
+          "hits_ci": [
+            0.7472427908584185,
+            1.0
+          ],
+          "ranged": 8,
+          "ranged_hits": 8,
+          "verdict": "too wide (underconfident)"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.16409924655427063,
+          "hits": 8,
+          "hits_ci": [
+            0.7472427908584185,
+            1.0
+          ],
+          "ranged": 8,
+          "ranged_hits": 8,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.013573831268691864,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.0,
+            0.0,
+            5.0,
+            3.0,
+            0.0,
+            0.0
+          ],
+          "above": 3.0,
+          "above_ci": [
+            0.16115994929027644,
+            0.652029352995119
+          ]
+        }
+      },
+      "stdlib_defs": {
+        "n": 8,
+        "score_mean": 0.3611351442093397,
+        "score_median": 0.33326735435915755,
+        "score_ci": [
+          0.2348865122063361,
+          0.4924875919607181
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 1.821544623324986,
+          "hits": 2,
+          "hits_ci": [
+            0.0865070033792796,
+            0.5398716011915111
+          ],
+          "ranged": 8,
+          "ranged_hits": 2,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 3.570389740107247,
+          "hits": 4,
+          "hits_ci": [
+            0.2486251757128503,
+            0.7513748242871496
+          ],
+          "ranged": 8,
+          "ranged_hits": 4,
+          "verdict": "too narrow (overconfident)"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.8783102143757882,
+        "fell": {
+          "n": 8,
+          "bins": [
+            4.0,
+            2.0,
+            1.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          "above": 1.0,
+          "above_ci": [
+            0.02839608135329466,
+            0.41117182550289144
+          ]
+        }
+      },
+      "stdlib_lines": {
+        "n": 8,
+        "score_mean": 0.2459922304481168,
+        "score_median": 0.14201791797447194,
+        "score_ci": [
+          0.1006245583593602,
+          0.409708323093845
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 1.1802471370247356,
+          "hits": 3,
+          "hits_ci": [
+            0.16115994929027644,
+            0.652029352995119
+          ],
+          "ranged": 8,
+          "ranged_hits": 3,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 3.1876693518647263,
+          "hits": 6,
+          "hits_ci": [
+            0.46012839880848877,
+            0.9134929966207204
+          ],
+          "ranged": 8,
+          "ranged_hits": 6,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.2557544757033248,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.2,
+            1.8,
+            1.0,
+            2.0,
+            1.0,
+            2.0
+          ],
+          "above": 5.0,
+          "above_ci": [
+            0.34797064700488106,
+            0.8388400507097236
+          ]
+        }
+      },
+      "unicode_block": {
+        "n": 8,
+        "score_mean": 0.01567601365045938,
+        "score_median": 0.006734272959980574,
+        "score_ci": [
+          0.006330116005510532,
+          0.025777072287345455
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.08404020917189986,
+          "hits": 6,
+          "hits_ci": [
+            0.46012839880848877,
+            0.9134929966207204
+          ],
+          "ranged": 8,
+          "ranged_hits": 6,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.2085338258259961,
+          "hits": 7,
+          "hits_ci": [
+            0.5888281744971084,
+            0.9716039186467054
+          ],
+          "ranged": 8,
+          "ranged_hits": 7,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.0,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.06666666666666667,
+            1.2666666666666666,
+            2.5238095238095237,
+            2.5238095238095237,
+            0.5523809523809524,
+            1.0666666666666667
+          ],
+          "above": 4.0,
+          "above_ci": [
+            0.2486251757128503,
+            0.7513748242871496
+          ]
+        }
+      },
+      "unicode_category": {
+        "n": 8,
+        "score_mean": 0.3034687576452394,
+        "score_median": 0.031060023614027026,
+        "score_ci": [
+          0.023009407411369257,
+          0.854323878660589
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 1.291028376475621,
+          "hits": 7,
+          "hits_ci": [
+            0.5888281744971084,
+            0.9716039186467054
+          ],
+          "ranged": 8,
+          "ranged_hits": 7,
+          "verdict": "too wide (underconfident)"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 5.740807502941517,
+          "hits": 7,
+          "hits_ci": [
+            0.5888281744971084,
+            0.9716039186467054
+          ],
+          "ranged": 8,
+          "ranged_hits": 7,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.0015923566878980893,
+        "fell": {
+          "n": 8,
+          "bins": [
+            1.0,
+            0.0,
+            5.0,
+            2.0,
+            0.0,
+            0.0
+          ],
+          "above": 2.0,
+          "above_ci": [
+            0.0865070033792796,
+            0.5398716011915111
+          ]
+        }
+      },
+      "unicode_word": {
+        "n": 8,
+        "score_mean": 0.7436774297659795,
+        "score_median": 0.5391542236728462,
+        "score_ci": [
+          0.3859611482210296,
+          1.1498686600129184
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 3.352454851497532,
+          "hits": 0,
+          "hits_ci": [
+            0.0,
+            0.25275720914158145
+          ],
+          "ranged": 8,
+          "ranged_hits": 0,
+          "verdict": "too narrow (overconfident)"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 11.122636825430702,
+          "hits": 2,
+          "hits_ci": [
+            0.0865070033792796,
+            0.5398716011915111
+          ],
+          "ranged": 8,
+          "ranged_hits": 2,
+          "verdict": "too narrow (overconfident)"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.5240708296144481,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            6.0
+          ],
+          "above": 8.0,
+          "above_ci": [
+            0.7472427908584185,
+            1.0
+          ]
+        }
+      },
+      "walk_max": {
+        "n": 8,
+        "score_mean": 0.12771674474764905,
+        "score_median": 0.18345276017026535,
+        "score_ci": [
+          0.08120094461979614,
+          0.17338132268664025
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.8313667380835408,
+          "hits": 8,
+          "hits_ci": [
+            0.7472427908584185,
+            1.0
+          ],
+          "ranged": 8,
+          "ranged_hits": 8,
+          "verdict": "too wide (underconfident)"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 2.028289894962083,
+          "hits": 8,
+          "hits_ci": [
+            0.7472427908584185,
+            1.0
+          ],
+          "ranged": 8,
+          "ranged_hits": 8,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.020548956497049697,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.0,
+            0.0,
+            7.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          "above": 1.0,
+          "above_ci": [
+            0.02839608135329466,
+            0.41117182550289144
+          ]
+        }
+      }
+    },
+    "worked": {
+      "birthday": {
+        "n": 8,
+        "score_mean": 0.03178666190582882,
+        "score_median": 0.0006607822484283421,
+        "score_ci": [
+          0.0005200651868472028,
+          0.06444714928036925
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.19946555195046084,
+          "hits": 8,
+          "hits_ci": [
+            0.7472427908584185,
+            1.0
+          ],
+          "ranged": 8,
+          "ranged_hits": 8,
+          "verdict": "too wide (underconfident)"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.5148943013374003,
+          "hits": 8,
+          "hits_ci": [
+            0.7472427908584185,
+            1.0
+          ],
+          "ranged": 8,
+          "ranged_hits": 8,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 9.34292421303604e-06,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.0,
+            0.0,
+            3.0,
+            5.0,
+            0.0,
+            0.0
+          ],
+          "above": 5.0,
+          "above_ci": [
+            0.34797064700488106,
+            0.8388400507097236
+          ]
+        }
+      },
+      "collatz_steps": {
+        "n": 8,
+        "score_mean": 0.14486422126270207,
+        "score_median": 0.08823135020141618,
+        "score_ci": [
+          0.07013581943174227,
+          0.22398600054254675
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.7226884296154007,
+          "hits": 4,
+          "hits_ci": [
+            0.2486251757128503,
+            0.7513748242871496
+          ],
+          "ranged": 8,
+          "ranged_hits": 4,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 1.2704391478972867,
+          "hits": 6,
+          "hits_ci": [
+            0.46012839880848877,
+            0.9134929966207204
+          ],
+          "ranged": 8,
+          "ranged_hits": 6,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.16897328612809787,
+        "fell": {
+          "n": 8,
+          "bins": [
+            1.0,
+            1.0,
+            1.0,
+            2.5555555555555554,
+            1.4444444444444444,
+            1.0
+          ],
+          "above": 5.0,
+          "above_ci": [
+            0.34797064700488106,
+            0.8388400507097236
+          ]
+        }
+      },
+      "digit_sum_pow2": {
+        "n": 8,
+        "score_mean": 0.013751252601143533,
+        "score_median": 0.01023900308510985,
+        "score_ci": [
+          0.008471836887614924,
+          0.020467271892772976
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.07156808273179827,
+          "hits": 3,
+          "hits_ci": [
+            0.16115994929027644,
+            0.652029352995119
+          ],
+          "ranged": 8,
+          "ranged_hits": 3,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.09877769868572062,
+          "hits": 7,
+          "hits_ci": [
+            0.5888281744971084,
+            0.9716039186467054
+          ],
+          "ranged": 8,
+          "ranged_hits": 7,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.01889088309715619,
+        "fell": {
+          "n": 8,
+          "bins": [
+            1.0,
+            4.0,
+            1.0,
+            2.0,
+            0.0,
+            0.0
+          ],
+          "above": 2.0,
+          "above_ci": [
+            0.0865070033792796,
+            0.5398716011915111
+          ]
+        }
+      },
+      "lis": {
+        "n": 8,
+        "score_mean": 0.008347974471247004,
+        "score_median": 0.004733836320350582,
+        "score_ci": [
+          0.004561461836995657,
+          0.012651600030128397
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.04235444184344073,
+          "hits": 0,
+          "hits_ci": [
+            0.0,
+            0.25275720914158145
+          ],
+          "ranged": 8,
+          "ranged_hits": 0,
+          "verdict": "too narrow (overconfident)"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.06229182543778716,
+          "hits": 7,
+          "hits_ci": [
+            0.5888281744971084,
+            0.9716039186467054
+          ],
+          "ranged": 8,
+          "ranged_hits": 7,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.008928335662332889,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            7.0,
+            1.0
+          ],
+          "above": 8.0,
+          "above_ci": [
+            0.7472427908584185,
+            1.0
+          ]
+        }
+      },
+      "module_all": {
+        "n": 8,
+        "score_mean": 0.012622647877586338,
+        "score_median": 0.0033647223662121297,
+        "score_ci": [
+          0.0032337883673705155,
+          0.02429064522506876
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.05636231122656704,
+          "hits": 7,
+          "hits_ci": [
+            0.5888281744971084,
+            0.9716039186467054
+          ],
+          "ranged": 1,
+          "ranged_hits": 1,
+          "verdict": "too few to tell"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.18240659696582823,
+          "hits": 8,
+          "hits_ci": [
+            0.7472427908584185,
+            1.0
+          ],
+          "ranged": 8,
+          "ranged_hits": 8,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.0,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.15789473684210525,
+            1.2982456140350878,
+            1.6228070175438596,
+            2.178362573099415,
+            2.5426900584795327,
+            0.2
+          ],
+          "above": 5.0,
+          "above_ci": [
+            0.34797064700488106,
+            0.8388400507097236
+          ]
+        }
+      },
+      "primes_in_range": {
+        "n": 8,
+        "score_mean": 0.005275642215177368,
+        "score_median": 0.0041989293265997756,
+        "score_ci": [
+          0.0037689942377845996,
+          0.006870826090886521
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.02645592049371226,
+          "hits": 5,
+          "hits_ci": [
+            0.34797064700488106,
+            0.8388400507097236
+          ],
+          "ranged": 8,
+          "ranged_hits": 5,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.04833002860466229,
+          "hits": 7,
+          "hits_ci": [
+            0.5888281744971084,
+            0.9716039186467054
+          ],
+          "ranged": 8,
+          "ranged_hits": 7,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.006751425669869542,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.0,
+            1.0,
+            2.0,
+            3.0,
+            1.0,
+            1.0
+          ],
+          "above": 5.0,
+          "above_ci": [
+            0.34797064700488106,
+            0.8388400507097236
+          ]
+        }
+      },
+      "rect_distance": {
+        "n": 8,
+        "score_mean": 0.0006524489586930212,
+        "score_median": 0.00054800349252074,
+        "score_ci": [
+          0.00048631902647659417,
+          0.000836169817464715
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.003219752446451371,
+          "hits": 5,
+          "hits_ci": [
+            0.34797064700488106,
+            0.8388400507097236
+          ],
+          "ranged": 8,
+          "ranged_hits": 5,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.009785367978284392,
+          "hits": 8,
+          "hits_ci": [
+            0.7472427908584185,
+            1.0
+          ],
+          "ranged": 8,
+          "ranged_hits": 8,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.0004351478663801269,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.0,
+            0.0,
+            3.0,
+            2.0,
+            3.0,
+            0.0
+          ],
+          "above": 5.0,
+          "above_ci": [
+            0.34797064700488106,
+            0.8388400507097236
+          ]
+        }
+      },
+      "stdlib_defs": {
+        "n": 8,
+        "score_mean": 0.09353427589382485,
+        "score_median": 0.04941502021711992,
+        "score_ci": [
+          0.04124258860767619,
+          0.15904416253056378
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.4794742927394305,
+          "hits": 4,
+          "hits_ci": [
+            0.2486251757128503,
+            0.7513748242871496
+          ],
+          "ranged": 8,
+          "ranged_hits": 4,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.9413705543005995,
+          "hits": 7,
+          "hits_ci": [
+            0.5888281744971084,
+            0.9716039186467054
+          ],
+          "ranged": 8,
+          "ranged_hits": 7,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.0757142857142857,
+        "fell": {
+          "n": 8,
+          "bins": [
+            1.0,
+            1.0,
+            3.0,
+            1.0,
+            2.0,
+            0.0
+          ],
+          "above": 3.0,
+          "above_ci": [
+            0.16115994929027644,
+            0.652029352995119
+          ]
+        }
+      },
+      "stdlib_lines": {
+        "n": 8,
+        "score_mean": 0.19231961087796096,
+        "score_median": 0.027080025444411016,
+        "score_ci": [
+          0.052278943234902606,
+          0.3481419950882803
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.8334368185378962,
+          "hits": 4,
+          "hits_ci": [
+            0.2486251757128503,
+            0.7513748242871496
+          ],
+          "ranged": 8,
+          "ranged_hits": 4,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 3.246527963218276,
+          "hits": 5,
+          "hits_ci": [
+            0.34797064700488106,
+            0.8388400507097236
+          ],
+          "ranged": 8,
+          "ranged_hits": 5,
+          "verdict": "too narrow (overconfident)"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.053839721028039286,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.0,
+            0.0,
+            1.5,
+            2.5,
+            1.0,
+            3.0
+          ],
+          "above": 6.5,
+          "above_ci": [
+            0.46012839880848877,
+            0.9134929966207204
+          ]
+        }
+      },
+      "unicode_block": {
+        "n": 8,
+        "score_mean": 0.023060735852416726,
+        "score_median": 0.0014553850371201316,
+        "score_ci": [
+          0.0011762324398626957,
+          0.06516600118354275
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.096700757566757,
+          "hits": 7,
+          "hits_ci": [
+            0.5888281744971084,
+            0.9716039186467054
+          ],
+          "ranged": 4,
+          "ranged_hits": 3,
+          "verdict": "too few to tell"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.40849343631405294,
+          "hits": 7,
+          "hits_ci": [
+            0.5888281744971084,
+            0.9716039186467054
+          ],
+          "ranged": 8,
+          "ranged_hits": 7,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.0,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.0,
+            0.8771929824561403,
+            1.81077694235589,
+            2.3663324979114453,
+            1.8930659983291567,
+            1.0526315789473684
+          ],
+          "above": 5.0,
+          "above_ci": [
+            0.34797064700488106,
+            0.8388400507097236
+          ]
+        }
+      },
+      "unicode_category": {
+        "n": 8,
+        "score_mean": 0.00593820437200468,
+        "score_median": 0.003721292412056241,
+        "score_ci": [
+          0.0037731663929855353,
+          0.008207773630556268
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.022728440117881665,
+          "hits": 7,
+          "hits_ci": [
+            0.5888281744971084,
+            0.9716039186467054
+          ],
+          "ranged": 5,
+          "ranged_hits": 4,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.12344169861460563,
+          "hits": 8,
+          "hits_ci": [
+            0.7472427908584185,
+            1.0
+          ],
+          "ranged": 8,
+          "ranged_hits": 8,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.0,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.0,
+            1.6666666666666667,
+            2.6904761904761902,
+            2.6904761904761902,
+            0.9523809523809526,
+            0.0
+          ],
+          "above": 3.5,
+          "above_ci": [
+            0.2486251757128503,
+            0.7513748242871496
+          ]
+        }
+      },
+      "unicode_word": {
+        "n": 8,
+        "score_mean": 0.11643776805640889,
+        "score_median": 0.08757850647210567,
+        "score_ci": [
+          0.05032785984690178,
+          0.18513476664178583
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.5528228979088348,
+          "hits": 2,
+          "hits_ci": [
+            0.0865070033792796,
+            0.5398716011915111
+          ],
+          "ranged": 8,
+          "ranged_hits": 2,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 1.5353196883755362,
+          "hits": 4,
+          "hits_ci": [
+            0.2486251757128503,
+            0.7513748242871496
+          ],
+          "ranged": 8,
+          "ranged_hits": 4,
+          "verdict": "too narrow (overconfident)"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.10636951631046118,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.0,
+            0.0,
+            2.0,
+            0.0,
+            2.0,
+            4.0
+          ],
+          "above": 6.0,
+          "above_ci": [
+            0.46012839880848877,
+            0.9134929966207204
+          ]
+        }
+      },
+      "walk_max": {
+        "n": 8,
+        "score_mean": 0.008634469771435456,
+        "score_median": 0.0073409418745172105,
+        "score_ci": [
+          0.005970815862829463,
+          0.011589723974761624
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.043864852491203865,
+          "hits": 2,
+          "hits_ci": [
+            0.0865070033792796,
+            0.5398716011915111
+          ],
+          "ranged": 8,
+          "ranged_hits": 2,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.06786911618485747,
+          "hits": 6,
+          "hits_ci": [
+            0.46012839880848877,
+            0.9134929966207204
+          ],
+          "ranged": 8,
+          "ranged_hits": 6,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.013921964653009372,
+        "fell": {
+          "n": 8,
+          "bins": [
+            2.0,
+            3.0,
+            1.0,
+            1.0,
+            1.0,
+            0.0
+          ],
+          "above": 2.0,
+          "above_ci": [
+            0.0865070033792796,
+            0.5398716011915111
+          ]
+        }
+      }
+    }
+  },
+  "questions": [
+    {
+      "q": 1,
+      "key": "unicode_word {\"word\": \"MUSICAL\"}",
+      "family": "unicode_word",
+      "kind": "knowledge",
+      "short": "Unicode names with the word MUSICAL",
+      "answer": 518,
+      "instinct": {
+        "status": "ok",
+        "estimate": 40,
+        "p50": [
+          30,
+          55
+        ],
+        "p90": [
+          20,
+          80
+        ],
+        "score": 2.2274041146259718,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 444,
+        "p50": [
+          438,
+          448
+        ],
+        "p90": [
+          420,
+          456
+        ],
+        "score": 0.1434998738890013,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      }
+    },
+    {
+      "q": 2,
+      "key": "stdlib_lines {\"module\": \"smtplib\"}",
+      "family": "stdlib_lines",
+      "kind": "knowledge",
+      "short": "lines in `smtplib`",
+      "answer": 1123,
+      "instinct": {
+        "status": "ok",
+        "estimate": 1600,
+        "p50": [
+          1350,
+          1850
+        ],
+        "p90": [
+          1100,
+          2300
+        ],
+        "score": 0.19055805603882434,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 1150,
+        "p50": [
+          1110,
+          1190
+        ],
+        "p90": [
+          1020,
+          1280
+        ],
+        "score": 0.016237923299857647,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 3,
+      "key": "walk_max {\"n\": 426, \"seed\": 758071545}",
+      "family": "walk_max",
+      "kind": "statistical",
+      "short": "highest point of a 426-step walk",
+      "answer": 15.79525,
+      "instinct": {
+        "status": "ok",
+        "estimate": 16.5,
+        "p50": [
+          6.6,
+          23.7
+        ],
+        "p90": [
+          1.3,
+          40.5
+        ],
+        "score": 0.20534951790059847,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 15.98,
+        "p50": [
+          15.85,
+          16.11
+        ],
+        "p90": [
+          15.65,
+          16.31
+        ],
+        "score": 0.006163050722998635,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 4,
+      "key": "birthday {\"d\": 35930}",
+      "family": "birthday",
+      "kind": "exact",
+      "short": "draws until a repeat, d = 35,930",
+      "answer": 238.23554810932265,
+      "instinct": {
+        "status": "ok",
+        "estimate": 238,
+        "p50": [
+          144,
+          316
+        ],
+        "p90": [
+          61,
+          464
+        ],
+        "score": 0.11937094686419462,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 224,
+        "p50": [
+          144,
+          317
+        ],
+        "p90": [
+          61,
+          465
+        ],
+        "score": 0.13185488432374054,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 5,
+      "key": "digit_sum_pow2 {\"n\": 1269}",
+      "family": "digit_sum_pow2",
+      "kind": "statistical",
+      "short": "digit sum of 2^1269",
+      "answer": 1736,
+      "instinct": {
+        "status": "ok",
+        "estimate": 1370,
+        "p50": [
+          1330,
+          1410
+        ],
+        "p90": [
+          1260,
+          1480
+        ],
+        "score": 0.2032979867922243,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 1718,
+        "p50": [
+          1680,
+          1756
+        ],
+        "p90": [
+          1620,
+          1815
+        ],
+        "score": 0.008777108398010488,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 6,
+      "key": "module_all {\"module\": \"timeit\"}",
+      "family": "module_all",
+      "kind": "knowledge",
+      "short": "names in `timeit.__all__`",
+      "answer": 4,
+      "instinct": {
+        "status": "ok",
+        "estimate": 3,
+        "p50": [
+          2,
+          4
+        ],
+        "p90": [
+          1,
+          6
+        ],
+        "score": 0.12076653200934835,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 4,
+        "p50": [
+          4,
+          4
+        ],
+        "p90": [
+          4,
+          5
+        ],
+        "score": 0.0036464311358790935,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 7,
+      "key": "rect_distance {\"b\": 2.52, \"seed\": 3419691168}",
+      "family": "rect_distance",
+      "kind": "statistical",
+      "short": "mean distance in a 1 × 2.52 rectangle",
+      "answer": 0.9621300521295046,
+      "instinct": {
+        "status": "ok",
+        "estimate": 1.0,
+        "p50": [
+          0.95,
+          1.05
+        ],
+        "p90": [
+          0.9,
+          1.1
+        ],
+        "score": 0.021742889390916148,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 0.9624,
+        "p50": [
+          0.9612,
+          0.9636
+        ],
+        "p90": [
+          0.957,
+          0.968
+        ],
+        "score": 0.0005340573659539784,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 8,
+      "key": "unicode_category {\"category\": \"Po\"}",
+      "family": "unicode_category",
+      "kind": "knowledge",
+      "short": "code points in category Po",
+      "answer": 628,
+      "instinct": {
+        "status": "ok",
+        "estimate": 630,
+        "p50": [
+          600,
+          670
+        ],
+        "p90": [
+          560,
+          720
+        ],
+        "score": 0.01667070604704687,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 630,
+        "p50": [
+          620,
+          640
+        ],
+        "p90": [
+          600,
+          660
+        ],
+        "score": 0.0057079367732030305,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 9,
+      "key": "unicode_block {\"hi\": 1983, \"lo\": 1920}",
+      "family": "unicode_block",
+      "kind": "knowledge",
+      "short": "assigned in the Thaana block",
+      "answer": 50,
+      "instinct": {
+        "status": "ok",
+        "estimate": 50,
+        "p50": [
+          50,
+          51
+        ],
+        "p90": [
+          50,
+          51
+        ],
+        "score": 0.002330170302852217,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 50,
+        "p50": [
+          50,
+          50
+        ],
+        "p90": [
+          49,
+          52
+        ],
+        "score": 0.0011653781624795202,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 10,
+      "key": "stdlib_defs {\"module\": \"optparse\"}",
+      "family": "stdlib_defs",
+      "kind": "knowledge",
+      "short": "function definitions in `optparse`",
+      "answer": 122,
+      "instinct": {
+        "status": "ok",
+        "estimate": 280,
+        "p50": [
+          240,
+          320
+        ],
+        "p90": [
+          195,
+          390
+        ],
+        "score": 0.6631274925618337,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 105,
+        "p50": [
+          95,
+          116
+        ],
+        "p90": [
+          82,
+          130
+        ],
+        "score": 0.07866292912301741,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 11,
+      "key": "primes_in_range {\"a\": 3164661, \"b\": 3229443}",
+      "family": "primes_in_range",
+      "kind": "statistical",
+      "short": "primes in [3,164,661, 3,229,443]",
+      "answer": 4399,
+      "instinct": {
+        "status": "ok",
+        "estimate": 4320,
+        "p50": [
+          4290,
+          4350
+        ],
+        "p90": [
+          4180,
+          4460
+        ],
+        "score": 0.010788111517503154,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 4325,
+        "p50": [
+          4302,
+          4349
+        ],
+        "p90": [
+          4260,
+          4392
+        ],
+        "score": 0.01029710031427907,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      }
+    },
+    {
+      "q": 12,
+      "key": "collatz_steps {\"n\": 87974385043}",
+      "family": "collatz_steps",
+      "kind": "statistical",
+      "short": "Collatz steps from 87,974,385,043",
+      "answer": 246,
+      "instinct": {
+        "status": "ok",
+        "estimate": 120,
+        "p50": [
+          95,
+          145
+        ],
+        "p90": [
+          60,
+          200
+        ],
+        "score": 0.5012400795034296,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 170,
+        "p50": [
+          130,
+          215
+        ],
+        "p90": [
+          85,
+          290
+        ],
+        "score": 0.2015765554692494,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 13,
+      "key": "lis {\"n\": 112, \"seed\": 3552218128}",
+      "family": "lis",
+      "kind": "statistical",
+      "short": "longest increasing subsequence, n = 112",
+      "answer": 17.812,
+      "instinct": {
+        "status": "ok",
+        "estimate": 17.3,
+        "p50": [
+          16.7,
+          17.9
+        ],
+        "p90": [
+          16.0,
+          18.6
+        ],
+        "score": 0.015783833703131932,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 17.4,
+        "p50": [
+          17.2,
+          17.6
+        ],
+        "p90": [
+          16.85,
+          17.95
+        ],
+        "score": 0.01303357139912257,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 14,
+      "key": "rect_distance {\"b\": 9.91, \"seed\": 2039402934}",
+      "family": "rect_distance",
+      "kind": "statistical",
+      "short": "mean distance in a 1 × 9.91 rectangle",
+      "answer": 3.3585323432697747,
+      "instinct": {
+        "status": "ok",
+        "estimate": 3.36,
+        "p50": [
+          3.31,
+          3.4
+        ],
+        "p90": [
+          3.25,
+          3.47
+        ],
+        "score": 0.004080095780521939,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 3.356,
+        "p50": [
+          3.353,
+          3.358
+        ],
+        "p90": [
+          3.348,
+          3.363
+        ],
+        "score": 0.000452679107084637,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 15,
+      "key": "unicode_block {\"hi\": 3711, \"lo\": 3584}",
+      "family": "unicode_block",
+      "kind": "knowledge",
+      "short": "assigned in the Thai block",
+      "answer": 87,
+      "instinct": {
+        "status": "ok",
+        "estimate": 87,
+        "p50": [
+          85,
+          88
+        ],
+        "p90": [
+          80,
+          88
+        ],
+        "score": 0.005312651649057241,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 87,
+        "p50": [
+          87,
+          87
+        ],
+        "p90": [
+          86,
+          88
+        ],
+        "score": 0.0004545650215511188,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 16,
+      "key": "unicode_word {\"word\": \"FRACTION\"}",
+      "family": "unicode_word",
+      "kind": "knowledge",
+      "short": "Unicode names with the word FRACTION",
+      "answer": 98,
+      "instinct": {
+        "status": "ok",
+        "estimate": 80,
+        "p50": [
+          68,
+          95
+        ],
+        "p90": [
+          55,
+          120
+        ],
+        "score": 0.10087574834342108,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 60,
+        "p50": [
+          52,
+          68
+        ],
+        "p90": [
+          42,
+          85
+        ],
+        "score": 0.3378079596753334,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      }
+    },
+    {
+      "q": 17,
+      "key": "unicode_category {\"category\": \"Pc\"}",
+      "family": "unicode_category",
+      "kind": "knowledge",
+      "short": "code points in category Pc",
+      "answer": 10,
+      "instinct": {
+        "status": "ok",
+        "estimate": 10,
+        "p50": [
+          9,
+          12
+        ],
+        "p90": [
+          7,
+          18
+        ],
+        "score": 0.043536375196481174,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 10,
+        "p50": [
+          10,
+          10
+        ],
+        "p90": [
+          9,
+          11
+        ],
+        "score": 0.003646431135879089,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 18,
+      "key": "stdlib_defs {\"module\": \"traceback\"}",
+      "family": "stdlib_defs",
+      "kind": "knowledge",
+      "short": "function definitions in `traceback`",
+      "answer": 70,
+      "instinct": {
+        "status": "ok",
+        "estimate": 95,
+        "p50": [
+          75,
+          115
+        ],
+        "p90": [
+          55,
+          150
+        ],
+        "score": 0.1496792961869092,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 70,
+        "p50": [
+          62,
+          80
+        ],
+        "p90": [
+          52,
+          95
+        ],
+        "score": 0.03701256838640494,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 19,
+      "key": "stdlib_lines {\"module\": \"shutil\"}",
+      "family": "stdlib_lines",
+      "kind": "knowledge",
+      "short": "lines in `shutil`",
+      "answer": 1569,
+      "instinct": {
+        "status": "ok",
+        "estimate": 1600,
+        "p50": [
+          1400,
+          1800
+        ],
+        "p90": [
+          1200,
+          2100
+        ],
+        "score": 0.04021132039006746,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 1480,
+        "p50": [
+          1420,
+          1560
+        ],
+        "p90": [
+          1330,
+          1700
+        ],
+        "score": 0.028273502667527595,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 20,
+      "key": "lis {\"n\": 1643, \"seed\": 187589353}",
+      "family": "lis",
+      "kind": "statistical",
+      "short": "longest increasing subsequence, n = 1,643",
+      "answer": 75.539,
+      "instinct": {
+        "status": "ok",
+        "estimate": 75.0,
+        "p50": [
+          73.5,
+          76.5
+        ],
+        "p90": [
+          71.5,
+          78.0
+        ],
+        "score": 0.007172954129319517,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 75.0,
+        "p50": [
+          74.5,
+          75.5
+        ],
+        "p90": [
+          73.9,
+          76.1
+        ],
+        "score": 0.0035588241222196436,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 21,
+      "key": "walk_max {\"n\": 1512, \"seed\": 1440837354}",
+      "family": "walk_max",
+      "kind": "statistical",
+      "short": "highest point of a 1,512-step walk",
+      "answer": 31.035,
+      "instinct": {
+        "status": "ok",
+        "estimate": 31,
+        "p50": [
+          12.4,
+          44.7
+        ],
+        "p90": [
+          4.9,
+          64.0
+        ],
+        "score": 0.17984633954180898,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 31.02,
+        "p50": [
+          30.75,
+          31.3
+        ],
+        "p90": [
+          30.4,
+          31.65
+        ],
+        "score": 0.002675409556362922,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 22,
+      "key": "primes_in_range {\"a\": 8284359, \"b\": 8296430}",
+      "family": "primes_in_range",
+      "kind": "statistical",
+      "short": "primes in [8,284,359, 8,296,430]",
+      "answer": 753,
+      "instinct": {
+        "status": "ok",
+        "estimate": 758,
+        "p50": [
+          748,
+          768
+        ],
+        "p90": [
+          728,
+          788
+        ],
+        "score": 0.00553893225312164,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 758,
+        "p50": [
+          751,
+          765
+        ],
+        "p90": [
+          738,
+          778
+        ],
+        "score": 0.004220728955060852,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 23,
+      "key": "collatz_steps {\"n\": 337264368477}",
+      "family": "collatz_steps",
+      "kind": "statistical",
+      "short": "Collatz steps from 337,264,368,477",
+      "answer": 248,
+      "instinct": {
+        "status": "ok",
+        "estimate": 380,
+        "p50": [
+          300,
+          450
+        ],
+        "p90": [
+          200,
+          600
+        ],
+        "score": 0.22327375105096894,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 248,
+        "p50": [
+          246,
+          250
+        ],
+        "p90": [
+          240,
+          256
+        ],
+        "score": 0.00289204327847191,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 24,
+      "key": "module_all {\"module\": \"weakref\"}",
+      "family": "module_all",
+      "kind": "knowledge",
+      "short": "names in `weakref.__all__`",
+      "answer": 13,
+      "instinct": {
+        "status": "ok",
+        "estimate": 11,
+        "p50": [
+          9,
+          13
+        ],
+        "p90": [
+          7,
+          18
+        ],
+        "score": 0.08177730837730494,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 13,
+        "p50": [
+          13,
+          13
+        ],
+        "p90": [
+          12,
+          14
+        ],
+        "score": 0.0028620168728134667,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 25,
+      "key": "birthday {\"d\": 6620093}",
+      "family": "birthday",
+      "kind": "exact",
+      "short": "draws until a repeat, d = 6,620,093",
+      "answer": 3225.386503987564,
+      "instinct": {
+        "status": "ok",
+        "estimate": 3225,
+        "p50": [
+          1950,
+          4290
+        ],
+        "p90": [
+          820,
+          6300
+        ],
+        "score": 0.11964971528219626,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 3225.4,
+        "p50": [
+          3224.9,
+          3225.9
+        ],
+        "p90": [
+          3222.5,
+          3228.5
+        ],
+        "score": 6.904431177005676e-05,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 26,
+      "key": "digit_sum_pow2 {\"n\": 1219}",
+      "family": "digit_sum_pow2",
+      "kind": "statistical",
+      "short": "digit sum of 2^1219",
+      "answer": 1550,
+      "instinct": {
+        "status": "ok",
+        "estimate": 1651,
+        "p50": [
+          1614,
+          1688
+        ],
+        "p90": [
+          1560,
+          1742
+        ],
+        "score": 0.038047880723717245,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 1651,
+        "p50": [
+          1614,
+          1688
+        ],
+        "p90": [
+          1561,
+          1741
+        ],
+        "score": 0.0382797587175615,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      }
+    },
+    {
+      "q": 27,
+      "key": "stdlib_defs {\"module\": \"hmac\"}",
+      "family": "stdlib_defs",
+      "kind": "knowledge",
+      "short": "function definitions in `hmac`",
+      "answer": 11,
+      "instinct": {
+        "status": "ok",
+        "estimate": 30,
+        "p50": [
+          22,
+          40
+        ],
+        "p90": [
+          14,
+          60
+        ],
+        "score": 0.6251728162605107,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 15,
+        "p50": [
+          13,
+          17
+        ],
+        "p90": [
+          10,
+          22
+        ],
+        "score": 0.15908010811196557,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 28,
+      "key": "unicode_block {\"hi\": 127231, \"lo\": 127136}",
+      "family": "unicode_block",
+      "kind": "knowledge",
+      "short": "assigned in the Playing Cards block",
+      "answer": 82,
+      "instinct": {
+        "status": "ok",
+        "estimate": 82,
+        "p50": [
+          80,
+          83
+        ],
+        "p90": [
+          70,
+          88
+        ],
+        "score": 0.008155894270903907,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 81,
+        "p50": [
+          80,
+          82
+        ],
+        "p90": [
+          77,
+          83
+        ],
+        "score": 0.006345576861959331,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 29,
+      "key": "lis {\"n\": 4365, \"seed\": 3575572515}",
+      "family": "lis",
+      "kind": "statistical",
+      "short": "longest increasing subsequence, n = 4,365",
+      "answer": 125.447,
+      "instinct": {
+        "status": "ok",
+        "estimate": 125.0,
+        "p50": [
+          123.5,
+          126.5
+        ],
+        "p90": [
+          121.5,
+          128.0
+        ],
+        "score": 0.004156359495587321,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 125.0,
+        "p50": [
+          124.7,
+          125.3
+        ],
+        "p90": [
+          124.2,
+          125.8
+        ],
+        "score": 0.0019189273656122906,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 30,
+      "key": "rect_distance {\"b\": 4.45, \"seed\": 3946321271}",
+      "family": "rect_distance",
+      "kind": "statistical",
+      "short": "mean distance in a 1 × 4.45 rectangle",
+      "answer": 1.572471661797392,
+      "instinct": {
+        "status": "ok",
+        "estimate": 1.58,
+        "p50": [
+          1.55,
+          1.62
+        ],
+        "p90": [
+          1.5,
+          1.68
+        ],
+        "score": 0.007638927282120872,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 1.5708,
+        "p50": [
+          1.5695,
+          1.5722
+        ],
+        "p90": [
+          1.5665,
+          1.575
+        ],
+        "score": 0.0005619496190875017,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 31,
+      "key": "unicode_word {\"word\": \"CAPITAL\"}",
+      "family": "unicode_word",
+      "kind": "knowledge",
+      "short": "Unicode names with the word CAPITAL",
+      "answer": 2032,
+      "instinct": {
+        "status": "ok",
+        "estimate": 1400,
+        "p50": [
+          1100,
+          1700
+        ],
+        "p90": [
+          800,
+          2300
+        ],
+        "score": 0.21038825037792047,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 1890,
+        "p50": [
+          1840,
+          1940
+        ],
+        "p90": [
+          1760,
+          2040
+        ],
+        "score": 0.04124564245757858,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 32,
+      "key": "collatz_steps {\"n\": 904534976486}",
+      "family": "collatz_steps",
+      "kind": "statistical",
+      "short": "Collatz steps from 904,534,976,486",
+      "answer": 239,
+      "instinct": {
+        "status": "ok",
+        "estimate": 108,
+        "p50": [
+          78,
+          140
+        ],
+        "p90": [
+          45,
+          200
+        ],
+        "score": 0.5289679015437792,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 283,
+        "p50": [
+          240,
+          330
+        ],
+        "p90": [
+          170,
+          400
+        ],
+        "score": 0.08410836862802742,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 33,
+      "key": "unicode_category {\"category\": \"So\"}",
+      "family": "unicode_category",
+      "kind": "knowledge",
+      "short": "code points in category So",
+      "answer": 6639,
+      "instinct": {
+        "status": "ok",
+        "estimate": 6700,
+        "p50": [
+          6000,
+          7400
+        ],
+        "p90": [
+          5200,
+          8500
+        ],
+        "score": 0.03262451929821921,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 6500,
+        "p50": [
+          6350,
+          6650
+        ],
+        "p90": [
+          6100,
+          6900
+        ],
+        "score": 0.01131095703072173,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 34,
+      "key": "digit_sum_pow2 {\"n\": 2531}",
+      "family": "digit_sum_pow2",
+      "kind": "statistical",
+      "short": "digit sum of 2^2531",
+      "answer": 3353,
+      "instinct": {
+        "status": "ok",
+        "estimate": 3429,
+        "p50": [
+          3376,
+          3482
+        ],
+        "p90": [
+          3300,
+          3560
+        ],
+        "score": 0.011821894782866523,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 3429,
+        "p50": [
+          3395,
+          3463
+        ],
+        "p90": [
+          3300,
+          3560
+        ],
+        "score": 0.012958052828199946,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 35,
+      "key": "stdlib_lines {\"module\": \"functools\"}",
+      "family": "stdlib_lines",
+      "kind": "knowledge",
+      "short": "lines in `functools`",
+      "answer": 1036,
+      "instinct": {
+        "status": "ok",
+        "estimate": 1000,
+        "p50": [
+          870,
+          1150
+        ],
+        "p90": [
+          700,
+          1400
+        ],
+        "score": 0.048789602155847746,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 1030,
+        "p50": [
+          980,
+          1090
+        ],
+        "p90": [
+          910,
+          1180
+        ],
+        "score": 0.01697977584803226,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 36,
+      "key": "birthday {\"d\": 46781}",
+      "family": "birthday",
+      "kind": "exact",
+      "short": "draws until a repeat, d = 46,781",
+      "answer": 271.7454087698817,
+      "instinct": {
+        "status": "ok",
+        "estimate": 255,
+        "p50": [
+          164,
+          360
+        ],
+        "p90": [
+          69,
+          529
+        ],
+        "score": 0.1320818160376439,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 271.75,
+        "p50": [
+          271.0,
+          272.5
+        ],
+        "p90": [
+          269.5,
+          274.0
+        ],
+        "score": 0.0008865526818913238,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 37,
+      "key": "walk_max {\"n\": 869, \"seed\": 3323348341}",
+      "family": "walk_max",
+      "kind": "statistical",
+      "short": "highest point of a 869-step walk",
+      "answer": 22.92075,
+      "instinct": {
+        "status": "ok",
+        "estimate": 23.5,
+        "p50": [
+          9.4,
+          34.7
+        ],
+        "p90": [
+          3.7,
+          48.5
+        ],
+        "score": 0.18705918079872172,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 23.53,
+        "p50": [
+          23.33,
+          23.72
+        ],
+        "p90": [
+          23.07,
+          23.99
+        ],
+        "score": 0.01736181891413365,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      }
+    },
+    {
+      "q": 38,
+      "key": "module_all {\"module\": \"locale\"}",
+      "family": "module_all",
+      "kind": "knowledge",
+      "short": "names in `locale.__all__`",
+      "answer": 23,
+      "instinct": {
+        "status": "ok",
+        "estimate": 60,
+        "p50": [
+          45,
+          75
+        ],
+        "p90": [
+          25,
+          110
+        ],
+        "score": 0.5580539839364881,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 22,
+        "p50": [
+          21,
+          23
+        ],
+        "p90": [
+          19,
+          26
+        ],
+        "score": 0.02321515243172895,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 39,
+      "key": "primes_in_range {\"a\": 591475, \"b\": 604946}",
+      "family": "primes_in_range",
+      "kind": "statistical",
+      "short": "primes in [591,475, 604,946]",
+      "answer": 1020,
+      "instinct": {
+        "status": "ok",
+        "estimate": 1013,
+        "p50": [
+          1000,
+          1026
+        ],
+        "p90": [
+          980,
+          1047
+        ],
+        "score": 0.005261497970353499,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 1013,
+        "p50": [
+          1005,
+          1021
+        ],
+        "p90": [
+          982,
+          1044
+        ],
+        "score": 0.0041771296981386995,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 40,
+      "key": "lis {\"n\": 2201, \"seed\": 3537523211}",
+      "family": "lis",
+      "kind": "statistical",
+      "short": "longest increasing subsequence, n = 2,201",
+      "answer": 87.908,
+      "instinct": {
+        "status": "ok",
+        "estimate": 88.9,
+        "p50": [
+          87.3,
+          90.5
+        ],
+        "p90": [
+          84.8,
+          93.0
+        ],
+        "score": 0.007690283684319255,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 87.4,
+        "p50": [
+          87.1,
+          87.7
+        ],
+        "p90": [
+          86.6,
+          88.2
+        ],
+        "score": 0.003159316055680961,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 41,
+      "key": "unicode_category {\"category\": \"Me\"}",
+      "family": "unicode_category",
+      "kind": "knowledge",
+      "short": "code points in category Me",
+      "answer": 13,
+      "instinct": {
+        "status": "ok",
+        "estimate": 143,
+        "p50": [
+          130,
+          160
+        ],
+        "p90": [
+          115,
+          190
+        ],
+        "score": 2.2370147049400844,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 13,
+        "p50": [
+          13,
+          13
+        ],
+        "p90": [
+          12,
+          14
+        ],
+        "score": 0.0028620168728134667,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 42,
+      "key": "stdlib_lines {\"module\": \"tabnanny\"}",
+      "family": "stdlib_lines",
+      "kind": "knowledge",
+      "short": "lines in `tabnanny`",
+      "answer": 340,
+      "instinct": {
+        "status": "ok",
+        "estimate": 440,
+        "p50": [
+          400,
+          480
+        ],
+        "p90": [
+          340,
+          560
+        ],
+        "score": 0.14441141248658954,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 340,
+        "p50": [
+          326,
+          356
+        ],
+        "p90": [
+          310,
+          380
+        ],
+        "score": 0.012837690347187874,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 43,
+      "key": "primes_in_range {\"a\": 310586, \"b\": 338601}",
+      "family": "primes_in_range",
+      "kind": "statistical",
+      "short": "primes in [310,586, 338,601]",
+      "answer": 2242,
+      "instinct": {
+        "status": "ok",
+        "estimate": 2208,
+        "p50": [
+          2193,
+          2223
+        ],
+        "p90": [
+          2158,
+          2258
+        ],
+        "score": 0.008721261052505884,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 2206,
+        "p50": [
+          2189,
+          2223
+        ],
+        "p90": [
+          2150,
+          2262
+        ],
+        "score": 0.009194530895896983,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 44,
+      "key": "rect_distance {\"b\": 4.51, \"seed\": 1875967922}",
+      "family": "rect_distance",
+      "kind": "statistical",
+      "short": "mean distance in a 1 × 4.51 rectangle",
+      "answer": 1.5900454196314202,
+      "instinct": {
+        "status": "ok",
+        "estimate": 1.55,
+        "p50": [
+          1.5,
+          1.6
+        ],
+        "p90": [
+          1.42,
+          1.72
+        ],
+        "score": 0.015388730637783902,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 1.591,
+        "p50": [
+          1.589,
+          1.594
+        ],
+        "p90": [
+          1.58,
+          1.6
+        ],
+        "score": 0.00068577847059762,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 45,
+      "key": "stdlib_defs {\"module\": \"csv\"}",
+      "family": "stdlib_defs",
+      "kind": "knowledge",
+      "short": "function definitions in `csv`",
+      "answer": 17,
+      "instinct": {
+        "status": "ok",
+        "estimate": 40,
+        "p50": [
+          28,
+          55
+        ],
+        "p90": [
+          18,
+          85
+        ],
+        "score": 0.4730403315224717,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 17,
+        "p50": [
+          16,
+          18
+        ],
+        "p90": [
+          14,
+          21
+        ],
+        "score": 0.01878240855614453,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 46,
+      "key": "digit_sum_pow2 {\"n\": 7366}",
+      "family": "digit_sum_pow2",
+      "kind": "statistical",
+      "short": "digit sum of 2^7366",
+      "answer": 10060,
+      "instinct": {
+        "status": "ok",
+        "estimate": 9981,
+        "p50": [
+          9890,
+          10072
+        ],
+        "p90": [
+          9760,
+          10200
+        ],
+        "score": 0.004281768882934181,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 9981,
+        "p50": [
+          9890,
+          10075
+        ],
+        "p90": [
+          9750,
+          10210
+        ],
+        "score": 0.004351643560173492,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 47,
+      "key": "collatz_steps {\"n\": 189630655112}",
+      "family": "collatz_steps",
+      "kind": "statistical",
+      "short": "Collatz steps from 189,630,655,112",
+      "answer": 291,
+      "instinct": {
+        "status": "ok",
+        "estimate": 120,
+        "p50": [
+          95,
+          145
+        ],
+        "p90": [
+          60,
+          200
+        ],
+        "score": 0.6686055451437339,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 170,
+        "p50": [
+          142,
+          202
+        ],
+        "p90": [
+          100,
+          265
+        ],
+        "score": 0.344143826555352,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      }
+    },
+    {
+      "q": 48,
+      "key": "birthday {\"d\": 2138}",
+      "family": "birthday",
+      "kind": "exact",
+      "short": "draws until a repeat, d = 2,138",
+      "answer": 58.62029252424441,
+      "instinct": {
+        "status": "ok",
+        "estimate": 58.6,
+        "p50": [
+          35,
+          77
+        ],
+        "p90": [
+          15,
+          113
+        ],
+        "score": 0.11930173416172955,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 58.62,
+        "p50": [
+          35,
+          77
+        ],
+        "p90": [
+          15,
+          113
+        ],
+        "score": 0.11923348642177381,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 49,
+      "key": "module_all {\"module\": \"base64\"}",
+      "family": "module_all",
+      "kind": "knowledge",
+      "short": "names in `base64.__all__`",
+      "answer": 22,
+      "instinct": {
+        "status": "ok",
+        "estimate": 20,
+        "p50": [
+          19,
+          22
+        ],
+        "p90": [
+          17,
+          24
+        ],
+        "score": 0.03874063121810194,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 20,
+        "p50": [
+          20,
+          20
+        ],
+        "p90": [
+          18,
+          22
+        ],
+        "score": 0.058404171658690184,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 50,
+      "key": "unicode_word {\"word\": \"GREEK\"}",
+      "family": "unicode_word",
+      "kind": "knowledge",
+      "short": "Unicode names with the word GREEK",
+      "answer": 531,
+      "instinct": {
+        "status": "ok",
+        "estimate": 130,
+        "p50": [
+          100,
+          160
+        ],
+        "p90": [
+          70,
+          220
+        ],
+        "score": 1.1791152394043771,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 512,
+        "p50": [
+          501,
+          522
+        ],
+        "p90": [
+          482,
+          545
+        ],
+        "score": 0.020648519824029633,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 51,
+      "key": "unicode_block {\"hi\": 8303, \"lo\": 8192}",
+      "family": "unicode_block",
+      "kind": "knowledge",
+      "short": "assigned in the General Punctuation block",
+      "answer": 111,
+      "instinct": {
+        "status": "ok",
+        "estimate": 105,
+        "p50": [
+          104,
+          105
+        ],
+        "p90": [
+          102,
+          107
+        ],
+        "score": 0.0494788431515121,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 111,
+        "p50": [
+          111,
+          111
+        ],
+        "p90": [
+          110,
+          111
+        ],
+        "score": 0.00017937339965520496,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 52,
+      "key": "walk_max {\"n\": 707, \"seed\": 4028422008}",
+      "family": "walk_max",
+      "kind": "statistical",
+      "short": "highest point of a 707-step walk",
+      "answer": 20.723,
+      "instinct": {
+        "status": "ok",
+        "estimate": 21.2,
+        "p50": [
+          8.5,
+          30.6
+        ],
+        "p90": [
+          1.7,
+          52.1
+        ],
+        "score": 0.20109551592467273,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 21.22,
+        "p50": [
+          21.05,
+          21.4
+        ],
+        "p90": [
+          20.8,
+          21.65
+        ],
+        "score": 0.01493613636084799,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      }
+    },
+    {
+      "q": 53,
+      "key": "stdlib_lines {\"module\": \"glob\"}",
+      "family": "stdlib_lines",
+      "kind": "knowledge",
+      "short": "lines in `glob`",
+      "answer": 572,
+      "instinct": {
+        "status": "ok",
+        "estimate": 220,
+        "p50": [
+          190,
+          250
+        ],
+        "p90": [
+          160,
+          300
+        ],
+        "score": 0.8180599639627294,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 280,
+        "p50": [
+          265,
+          295
+        ],
+        "p90": [
+          240,
+          325
+        ],
+        "score": 0.6490403720834409,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      }
+    },
+    {
+      "q": 54,
+      "key": "stdlib_defs {\"module\": \"webbrowser\"}",
+      "family": "stdlib_defs",
+      "kind": "knowledge",
+      "short": "function definitions in `webbrowser`",
+      "answer": 25,
+      "instinct": {
+        "status": "ok",
+        "estimate": 60,
+        "p50": [
+          45,
+          80
+        ],
+        "p90": [
+          30,
+          120
+        ],
+        "score": 0.552946517843443,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 27,
+        "p50": [
+          23,
+          31
+        ],
+        "p90": [
+          18,
+          38
+        ],
+        "score": 0.05797225501518653,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 55,
+      "key": "unicode_block {\"hi\": 3839, \"lo\": 3712}",
+      "family": "unicode_block",
+      "kind": "knowledge",
+      "short": "assigned in the Lao block",
+      "answer": 83,
+      "instinct": {
+        "status": "ok",
+        "estimate": 89,
+        "p50": [
+          86,
+          90
+        ],
+        "p90": [
+          80,
+          96
+        ],
+        "score": 0.03593547748474395,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 68,
+        "p50": [
+          66,
+          70
+        ],
+        "p90": [
+          63,
+          72
+        ],
+        "score": 0.17117002356878824,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      }
+    },
+    {
+      "q": 56,
+      "key": "lis {\"n\": 452, \"seed\": 991902960}",
+      "family": "lis",
+      "kind": "statistical",
+      "short": "longest increasing subsequence, n = 452",
+      "answer": 38.193,
+      "instinct": {
+        "status": "ok",
+        "estimate": 37.7,
+        "p50": [
+          36.9,
+          38.5
+        ],
+        "p90": [
+          35.5,
+          39.8
+        ],
+        "score": 0.00912978499963674,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 37.8,
+        "p50": [
+          37.5,
+          38.1
+        ],
+        "p90": [
+          37.0,
+          38.6
+        ],
+        "score": 0.005477840462560462,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 57,
+      "key": "walk_max {\"n\": 1229, \"seed\": 2432215748}",
+      "family": "walk_max",
+      "kind": "statistical",
+      "short": "highest point of a 1,229-step walk",
+      "answer": 27.50275,
+      "instinct": {
+        "status": "ok",
+        "estimate": 28.0,
+        "p50": [
+          12.0,
+          40.0
+        ],
+        "p90": [
+          2.0,
+          58.0
+        ],
+        "score": 0.19132689913279202,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 27.98,
+        "p50": [
+          27.7,
+          28.25
+        ],
+        "p90": [
+          27.4,
+          28.55
+        ],
+        "score": 0.009087742215144275,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 58,
+      "key": "digit_sum_pow2 {\"n\": 8596}",
+      "family": "digit_sum_pow2",
+      "kind": "statistical",
+      "short": "digit sum of 2^8596",
+      "answer": 11455,
+      "instinct": {
+        "status": "ok",
+        "estimate": 11646,
+        "p50": [
+          11546,
+          11746
+        ],
+        "p90": [
+          11404,
+          11888
+        ],
+        "score": 0.00902028381102042,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 11646,
+        "p50": [
+          11548,
+          11744
+        ],
+        "p90": [
+          11406,
+          11886
+        ],
+        "score": 0.009048342123155848,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 59,
+      "key": "birthday {\"d\": 6016}",
+      "family": "birthday",
+      "kind": "exact",
+      "short": "draws until a repeat, d = 6,016",
+      "answer": 97.8786594837174,
+      "instinct": {
+        "status": "ok",
+        "estimate": 98,
+        "p50": [
+          59,
+          129
+        ],
+        "p90": [
+          25,
+          190
+        ],
+        "score": 0.11903824813093537,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 97.88,
+        "p50": [
+          97.5,
+          98.3
+        ],
+        "p90": [
+          96.5,
+          99.5
+        ],
+        "score": 0.0014321967515982868,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 60,
+      "key": "module_all {\"module\": \"gzip\"}",
+      "family": "module_all",
+      "kind": "knowledge",
+      "short": "names in `gzip.__all__`",
+      "answer": 5,
+      "instinct": {
+        "status": "ok",
+        "estimate": 4,
+        "p50": [
+          3,
+          6
+        ],
+        "p90": [
+          2,
+          10
+        ],
+        "score": 0.11841154983493843,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 5,
+        "p50": [
+          5,
+          5
+        ],
+        "p90": [
+          5,
+          6
+        ],
+        "score": 0.0030830135965451656,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 61,
+      "key": "unicode_category {\"category\": \"Pf\"}",
+      "family": "unicode_category",
+      "kind": "knowledge",
+      "short": "code points in category Pf",
+      "answer": 10,
+      "instinct": {
+        "status": "ok",
+        "estimate": 10,
+        "p50": [
+          9,
+          11
+        ],
+        "p90": [
+          8,
+          13
+        ],
+        "score": 0.027068810724976224,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 10,
+        "p50": [
+          10,
+          10
+        ],
+        "p90": [
+          9,
+          11
+        ],
+        "score": 0.003646431135879089,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 62,
+      "key": "primes_in_range {\"a\": 335112, \"b\": 371030}",
+      "family": "primes_in_range",
+      "kind": "statistical",
+      "short": "primes in [335,112, 371,030]",
+      "answer": 2787,
+      "instinct": {
+        "status": "ok",
+        "estimate": 2812,
+        "p50": [
+          2795,
+          2830
+        ],
+        "p90": [
+          2770,
+          2855
+        ],
+        "score": 0.004779833658952519,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 2810,
+        "p50": [
+          2796,
+          2824
+        ],
+        "p90": [
+          2770,
+          2852
+        ],
+        "score": 0.004511679498709799,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 63,
+      "key": "unicode_word {\"word\": \"HEBREW\"}",
+      "family": "unicode_word",
+      "kind": "knowledge",
+      "short": "Unicode names with the word HEBREW",
+      "answer": 134,
+      "instinct": {
+        "status": "ok",
+        "estimate": 88,
+        "p50": [
+          75,
+          100
+        ],
+        "p90": [
+          60,
+          130
+        ],
+        "score": 0.255145555311087,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 135,
+        "p50": [
+          133,
+          137
+        ],
+        "p90": [
+          128,
+          142
+        ],
+        "score": 0.006478054498118642,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 64,
+      "key": "rect_distance {\"b\": 2.07, \"seed\": 2957713222}",
+      "family": "rect_distance",
+      "kind": "statistical",
+      "short": "mean distance in a 1 × 2.07 rectangle",
+      "answer": 0.8260337199091631,
+      "instinct": {
+        "status": "ok",
+        "estimate": 0.84,
+        "p50": [
+          0.78,
+          0.9
+        ],
+        "p90": [
+          0.69,
+          0.99
+        ],
+        "score": 0.024883610477822483,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 0.8242,
+        "p50": [
+          0.8228,
+          0.8256
+        ],
+        "p90": [
+          0.82,
+          0.8285
+        ],
+        "score": 0.0012005294485432278,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 65,
+      "key": "collatz_steps {\"n\": 23010656711}",
+      "family": "collatz_steps",
+      "kind": "statistical",
+      "short": "Collatz steps from 23,010,656,711",
+      "answer": 195,
+      "instinct": {
+        "status": "ok",
+        "estimate": 170,
+        "p50": [
+          130,
+          215
+        ],
+        "p90": [
+          95,
+          280
+        ],
+        "score": 0.09877845855119091,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 165,
+        "p50": [
+          135,
+          195
+        ],
+        "p90": [
+          85,
+          265
+        ],
+        "score": 0.09235433177480491,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 66,
+      "key": "unicode_category {\"category\": \"Sk\"}",
+      "family": "unicode_category",
+      "kind": "knowledge",
+      "short": "code points in category Sk",
+      "answer": 125,
+      "instinct": {
+        "status": "ok",
+        "estimate": 130,
+        "p50": [
+          118,
+          135
+        ],
+        "p90": [
+          105,
+          160
+        ],
+        "score": 0.02949552792983484,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 128,
+        "p50": [
+          126,
+          130
+        ],
+        "p90": [
+          121,
+          136
+        ],
+        "score": 0.01328839258103745,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 67,
+      "key": "birthday {\"d\": 131706}",
+      "family": "birthday",
+      "kind": "exact",
+      "short": "draws until a repeat, d = 131,706",
+      "answer": 455.511214409905,
+      "instinct": {
+        "status": "ok",
+        "estimate": 455.5,
+        "p50": [
+          275,
+          605
+        ],
+        "p90": [
+          116,
+          889
+        ],
+        "score": 0.1195808008639228,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 455.51,
+        "p50": [
+          455.3,
+          455.7
+        ],
+        "p90": [
+          454.5,
+          456.5
+        ],
+        "score": 0.00017616452943812534,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 68,
+      "key": "unicode_word {\"word\": \"FACE\"}",
+      "family": "unicode_word",
+      "kind": "knowledge",
+      "short": "Unicode names with the word FACE",
+      "answer": 179,
+      "instinct": {
+        "status": "ok",
+        "estimate": 80,
+        "p50": [
+          60,
+          110
+        ],
+        "p90": [
+          40,
+          170
+        ],
+        "score": 0.46201698033959426,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 133,
+        "p50": [
+          127,
+          139
+        ],
+        "p90": [
+          119,
+          150
+        ],
+        "score": 0.24337696487996321,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      }
+    },
+    {
+      "q": 69,
+      "key": "lis {\"n\": 827, \"seed\": 2595016099}",
+      "family": "lis",
+      "kind": "statistical",
+      "short": "longest increasing subsequence, n = 827",
+      "answer": 52.598,
+      "instinct": {
+        "status": "ok",
+        "estimate": 52.1,
+        "p50": [
+          50.7,
+          53.5
+        ],
+        "p90": [
+          48.3,
+          55.9
+        ],
+        "score": 0.010200860210086695,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 52.2,
+        "p50": [
+          51.9,
+          52.5
+        ],
+        "p90": [
+          51.4,
+          52.9
+        ],
+        "score": 0.003989832178140702,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 70,
+      "key": "digit_sum_pow2 {\"n\": 3289}",
+      "family": "digit_sum_pow2",
+      "kind": "statistical",
+      "short": "digit sum of 2^3289",
+      "answer": 4430,
+      "instinct": {
+        "status": "ok",
+        "estimate": 4455,
+        "p50": [
+          4395,
+          4515
+        ],
+        "p90": [
+          4305,
+          4605
+        ],
+        "score": 0.005165411105256652,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 4454,
+        "p50": [
+          4393,
+          4515
+        ],
+        "p90": [
+          4305,
+          4603
+        ],
+        "score": 0.00515734281193307,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 71,
+      "key": "unicode_block {\"hi\": 4351, \"lo\": 4256}",
+      "family": "unicode_block",
+      "kind": "knowledge",
+      "short": "assigned in the Georgian block",
+      "answer": 88,
+      "instinct": {
+        "status": "ok",
+        "estimate": 88,
+        "p50": [
+          87,
+          88
+        ],
+        "p90": [
+          84,
+          89
+        ],
+        "score": 0.002273123802192245,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 88,
+        "p50": [
+          87,
+          88
+        ],
+        "p90": [
+          85,
+          90
+        ],
+        "score": 0.002260199730660126,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 72,
+      "key": "rect_distance {\"b\": 3.1, \"seed\": 3310015775}",
+      "family": "rect_distance",
+      "kind": "statistical",
+      "short": "mean distance in a 1 × 3.1 rectangle",
+      "answer": 1.1423632918367799,
+      "instinct": {
+        "status": "ok",
+        "estimate": 1.12,
+        "p50": [
+          1.06,
+          1.18
+        ],
+        "p90": [
+          1.0,
+          1.25
+        ],
+        "score": 0.019141522918464743,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 1.1424,
+        "p50": [
+          1.139,
+          1.146
+        ],
+        "p90": [
+          1.13,
+          1.156
+        ],
+        "score": 0.001074082735684134,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 73,
+      "key": "walk_max {\"n\": 1415, \"seed\": 2532029842}",
+      "family": "walk_max",
+      "kind": "statistical",
+      "short": "highest point of a 1,415-step walk",
+      "answer": 29.89475,
+      "instinct": {
+        "status": "ok",
+        "estimate": 30.0,
+        "p50": [
+          27.5,
+          32.5
+        ],
+        "p90": [
+          24.0,
+          36.5
+        ],
+        "score": 0.025793477464465857,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 29.52,
+        "p50": [
+          29.25,
+          29.8
+        ],
+        "p90": [
+          28.9,
+          30.15
+        ],
+        "score": 0.006502519010723162,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 74,
+      "key": "primes_in_range {\"a\": 188978, \"b\": 218173}",
+      "family": "primes_in_range",
+      "kind": "statistical",
+      "short": "primes in [188,978, 218,173]",
+      "answer": 2379,
+      "instinct": {
+        "status": "ok",
+        "estimate": 2392,
+        "p50": [
+          2375,
+          2410
+        ],
+        "p90": [
+          2335,
+          2450
+        ],
+        "score": 0.0035129048100339413,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 2388,
+        "p50": [
+          2370,
+          2406
+        ],
+        "p90": [
+          2340,
+          2437
+        ],
+        "score": 0.003073808154830715,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 75,
+      "key": "stdlib_lines {\"module\": \"statistics\"}",
+      "family": "stdlib_lines",
+      "kind": "knowledge",
+      "short": "lines in `statistics`",
+      "answer": 1817,
+      "instinct": {
+        "status": "ok",
+        "estimate": 938,
+        "p50": [
+          820,
+          1060
+        ],
+        "p90": [
+          700,
+          1250
+        ],
+        "score": 0.5342911346482158,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 1000,
+        "p50": [
+          930,
+          1070
+        ],
+        "p90": [
+          820,
+          1200
+        ],
+        "score": 0.5184547754329064,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      }
+    },
+    {
+      "q": 76,
+      "key": "stdlib_defs {\"module\": \"operator\"}",
+      "family": "stdlib_defs",
+      "kind": "knowledge",
+      "short": "function definitions in `operator`",
+      "answer": 67,
+      "instinct": {
+        "status": "ok",
+        "estimate": 60,
+        "p50": [
+          40,
+          85
+        ],
+        "p90": [
+          20,
+          130
+        ],
+        "score": 0.1324177888650336,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 68,
+        "p50": [
+          65,
+          71
+        ],
+        "p90": [
+          60,
+          77
+        ],
+        "score": 0.016537596833519165,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 77,
+      "key": "module_all {\"module\": \"difflib\"}",
+      "family": "module_all",
+      "kind": "knowledge",
+      "short": "names in `difflib.__all__`",
+      "answer": 12,
+      "instinct": {
+        "status": "ok",
+        "estimate": 14,
+        "p50": [
+          11,
+          17
+        ],
+        "p90": [
+          8,
+          22
+        ],
+        "score": 0.08793207231080968,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 12,
+        "p50": [
+          12,
+          12
+        ],
+        "p90": [
+          11,
+          13
+        ],
+        "score": 0.0030830135965451613,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 78,
+      "key": "collatz_steps {\"n\": 360172167088}",
+      "family": "collatz_steps",
+      "kind": "statistical",
+      "short": "Collatz steps from 360,172,167,088",
+      "answer": 160,
+      "instinct": {
+        "status": "ok",
+        "estimate": 130,
+        "p50": [
+          100,
+          160
+        ],
+        "p90": [
+          70,
+          220
+        ],
+        "score": 0.11057944966051148,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 278,
+        "p50": [
+          235,
+          325
+        ],
+        "p90": [
+          180,
+          395
+        ],
+        "score": 0.3577344271302674,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      }
+    },
+    {
+      "q": 79,
+      "key": "collatz_steps {\"n\": 905376815232}",
+      "family": "collatz_steps",
+      "kind": "statistical",
+      "short": "Collatz steps from 905,376,815,232",
+      "answer": 177,
+      "instinct": {
+        "status": "ok",
+        "estimate": 108,
+        "p50": [
+          88,
+          130
+        ],
+        "p90": [
+          60,
+          170
+        ],
+        "score": 0.29604151115821986,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 160,
+        "p50": [
+          132,
+          190
+        ],
+        "p90": [
+          95,
+          235
+        ],
+        "score": 0.07425793931516748,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 80,
+      "key": "module_all {\"module\": \"tabnanny\"}",
+      "family": "module_all",
+      "kind": "knowledge",
+      "short": "names in `tabnanny.__all__`",
+      "answer": 3,
+      "instinct": {
+        "status": "ok",
+        "estimate": 3,
+        "p50": [
+          2,
+          4
+        ],
+        "p90": [
+          1,
+          6
+        ],
+        "score": 0.0761378217465064,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 3,
+        "p50": [
+          3,
+          3
+        ],
+        "p90": [
+          3,
+          4
+        ],
+        "score": 0.004462871026284195,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 81,
+      "key": "digit_sum_pow2 {\"n\": 706}",
+      "family": "digit_sum_pow2",
+      "kind": "statistical",
+      "short": "digit sum of 2^706",
+      "answer": 925,
+      "instinct": {
+        "status": "ok",
+        "estimate": 958,
+        "p50": [
+          930,
+          986
+        ],
+        "p90": [
+          889,
+          1027
+        ],
+        "score": 0.01788144098122684,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 961,
+        "p50": [
+          934,
+          988
+        ],
+        "p90": [
+          891,
+          1030
+        ],
+        "score": 0.020008108323050066,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 82,
+      "key": "birthday {\"d\": 944525}",
+      "family": "birthday",
+      "kind": "exact",
+      "short": "draws until a repeat, d = 944,525",
+      "answer": 1218.7211245169462,
+      "instinct": {
+        "status": "ok",
+        "estimate": 1219,
+        "p50": [
+          740,
+          1620
+        ],
+        "p90": [
+          311,
+          2380
+        ],
+        "score": 0.11910014132333416,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 1218.72,
+        "p50": [
+          1217.5,
+          1220.0
+        ],
+        "p90": [
+          1212.0,
+          1226.0
+        ],
+        "score": 0.0004350118149653604,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 83,
+      "key": "stdlib_defs {\"module\": \"weakref\"}",
+      "family": "stdlib_defs",
+      "kind": "knowledge",
+      "short": "function definitions in `weakref`",
+      "answer": 65,
+      "instinct": {
+        "status": "ok",
+        "estimate": 95,
+        "p50": [
+          75,
+          115
+        ],
+        "p90": [
+          55,
+          150
+        ],
+        "score": 0.19349437719584336,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 105,
+        "p50": [
+          92,
+          118
+        ],
+        "p90": [
+          78,
+          135
+        ],
+        "score": 0.3393685557053073,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      }
+    },
+    {
+      "q": 84,
+      "key": "primes_in_range {\"a\": 865988, \"b\": 892619}",
+      "family": "primes_in_range",
+      "kind": "statistical",
+      "short": "primes in [865,988, 892,619]",
+      "answer": 1952,
+      "instinct": {
+        "status": "ok",
+        "estimate": 1946,
+        "p50": [
+          1931,
+          1961
+        ],
+        "p90": [
+          1906,
+          1987
+        ],
+        "score": 0.0029882032685023853,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 1946,
+        "p50": [
+          1928,
+          1964
+        ],
+        "p90": [
+          1895,
+          1997
+        ],
+        "score": 0.0035124417685297614,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 85,
+      "key": "unicode_category {\"category\": \"Nd\"}",
+      "family": "unicode_category",
+      "kind": "knowledge",
+      "short": "code points in category Nd",
+      "answer": 680,
+      "instinct": {
+        "status": "ok",
+        "estimate": 680,
+        "p50": [
+          660,
+          690
+        ],
+        "p90": [
+          630,
+          730
+        ],
+        "score": 0.007380750335769744,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 680,
+        "p50": [
+          672,
+          684
+        ],
+        "p90": [
+          650,
+          700
+        ],
+        "score": 0.0032473157582701973,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 86,
+      "key": "lis {\"n\": 121, \"seed\": 2680340972}",
+      "family": "lis",
+      "kind": "statistical",
+      "short": "longest increasing subsequence, n = 121",
+      "answer": 18.593,
+      "instinct": {
+        "status": "ok",
+        "estimate": 18.1,
+        "p50": [
+          17.6,
+          18.6
+        ],
+        "p90": [
+          16.9,
+          19.3
+        ],
+        "score": 0.01355674285237031,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 18.2,
+        "p50": [
+          17.95,
+          18.45
+        ],
+        "p90": [
+          17.5,
+          18.9
+        ],
+        "score": 0.011647678845538464,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 87,
+      "key": "walk_max {\"n\": 853, \"seed\": 3752496263}",
+      "family": "walk_max",
+      "kind": "statistical",
+      "short": "highest point of a 853-step walk",
+      "answer": 22.6055,
+      "instinct": {
+        "status": "ok",
+        "estimate": 23.3,
+        "p50": [
+          22.5,
+          24.2
+        ],
+        "p90": [
+          20.5,
+          26.5
+        ],
+        "score": 0.018470153546080264,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 22.8,
+        "p50": [
+          22.6,
+          23.0
+        ],
+        "p90": [
+          22.4,
+          23.2
+        ],
+        "score": 0.004169716652961756,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 88,
+      "key": "rect_distance {\"b\": 7.13, \"seed\": 1173174960}",
+      "family": "rect_distance",
+      "kind": "statistical",
+      "short": "mean distance in a 1 × 7.13 rectangle",
+      "answer": 2.442191459637168,
+      "instinct": {
+        "status": "ok",
+        "estimate": 2.41,
+        "p50": [
+          2.37,
+          2.46
+        ],
+        "p90": [
+          2.31,
+          2.55
+        ],
+        "score": 0.008357861754942526,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 2.442,
+        "p50": [
+          2.4395,
+          2.4447
+        ],
+        "p90": [
+          2.436,
+          2.448
+        ],
+        "score": 0.0003268918151846267,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 89,
+      "key": "unicode_word {\"word\": \"DIGIT\"}",
+      "family": "unicode_word",
+      "kind": "knowledge",
+      "short": "Unicode names with the word DIGIT",
+      "answer": 898,
+      "instinct": {
+        "status": "ok",
+        "estimate": 320,
+        "p50": [
+          290,
+          360
+        ],
+        "p90": [
+          240,
+          430
+        ],
+        "score": 0.8981820827193662,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 760,
+        "p50": [
+          740,
+          780
+        ],
+        "p90": [
+          715,
+          820
+        ],
+        "score": 0.13391137048663276,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      }
+    },
+    {
+      "q": 90,
+      "key": "unicode_block {\"hi\": 66383, \"lo\": 66352}",
+      "family": "unicode_block",
+      "kind": "knowledge",
+      "short": "assigned in the Gothic block",
+      "answer": 27,
+      "instinct": {
+        "status": "ok",
+        "estimate": 27,
+        "p50": [
+          26,
+          27
+        ],
+        "p90": [
+          25,
+          27
+        ],
+        "score": 0.005118923860161902,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 27,
+        "p50": [
+          27,
+          27
+        ],
+        "p90": [
+          26,
+          28
+        ],
+        "score": 0.0014291792796429005,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 91,
+      "key": "stdlib_lines {\"module\": \"string\"}",
+      "family": "stdlib_lines",
+      "kind": "knowledge",
+      "short": "lines in `string`",
+      "answer": 314,
+      "instinct": {
+        "status": "ok",
+        "estimate": 300,
+        "p50": [
+          260,
+          340
+        ],
+        "p90": [
+          200,
+          450
+        ],
+        "score": 0.05199193044030592,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 298,
+        "p50": [
+          285,
+          315
+        ],
+        "p90": [
+          262,
+          345
+        ],
+        "score": 0.025886548221294436,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 92,
+      "key": "birthday {\"d\": 4022}",
+      "family": "birthday",
+      "kind": "exact",
+      "short": "draws until a repeat, d = 4,022",
+      "answer": 80.15253622900566,
+      "instinct": {
+        "status": "ok",
+        "estimate": 80,
+        "p50": [
+          48,
+          106
+        ],
+        "p90": [
+          20,
+          155
+        ],
+        "score": 0.12055864267011977,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 80.15,
+        "p50": [
+          80.1,
+          80.2
+        ],
+        "p90": [
+          80.0,
+          80.3
+        ],
+        "score": 0.0002059544114530887,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 93,
+      "key": "primes_in_range {\"a\": 1135630, \"b\": 1167274}",
+      "family": "primes_in_range",
+      "kind": "statistical",
+      "short": "primes in [1,135,630, 1,167,274]",
+      "answer": 2277,
+      "instinct": {
+        "status": "ok",
+        "estimate": 2266,
+        "p50": [
+          2236,
+          2296
+        ],
+        "p90": [
+          2180,
+          2350
+        ],
+        "score": 0.005116068466585233,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 2266,
+        "p50": [
+          2249,
+          2283
+        ],
+        "p90": [
+          2224,
+          2309
+        ],
+        "score": 0.0032177184359730585,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 94,
+      "key": "unicode_block {\"hi\": 1023, \"lo\": 880}",
+      "family": "unicode_block",
+      "kind": "knowledge",
+      "short": "assigned in the Greek and Coptic block",
+      "answer": 135,
+      "instinct": {
+        "status": "ok",
+        "estimate": 135,
+        "p50": [
+          125,
+          141
+        ],
+        "p90": [
+          112,
+          143
+        ],
+        "score": 0.016803024682251484,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 135,
+        "p50": [
+          134,
+          135
+        ],
+        "p90": [
+          131,
+          136
+        ],
+        "score": 0.0014815907945973628,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 95,
+      "key": "module_all {\"module\": \"mailbox\"}",
+      "family": "module_all",
+      "kind": "knowledge",
+      "short": "names in `mailbox.__all__`",
+      "answer": 17,
+      "instinct": {
+        "status": "ok",
+        "estimate": 17,
+        "p50": [
+          16,
+          17
+        ],
+        "p90": [
+          14,
+          19
+        ],
+        "score": 0.01146948283303045,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 17,
+        "p50": [
+          17,
+          17
+        ],
+        "p90": [
+          16,
+          18
+        ],
+        "score": 0.002224512702204482,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 96,
+      "key": "rect_distance {\"b\": 1.09, \"seed\": 1575797736}",
+      "family": "rect_distance",
+      "kind": "statistical",
+      "short": "mean distance in a 1 × 1.09 rectangle",
+      "answer": 0.5453958225031998,
+      "instinct": {
+        "status": "ok",
+        "estimate": 0.546,
+        "p50": [
+          0.54,
+          0.552
+        ],
+        "p90": [
+          0.53,
+          0.562
+        ],
+        "score": 0.003591820513395165,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 0.5452,
+        "p50": [
+          0.5447,
+          0.5457
+        ],
+        "p90": [
+          0.5435,
+          0.547
+        ],
+        "score": 0.000383623107408444,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 97,
+      "key": "unicode_category {\"category\": \"Cf\"}",
+      "family": "unicode_category",
+      "kind": "knowledge",
+      "short": "code points in category Cf",
+      "answer": 170,
+      "instinct": {
+        "status": "ok",
+        "estimate": 170,
+        "p50": [
+          150,
+          190
+        ],
+        "p90": [
+          130,
+          220
+        ],
+        "score": 0.033958666689502585,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 170,
+        "p50": [
+          166,
+          170
+        ],
+        "p90": [
+          161,
+          173
+        ],
+        "score": 0.0037961536882333926,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 98,
+      "key": "collatz_steps {\"n\": 70587310865}",
+      "family": "collatz_steps",
+      "kind": "statistical",
+      "short": "Collatz steps from 70,587,310,865",
+      "answer": 194,
+      "instinct": {
+        "status": "ok",
+        "estimate": 170,
+        "p50": [
+          125,
+          215
+        ],
+        "p90": [
+          70,
+          300
+        ],
+        "score": 0.10905545823963725,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 194,
+        "p50": [
+          193,
+          195
+        ],
+        "p90": [
+          190,
+          198
+        ],
+        "score": 0.0018462779502761075,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 99,
+      "key": "digit_sum_pow2 {\"n\": 5606}",
+      "family": "digit_sum_pow2",
+      "kind": "statistical",
+      "short": "digit sum of 2^5606",
+      "answer": 7438,
+      "instinct": {
+        "status": "ok",
+        "estimate": 7596,
+        "p50": [
+          7515,
+          7677
+        ],
+        "p90": [
+          7400,
+          7792
+        ],
+        "score": 0.011487177274842147,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 7595,
+        "p50": [
+          7515,
+          7675
+        ],
+        "p90": [
+          7400,
+          7790
+        ],
+        "score": 0.011429664047063852,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 100,
+      "key": "unicode_word {\"word\": \"CYRILLIC\"}",
+      "family": "unicode_word",
+      "kind": "knowledge",
+      "short": "Unicode names with the word CYRILLIC",
+      "answer": 507,
+      "instinct": {
+        "status": "ok",
+        "estimate": 256,
+        "p50": [
+          240,
+          270
+        ],
+        "p90": [
+          205,
+          300
+        ],
+        "score": 0.6162914670060979,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 508,
+        "p50": [
+          500,
+          513
+        ],
+        "p90": [
+          486,
+          526
+        ],
+        "score": 0.00453375874061365,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 101,
+      "key": "lis {\"n\": 104, \"seed\": 1997747997}",
+      "family": "lis",
+      "kind": "statistical",
+      "short": "longest increasing subsequence, n = 104",
+      "answer": 17.147,
+      "instinct": {
+        "status": "ok",
+        "estimate": 16.6,
+        "p50": [
+          16.2,
+          17.0
+        ],
+        "p90": [
+          15.5,
+          17.7
+        ],
+        "score": 0.01740276451792182,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 16.55,
+        "p50": [
+          16.4,
+          16.7
+        ],
+        "p90": [
+          16.1,
+          17.0
+        ],
+        "score": 0.023997805341100947,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      }
+    },
+    {
+      "q": 102,
+      "key": "stdlib_lines {\"module\": \"reprlib\"}",
+      "family": "stdlib_lines",
+      "kind": "knowledge",
+      "short": "lines in `reprlib`",
+      "answer": 230,
+      "instinct": {
+        "status": "ok",
+        "estimate": 180,
+        "p50": [
+          160,
+          200
+        ],
+        "p90": [
+          130,
+          250
+        ],
+        "score": 0.13962442346235435,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 168,
+        "p50": [
+          162,
+          174
+        ],
+        "p90": [
+          155,
+          185
+        ],
+        "score": 0.2708462991234406,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      }
+    },
+    {
+      "q": 103,
+      "key": "stdlib_defs {\"module\": \"base64\"}",
+      "family": "stdlib_defs",
+      "kind": "knowledge",
+      "short": "function definitions in `base64`",
+      "answer": 28,
+      "instinct": {
+        "status": "ok",
+        "estimate": 30,
+        "p50": [
+          22,
+          40
+        ],
+        "p90": [
+          14,
+          60
+        ],
+        "score": 0.09920253323867227,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 26,
+        "p50": [
+          25,
+          27
+        ],
+        "p90": [
+          23,
+          30
+        ],
+        "score": 0.040857785419053314,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 104,
+      "key": "walk_max {\"n\": 996, \"seed\": 4060233402}",
+      "family": "walk_max",
+      "kind": "statistical",
+      "short": "highest point of a 996-step walk",
+      "answer": 24.7905,
+      "instinct": {
+        "status": "ok",
+        "estimate": 25.2,
+        "p50": [
+          24.5,
+          26.0
+        ],
+        "p90": [
+          23.0,
+          27.5
+        ],
+        "score": 0.012792873672052379,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 25.17,
+        "p50": [
+          24.9,
+          25.45
+        ],
+        "p90": [
+          24.4,
+          25.9
+        ],
+        "score": 0.008179364738311259,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      }
+    }
+  ],
+  "paired": {
+    "n": 104,
+    "closer": {
+      "instinct": 18,
+      "worked": 62,
+      "tie": 24
+    },
+    "score_instinct": 0.18766801774890704,
+    "score_worked": 0.05055583954741767,
+    "gain_ci": [
+      0.08733311705866907,
+      0.19423473684790174
+    ],
+    "worked_better": 89
+  },
+  "concentration": {
+    "instinct": {
+      "top1_share": 0.11461599603534638,
+      "top5_share": 0.3770865104657864,
+      "mean_without_top": 0.16777144797035193,
+      "misses": [
+        {
+          "q": 41,
+          "short": "code points in category Me",
+          "answer": 13,
+          "estimate": 143,
+          "p90": [
+            115,
+            190
+          ],
+          "factor": 8.285714285714286,
+          "width": 1.646551724137931,
+          "score": 2.2370147049400844,
+          "share": 0.11461599603534638,
+          "side": "below"
+        },
+        {
+          "q": 1,
+          "short": "Unicode names with the word MUSICAL",
+          "answer": 518,
+          "estimate": 40,
+          "p90": [
+            20,
+            80
+          ],
+          "factor": 6.407407407407407,
+          "width": 3.857142857142857,
+          "score": 2.2274041146259718,
+          "share": 0.11412358649556681,
+          "side": "above"
+        },
+        {
+          "q": 50,
+          "short": "Unicode names with the word GREEK",
+          "answer": 531,
+          "estimate": 130,
+          "p90": [
+            70,
+            220
+          ],
+          "factor": 2.4072398190045248,
+          "width": 3.112676056338028,
+          "score": 1.1791152394043771,
+          "share": 0.060413312128141904,
+          "side": "above"
+        },
+        {
+          "q": 89,
+          "short": "Unicode names with the word DIGIT",
+          "answer": 898,
+          "estimate": 320,
+          "p90": [
+            240,
+            430
+          ],
+          "factor": 2.08584686774942,
+          "width": 1.7883817427385893,
+          "score": 0.8981820827193662,
+          "share": 0.04601938190421475,
+          "side": "above"
+        },
+        {
+          "q": 53,
+          "short": "lines in `glob`",
+          "answer": 572,
+          "estimate": 220,
+          "p90": [
+            160,
+            300
+          ],
+          "factor": 1.9036544850498338,
+          "width": 1.8695652173913044,
+          "score": 0.8180599639627294,
+          "share": 0.04191423390251657,
+          "side": "above"
+        },
+        {
+          "q": 47,
+          "short": "Collatz steps from 189,630,655,112",
+          "answer": 291,
+          "estimate": 120,
+          "p90": [
+            60,
+            200
+          ],
+          "factor": 1.4527363184079602,
+          "width": 3.2950819672131146,
+          "score": 0.6686055451437339,
+          "share": 0.034256766547923666,
+          "side": "above"
+        },
+        {
+          "q": 10,
+          "short": "function definitions in `optparse`",
+          "answer": 122,
+          "estimate": 280,
+          "p90": [
+            195,
+            390
+          ],
+          "factor": 1.5934959349593496,
+          "width": 1.9948979591836735,
+          "score": 0.6631274925618337,
+          "share": 0.03397609228520114,
+          "side": "below"
+        },
+        {
+          "q": 27,
+          "short": "function definitions in `hmac`",
+          "answer": 11,
+          "estimate": 30,
+          "p90": [
+            14,
+            60
+          ],
+          "factor": 1.25,
+          "width": 4.066666666666666,
+          "score": 0.6251728162605107,
+          "share": 0.032031441220159614,
+          "side": "below"
+        },
+        {
+          "q": 100,
+          "short": "Unicode names with the word CYRILLIC",
+          "answer": 507,
+          "estimate": 256,
+          "p90": [
+            205,
+            300
+          ],
+          "factor": 1.6877076411960132,
+          "width": 1.4611650485436893,
+          "score": 0.6162914670060979,
+          "share": 0.031576395176571105,
+          "side": "above"
+        },
+        {
+          "q": 38,
+          "short": "names in `locale.__all__`",
+          "answer": 23,
+          "estimate": 60,
+          "p90": [
+            25,
+            110
+          ],
+          "factor": 1.0833333333333333,
+          "width": 4.269230769230769,
+          "score": 0.5580539839364881,
+          "share": 0.02859253140764978,
+          "side": "below"
+        },
+        {
+          "q": 54,
+          "short": "function definitions in `webbrowser`",
+          "answer": 25,
+          "estimate": 60,
+          "p90": [
+            30,
+            120
+          ],
+          "factor": 1.1923076923076923,
+          "width": 3.903225806451613,
+          "score": 0.552946517843443,
+          "share": 0.028330844565726758,
+          "side": "below"
+        },
+        {
+          "q": 75,
+          "short": "lines in `statistics`",
+          "answer": 1817,
+          "estimate": 938,
+          "p90": [
+            700,
+            1250
+          ],
+          "factor": 1.4532374100719425,
+          "width": 1.7845934379457917,
+          "score": 0.5342911346482158,
+          "share": 0.027375014762006582,
+          "side": "above"
+        },
+        {
+          "q": 32,
+          "short": "Collatz steps from 904,534,976,486",
+          "answer": 239,
+          "estimate": 108,
+          "p90": [
+            45,
+            200
+          ],
+          "factor": 1.1940298507462686,
+          "width": 4.369565217391305,
+          "score": 0.5289679015437792,
+          "share": 0.02710227285152832,
+          "side": "above"
+        },
+        {
+          "q": 12,
+          "short": "Collatz steps from 87,974,385,043",
+          "answer": 246,
+          "estimate": 120,
+          "p90": [
+            60,
+            200
+          ],
+          "factor": 1.228855721393035,
+          "width": 3.2950819672131146,
+          "score": 0.5012400795034296,
+          "share": 0.025681606311416947,
+          "side": "above"
+        },
+        {
+          "q": 45,
+          "short": "function definitions in `csv`",
+          "answer": 17,
+          "estimate": 40,
+          "p90": [
+            18,
+            85
+          ],
+          "factor": 1.0555555555555556,
+          "width": 4.526315789473684,
+          "score": 0.4730403315224717,
+          "share": 0.024236760108284898,
+          "side": "below"
+        },
+        {
+          "q": 68,
+          "short": "Unicode names with the word FACE",
+          "answer": 179,
+          "estimate": 80,
+          "p90": [
+            40,
+            170
+          ],
+          "factor": 1.0526315789473684,
+          "width": 4.170731707317073,
+          "score": 0.46201698033959426,
+          "share": 0.02367196615646921,
+          "side": "above"
+        },
+        {
+          "q": 79,
+          "short": "Collatz steps from 905,376,815,232",
+          "answer": 177,
+          "estimate": 108,
+          "p90": [
+            60,
+            170
+          ],
+          "factor": 1.04093567251462,
+          "width": 2.80327868852459,
+          "score": 0.29604151115821986,
+          "share": 0.015168023971535438,
+          "side": "above"
+        },
+        {
+          "q": 63,
+          "short": "Unicode names with the word HEBREW",
+          "answer": 134,
+          "estimate": 88,
+          "p90": [
+            60,
+            130
+          ],
+          "factor": 1.0305343511450382,
+          "width": 2.1475409836065573,
+          "score": 0.255145555311087,
+          "share": 0.013072673099283474,
+          "side": "above"
+        },
+        {
+          "q": 5,
+          "short": "digit sum of 2^1269",
+          "answer": 1736,
+          "estimate": 1370,
+          "p90": [
+            1260,
+            1480
+          ],
+          "factor": 1.1728561782579339,
+          "width": 1.1744647105471848,
+          "score": 0.2032979867922243,
+          "share": 0.010416203879533984,
+          "side": "above"
+        },
+        {
+          "q": 51,
+          "short": "assigned in the General Punctuation block",
+          "answer": 111,
+          "estimate": 105,
+          "p90": [
+            102,
+            107
+          ],
+          "factor": 1.037037037037037,
+          "width": 1.0485436893203883,
+          "score": 0.0494788431515121,
+          "share": 0.0025351048779266422,
+          "side": "above"
+        },
+        {
+          "q": 26,
+          "short": "digit sum of 2^1219",
+          "answer": 1550,
+          "estimate": 1651,
+          "p90": [
+            1560,
+            1742
+          ],
+          "factor": 1.006447453255964,
+          "width": 1.116591928251121,
+          "score": 0.038047880723717245,
+          "share": 0.0019494264997689,
+          "side": "below"
+        }
+      ]
+    },
+    "worked": {
+      "top1_share": 0.12344316431816421,
+      "top5_share": 0.4200880377405486,
+      "mean_without_top": 0.04474531010532036,
+      "misses": [
+        {
+          "q": 53,
+          "short": "lines in `glob`",
+          "answer": 572,
+          "estimate": 280,
+          "p90": [
+            240,
+            325
+          ],
+          "factor": 1.7576687116564418,
+          "width": 1.3526970954356847,
+          "score": 0.6490403720834409,
+          "share": 0.12344316431816421,
+          "side": "above"
+        },
+        {
+          "q": 75,
+          "short": "lines in `statistics`",
+          "answer": 1817,
+          "estimate": 1000,
+          "p90": [
+            820,
+            1200
+          ],
+          "factor": 1.5137385512073271,
+          "width": 1.4628501827040195,
+          "score": 0.5184547754329064,
+          "share": 0.09860665189418041,
+          "side": "above"
+        },
+        {
+          "q": 78,
+          "short": "Collatz steps from 360,172,167,088",
+          "answer": 160,
+          "estimate": 278,
+          "p90": [
+            180,
+            395
+          ],
+          "factor": 1.124223602484472,
+          "width": 2.1878453038674035,
+          "score": 0.3577344271302674,
+          "share": 0.06803871002469584,
+          "side": "below"
+        },
+        {
+          "q": 47,
+          "short": "Collatz steps from 189,630,655,112",
+          "answer": 291,
+          "estimate": 170,
+          "p90": [
+            100,
+            265
+          ],
+          "factor": 1.0977443609022557,
+          "width": 2.633663366336634,
+          "score": 0.344143826555352,
+          "share": 0.0654538681379478,
+          "side": "above"
+        },
+        {
+          "q": 83,
+          "short": "function definitions in `weakref`",
+          "answer": 65,
+          "estimate": 105,
+          "p90": [
+            78,
+            135
+          ],
+          "factor": 1.196969696969697,
+          "width": 1.7215189873417722,
+          "score": 0.3393685557053073,
+          "share": 0.06454564336556026,
+          "side": "below"
+        },
+        {
+          "q": 16,
+          "short": "Unicode names with the word FRACTION",
+          "answer": 98,
+          "estimate": 60,
+          "p90": [
+            42,
+            85
+          ],
+          "factor": 1.1511627906976745,
+          "width": 2.0,
+          "score": 0.3378079596753334,
+          "share": 0.0642488283746161,
+          "side": "above"
+        },
+        {
+          "q": 102,
+          "short": "lines in `reprlib`",
+          "answer": 230,
+          "estimate": 168,
+          "p90": [
+            155,
+            185
+          ],
+          "factor": 1.2419354838709677,
+          "width": 1.1923076923076923,
+          "score": 0.2708462991234406,
+          "share": 0.05151316566076914,
+          "side": "above"
+        },
+        {
+          "q": 68,
+          "short": "Unicode names with the word FACE",
+          "answer": 179,
+          "estimate": 133,
+          "p90": [
+            119,
+            150
+          ],
+          "factor": 1.1920529801324504,
+          "width": 1.2583333333333333,
+          "score": 0.24337696487996321,
+          "share": 0.046288680888206764,
+          "side": "above"
+        },
+        {
+          "q": 55,
+          "short": "assigned in the Lao block",
+          "answer": 83,
+          "estimate": 68,
+          "p90": [
+            63,
+            72
+          ],
+          "factor": 1.1506849315068493,
+          "width": 1.140625,
+          "score": 0.17117002356878824,
+          "share": 0.03255540064159447,
+          "side": "above"
+        },
+        {
+          "q": 1,
+          "short": "Unicode names with the word MUSICAL",
+          "answer": 518,
+          "estimate": 444,
+          "p90": [
+            420,
+            456
+          ],
+          "factor": 1.135667396061269,
+          "width": 1.0855106888361046,
+          "score": 0.1434998738890013,
+          "share": 0.027292722107953093,
+          "side": "above"
+        },
+        {
+          "q": 89,
+          "short": "Unicode names with the word DIGIT",
+          "answer": 898,
+          "estimate": 760,
+          "p90": [
+            715,
+            820
+          ],
+          "factor": 1.0950060901339829,
+          "width": 1.1466480446927374,
+          "score": 0.13391137048663276,
+          "share": 0.025469052499752377,
+          "side": "above"
+        },
+        {
+          "q": 26,
+          "short": "digit sum of 2^1219",
+          "answer": 1550,
+          "estimate": 1651,
+          "p90": [
+            1561,
+            1741
+          ],
+          "factor": 1.0070921985815602,
+          "width": 1.115236875800256,
+          "score": 0.0382797587175615,
+          "share": 0.007280555645965467,
+          "side": "below"
+        },
+        {
+          "q": 101,
+          "short": "longest increasing subsequence, n = 104",
+          "answer": 17.147,
+          "estimate": 16.55,
+          "p90": [
+            16.1,
+            17.0
+          ],
+          "factor": 1.0086470588235292,
+          "width": 1.0559006211180124,
+          "score": 0.023997805341100947,
+          "share": 0.004564223052084655,
+          "side": "above"
+        },
+        {
+          "q": 37,
+          "short": "highest point of a 869-step walk",
+          "answer": 22.92075,
+          "estimate": 23.53,
+          "p90": [
+            23.07,
+            23.99
+          ],
+          "factor": 1.0065115670298745,
+          "width": 1.0398786302557432,
+          "score": 0.01736181891413365,
+          "share": 0.0033021025459477596,
+          "side": "below"
+        },
+        {
+          "q": 52,
+          "short": "highest point of a 707-step walk",
+          "answer": 20.723,
+          "estimate": 21.22,
+          "p90": [
+            20.8,
+            21.65
+          ],
+          "factor": 1.0037156782319163,
+          "width": 1.0408653846153846,
+          "score": 0.01493613636084799,
+          "share": 0.002840753848874027,
+          "side": "below"
+        },
+        {
+          "q": 11,
+          "short": "primes in [3,164,661, 3,229,443]",
+          "answer": 4399,
+          "estimate": 4325,
+          "p90": [
+            4260,
+            4392
+          ],
+          "factor": 1.0015934441156384,
+          "width": 1.030978643510913,
+          "score": 0.01029710031427907,
+          "share": 0.001958440030495911,
+          "side": "above"
+        }
+      ]
+    }
+  },
+  "served_models": [
+    "anthropic/claude-haiku-5.5 via Claude Platform on AWS"
+  ],
+  "tokens": {
+    "prompt_tokens": 51704,
+    "completion_tokens": 455306,
+    "reasoning_tokens": 382860
+  },
+  "cost": 0.232823,
+  "answers_changed_after_run": false,
+  "scored_with": {
+    "calibench": "2.2.1",
+    "scoring": "log-wis-1"
+  }
+}

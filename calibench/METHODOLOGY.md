@@ -152,6 +152,14 @@ When publishing a result, report: the suite (or seed, count and families), the C
 - **The worked score barely depends on it.** The second wording scored 0.010–0.016 better, an effect whose intervals just reach zero: perhaps real, and if so small, about twice the test–retest difference. Its worked prompt also says what calibration means, which may help a little.
 - **The lean survives the change of wording.** True answers lay above the worked estimate 59% of the time (90% interval 51–67%).
 
+**Consistency: three runs of Claude Haiku 5.5 on suite v1.** A third standard run (c) scored 0.051, between runs a and b; the three pairwise differences are 0.001, 0.005 and 0.006, all with intervals that include zero. `consistency` then asks what the three runs say together:
+
+- Where all three runs gave the same estimate (32 of 104 questions), their 90% intervals held the answer 95 times out of 96; where they disagreed, 169 out of 216 (78%).
+- The other runs' disagreement and a run's own stated 90% width rank its errors about equally well: rank correlations of 0.447 [0.316, 0.569] and 0.410 [0.273, 0.520].
+- Averaging the three runs' forecasts quantile by quantile on the log scale improves the score by 0.003 [0.002, 0.005], from 0.052 to 0.049.
+
+The comparison has to be held out. The spread of several estimates bounds their mean error from below (the error is at least half the spread), so correlating all runs' spread with their mean error finds a relationship by construction: with runs a and b alone, that version gave 0.74 against 0.45 for width. Comparing each run's error with the spread of the *other* runs removes the shared estimate, needs at least three runs, and gives the figures above.
+
 **How many questions a comparison needs.** Between Haiku's three suite-v1 runs, the per-question differences in worked score had standard deviations of 0.07 to 0.13. By the normal approximation, detecting a difference with 80% power and a 90% interval that excludes zero needs n ≈ (2.49·σ/δ)² questions. So one run of a 108-question suite separates two runs whose scores differ by about 0.02 to 0.03 or more, and three runs (about 320 questions) by about 0.01 to 0.02. Two different models will usually differ more from question to question than one model does from itself, so treat these as lower bounds. `compare` prints this estimate for every pair it compares.
 
 ## References

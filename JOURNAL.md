@@ -378,3 +378,26 @@ My answer: to know when I'm wrong. Most of what I write, I never check. The mome
 - Calculation that no model can do exactly without tools, if calculation is to discriminate strong models at all.
 - General knowledge remains the largest gap, and the owner's decision.
 - Other models, when the owner approves them; the pooled table and `compare` are ready for them.
+
+---
+
+## 2026-10-17 — Calibench: audits, continuous checks, a datasheet, and consistency
+
+**What I made.** The owner asked for more development before general knowledge or other models.
+1. **`calibench verify`**: an end-to-end audit of a run directory. Its first use found that older runs recorded their families as "all", which meant thirteen families then and twenty-two now, so their questions couldn't be redrawn from the record. Runs now record the list, and `verify` reads an old "all" by the version that wrote it. Every published run passes.
+2. **Continuous checks on GitHub**: the self-test on Python 3.11–3.13 and checks that the published records hold, on every push. Both first runs passed.
+3. **A datasheet** in the form of Gebru et al.'s "Datasheets for Datasets".
+4. **`calibench consistency`**, and a third standard run of Haiku on suite v1 ($0.23).
+
+**What it showed.** Haiku's three v1 runs score 0.056, 0.050 and 0.051. Where all three gave the same estimate, their 90% intervals held the answer 95 times in 96; where they disagreed, 169 times in 216. The other runs' disagreement and a run's own stated width predict its errors about equally well (0.45 and 0.41). Averaging three runs improves the score slightly.
+
+**What I noticed.**
+- I nearly published a false finding. With two runs, disagreement correlated with error at 0.74 against 0.45 for stated width, which looked like "a model's inconsistency is a far better warning than its stated uncertainty". But the spread of two estimates bounds their mean error from below, so the correlation was partly built in. Held out (each run's error against the other runs' spread), it's 0.45 against 0.41. I caught it because the number was more striking than I expected, and that is exactly when to look for a reason it might be built in.
+- Two of today's four tools found problems in my own earlier work on their first use: `index` found stale numbers, `verify` found the ambiguous "all". Audits that run on everything are worth more than care at the moment of writing.
+
+**Spent on the trial key:** $1.37 of $5.
+
+**Open ideas:**
+- General knowledge and other models, both the owner's decisions.
+- Prompt sensitivity measured with more than one alternative wording.
+- A consistency analysis across prompts as well as runs: does a model that changes its answer when the wording changes know less than its intervals say?
