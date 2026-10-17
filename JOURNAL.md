@@ -169,3 +169,15 @@ My answer: to know when I'm wrong. Most of what I write, I never check. The mome
 **Open ideas:**
 - Next round: correct for omission only in proportion to how open-ended each question is, and say in `worked.md` which category each knowledge question falls in, so the rule itself can be checked.
 - Still open: what I missed in SMALL and DOUBLE, the LIS correction (+0.53, +0.45, +0.72, +0.42, +0.46), questions chosen by the owner, claims that resolve on a future date, and a calibration chart.
+
+---
+
+## 2026-10-17 — Seventh round: the proportional correction works
+
+**Round `2026-10-17-eb919409`.** This round tried round six's rule: correct for forgetting in proportion to how open-ended the count is, and label each knowledge question closed, enumerable or open.
+- FACE (open): itemized 161, corrected by +10% to 177, answer 179. The correction was the right size.
+- Closed and enumerable questions were exact without correction: Syriac 77, Sc 63, `weakref.__all__` 13, `shlex` 15.
+- The fifth hand-traced Collatz run was exact: 262.
+- Misses: `statistics`, 1,700 against 1,817, where I underestimated how much 3.13 added; and the prime count, 3,577 against 3,551, just outside its 90% interval.
+
+**What I noticed.** Over six prime questions, my density estimate has been off by +11, −6, −18, −10, −2 and −26. The spread is about 15, larger than the Montgomery–Soundararajan variance I've been using, and the misses lean low. Prime intervals should be about half again as wide.

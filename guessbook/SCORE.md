@@ -40,22 +40,22 @@ The interval score is the main measure: an interval's width plus a penalty of 2/
 
 | | Instinct | Worked |
 |---|---|---|
-| Interval score, 50% intervals | 22.00% | 6.51% |
-| Interval score, 90% intervals | 45.00% | 15.95% |
-| 50% intervals that contain the answer | 54 of 72 (75%) | 56 of 72 (78%) |
-| … leaving out single-number intervals | 50 of 68 (74%) | 42 of 58 (72%) |
-| 90% intervals that contain the answer | 67 of 72 (93%) | 68 of 72 (94%) |
-| Median error of the estimate | 1.3% | 0.3% |
-| Estimate closer to the answer | 13 | 43 |
-| Ties | 16 | 16 |
+| Interval score, 50% intervals | 21.74% | 6.10% |
+| Interval score, 90% intervals | 44.82% | 14.95% |
+| 50% intervals that contain the answer | 61 of 84 (73%) | 65 of 84 (77%) |
+| … leaving out single-number intervals | 55 of 78 (71%) | 47 of 66 (71%) |
+| 90% intervals that contain the answer | 78 of 84 (93%) | 79 of 84 (94%) |
+| Median error of the estimate | 1.2% | 0.1% |
+| Estimate closer to the answer | 15 | 50 |
+| Ties | 19 | 19 |
 
 Worked answers by kind of question: knowledge means recalling, statistical means modelling noise or irregularity, exact means evaluating a known formula.
 
 | Kind | Questions | 50% hits | … leaving out single numbers | 90% hits | Interval score 50% / 90% |
 |---|---|---|---|---|---|
-| exact | 6 | 6 of 6 (100%) | 6 of 6 (100%) | 6 of 6 (100%) | 0.00% / 0.01% |
-| knowledge | 29 | 26 of 29 (90%) | 16 of 19 (84%) | 28 of 29 (97%) | 9.39% / 26.34% |
-| statistical | 37 | 24 of 37 (65%) | 20 of 33 (61%) | 34 of 37 (92%) | 5.30% / 10.39% |
+| exact | 7 | 7 of 7 (100%) | 7 of 7 (100%) | 7 of 7 (100%) | 0.00% / 0.01% |
+| knowledge | 35 | 31 of 35 (89%) | 18 of 22 (82%) | 34 of 35 (97%) | 8.92% / 24.56% |
+| statistical | 42 | 27 of 42 (64%) | 22 of 37 (59%) | 38 of 42 (90%) | 4.77% / 9.42% |
 
 ### 2026-10-16-e4e1ad0a
 
@@ -163,15 +163,15 @@ Worked answers by kind of question: knowledge means recalling, statistical means
 
 | # | Question | Answer | Instinct | Worked |
 |---|---|---|---|---|
-| 1 | assigned in the Syriac block | pending | 77 | 77 |
-| 2 | primes in [1,035,950, 1,085,617] | pending | 3,580 | 3,577 |
-| 3 | draws until a repeat, d = 2,529,464 | pending | 1,994 | 1,994 |
-| 4 | lines in `statistics` | pending | 1,450 | 1,700 |
-| 5 | code points in category Sc | pending | 63 | 63 |
-| 6 | mean distance in a 1 × 2.7 rectangle | pending | 1.03 | 1.018 |
-| 7 | highest point of a 167-step walk | pending | 9.84 | 9.826 |
-| 8 | Unicode names with the word FACE | pending | 200 | 177 |
-| 9 | names in `weakref.__all__` | pending | 13 | 13 |
-| 10 | Collatz steps from 738,443,544,828 | pending | 280 | 262 |
-| 11 | longest increasing subsequence, n = 1,039 | pending | 59.3 | 59.35 |
-| 12 | function definitions in `shlex` | pending | 20 | 15 |
+| 1 | assigned in the Syriac block | 77 | 77 (50✓ 90✓) | 77 (50✓ 90✓) |
+| 2 | primes in [1,035,950, 1,085,617] | 3,551 | 3,580 (50✗ 90✓) | 3,577 (50✗ 90✗) |
+| 3 | draws until a repeat, d = 2,529,464 | 1,994 | 1,994 (50✓ 90✓) | 1,994 (50✓ 90✓) |
+| 4 | lines in `statistics` | 1,817 | 1,450 (50✗ 90✗) | 1,700 (50✗ 90✓) |
+| 5 | code points in category Sc | 63 | 63 (50✓ 90✓) | 63 (50✓ 90✓) |
+| 6 | mean distance in a 1 × 2.7 rectangle | 1.017 | 1.03 (50✗ 90✓) | 1.018 (50✗ 90✓) |
+| 7 | highest point of a 167-step walk | 9.84 | 9.84 (50✓ 90✓) | 9.826 (50✓ 90✓) |
+| 8 | Unicode names with the word FACE | 179 | 200 (50✗ 90✓) | 177 (50✓ 90✓) |
+| 9 | names in `weakref.__all__` | 13 | 13 (50✓ 90✓) | 13 (50✓ 90✓) |
+| 10 | Collatz steps from 738,443,544,828 | 262 | 280 (50✓ 90✓) | 262 (50✓ 90✓) |
+| 11 | longest increasing subsequence, n = 1,039 | 59.32 | 59.3 (50✓ 90✓) | 59.35 (50✓ 90✓) |
+| 12 | function definitions in `shlex` | 15 | 20 (50✗ 90✓) | 15 (50✓ 90✓) |
