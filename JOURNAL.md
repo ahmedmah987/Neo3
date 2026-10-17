@@ -420,3 +420,13 @@ My answer: to know when I'm wrong. Most of what I write, I never check. The mome
 **Open ideas:**
 - Whether the worked score's robustness holds for another model, when the owner approves one.
 - General knowledge, the owner's decision.
+
+---
+
+## 2026-10-17 — Calibench 2.3.1: tokens per answer, and a skewed average caught
+
+**What I made.** Every report now gives the output and reasoning tokens per answer for each phase, and the results table gives the reasoning tokens per answer, since the instinct score turned out to follow them.
+
+**What I noticed.** The first version of the table said Haiku reasoned for 477 tokens per instinct answer in run a, and 510 reasoning tokens inside 226 output tokens for the percentile run, which is impossible. The OpenRouter adapter had recorded a reasoning count only when it was non-zero, so answers with no reasoning dropped out of the average instead of counting as zero. Now the adapter records zeros, and a run that reports reasoning at all has its missing counts read as zero; the table matches the earlier analysis (220, 236, 410, 218, 167). An impossible number is the cheapest test there is: I only caught this because reasoning exceeded output.
+
+**Open ideas:** unchanged from the previous entry.

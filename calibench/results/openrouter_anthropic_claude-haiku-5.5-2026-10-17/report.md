@@ -1,6 +1,6 @@
 # Calibench report: openrouter:anthropic/claude-haiku-5.5
 
-Seed `2026-10-17`, 26 questions, Calibench 1.0.0, Python 3.13.16 (Unicode 15.1.0), started 2026-10-17T03:01:02+00:00. Scored with Calibench 2.2.0 (log-wis-1).
+Seed `2026-10-17`, 26 questions, Calibench 1.0.0, Python 3.13.16 (Unicode 15.1.0), started 2026-10-17T03:01:02+00:00. Scored with Calibench 2.3.1 (log-wis-1).
 
 Served by: anthropic/claude-haiku-5.5 via Claude Platform on AWS.
 
@@ -22,6 +22,7 @@ Cost reported by the API: 0.0720 (US dollars on OpenRouter).
 | … leaving out single numbers | 20 of 26 (77%): too narrow (overconfident) | 18 of 26 (69%): too narrow (overconfident) |
 | Answers given as certain (a single number) | 0, 0 exactly right | 0, 0 exactly right |
 | Median error of the estimate | 2.7% | 2.4% |
+| Output tokens per answer | 225 (182 reasoning) | 5,216 (4,513 reasoning) |
 | Estimate closer to the answer | 6 | 15 |
 
 Working it out lowered the score on 19 of 26 questions answered both ways, from 0.185 to 0.104 on average (improvement [0.027, 0.141]).

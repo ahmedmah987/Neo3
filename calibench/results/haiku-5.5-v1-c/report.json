@@ -34,6 +34,10 @@
       "statuses": {
         "ok": 104
       },
+      "tokens": {
+        "output": 268.4519230769231,
+        "reasoning": 218.35576923076923
+      },
       "all": {
         "score_mean": 0.18766801774890704,
         "score_median": 0.04913422265367992,
@@ -97,6 +101,10 @@
       "asked": 104,
       "statuses": {
         "ok": 104
+      },
+      "tokens": {
+        "output": 4109.490384615385,
+        "reasoning": 3462.9903846153848
       },
       "all": {
         "score_mean": 0.05055583954741767,
@@ -6807,7 +6815,7 @@
   "cost": 0.232823,
   "answers_changed_after_run": false,
   "scored_with": {
-    "calibench": "2.2.1",
+    "calibench": "2.3.1",
     "scoring": "log-wis-1"
   }
 }

@@ -1,6 +1,6 @@
 # Calibench methodology
 
-This document describes what Calibench measures, how, and where the measurement can mislead. It describes Calibench 2.3.0 with scoring `log-wis-1`.
+This document describes what Calibench measures, how, and where the measurement can mislead. It describes Calibench 2.3.1 with scoring `log-wis-1`.
 
 ## What is measured
 
@@ -163,7 +163,7 @@ When publishing a result, report: the suite (or seed, count and families), the C
 - **The worked score holds up to the format.** Standard minus percentiles is 0.009 [−0.007, 0.028], 0.003 [−0.006, 0.012] and 0.003 [−0.006, 0.013] for runs a, b and c. Worked coverage and the lean low (62% of true answers above the estimate) are as in the standard runs.
 - **The instinct score follows how much the prompt lets the model reason.** Percentiles drew less reasoning than the standard format and scored worse (standard minus percentiles −0.061 to −0.072, every interval excluding zero); the alternative wording drew more and scored better. Across the five runs, more reasoning on instinct answers goes with a better instinct score, without exception. The percentile format also made instinct answers far more overconfident: their 90% intervals held the answer 69 times in 104, against 82–83 for the standard runs.
 
-So an instinct score is less a property of the model than of the model and the prompt together. The worked score is the measure to compare.
+So an instinct score is less a property of the model than of the model and the prompt together. The worked score is the measure to compare. Since Calibench 2.3.1 every report gives the output and reasoning tokens per answer in each phase, and the results table gives the reasoning tokens, so this can be read off any run.
 
 **Consistency: three runs of Claude Haiku 5.5 on suite v1.** A third standard run (c) scored 0.051, between runs a and b; the three pairwise differences are 0.001, 0.005 and 0.006, all with intervals that include zero. `consistency` then asks what the three runs say together:
 

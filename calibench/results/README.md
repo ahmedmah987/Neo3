@@ -5,16 +5,16 @@ Runs of Calibench on real models. Each folder is a complete run directory: the q
 Scores are Calibench 2.0's log-scale weighted interval score (lower is better; 0.1 is roughly a 10% miss), with 90% intervals over questions. The table is generated from the runs' reports by `python3 -m calibench index calibench/results --write calibench/results/README.md`; don't edit it by hand.
 
 <!-- index:start -->
-| Run | Model | Prompts | Questions | Score, worked [90% interval] | Score, instinct | Worked 50% / 90% hits | Worked answers above the estimate | Cost |
-|---|---|---|---|---|---|---|---|---|
-| [haiku-5.5-v1-a](haiku-5.5-v1-a/report.md) | openrouter:anthropic/claude-haiku-5.5 | standard | suite v1, 104 | 0.056 [0.035, 0.082] | 0.177 | 62 / 85 of 104 | 62% | $0.225 |
-| [haiku-5.5-v1-b](haiku-5.5-v1-b/report.md) | openrouter:anthropic/claude-haiku-5.5 | standard | suite v1, 104 | 0.050 [0.034, 0.067] | 0.178 | 66 / 91 of 104 | 62% | $0.226 |
-| [haiku-5.5-v1-alt](haiku-5.5-v1-alt/report.md) | openrouter:anthropic/claude-haiku-5.5 | alt | suite v1, 104 | 0.040 [0.027, 0.054] | 0.097 | 66 / 92 of 104 | 59% | $0.217 |
-| [haiku-5.5-v2](haiku-5.5-v2/report.md) | openrouter:anthropic/claude-haiku-5.5 | standard | suite v2, 108 | 0.068 [0.035, 0.111] | 0.098 | 80 / 94 of 108 | 51% | $0.285 |
-| [haiku-5.5-calc1](haiku-5.5-calc1/report.md) | openrouter:anthropic/claude-haiku-5.5 | standard | suite calc1, 40 | 0.000 [0.000, 0.000] | 0.019 | 40 / 40 of 40 | 52% | $0.100 |
-| [haiku-5.5-v1-c](haiku-5.5-v1-c/report.md) | openrouter:anthropic/claude-haiku-5.5 | standard | suite v1, 104 | 0.051 [0.034, 0.069] | 0.188 | 58 / 88 of 104 | 59% | $0.233 |
-| [haiku-5.5-v1-quantiles](haiku-5.5-v1-quantiles/report.md) | openrouter:anthropic/claude-haiku-5.5 | quantiles | suite v1, 104 | 0.047 [0.033, 0.063] | 0.249 | 61 / 85 of 104 | 62% | $0.229 |
-| [openrouter_anthropic_claude-haiku-5.5-2026-10-17](openrouter_anthropic_claude-haiku-5.5-2026-10-17/report.md) | openrouter:anthropic/claude-haiku-5.5 | standard | seed `2026-10-17`, 26 | 0.104 [0.044, 0.177] | 0.185 | 15 / 18 of 26 | 52% | $0.072 |
+| Run | Model | Prompts | Questions | Score, worked [90% interval] | Score, instinct | Worked 50% / 90% hits | Worked answers above the estimate | Reasoning tokens per answer, instinct / worked | Cost |
+|---|---|---|---|---|---|---|---|---|---|
+| [haiku-5.5-v1-a](haiku-5.5-v1-a/report.md) | openrouter:anthropic/claude-haiku-5.5 | standard | suite v1, 104 | 0.056 [0.035, 0.082] | 0.177 | 62 / 85 of 104 | 62% | 220 / 3,285 | $0.225 |
+| [haiku-5.5-v1-b](haiku-5.5-v1-b/report.md) | openrouter:anthropic/claude-haiku-5.5 | standard | suite v1, 104 | 0.050 [0.034, 0.067] | 0.178 | 66 / 91 of 104 | 62% | 236 / 3,320 | $0.226 |
+| [haiku-5.5-v1-alt](haiku-5.5-v1-alt/report.md) | openrouter:anthropic/claude-haiku-5.5 | alt | suite v1, 104 | 0.040 [0.027, 0.054] | 0.097 | 66 / 92 of 104 | 59% | 410 / 3,140 | $0.217 |
+| [haiku-5.5-v2](haiku-5.5-v2/report.md) | openrouter:anthropic/claude-haiku-5.5 | standard | suite v2, 108 | 0.068 [0.035, 0.111] | 0.098 | 80 / 94 of 108 | 51% | 244 / 4,253 | $0.285 |
+| [haiku-5.5-calc1](haiku-5.5-calc1/report.md) | openrouter:anthropic/claude-haiku-5.5 | standard | suite calc1, 40 | 0.000 [0.000, 0.000] | 0.019 | 40 / 40 of 40 | 52% | 493 / 3,679 | $0.100 |
+| [haiku-5.5-v1-c](haiku-5.5-v1-c/report.md) | openrouter:anthropic/claude-haiku-5.5 | standard | suite v1, 104 | 0.051 [0.034, 0.069] | 0.188 | 58 / 88 of 104 | 59% | 218 / 3,463 | $0.233 |
+| [haiku-5.5-v1-quantiles](haiku-5.5-v1-quantiles/report.md) | openrouter:anthropic/claude-haiku-5.5 | quantiles | suite v1, 104 | 0.047 [0.033, 0.063] | 0.249 | 61 / 85 of 104 | 62% | 167 / 3,412 | $0.229 |
+| [openrouter_anthropic_claude-haiku-5.5-2026-10-17](openrouter_anthropic_claude-haiku-5.5-2026-10-17/report.md) | openrouter:anthropic/claude-haiku-5.5 | standard | seed `2026-10-17`, 26 | 0.104 [0.044, 0.177] | 0.185 | 15 / 18 of 26 | 52% | 182 / 4,513 | $0.072 |
 <!-- index:end -->
 
 ## Claude Haiku 5.5 on suite v1: a percentile format

@@ -237,6 +237,22 @@ class OracleModel(models.Model):
         return f"Working.\n{json.dumps({'estimate': x, 'p50': [x, x], 'p90': [x, x]})}", {"served_model": "oracle"}
 
 
+class TokenModel(models.Model):
+    """Answers badly, reporting tokens as OpenRouter does: more reasoning when working, and on instinct
+    sometimes none, with the count left out as versions before 2.3.1 did."""
+
+    def __init__(self):
+        self.calls = 0
+
+    def ask(self, prompt, phase):
+        if phase == "worked":
+            usage = {"completion_tokens": 100, "reasoning_tokens": 80}
+        else:
+            self.calls += 1
+            usage = {"completion_tokens": 20, **({"reasoning_tokens": 10} if self.calls % 2 else {})}
+        return '{"estimate": 5, "p50": [4, 6], "p90": [3, 8]}', usage
+
+
 class FlakyModel(models.Model):
     """Fails the first call for some questions, and answers badly but readably otherwise."""
 
@@ -288,6 +304,13 @@ def check_run(tmp):
         stopped = raises(quiet, runner.run, broken, "broken", seed, count, FAST, tmp / "broken", 1)
     asked = len(runner.load_records(tmp / "broken" / "answers.jsonl"))
     check("a run stops early when every call fails", stopped and asked == runner.GIVE_UP_AFTER)
+
+    rep = quiet(runner.run, TokenModel(), "tokens", seed, count, FAST, tmp / "tokens", 1)
+    check("tokens per answer are reported for each phase, a missing reasoning count taken as zero",
+          rep["phases"]["worked"]["tokens"] == {"output": 100, "reasoning": 80}
+          and rep["phases"]["instinct"]["tokens"] == {"output": 20, "reasoning": 5}
+          and "| Output tokens per answer | 20 (5 reasoning) | 100 (80 reasoning) |"
+          in (tmp / "tokens" / "report.md").read_text())
 
     rep = quiet(runner.run, models.NaiveModel(), "mock:naive", seed, count, FAST, tmp / "naive", 3)
     md = (tmp / "naive" / "report.md").read_text()

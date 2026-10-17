@@ -9,6 +9,25 @@ from .scoring import (BIN_SHARES, BINS, KNOW_NOTHING, LEVELS, PHASES, bootstrap,
                       offset, questions_needed, spearman, summarize, wilson)
 
 
+def tokens_per_answer(recs):
+    """Mean output and reasoning tokens per call that reports its usage, retries included.
+
+    Before 2.3.1 the OpenRouter adapter left out a reasoning count of zero, so when a run reports
+    reasoning at all, a call without a count is taken to have reasoned for zero tokens. A run that
+    never reports reasoning (the Claude SDK counts thinking within output tokens) shows none."""
+    attempts = [(r or {}).get("attempts", []) for r in recs]
+    reports_reasoning = any("reasoning_tokens" in a for tries in attempts for a in tries)
+    output, reasoning = [], []
+    for tries in attempts:
+        out = [a.get("output_tokens", a.get("completion_tokens")) for a in tries]
+        if tries and all(v is not None for v in out):
+            output.append(sum(out))
+            if reports_reasoning:
+                reasoning.append(sum(a.get("reasoning_tokens") or 0 for a in tries))
+    return {"output": statistics.fmean(output) if output else None,
+            "reasoning": statistics.fmean(reasoning) if reasoning else None}
+
+
 def question_key(q):
     return f"{q['family']} {json.dumps(q['params'], sort_keys=True)}"
 
@@ -33,7 +52,7 @@ def build(meta, questions, records, results):
         every = [log_wis(r["answer"] if r and r["status"] == "ok" else KNOW_NOTHING, truth[q["q"]], offset(q["family"]))
                  for q, r in zip(questions, recs)]
         report["phases"][phase] = {
-            "asked": len(questions), "statuses": dict(statuses),
+            "asked": len(questions), "statuses": dict(statuses), "tokens": tokens_per_answer(recs),
             "all": {"score_mean": statistics.fmean(every), "score_median": statistics.median(every),
                     "score_ci": bootstrap_mean(every)},
             **summarize([(r["answer"], truth[q["q"]], offset(q["family"])) for q, r in ok]),
@@ -194,6 +213,13 @@ def render(report):
               row("… leaving out single numbers", coverage("p90", True)),
               row("Answers given as certain (a single number)", lambda s: f"{s['certain']}, {s['certain_right']} exactly right"),
               row("Median error of the estimate", lambda s: f"{s['median_error']:.1%}")]
+    spent = {p: phases[p].get("tokens") or {} for p in PHASES}
+    if any(t.get("output") for t in spent.values()):
+        def tokens(t):
+            if not t.get("output"):
+                return "—"
+            return f"{t['output']:,.0f}" + (f" ({t['reasoning']:,.0f} reasoning)" if t.get("reasoning") is not None else "")
+        lines.append(f"| Output tokens per answer | {tokens(spent['instinct'])} | {tokens(spent['worked'])} |")
     paired = report["paired"]
     if paired["n"]:
         lines.append(f"| Estimate closer to the answer | {paired['closer']['instinct']} | {paired['closer']['worked']} |")
@@ -294,17 +320,19 @@ def index(runs):
 
     rows = sorted(runs, key=lambda r: (not r[1]["meta"].get("suite"), r[1]["meta"]["started"], r[0]))
     lines = ["| Run | Model | Prompts | Questions | Score, worked [90% interval] | Score, instinct "
-             "| Worked 50% / 90% hits | Worked answers above the estimate | Cost |",
-             "|---|---|---|---|---|---|---|---|---|"]
+             "| Worked 50% / 90% hits | Worked answers above the estimate | Reasoning tokens per answer, instinct / worked "
+             "| Cost |", "|---|---|---|---|---|---|---|---|---|---|"]
     for name, rep in rows:
         meta, worked, instinct = rep["meta"], rep["phases"]["worked"], rep["phases"]["instinct"]
         fell = worked.get("fell") or {}
         above = f"{fell['above'] / fell['n']:.0%}" if fell.get("n") else "—"
         hits = f"{worked['p50']['hits']} / {worked['p90']['hits']} of {worked['n']}" if worked["n"] else "—"
         cost = f"${rep['cost']:.3f}" if rep.get("cost") else "—"
+        thought = [(rep["phases"][p].get("tokens") or {}).get("reasoning") for p in PHASES]
+        thought = "—" if None in thought else f"{thought[0]:,.0f} / {thought[1]:,.0f}"
         lines.append(f"| [{name}]({name}/report.md) | {meta['model']} | {meta.get('prompts', 'standard')} "
                      f"| {where(meta)}, {meta['count']} | {sc(worked['all']['score_mean'])}{ci(worked['all']['score_ci'])} "
-                     f"| {sc(instinct['all']['score_mean'])} | {hits} | {above} | {cost} |")
+                     f"| {sc(instinct['all']['score_mean'])} | {hits} | {above} | {thought} | {cost} |")
     return "\n".join(lines) + "\n"
 
 
