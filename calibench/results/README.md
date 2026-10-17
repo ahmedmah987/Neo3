@@ -16,8 +16,25 @@ Scores are Calibench 2.0's log-scale weighted interval score (lower is better; 0
 | [haiku-5.5-v1-quantiles](haiku-5.5-v1-quantiles/report.md) | openrouter:anthropic/claude-haiku-5.5 | quantiles | suite v1, 104 | 0.047 [0.033, 0.063] | 0.249 | 61 / 85 of 104 | 62% | 167 / 3,412 | $0.229 |
 | [deepseek-v4.1-flash-v1](deepseek-v4.1-flash-v1/report.md) | openrouter:deepseek/deepseek-v4.1-flash-1017 | standard | suite v1, 104 | 0.267 [0.193, 0.347] | 0.164 | 54 / 69 of 88 | 62% | 1,435 / 15,330 | $0.919 |
 | [deepseek-v4.1-flash-v2](deepseek-v4.1-flash-v2/report.md) | openrouter:deepseek/deepseek-v4.1-flash-1017 | standard | suite v2, 108 | 0.292 [0.210, 0.374] | 0.113 | 63 / 71 of 86 | 47% | 1,259 / 14,648 | $0.910 |
+| [dots-3-note-preview-v2](dots-3-note-preview-v2/report.md) | openrouter:dots-studio/dots-3-note-preview:free | standard | suite v2, 108 | 0.501 [0.406, 0.597] | 0.425 | 51 / 60 of 71 | 50% | 2,948 / 11,053 | $0.000 |
 | [openrouter_anthropic_claude-haiku-5.5-2026-10-17](openrouter_anthropic_claude-haiku-5.5-2026-10-17/report.md) | openrouter:anthropic/claude-haiku-5.5 | standard | seed `2026-10-17`, 26 | 0.104 [0.044, 0.177] | 0.185 | 15 / 18 of 26 | 52% | 182 / 4,513 | $0.072 |
 <!-- index:end -->
+
+## Dots3-Note Preview against Claude Haiku 5.5 and DeepSeek V4.1 Flash
+
+The third model, chosen by the repository's owner: `dots-studio/dots-3-note-preview:free` through OpenRouter, free of charge, served by AtlasCloud. Suite v2, with the standard settings (effort low for instinct answers and high for worked ones, caps of 8,000 and 32,000 tokens), after a four-question trial. The run took 51 minutes with eight calls at a time and cost nothing.
+
+| Questions | Haiku | DeepSeek | Dots | Difference [90% interval] |
+|---|---|---|---|---|
+| all 108 | 0.068 | 0.292 | 0.501 | Dots worse than Haiku by 0.433 [0.332, 0.532] |
+| the 71 Haiku and Dots both answered | 0.069 | | 0.090 | Dots worse by 0.021 [−0.047, 0.078] |
+| the 57 all three answered | 0.076 | 0.031 | 0.093 | Dots worse than DeepSeek by 0.062 [0.027, 0.104] |
+
+- **Dots didn't finish a third of its worked answers.** 36 ran past the 32,000-token cap and one more ended in a content filter, after 13,367 tokens of reasoning on a longest-increasing-subsequence question. That is what puts it far behind on the whole suite.
+- **It finished every calculation and failed on estimates.** Unfinished worked answers by kind: knowledge 19 of 36, statistical 16 of 36, exact 2 of 6, calculation 0 of 30. Longest increasing subsequences went unfinished 6 times out of 6, and rectangle distances, Unicode word counts and module `__all__` sizes 5 out of 6. DeepSeek showed the same pattern with fewer failures: both kept working on questions that call for an estimate and finished those that can be computed.
+- **When it answers, it is close to Haiku.** On the 71 questions both answered, the difference includes zero. On the 57 all three answered, DeepSeek is better than Dots. Its 90% intervals held the answer 85% of the time (79% leaving out single numbers): overconfident, like the others. All 18 answers it gave as a single number were exactly right.
+- **Its instinct answers aren't instinct either.** At low effort it produced 4,167 output tokens per instinct answer, against Haiku's 285 and DeepSeek's 1,290, and 24 of 108 were cut off at the 8,000-token cap.
+- **Its reasoning count is too low.** AtlasCloud reported 1,512,179 reasoning tokens out of 2,173,892 output tokens, yet the replies average 126 characters, so about 30% of the output is counted as neither. The output tokens are the safer measure for this model, and its reasoning column in the table above understates it.
 
 ## DeepSeek V4.1 Flash against Claude Haiku 5.5
 

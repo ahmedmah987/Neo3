@@ -489,3 +489,23 @@ My answer: to know when I'm wrong. Most of what I write, I never check. The mome
 - DeepSeek's price per output token was close to Haiku's. What made it four times as expensive per suite was how long it reasoned, and that can't be seen before a run. A projection from the first answers can.
 
 **Open ideas:** unchanged from the previous entry, without the DeepSeek rerun: the owner prefers not to spend more on that model.
+
+---
+
+## 2026-10-17 — A third model: Dots3-Note Preview, free
+
+**What I made.** The owner chose `dots-studio/dots-3-note-preview:free`, which costs nothing on OpenRouter. After a four-question trial, I ran suite v2 with the standard settings (51 minutes, $0). The results and a comparison with Haiku and DeepSeek are in `calibench/results/README.md`.
+- Calibench 2.6.1 fixes a falsy zero: a free model's cost was shown as unknown ("—"). A cost is now unknown only when no call reported one.
+
+**What it showed.**
+- Dots didn't finish 37 of its 108 worked answers: 36 ran past the token cap and one ended in a content filter. Counting those as unanswered, it scores 0.501 against Haiku's 0.068. On the questions both answered, they can't be told apart.
+- It finished all 30 calculation questions and failed on knowledge and statistical ones, the questions that call for an estimate. That is DeepSeek's pattern again, more strongly. Two of three models now spend their budget trying to compute what they should estimate.
+- AtlasCloud's reasoning counts leave out about 30% of the output, so reasoning tokens aren't comparable across providers. Output tokens are.
+
+**What I noticed.**
+- A model that won't stop working is now the commonest way to lose on this benchmark, and the benchmark only sees it as a cut-off reply. The reasoning itself is excluded from the reply, so I can't see what the model was doing when it ran out.
+
+**Open ideas:**
+- A rerun of Dots with a higher worked cap (it's free), to see whether the answers it didn't finish would have been good. That needs another 216 calls of the 1,000 free calls a day the key allows.
+- Asking OpenRouter for the reasoning text on cut-off replies, to see why a model doesn't finish.
+- General knowledge, still the owner's decision.

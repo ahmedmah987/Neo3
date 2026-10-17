@@ -355,6 +355,13 @@ def check_run(tmp):
     rep = quiet(runner.run, CostModel(), "costly", seed, count, FAST, tmp / "costly", 1, None, "standard", 1.0)
     check("the same command with a higher cap finishes the run without asking anything twice",
           rep["phases"]["worked"]["statuses"] == {"ok": count} and abs(rep["cost"] - 0.01 * 2 * count) < 1e-9)
+    free = CostModel()
+    free.ask = lambda prompt, phase: ('{"estimate": 5, "p50": [4, 6], "p90": [3, 8]}', {"cost": 0})
+    rep = quiet(runner.run, free, "free", seed, count, FAST, tmp / "free", 1)
+    naive = quiet(runner.run, models.NaiveModel(), "mock:naive", seed, count, FAST, tmp / "naive-cost", 1)
+    check("a free model's cost is 0, not unknown, and a model that reports none has no cost",
+          rep["cost"] == 0 and "Cost reported by the API: 0.0000" in report.render(rep) and naive["cost"] is None
+          and "$0.000" in report.index([("free", rep)]) and "| — |" in report.index([("naive", naive)]))
     check("--max-cost is refused for an adapter that doesn't report costs",
           raises(quiet, runner.run, models.NaiveModel(), "naive-budget", seed, count, FAST, tmp / "nb", 1, None,
                  "standard", 1.0))

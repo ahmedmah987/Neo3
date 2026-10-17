@@ -93,7 +93,7 @@ def build(meta, questions, records, results):
         }
 
     closer = {"instinct": 0, "worked": 0, "tie": 0}
-    served, tokens, cost = set(), collections.Counter(), 0.0
+    served, tokens, cost = set(), collections.Counter(), None    # cost stays None if no call reported one
     for q in questions:
         x, shift = truth[q["q"]], offset(q["family"])
         row = {"q": q["q"], "key": question_key(q), "family": q["family"], "kind": q["kind"],
@@ -104,7 +104,8 @@ def build(meta, questions, records, results):
             for attempt in (r or {}).get("attempts", []):
                 if attempt.get("served_model"):
                     served.add(attempt["served_model"] + (f" via {attempt['provider']}" if attempt.get("provider") else ""))
-                cost += attempt.get("cost") or 0
+                if attempt.get("cost") is not None:
+                    cost = (cost or 0) + attempt["cost"]
             for name, value in zip(("input", "output", "reasoning"), record_usage(r, zero_fill)):
                 tokens[name] += value or 0
             if r and r["status"] == "ok":
@@ -133,7 +134,7 @@ def build(meta, questions, records, results):
     report["concentration"] = {phase: concentration(report["questions"], phase) for phase in PHASES}
     report["served_models"] = sorted(served)
     report["tokens"] = {k: v for k, v in tokens.items() if v}
-    report["cost"] = round(cost, 6) if cost else None
+    report["cost"] = None if cost is None else round(cost, 6)       # a free model costs 0, not unknown
     return report
 
 
@@ -219,7 +220,7 @@ def render(report):
         lines += ["", f"Served by: {', '.join(report['served_models'])}."]
     if report["tokens"]:
         lines += ["", "Tokens: " + ", ".join(f"{k} {v:,}" for k, v in report["tokens"].items()) + "."]
-    if report.get("cost"):
+    if report.get("cost") is not None:
         lines += ["", f"Cost reported by the API: {report['cost']:.4f} (US dollars on OpenRouter)."]
     if report.get("answers_changed_after_run"):
         lines += ["", "**Warning:** answers.jsonl was changed after the run recorded its hash."]
@@ -364,7 +365,7 @@ def index(runs):
         fell = worked.get("fell") or {}
         above = f"{fell['above'] / fell['n']:.0%}" if fell.get("n") else "—"
         hits = f"{worked['p50']['hits']} / {worked['p90']['hits']} of {worked['n']}" if worked["n"] else "—"
-        cost = f"${rep['cost']:.3f}" if rep.get("cost") else "—"
+        cost = f"${rep['cost']:.3f}" if rep.get("cost") is not None else "—"
         thought = [(rep["phases"][p].get("tokens") or {}).get("reasoning") for p in PHASES]
         thought = "—" if None in thought else f"{thought[0]:,.0f} / {thought[1]:,.0f}"
         lines.append(f"| [{name}]({name}/report.md) | {meta['model']} | {meta.get('prompts', 'standard')} "

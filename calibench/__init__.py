@@ -7,4 +7,4 @@ settled only after all of them are recorded, and scored with the interval score.
 
 Run `python3 -m calibench --help`.
 """
-__version__ = "2.6.0"
+__version__ = "2.6.1"
