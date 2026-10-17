@@ -112,18 +112,18 @@ Worked answers by kind of question: knowledge means recalling, statistical means
 
 | # | Question | Answer | Instinct | Worked |
 |---|---|---|---|---|
-| 1 | function definitions in `optparse` | pending | 150 | — |
-| 2 | lines in `quopri` | pending | 240 | — |
-| 3 | names in `gzip.__all__` | pending | 5 | — |
-| 4 | code points in category Zs | pending | 17 | — |
-| 5 | Collatz steps from 999,226,632,124 | pending | 285 | — |
-| 6 | assigned in the Ethiopic block | pending | 358 | — |
-| 7 | longest increasing subsequence, n = 581 | pending | 43.6 | — |
-| 8 | highest point of a 1,417-step walk | pending | 29.53 | — |
-| 9 | mean distance in a 1 × 4.02 rectangle | pending | 1.43 | — |
-| 10 | digit sum of 2^4578 | pending | 6,205 | — |
-| 11 | Unicode names with the word CAPITAL | pending | 3,000 | — |
-| 12 | draws until a repeat, d = 3,061,525 | pending | 2,194 | — |
+| 1 | function definitions in `optparse` | pending | 150 | 127 |
+| 2 | lines in `quopri` | pending | 240 | 240 |
+| 3 | names in `gzip.__all__` | pending | 5 | 5 |
+| 4 | code points in category Zs | pending | 17 | 17 |
+| 5 | Collatz steps from 999,226,632,124 | pending | 285 | 234 |
+| 6 | assigned in the Ethiopic block | pending | 358 | 358 |
+| 7 | longest increasing subsequence, n = 581 | pending | 43.6 | 43.62 |
+| 8 | highest point of a 1,417-step walk | pending | 29.53 | 29.54 |
+| 9 | mean distance in a 1 × 4.02 rectangle | pending | 1.43 | 1.434 |
+| 10 | digit sum of 2^4578 | pending | 6,205 | 6,202 |
+| 11 | Unicode names with the word CAPITAL | pending | 3,000 | 2,300 |
+| 12 | draws until a repeat, d = 3,061,525 | pending | 2,194 | 2,194 |
 
 ### 2026-10-17-a9bfbcea
 
