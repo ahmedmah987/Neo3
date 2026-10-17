@@ -1,0 +1,117 @@
+{
+  "seed": "6ae44e63f6d4bc536b6c102f82504365baaeda03",
+  "questions": [
+    {
+      "q": 1,
+      "family": "stdlib_defs",
+      "params": {
+        "module": "optparse"
+      },
+      "short": "function definitions in `optparse`",
+      "text": "How many function definitions (def and async def, counting methods and nested functions) are in the source file of the standard-library module `optparse` in Python 3.13?"
+    },
+    {
+      "q": 2,
+      "family": "stdlib_lines",
+      "params": {
+        "module": "quopri"
+      },
+      "short": "lines in `quopri`",
+      "text": "How many lines are in the source file of the standard-library module `quopri` in Python 3.13 (every line, blank or not)?"
+    },
+    {
+      "q": 3,
+      "family": "module_all",
+      "params": {
+        "module": "gzip"
+      },
+      "short": "names in `gzip.__all__`",
+      "text": "How many names are listed in `gzip.__all__` in Python 3.13?"
+    },
+    {
+      "q": 4,
+      "family": "unicode_category",
+      "params": {
+        "category": "Zs"
+      },
+      "short": "code points in category Zs",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have the general category Zs (space separators)?"
+    },
+    {
+      "q": 5,
+      "family": "collatz_steps",
+      "params": {
+        "n": 999226632124
+      },
+      "short": "Collatz steps from 999,226,632,124",
+      "text": "Starting from 999,226,632,124, how many steps does the Collatz process (halve if even, 3n + 1 if odd) take to reach 1?"
+    },
+    {
+      "q": 6,
+      "family": "unicode_block",
+      "params": {
+        "lo": 4608,
+        "hi": 4991
+      },
+      "short": "assigned in the Ethiopic block",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points in U+1200–U+137F (the Ethiopic block) are assigned, that is, have a category other than Cn?"
+    },
+    {
+      "q": 7,
+      "family": "lis",
+      "params": {
+        "n": 581,
+        "seed": 3824964566
+      },
+      "short": "longest increasing subsequence, n = 581",
+      "text": "What is the average length of the longest increasing subsequence of a uniformly random permutation of 581 elements? (Settled by averaging 1,000 random permutations.)"
+    },
+    {
+      "q": 8,
+      "family": "walk_max",
+      "params": {
+        "n": 1417,
+        "seed": 2627951944
+      },
+      "short": "highest point of a 1,417-step walk",
+      "text": "A simple random walk on the integers starts at 0 and takes 1,417 steps of +1 or −1, each with probability ½. What is the expected highest position it reaches (0 if it never rises above the start)? (Settled by averaging 4,000 random walks.)"
+    },
+    {
+      "q": 9,
+      "family": "rect_distance",
+      "params": {
+        "b": 4.02,
+        "seed": 2727062389
+      },
+      "short": "mean distance in a 1 × 4.02 rectangle",
+      "text": "Two points are chosen independently and uniformly at random in a 1 × 4.02 rectangle. What is the expected distance between them? (Settled by averaging 400,000 random pairs.)"
+    },
+    {
+      "q": 10,
+      "family": "digit_sum_pow2",
+      "params": {
+        "n": 4578
+      },
+      "short": "digit sum of 2^4578",
+      "text": "What is the sum of the decimal digits of 2^4578?"
+    },
+    {
+      "q": 11,
+      "family": "unicode_word",
+      "params": {
+        "word": "CAPITAL"
+      },
+      "short": "Unicode names with the word CAPITAL",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have a name containing the whole word CAPITAL? (Names are split into words at spaces and hyphens.)"
+    },
+    {
+      "q": 12,
+      "family": "birthday",
+      "params": {
+        "d": 3061525
+      },
+      "short": "draws until a repeat, d = 3,061,525",
+      "text": "Integers are drawn uniformly at random from 1 to 3,061,525, with replacement, until some value appears for the second time. What is the expected number of draws, counting the repeat?"
+    }
+  ]
+}
