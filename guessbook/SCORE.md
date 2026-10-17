@@ -59,3 +59,20 @@ Questions drawn from a seed I don't choose. Each is answered twice, first by ins
 | 10 | primes in [1,829,380, 1,834,725] | 382 | 370 (50✓ 90✓) | 371 (50✗ 90✓) |
 | 11 | mean distance in a 1 × 2.37 rectangle | 0.9159 | 0.95 (50✓ 90✓) | 0.9165 (50✓ 90✓) |
 | 12 | lines in `weakref` | 674 | 650 (50✓ 90✓) | 674 (50✓ 90✓) |
+
+### 2026-10-17-a9bfbcea
+
+| # | Question | Answer | Instinct | Worked |
+|---|---|---|---|---|
+| 1 | digit sum of 2^3832 | pending | 5,200 | — |
+| 2 | highest point of a 890-step walk | pending | 23.3 | — |
+| 3 | primes in [2,208,270, 2,216,007] | pending | 530 | — |
+| 4 | draws until a repeat, d = 3,625,240 | pending | 2,387 | — |
+| 5 | Collatz steps from 947,083,466,021 | pending | 285 | — |
+| 6 | Unicode names with the word DOUBLE | pending | 550 | — |
+| 7 | longest increasing subsequence, n = 261 | pending | 28 | — |
+| 8 | lines in `fractions` | pending | 1,000 | — |
+| 9 | mean distance in a 1 × 6.41 rectangle | pending | 2.25 | — |
+| 10 | function definitions in `tokenize` | pending | 30 | — |
+| 11 | highest point of a 1,342-step walk | pending | 28.7 | — |
+| 12 | Unicode names with the word GREEK | pending | 520 | — |

@@ -1,0 +1,118 @@
+{
+  "seed": "a9bfbcea8f51a0c850f694c58721a4db28ce6870",
+  "questions": [
+    {
+      "q": 1,
+      "family": "digit_sum_pow2",
+      "params": {
+        "n": 3832
+      },
+      "short": "digit sum of 2^3832",
+      "text": "What is the sum of the decimal digits of 2^3832?"
+    },
+    {
+      "q": 2,
+      "family": "walk_max",
+      "params": {
+        "n": 890,
+        "seed": 3650060354
+      },
+      "short": "highest point of a 890-step walk",
+      "text": "A simple random walk on the integers starts at 0 and takes 890 steps of +1 or −1, each with probability ½. What is the expected highest position it reaches (0 if it never rises above the start)? (Settled by averaging 4,000 random walks.)"
+    },
+    {
+      "q": 3,
+      "family": "primes_in_range",
+      "params": {
+        "a": 2208270,
+        "b": 2216007
+      },
+      "short": "primes in [2,208,270, 2,216,007]",
+      "text": "How many primes p satisfy 2,208,270 ≤ p ≤ 2,216,007?"
+    },
+    {
+      "q": 4,
+      "family": "birthday",
+      "params": {
+        "d": 3625240
+      },
+      "short": "draws until a repeat, d = 3,625,240",
+      "text": "Integers are drawn uniformly at random from 1 to 3,625,240, with replacement, until some value appears for the second time. What is the expected number of draws, counting the repeat?"
+    },
+    {
+      "q": 5,
+      "family": "collatz_steps",
+      "params": {
+        "n": 947083466021
+      },
+      "short": "Collatz steps from 947,083,466,021",
+      "text": "Starting from 947,083,466,021, how many steps does the Collatz process (halve if even, 3n + 1 if odd) take to reach 1?"
+    },
+    {
+      "q": 6,
+      "family": "unicode_word",
+      "params": {
+        "word": "DOUBLE"
+      },
+      "short": "Unicode names with the word DOUBLE",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have a name containing the whole word DOUBLE? (Names are split into words at spaces and hyphens.)"
+    },
+    {
+      "q": 7,
+      "family": "lis",
+      "params": {
+        "n": 261,
+        "seed": 3874579657
+      },
+      "short": "longest increasing subsequence, n = 261",
+      "text": "What is the average length of the longest increasing subsequence of a uniformly random permutation of 261 elements? (Settled by averaging 1,000 random permutations.)"
+    },
+    {
+      "q": 8,
+      "family": "stdlib_lines",
+      "params": {
+        "module": "fractions"
+      },
+      "short": "lines in `fractions`",
+      "text": "How many lines are in the source file of the standard-library module `fractions` in Python 3.13 (every line, blank or not)?"
+    },
+    {
+      "q": 9,
+      "family": "rect_distance",
+      "params": {
+        "b": 6.41,
+        "seed": 197702157
+      },
+      "short": "mean distance in a 1 × 6.41 rectangle",
+      "text": "Two points are chosen independently and uniformly at random in a 1 × 6.41 rectangle. What is the expected distance between them? (Settled by averaging 400,000 random pairs.)"
+    },
+    {
+      "q": 10,
+      "family": "stdlib_defs",
+      "params": {
+        "module": "tokenize"
+      },
+      "short": "function definitions in `tokenize`",
+      "text": "How many function definitions (def and async def, counting methods and nested functions) are in the source file of the standard-library module `tokenize` in Python 3.13?"
+    },
+    {
+      "q": 11,
+      "family": "walk_max",
+      "params": {
+        "n": 1342,
+        "seed": 1829203834
+      },
+      "short": "highest point of a 1,342-step walk",
+      "text": "A simple random walk on the integers starts at 0 and takes 1,342 steps of +1 or −1, each with probability ½. What is the expected highest position it reaches (0 if it never rises above the start)? (Settled by averaging 4,000 random walks.)"
+    },
+    {
+      "q": 12,
+      "family": "unicode_word",
+      "params": {
+        "word": "GREEK"
+      },
+      "short": "Unicode names with the word GREEK",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have a name containing the whole word GREEK? (Names are split into words at spaces and hyphens.)"
+    }
+  ]
+}
