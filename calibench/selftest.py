@@ -24,8 +24,8 @@ from . import families as F
 from . import models, report, runner
 from .prompts import PROMPT_SETS, parse_answer
 from .questions import ORIGINAL_FAMILIES, SUITES, draw, fingerprint, rng_from_seed, solve
-from .scoring import (KNOW_NOTHING, bin_weights, interval_score, log_interval_score, log_wis, offset, spearman,
-                      verdict, where_answers_fell, wilson)
+from .scoring import (KNOW_NOTHING, bin_weights, interval_score, log_interval_score, log_wis, offset,
+                      questions_needed, spearman, verdict, where_answers_fell, wilson)
 
 failures = []
 
@@ -176,6 +176,9 @@ def check_core():
     check("where answers fell leaves out single numbers and counts ties as half above",
           fell["n"] == 3 and fell["above"] == 1.5 and abs(sum(fell["bins"]) - 3) < 1e-12)
 
+    check("questions needed: about 7 for a difference of one standard deviation, none for no difference",
+          questions_needed([0.0, 2.0] * 10) == 7 and questions_needed([1.0, 1.0, 1.0]) == 2
+          and questions_needed([0.0, 0.0, 0.0]) is None)
     w = wilson(5, 10)
     check("Wilson interval for 5 of 10", abs(w[0] - 0.2693) < 1e-3 and abs(w[1] - 0.7307) < 1e-3)
     check("rank correlation", spearman([1, 2, 3, 4], [10, 20, 30, 40]) == 1 and spearman([1, 2, 3, 4], [4, 3, 2, 1]) == -1

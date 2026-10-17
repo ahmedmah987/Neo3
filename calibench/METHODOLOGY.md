@@ -150,6 +150,8 @@ When publishing a result, report: the suite (or seed, count and families), the C
 - **The worked score barely depends on it.** The second wording scored 0.010–0.016 better, an effect whose intervals just reach zero: perhaps real, and if so small, about twice the test–retest difference. Its worked prompt also says what calibration means, which may help a little.
 - **The lean survives the change of wording.** True answers lay above the worked estimate 59% of the time (90% interval 51–67%).
 
+**How many questions a comparison needs.** Between Haiku's three suite-v1 runs, the per-question differences in worked score had standard deviations of 0.07 to 0.13. By the normal approximation, detecting a difference with 80% power and a 90% interval that excludes zero needs n ≈ (2.49·σ/δ)² questions. So one run of a 108-question suite separates two runs whose scores differ by about 0.02 to 0.03 or more, and three runs (about 320 questions) by about 0.01 to 0.02. Two different models will usually differ more from question to question than one model does from itself, so treat these as lower bounds. `compare` prints this estimate for every pair it compares.
+
 ## References
 
 - Gneiting, T., and Raftery, A. E. (2007). Strictly proper scoring rules, prediction, and estimation. *Journal of the American Statistical Association*, 102(477), 359–378.

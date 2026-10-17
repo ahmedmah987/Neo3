@@ -6,7 +6,7 @@ import statistics
 from .families import KINDS
 from .questions import SUITES
 from .scoring import (BIN_SHARES, BINS, KNOW_NOTHING, LEVELS, PHASES, bootstrap_mean, inside, log_wis, offset,
-                      spearman, summarize)
+                      questions_needed, spearman, summarize)
 
 
 def question_key(q):
@@ -345,19 +345,24 @@ def compare(reports, names=None):
              "An unanswered question scores as the know-nothing answer.", ""]
     if len(pythons) > 1:
         lines += [f"**Note:** runs used different Python versions ({', '.join(sorted(pythons))}).", ""]
-    lines += ["| Run | Answered | Score [90% interval] | Median | 50% hits | 90% hits | Instinct score | Difference from the best [90% interval] |",
-              "|---|---|---|---|---|---|---|---|"]
+    lines += ["| Run | Answered | Score [90% interval] | Median | 50% hits | 90% hits | Instinct score "
+              "| Difference from the best [90% interval] | Questions needed to separate it |",
+              "|---|---|---|---|---|---|---|---|---|"]
     for s in stats:
         if s is best:
-            diff = "best"
+            diff, needed = "best", ""
         else:
             d = [a - b for a, b in zip(s["scores"], best["scores"])]
             diff = f"+{sc(statistics.fmean(d))}{ci(bootstrap_mean(d))}"
+            k = questions_needed(d)
+            needed = "—" if k is None else f"about {k:,}"
         lines.append(f"| {s['label']} | {s['answered']} of {n} | {sc(s['mean'])}{ci(bootstrap_mean(s['scores']))} "
                      f"| {sc(statistics.median(s['scores']))} | {frac(s['hits50'], s['answered'])} "
-                     f"| {frac(s['hits90'], s['answered'])} | {sc(s['instinct'])} | {diff} |")
+                     f"| {frac(s['hits90'], s['answered'])} | {sc(s['instinct'])} | {diff} | {needed} |")
     lines += ["", "The interval for a difference is a bootstrap over questions. When it includes zero, these "
-              "questions don't separate the two runs; more questions would."]
+              "questions don't separate the two runs; more questions would. *Questions needed* is how many questions "
+              "a difference this size would need to be separated with 80% power, from the spread of the per-question "
+              "differences seen here; heavy tails make it a lower bound."]
 
     pairs = [(a, b) for i, a in enumerate(stats) for b in stats[i + 1:] if a["model"] == b["model"]]
     if pairs:

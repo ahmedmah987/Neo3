@@ -70,6 +70,18 @@ def bootstrap_mean(values, level=0.9, samples=4_000, seed=0):
     return [means[int(samples * (1 - level) / 2)], means[int(samples * (1 + level) / 2) - 1]]
 
 
+def questions_needed(differences, power_z=0.8416, level_z=1.645):
+    """Questions needed for a paired difference this size to be detected with 80% power, with a 90% interval
+    that excludes zero, by the normal approximation and the spread observed here. Heavy tails make it
+    optimistic, so read it as a lower bound."""
+    if len(differences) < 3:
+        return None
+    mean, sd = statistics.fmean(differences), statistics.stdev(differences)
+    if mean == 0:
+        return None
+    return max(2, math.ceil(((level_z + power_z) * sd / abs(mean)) ** 2))   # an interval needs two
+
+
 def wilson(hits, n, z=1.645):
     """A 90% Wilson interval for a proportion."""
     if not n:
