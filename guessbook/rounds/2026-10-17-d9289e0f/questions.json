@@ -1,0 +1,117 @@
+{
+  "seed": "d9289e0fb387c7044a8f221cf37eed1de88e537b",
+  "questions": [
+    {
+      "q": 1,
+      "family": "primes_in_range",
+      "params": {
+        "a": 2815980,
+        "b": 2868969
+      },
+      "short": "primes in [2,815,980, 2,868,969]",
+      "text": "How many primes p satisfy 2,815,980 ≤ p ≤ 2,868,969?"
+    },
+    {
+      "q": 2,
+      "family": "stdlib_defs",
+      "params": {
+        "module": "fnmatch"
+      },
+      "short": "function definitions in `fnmatch`",
+      "text": "How many function definitions (def and async def, counting methods and nested functions) are in the source file of the standard-library module `fnmatch` in Python 3.13?"
+    },
+    {
+      "q": 3,
+      "family": "lis",
+      "params": {
+        "n": 339,
+        "seed": 2636454022
+      },
+      "short": "longest increasing subsequence, n = 339",
+      "text": "What is the average length of the longest increasing subsequence of a uniformly random permutation of 339 elements? (Settled by averaging 1,000 random permutations.)"
+    },
+    {
+      "q": 4,
+      "family": "birthday",
+      "params": {
+        "d": 188392
+      },
+      "short": "draws until a repeat, d = 188,392",
+      "text": "Integers are drawn uniformly at random from 1 to 188,392, with replacement, until some value appears for the second time. What is the expected number of draws, counting the repeat?"
+    },
+    {
+      "q": 5,
+      "family": "module_all",
+      "params": {
+        "module": "functools"
+      },
+      "short": "names in `functools.__all__`",
+      "text": "How many names are listed in `functools.__all__` in Python 3.13?"
+    },
+    {
+      "q": 6,
+      "family": "unicode_block",
+      "params": {
+        "lo": 8352,
+        "hi": 8399
+      },
+      "short": "assigned in the Currency Symbols block",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points in U+20A0–U+20CF (the Currency Symbols block) are assigned, that is, have a category other than Cn?"
+    },
+    {
+      "q": 7,
+      "family": "walk_max",
+      "params": {
+        "n": 1389,
+        "seed": 2297769626
+      },
+      "short": "highest point of a 1,389-step walk",
+      "text": "A simple random walk on the integers starts at 0 and takes 1,389 steps of +1 or −1, each with probability ½. What is the expected highest position it reaches (0 if it never rises above the start)? (Settled by averaging 4,000 random walks.)"
+    },
+    {
+      "q": 8,
+      "family": "unicode_category",
+      "params": {
+        "category": "Nd"
+      },
+      "short": "code points in category Nd",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have the general category Nd (decimal digits)?"
+    },
+    {
+      "q": 9,
+      "family": "unicode_word",
+      "params": {
+        "word": "TRIANGLE"
+      },
+      "short": "Unicode names with the word TRIANGLE",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have a name containing the whole word TRIANGLE? (Names are split into words at spaces and hyphens.)"
+    },
+    {
+      "q": 10,
+      "family": "collatz_steps",
+      "params": {
+        "n": 293589806402
+      },
+      "short": "Collatz steps from 293,589,806,402",
+      "text": "Starting from 293,589,806,402, how many steps does the Collatz process (halve if even, 3n + 1 if odd) take to reach 1?"
+    },
+    {
+      "q": 11,
+      "family": "digit_sum_pow2",
+      "params": {
+        "n": 9004
+      },
+      "short": "digit sum of 2^9004",
+      "text": "What is the sum of the decimal digits of 2^9004?"
+    },
+    {
+      "q": 12,
+      "family": "stdlib_lines",
+      "params": {
+        "module": "reprlib"
+      },
+      "short": "lines in `reprlib`",
+      "text": "How many lines are in the source file of the standard-library module `reprlib` in Python 3.13 (every line, blank or not)?"
+    }
+  ]
+}

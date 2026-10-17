@@ -176,6 +176,23 @@ Worked answers by kind of question: knowledge means recalling, statistical means
 | 11 | digit sum of 2^7726 | 10,474 | 10,467 (50✓ 90✓) | 10,467 (50✓ 90✓) |
 | 12 | primes in [106,716, 116,750] | 853 | 863 (50✓ 90✓) | 858 (50✓ 90✓) |
 
+### 2026-10-17-d9289e0f
+
+| # | Question | Answer | Instinct | Worked |
+|---|---|---|---|---|
+| 1 | primes in [2,815,980, 2,868,969] | pending | 3,566 | — |
+| 2 | function definitions in `fnmatch` | pending | 6 | — |
+| 3 | longest increasing subsequence, n = 339 | pending | 32.65 | — |
+| 4 | draws until a repeat, d = 188,392 | pending | 544.6 | — |
+| 5 | names in `functools.__all__` | pending | 14 | — |
+| 6 | assigned in the Currency Symbols block | pending | 33 | — |
+| 7 | highest point of a 1,389-step walk | pending | 29.25 | — |
+| 8 | code points in category Nd | pending | 680 | — |
+| 9 | Unicode names with the word TRIANGLE | pending | 280 | — |
+| 10 | Collatz steps from 293,589,806,402 | pending | 265 | — |
+| 11 | digit sum of 2^9004 | pending | 12,200 | — |
+| 12 | lines in `reprlib` | pending | 230 | — |
+
 ### 2026-10-17-eb919409
 
 | # | Question | Answer | Instinct | Worked |
