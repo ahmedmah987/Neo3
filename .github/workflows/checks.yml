@@ -1,0 +1,48 @@
+# Runs the repository's checks on every push and pull request.
+name: checks
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  selftest:
+    name: selftest (Python ${{ matrix.python }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install the optional Claude SDK, so its adapter is tested too
+        run: pip install anthropic
+      - name: Calibench self-test
+        run: python -m calibench selftest
+      - name: Guessbook family checks
+        run: python guessbook/check.py
+
+  records:
+    name: published records hold
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: The guessbook score is up to date
+        run: |
+          python guessbook/score.py > /dev/null
+          git diff --exit-code guessbook/SCORE.md
+      - name: The results table is generated from current reports
+        run: |
+          python -m calibench index calibench/results --write calibench/results/README.md
+          git diff --exit-code calibench/results/README.md
+      - name: Every published run verifies
+        run: python -m calibench verify calibench/results/*/

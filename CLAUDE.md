@@ -27,5 +27,5 @@ A standard suite (`--suite v1`, `--suite v2`) never changes: `selftest` checks i
 - Everything in the repository is in English (code, docs, journal) so anyone can work with it.
 - The owner's language is Arabic. In conversation, reply in the language the owner writes in.
 - Don't assume the owner's name.
-- Before any commit, run the checks for whatever you changed.
+- Before any commit, run the checks for whatever you changed. GitHub runs them too on every push (`.github/workflows/checks.yml`); a red run there is work to do now.
 - Code is under the MIT License and everything else under CC BY 4.0, as the root README says. New work follows the same split.
