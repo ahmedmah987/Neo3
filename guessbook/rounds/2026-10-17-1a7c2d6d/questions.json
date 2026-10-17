@@ -1,0 +1,117 @@
+{
+  "seed": "1a7c2d6d99673143c4e1886bdc6cbf0ce19d275e",
+  "questions": [
+    {
+      "q": 1,
+      "family": "walk_max",
+      "params": {
+        "n": 441,
+        "seed": 4280923366
+      },
+      "short": "highest point of a 441-step walk",
+      "text": "A simple random walk on the integers starts at 0 and takes 441 steps of +1 or −1, each with probability ½. What is the expected highest position it reaches (0 if it never rises above the start)? (Settled by averaging 4,000 random walks.)"
+    },
+    {
+      "q": 2,
+      "family": "rect_distance",
+      "params": {
+        "b": 8.9,
+        "seed": 3001309734
+      },
+      "short": "mean distance in a 1 × 8.9 rectangle",
+      "text": "Two points are chosen independently and uniformly at random in a 1 × 8.9 rectangle. What is the expected distance between them? (Settled by averaging 400,000 random pairs.)"
+    },
+    {
+      "q": 3,
+      "family": "lis",
+      "params": {
+        "n": 1078,
+        "seed": 4080375485
+      },
+      "short": "longest increasing subsequence, n = 1,078",
+      "text": "What is the average length of the longest increasing subsequence of a uniformly random permutation of 1,078 elements? (Settled by averaging 1,000 random permutations.)"
+    },
+    {
+      "q": 4,
+      "family": "unicode_category",
+      "params": {
+        "category": "Nl"
+      },
+      "short": "code points in category Nl",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have the general category Nl (letter numbers)?"
+    },
+    {
+      "q": 5,
+      "family": "unicode_word",
+      "params": {
+        "word": "GREEK"
+      },
+      "short": "Unicode names with the word GREEK",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have a name containing the whole word GREEK? (Names are split into words at spaces and hyphens.)"
+    },
+    {
+      "q": 6,
+      "family": "module_all",
+      "params": {
+        "module": "enum"
+      },
+      "short": "names in `enum.__all__`",
+      "text": "How many names are listed in `enum.__all__` in Python 3.13?"
+    },
+    {
+      "q": 7,
+      "family": "stdlib_lines",
+      "params": {
+        "module": "optparse"
+      },
+      "short": "lines in `optparse`",
+      "text": "How many lines are in the source file of the standard-library module `optparse` in Python 3.13 (every line, blank or not)?"
+    },
+    {
+      "q": 8,
+      "family": "collatz_steps",
+      "params": {
+        "n": 252385005544
+      },
+      "short": "Collatz steps from 252,385,005,544",
+      "text": "Starting from 252,385,005,544, how many steps does the Collatz process (halve if even, 3n + 1 if odd) take to reach 1?"
+    },
+    {
+      "q": 9,
+      "family": "primes_in_range",
+      "params": {
+        "a": 224907,
+        "b": 259190
+      },
+      "short": "primes in [224,907, 259,190]",
+      "text": "How many primes p satisfy 224,907 ≤ p ≤ 259,190?"
+    },
+    {
+      "q": 10,
+      "family": "birthday",
+      "params": {
+        "d": 562753
+      },
+      "short": "draws until a repeat, d = 562,753",
+      "text": "Integers are drawn uniformly at random from 1 to 562,753, with replacement, until some value appears for the second time. What is the expected number of draws, counting the repeat?"
+    },
+    {
+      "q": 11,
+      "family": "stdlib_defs",
+      "params": {
+        "module": "trace"
+      },
+      "short": "function definitions in `trace`",
+      "text": "How many function definitions (def and async def, counting methods and nested functions) are in the source file of the standard-library module `trace` in Python 3.13?"
+    },
+    {
+      "q": 12,
+      "family": "digit_sum_pow2",
+      "params": {
+        "n": 4686
+      },
+      "short": "digit sum of 2^4686",
+      "text": "What is the sum of the decimal digits of 2^4686?"
+    }
+  ]
+}
