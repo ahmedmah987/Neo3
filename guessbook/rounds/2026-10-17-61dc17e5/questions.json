@@ -1,0 +1,118 @@
+{
+  "seed": "61dc17e52f31b676e1270d3fae82488ac27ee54f",
+  "questions": [
+    {
+      "q": 1,
+      "family": "lis",
+      "params": {
+        "n": 3997,
+        "seed": 3085181719
+      },
+      "short": "longest increasing subsequence, n = 3,997",
+      "text": "What is the average length of the longest increasing subsequence of a uniformly random permutation of 3,997 elements? (Settled by averaging 1,000 random permutations.)"
+    },
+    {
+      "q": 2,
+      "family": "module_all",
+      "params": {
+        "module": "warnings"
+      },
+      "short": "names in `warnings.__all__`",
+      "text": "How many names are listed in `warnings.__all__` in Python 3.13?"
+    },
+    {
+      "q": 3,
+      "family": "unicode_category",
+      "params": {
+        "category": "Me"
+      },
+      "short": "code points in category Me",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have the general category Me (enclosing marks)?"
+    },
+    {
+      "q": 4,
+      "family": "stdlib_defs",
+      "params": {
+        "module": "bdb"
+      },
+      "short": "function definitions in `bdb`",
+      "text": "How many function definitions (def and async def, counting methods and nested functions) are in the source file of the standard-library module `bdb` in Python 3.13?"
+    },
+    {
+      "q": 5,
+      "family": "birthday",
+      "params": {
+        "d": 20895
+      },
+      "short": "draws until a repeat, d = 20,895",
+      "text": "Integers are drawn uniformly at random from 1 to 20,895, with replacement, until some value appears for the second time. What is the expected number of draws, counting the repeat?"
+    },
+    {
+      "q": 6,
+      "family": "primes_in_range",
+      "params": {
+        "a": 1134200,
+        "b": 1145075
+      },
+      "short": "primes in [1,134,200, 1,145,075]",
+      "text": "How many primes p satisfy 1,134,200 ≤ p ≤ 1,145,075?"
+    },
+    {
+      "q": 7,
+      "family": "stdlib_lines",
+      "params": {
+        "module": "socket"
+      },
+      "short": "lines in `socket`",
+      "text": "How many lines are in the source file of the standard-library module `socket` in Python 3.13 (every line, blank or not)?"
+    },
+    {
+      "q": 8,
+      "family": "unicode_word",
+      "params": {
+        "word": "MATHEMATICAL"
+      },
+      "short": "Unicode names with the word MATHEMATICAL",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have a name containing the whole word MATHEMATICAL? (Names are split into words at spaces and hyphens.)"
+    },
+    {
+      "q": 9,
+      "family": "walk_max",
+      "params": {
+        "n": 579,
+        "seed": 399089847
+      },
+      "short": "highest point of a 579-step walk",
+      "text": "A simple random walk on the integers starts at 0 and takes 579 steps of +1 or −1, each with probability ½. What is the expected highest position it reaches (0 if it never rises above the start)? (Settled by averaging 4,000 random walks.)"
+    },
+    {
+      "q": 10,
+      "family": "collatz_steps",
+      "params": {
+        "n": 13994883000
+      },
+      "short": "Collatz steps from 13,994,883,000",
+      "text": "Starting from 13,994,883,000, how many steps does the Collatz process (halve if even, 3n + 1 if odd) take to reach 1?"
+    },
+    {
+      "q": 11,
+      "family": "rect_distance",
+      "params": {
+        "b": 1.5,
+        "seed": 134086529
+      },
+      "short": "mean distance in a 1 × 1.5 rectangle",
+      "text": "Two points are chosen independently and uniformly at random in a 1 × 1.5 rectangle. What is the expected distance between them? (Settled by averaging 400,000 random pairs.)"
+    },
+    {
+      "q": 12,
+      "family": "unicode_block",
+      "params": {
+        "lo": 5792,
+        "hi": 5887
+      },
+      "short": "assigned in the Runic block",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points in U+16A0–U+16FF (the Runic block) are assigned, that is, have a category other than Cn?"
+    }
+  ]
+}

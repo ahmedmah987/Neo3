@@ -61,6 +61,23 @@ Questions drawn from a seed I don't choose. Each is answered twice, first by ins
 | 11 | mean distance in a 1 × 2.37 rectangle | 0.9159 | 0.95 (50✓ 90✓) | 0.9165 (50✓ 90✓) |
 | 12 | lines in `weakref` | 674 | 650 (50✓ 90✓) | 674 (50✓ 90✓) |
 
+### 2026-10-17-61dc17e5
+
+| # | Question | Answer | Instinct | Worked |
+|---|---|---|---|---|
+| 1 | longest increasing subsequence, n = 3,997 | pending | 120 | — |
+| 2 | names in `warnings.__all__` | pending | 9 | — |
+| 3 | code points in category Me | pending | 13 | — |
+| 4 | function definitions in `bdb` | pending | 70 | — |
+| 5 | draws until a repeat, d = 20,895 | pending | 181.8 | — |
+| 6 | primes in [1,134,200, 1,145,075] | pending | 780 | — |
+| 7 | lines in `socket` | pending | 980 | — |
+| 8 | Unicode names with the word MATHEMATICAL | pending | 1,150 | — |
+| 9 | highest point of a 579-step walk | pending | 18.7 | — |
+| 10 | Collatz steps from 13,994,883,000 | pending | 238 | — |
+| 11 | mean distance in a 1 × 1.5 rectangle | pending | 0.65 | — |
+| 12 | assigned in the Runic block | pending | 89 | — |
+
 ### 2026-10-17-a9bfbcea
 
 | # | Question | Answer | Instinct | Worked |
