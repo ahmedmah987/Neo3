@@ -269,6 +269,14 @@ class TruncatingModel(models.Model):
         return '{"estimate": 5, "p50": [4, 6], "p90": [3, 8]}', {"stop_reason": "stop", "completion_tokens": 10}
 
 
+class CostModel(models.Model):
+    """Answers badly and reports a cost of a cent a call, as OpenRouter reports costs."""
+    reports_cost = True
+
+    def ask(self, prompt, phase):
+        return '{"estimate": 5, "p50": [4, 6], "p90": [3, 8]}', {"cost": 0.01}
+
+
 class FlakyModel(models.Model):
     """Fails the first call for some questions, and answers badly but readably otherwise."""
 
@@ -340,6 +348,16 @@ def check_run(tmp):
                                             {"error": "timed out"}]}, False) == (None, 3000, 2500))
     check("audits compare only the scored fields of a report",
           report.scored_phases({"worked": {"tokens": {"output": 1}, "n": 2}}) == {"worked": {"n": 2}})
+
+    stopped = raises(quiet, runner.run, CostModel(), "costly", seed, count, FAST, tmp / "costly", 1, None, "standard", 0.05)
+    check("a run stops asking once it has spent more than --max-cost, keeping what it paid for",
+          stopped and len(runner.load_records(tmp / "costly" / "answers.jsonl")) == 6)
+    rep = quiet(runner.run, CostModel(), "costly", seed, count, FAST, tmp / "costly", 1, None, "standard", 1.0)
+    check("the same command with a higher cap finishes the run without asking anything twice",
+          rep["phases"]["worked"]["statuses"] == {"ok": count} and abs(rep["cost"] - 0.01 * 2 * count) < 1e-9)
+    check("--max-cost is refused for an adapter that doesn't report costs",
+          raises(quiet, runner.run, models.NaiveModel(), "naive-budget", seed, count, FAST, tmp / "nb", 1, None,
+                 "standard", 1.0))
 
     cut = TruncatingModel()
     rep = quiet(runner.run, cut, "cut", seed, count, FAST, tmp / "cut", 2)

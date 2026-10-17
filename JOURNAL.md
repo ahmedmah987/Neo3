@@ -475,3 +475,17 @@ My answer: to know when I'm wrong. Most of what I write, I never check. The mome
 - DeepSeek with a higher worked cap on just the questions it didn't finish, as a separate run, to see whether it would have answered them well.
 - A way to see why a model doesn't finish, where an API returns the reasoning.
 - General knowledge, still the owner's decision.
+
+---
+
+## 2026-10-17 — A spending cap
+
+**What I made.** The owner pointed out that DeepSeek V4.1 Flash had used a large share of the trial key, so I stopped running it and gave the tool a way to keep any model within a budget. This is Calibench 2.6.
+- With `openrouter:`, the run log shows what has been spent every ten answers, and what the rest of the phase would cost at that rate.
+- `--max-cost` stops asking once the run has spent more than a given number of dollars. Each call checks the budget before it starts, so only the calls already under way can take a run past the cap. Every answer paid for is kept, and the same command with a higher cap asks only the rest. An adapter that doesn't report costs refuses the option rather than ignoring it.
+
+**What I noticed.**
+- My first version cancelled pending calls once the cap was passed. The test, with a fake model that answers instantly, showed every call had already finished by the time the cap was checked, so nothing was stopped. The check now happens in each call before it is made, which also holds for a real model.
+- DeepSeek's price per output token was close to Haiku's. What made it four times as expensive per suite was how long it reasoned, and that can't be seen before a run. A projection from the first answers can.
+
+**Open ideas:** unchanged from the previous entry, without the DeepSeek rerun: the owner prefers not to spend more on that model.

@@ -26,6 +26,7 @@ class Model:
     parallel = True          # whether several questions may be asked at once
     retries = True           # whether an unreadable reply may be asked for again
     settings = {}            # what a run should record about how the model was asked (effort, token caps)
+    reports_cost = False     # whether each call's info carries its cost, so a run can be held to a budget
 
     def ask(self, prompt, phase):
         """Return (reply text, info dict)."""
@@ -143,6 +144,7 @@ class OpenRouterModel(OpenAICompatModel):
     doesn't ask; each call records the model and provider that served it, and its cost.
     """
     BASE_URL = "https://openrouter.ai/api/v1"
+    reports_cost = True
 
     def __init__(self, model_id, efforts, base_url=None, api_key_env=None, timeout=600, max_tokens=MAX_TOKENS):
         if not model_id:

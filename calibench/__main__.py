@@ -70,7 +70,7 @@ def cmd_run(args):
                        instinct_effort=args.instinct_effort, worked_effort=args.worked_effort, timeout=args.timeout,
                        worked_max_tokens=args.worked_max_tokens)
     report = run(model, args.model, args.seed, args.count, args.families, args.out, args.workers, args.suite,
-                 args.prompts)
+                 args.prompts, args.max_cost)
     print(render(report), end="")
     counts = collections.Counter()
     for p in PHASES:
@@ -244,6 +244,8 @@ def main(argv=None):
     p.add_argument("--worked-max-tokens", type=int, default=32_000,
                    help="anthropic and openrouter: token cap for a worked answer, reasoning included (default 32,000). "
                    "A reply cut off at the cap is recorded as truncated and counts as unanswered")
+    p.add_argument("--max-cost", type=float, help="openrouter: stop asking once this run has spent more than this many "
+                   "US dollars, keeping every answer so far; the same command with a higher cap continues")
     p.add_argument("--timeout", type=float, default=600, help="seconds per call (default 600)")
     p.set_defaults(func=cmd_run)
 

@@ -20,6 +20,7 @@ import pathlib
 import platform
 import re
 import sys
+import threading
 import time
 import unicodedata
 
@@ -95,7 +96,12 @@ def load_records(path):
     return records
 
 
-def run(model, model_spec, seed, count=26, families=None, out=None, workers=4, suite=None, prompt_set="standard"):
+def run(model, model_spec, seed, count=26, families=None, out=None, workers=4, suite=None, prompt_set="standard",
+        max_cost=None):
+    """Ask, record, settle and score. With max_cost (dollars), stop asking once this invocation has spent
+    more than that, keeping every answer already paid for; the same command with a higher cap resumes."""
+    if max_cost is not None and not getattr(model, "reports_cost", False):
+        sys.exit("--max-cost needs an adapter that reports what each call costs (openrouter:)")
     out = pathlib.Path(out or default_dir(model_spec, seed))
     out.mkdir(parents=True, exist_ok=True)
     questions = draw(rng_from_seed(seed), count, families)
@@ -122,23 +128,50 @@ def run(model, model_spec, seed, count=26, families=None, out=None, workers=4, s
                if records.get((q["q"], phase), {}).get("status") not in KEPT]
     if pending:
         log(f"{model_spec}: {len(pending)} calls, seed {seed}, writing to {out}")
+    spent = 0.0
+    tally = threading.Lock()
+    over_budget = threading.Event()
+
+    def ask_within_budget(question, phase):
+        nonlocal spent
+        if over_budget.is_set():
+            return None                     # start no more paid calls; the ones already running finish
+        record = ask(model, question, phase, PROMPT_SETS[prompt_set])
+        with tally:
+            spent += sum(a.get("cost") or 0 for a in record["attempts"])
+            if max_cost is not None and spent > max_cost:
+                over_budget.set()
+        return record
+
     with open(answers_path, "a", encoding="utf-8") as f:
         pool_size = max(1, workers) if model.parallel else 1
         with concurrent.futures.ThreadPoolExecutor(pool_size) as pool:
             for phase in PHASES:                    # every instinct answer before any worked one
-                jobs = [pool.submit(ask, model, q, p, PROMPT_SETS[prompt_set]) for q, p in pending if p == phase]
+                jobs = [pool.submit(ask_within_budget, q, p) for q, p in pending if p == phase]
+                phase_start = spent
                 for done, job in enumerate(concurrent.futures.as_completed(jobs), 1):
                     record = job.result()
+                    if record is None:
+                        continue
                     records[(record["q"], phase)] = record
                     f.write(json.dumps(record, ensure_ascii=False) + "\n")
                     f.flush()
                     log(f"  {phase} {done}/{len(jobs)}: question {record['q']} {record['status']}")
+                    if (getattr(model, "reports_cost", False) and not over_budget.is_set()
+                            and (done % 10 == 0 or done == len(jobs))):
+                        rest = (spent - phase_start) / done * (len(jobs) - done)
+                        log(f"  spent ${spent:.3f} so far; the rest of the {phase} answers at this rate: "
+                            f"about ${rest:.2f}" + ("; worked answers usually cost more" if phase == "instinct" else ""))
                     working = working or record["status"] != "error"
                     if not working and done >= GIVE_UP_AFTER:
                         for j in jobs:
                             j.cancel()
                         sys.exit(f"the first {done} calls failed, so nothing more was asked. The last error:\n"
                                  f"  {record['attempts'][-1]['error']}\nFix it and run the same command again.")
+                if over_budget.is_set():
+                    sys.exit(f"spent ${spent:.3f}, over --max-cost ${max_cost:g}, so nothing more was asked. "
+                             "Every answer paid for is kept: run the same command with a higher --max-cost to "
+                             "continue.")
 
     ordered = [records[(q["q"], phase)] for phase in PHASES for q in questions]
     answers_path.write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in ordered), encoding="utf-8")
