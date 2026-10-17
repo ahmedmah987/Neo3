@@ -1,5 +1,6 @@
 """Command line: python3 -m calibench <command> --help"""
 import argparse
+import collections
 import json
 import pathlib
 import secrets
@@ -66,13 +67,20 @@ def cmd_run(args):
 
     resolve_draw(args)
     model = make_model(args.model, base_url=args.base_url, api_key_env=args.api_key_env,
-                       instinct_effort=args.instinct_effort, worked_effort=args.worked_effort, timeout=args.timeout)
+                       instinct_effort=args.instinct_effort, worked_effort=args.worked_effort, timeout=args.timeout,
+                       worked_max_tokens=args.worked_max_tokens)
     report = run(model, args.model, args.seed, args.count, args.families, args.out, args.workers, args.suite,
                  args.prompts)
     print(render(report), end="")
-    failed = sum(n for p in PHASES for s, n in report["phases"][p]["statuses"].items() if s not in ("ok", "refused"))
+    counts = collections.Counter()
+    for p in PHASES:
+        counts.update(report["phases"][p]["statuses"])
+    failed = counts["error"] + counts["unparsed"]
     if failed:
         print(f"\n{failed} calls failed or couldn't be read; run the same command again to retry them.", file=sys.stderr)
+    if counts["truncated"]:
+        print(f"\n{counts['truncated']} replies were cut off at the token cap and count as unanswered; a higher "
+              "--worked-max-tokens needs a new --out.", file=sys.stderr)
 
 
 def cmd_questions(args):
@@ -233,6 +241,9 @@ def main(argv=None):
                    help="anthropic and openrouter: effort for instinct answers (default low; none to omit)")
     p.add_argument("--worked-effort", default="high",
                    help="anthropic and openrouter: effort for worked answers (default high; none to omit)")
+    p.add_argument("--worked-max-tokens", type=int, default=32_000,
+                   help="anthropic and openrouter: token cap for a worked answer, reasoning included (default 32,000). "
+                   "A reply cut off at the cap is recorded as truncated and counts as unanswered")
     p.add_argument("--timeout", type=float, default=600, help="seconds per call (default 600)")
     p.set_defaults(func=cmd_run)
 

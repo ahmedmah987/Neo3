@@ -29,7 +29,8 @@ from .families import FAMILIES
 from .questions import draw, rng_from_seed, solve
 from .scoring import PHASES, SCORING
 
-KEPT = ("ok", "refused")
+KEPT = ("ok", "refused", "truncated")      # asking again would give the same result
+TRUNCATED = ("length", "max_tokens")       # stop reasons that mean the reply hit its token cap
 GIVE_UP_AFTER = 3          # calls that fail before any succeeds, which usually means a wrong key, URL or model
 
 
@@ -44,6 +45,10 @@ def default_dir(model_spec, seed):
 
 def write_json(path, data):
     path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+
+def normal(data):
+    return json.loads(json.dumps(data))
 
 
 def read_json(path):
@@ -72,6 +77,9 @@ def ask(model, question, phase, prompts=PROMPT_SETS["standard"]):
             break
         except ValueError:
             record["status"] = "unparsed"
+            if info.get("stop_reason") in TRUNCATED:   # cut off at the cap: asking again would be cut off too
+                record["status"] = "truncated"
+                break
     record["seconds"] = round(time.time() - start, 1)
     return record
 
@@ -96,11 +104,13 @@ def run(model, model_spec, seed, count=26, families=None, out=None, workers=4, s
         # questions.json records the prompts from 2.3.2; before that only a finished run's run.json did
         earlier = old.get("prompts") or (read_json(out / "run.json").get("prompts", "standard")
                                          if (out / "run.json").exists() else prompt_set)
-        if old["questions"] != questions or old["model"] != model_spec or earlier != prompt_set:
+        settings = normal(getattr(model, "settings", {}))
+        if (old["questions"] != questions or old["model"] != model_spec or earlier != prompt_set
+                or old.get("settings", settings) != settings):
             sys.exit(f"{out} holds a different run; choose another --out")
     else:
         write_json(out / "questions.json", {"seed": str(seed), "model": model_spec, "prompts": prompt_set,
-                                            "questions": questions})
+                                            "settings": getattr(model, "settings", {}), "questions": questions})
 
     answers_path = out / "answers.jsonl"
     records = load_records(answers_path)
@@ -140,6 +150,7 @@ def run(model, model_spec, seed, count=26, families=None, out=None, workers=4, s
         "families": sorted(families or FAMILIES),          # explicit, since "all" changes as families are added
         "suite": suite,
         "prompts": prompt_set,
+        "settings": getattr(model, "settings", {}),
         "scoring": SCORING,
         "python": platform.python_version(),
         "unicode": unicodedata.unidata_version,

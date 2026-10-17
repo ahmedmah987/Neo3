@@ -1,6 +1,6 @@
 # Calibench methodology
 
-This document describes what Calibench measures, how, and where the measurement can mislead. It describes Calibench 2.3.2 with scoring `log-wis-1`.
+This document describes what Calibench measures, how, and where the measurement can mislead. It describes Calibench 2.4.0 with scoring `log-wis-1`.
 
 ## What is measured
 
@@ -61,7 +61,9 @@ The worked prompt allows written working rather than demanding it, because some 
 
 **Effort.** Where the API allows it, the instinct call uses low reasoning effort and the worked call high (Claude through the official SDK: `output_config.effort`; OpenRouter: `reasoning.effort`, and then only providers that honour the parameter). Models that always reason, such as Claude Opus 5.5, still reason a little on instinct calls, so instinct is "little reasoning", not "none", and isn't comparable across providers.
 
-**Reading replies.** The answer is the last JSON object in the reply that has an `estimate`. Numbers may be given as strings with thousands separators. Interval ends are put in order. The estimate isn't required to lie inside its intervals, because each part is scored on its own. If no answer can be read, the question is asked once more with a reminder of the format. Each call ends with a status: `ok`, `unparsed`, `refused` (the API's refusal stop reason or a content filter) or `error`.
+**Reading replies.** The answer is the last JSON object in the reply that has an `estimate`. Numbers may be given as strings with thousands separators. Interval ends are put in order. The estimate isn't required to lie inside its intervals, because each part is scored on its own. If no answer can be read, the question is asked once more with a reminder of the format. Each call ends with a status: `ok`, `unparsed`, `refused` (the API's refusal stop reason or a content filter), `truncated` (the reply hit its token cap before giving an answer; asking again under the same cap would be cut off again, so it isn't retried) or `error`.
+
+**Settings.** From Calibench 2.4 each run records how the model was asked: the effort for each phase and the token caps (8,000 for instinct answers and, by default, 32,000 for worked ones, reasoning included; `--worked-max-tokens` changes the second). A run can't be resumed with other settings. Effort names don't mean the same amount of reasoning across models: at high effort Claude Haiku 5.5 reasoned about 3,400 tokens per worked answer, while DeepSeek V4.1 Flash reasoned 20,000–32,000 in a trial. The reasoning tokens each report gives are the comparable measure.
 
 **No model substitution.** Calibench never enables server-side fallbacks that retry a refused request on another model. Each call records the model, and on OpenRouter the provider, that actually served it.
 

@@ -25,6 +25,7 @@ MAX_TOKENS = {"instinct": 8_000, "worked": 32_000}
 class Model:
     parallel = True          # whether several questions may be asked at once
     retries = True           # whether an unreadable reply may be asked for again
+    settings = {}            # what a run should record about how the model was asked (effort, token caps)
 
     def ask(self, prompt, phase):
         """Return (reply text, info dict)."""
@@ -39,13 +40,14 @@ class AnthropicModel(Model):
     this model's name. A refusal is recorded as a refusal instead.
     """
 
-    def __init__(self, model_id, efforts, base_url=None, timeout=600):
+    def __init__(self, model_id, efforts, base_url=None, timeout=600, max_tokens=MAX_TOKENS):
         try:
             import anthropic
         except ImportError:
             sys.exit("the anthropic: adapter needs the official SDK: pip install anthropic")
         self.model_id = model_id or "claude-opus-5-5"
-        self.efforts = efforts
+        self.efforts, self.max_tokens = efforts, max_tokens
+        self.settings = {"effort": efforts, "max_tokens": max_tokens}
         options = {"timeout": timeout}
         if base_url:
             options["base_url"] = base_url
@@ -57,7 +59,7 @@ class AnthropicModel(Model):
             extra["output_config"] = {"effort": self.efforts[phase]}
         with self.client.messages.stream(
             model=self.model_id,
-            max_tokens=MAX_TOKENS[phase],
+            max_tokens=self.max_tokens[phase],
             messages=[{"role": "user", "content": prompt}],
             **extra,
         ) as stream:
@@ -142,7 +144,7 @@ class OpenRouterModel(OpenAICompatModel):
     """
     BASE_URL = "https://openrouter.ai/api/v1"
 
-    def __init__(self, model_id, efforts, base_url=None, api_key_env=None, timeout=600):
+    def __init__(self, model_id, efforts, base_url=None, api_key_env=None, timeout=600, max_tokens=MAX_TOKENS):
         if not model_id:
             sys.exit("openrouter: needs a model id, for example openrouter:anthropic/claude-opus-5.5")
         base = (base_url or self.BASE_URL).rstrip("/")
@@ -160,10 +162,12 @@ class OpenRouterModel(OpenAICompatModel):
         info = found[model_id]
         self.reasoning = "reasoning" in (info.get("supported_parameters") or [])
         self.max_output = (info.get("top_provider") or {}).get("max_completion_tokens")
+        self.max_tokens = {phase: min(cap, self.max_output or cap) for phase, cap in max_tokens.items()}
+        self.settings = {"effort": efforts if self.reasoning else None, "max_tokens": self.max_tokens}
 
     def payload(self, prompt, phase):
         data = super().payload(prompt, phase)
-        data["max_tokens"] = min(MAX_TOKENS[phase], self.max_output or MAX_TOKENS[phase])
+        data["max_tokens"] = self.max_tokens[phase]
         effort = self.efforts.get(phase)
         if self.reasoning and effort not in (None, "", "none"):
             data["reasoning"] = {"effort": effort, "exclude": True}
@@ -237,14 +241,17 @@ class NaiveModel(Model):
         return json.dumps(KNOW_NOTHING), {}
 
 
-def make_model(spec, base_url=None, api_key_env=None, instinct_effort="low", worked_effort="high", timeout=600):
+def make_model(spec, base_url=None, api_key_env=None, instinct_effort="low", worked_effort="high", timeout=600,
+               worked_max_tokens=MAX_TOKENS["worked"]):
     scheme, _, rest = spec.partition(":")
+    caps = {**MAX_TOKENS, "worked": worked_max_tokens}
     if scheme == "anthropic":
-        return AnthropicModel(rest, {"instinct": instinct_effort, "worked": worked_effort}, base_url, timeout)
+        return AnthropicModel(rest, {"instinct": instinct_effort, "worked": worked_effort}, base_url, timeout, caps)
     if scheme == "openai-compat":
         return OpenAICompatModel(rest, base_url, api_key_env, timeout)
     if scheme == "openrouter":
-        return OpenRouterModel(rest, {"instinct": instinct_effort, "worked": worked_effort}, base_url, api_key_env, timeout)
+        return OpenRouterModel(rest, {"instinct": instinct_effort, "worked": worked_effort}, base_url, api_key_env,
+                               timeout, caps)
     if scheme == "cmd":
         return CommandModel(rest, timeout)
     if scheme == "replies":

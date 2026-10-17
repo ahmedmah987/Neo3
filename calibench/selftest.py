@@ -255,6 +255,20 @@ class TokenModel(models.Model):
         return '{"estimate": 5, "p50": [4, 6], "p90": [3, 8]}', usage
 
 
+class TruncatingModel(models.Model):
+    """Never finishes a worked answer within its cap, as a long reasoner can; answers instinct questions."""
+    settings = {"effort": {"instinct": "low", "worked": "high"}, "max_tokens": {"instinct": 8000, "worked": 100}}
+
+    def __init__(self):
+        self.calls = 0
+
+    def ask(self, prompt, phase):
+        self.calls += 1
+        if phase == "worked":
+            return "Let me think about this very carefully, step by", {"stop_reason": "length", "completion_tokens": 100}
+        return '{"estimate": 5, "p50": [4, 6], "p90": [3, 8]}', {"stop_reason": "stop", "completion_tokens": 10}
+
+
 class FlakyModel(models.Model):
     """Fails the first call for some questions, and answers badly but readably otherwise."""
 
@@ -325,6 +339,22 @@ def check_run(tmp):
                                             {"error": "timed out"}]}, False) == (None, 3000, 2500))
     check("audits compare only the scored fields of a report",
           report.scored_phases({"worked": {"tokens": {"output": 1}, "n": 2}}) == {"worked": {"n": 2}})
+
+    cut = TruncatingModel()
+    rep = quiet(runner.run, cut, "cut", seed, count, FAST, tmp / "cut", 2)
+    check("a reply cut off at its token cap is truncated, asked once, and counts as unanswered",
+          rep["phases"]["worked"]["statuses"] == {"truncated": count} and cut.calls == 2 * count
+          and all(r["worked"].get("imputed") for r in rep["questions"]))
+    quiet(runner.run, cut, "cut", seed, count, FAST, tmp / "cut", 2)
+    meta = json.loads((tmp / "cut" / "run.json").read_text())
+    check("truncated replies aren't asked again on resuming, and the run records its settings",
+          cut.calls == 2 * count and meta["settings"] == TruncatingModel.settings
+          and "Settings: effort low for instinct and high for worked answers; token caps of 8,000 and 100."
+          in (tmp / "cut" / "report.md").read_text())
+    wider = TruncatingModel()
+    wider.settings = {**TruncatingModel.settings, "max_tokens": {"instinct": 8000, "worked": 64000}}
+    check("a run can't be resumed with other settings",
+          raises(quiet, runner.run, wider, "cut", seed, count, FAST, tmp / "cut", 2))
 
     rep = quiet(runner.run, models.NaiveModel(), "mock:naive", seed, count, FAST, tmp / "naive", 3)
     md = (tmp / "naive" / "report.md").read_text()
@@ -520,7 +550,10 @@ def check_openrouter():
                   raises(models.make_model, "openrouter:maker/model-c", server.url))
             server.json(200, listing)
             model = models.make_model("openrouter:maker/model-a", server.url, instinct_effort="low", worked_effort="high")
-            check("openrouter: looks the model up first", server.requests[-1]["path"] == "/models")
+            check("openrouter: looks the model up first, and knows the settings it will ask with",
+                  server.requests[-1]["path"] == "/models"
+                  and model.settings == {"effort": {"instinct": "low", "worked": "high"},
+                                         "max_tokens": {"instinct": 8000, "worked": 10_000}})
             server.json(200, {"model": "maker/model-a", "provider": "SomeHost",
                               "choices": [{"message": {"content": ANSWER}, "finish_reason": "stop"}],
                               "usage": {"prompt_tokens": 9, "completion_tokens": 30, "cost": 0.0012,

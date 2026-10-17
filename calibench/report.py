@@ -202,6 +202,17 @@ def render(report):
         lines[-1] += f" Scored with Calibench {scored['calibench']} ({scored['scoring']})."
     if report.get("suite"):
         lines += ["", f"**{report['suite'][0].upper() + report['suite'][1:]}.**"]
+    settings = meta.get("settings") or {}
+    if settings:
+        effort = settings.get("effort") or {}
+        caps = settings.get("max_tokens") or {}
+        parts = []
+        if effort:
+            parts.append(f"effort {effort.get('instinct') or 'default'} for instinct and "
+                         f"{effort.get('worked') or 'default'} for worked answers")
+        if caps:
+            parts.append(f"token caps of {caps.get('instinct', 0):,} and {caps.get('worked', 0):,}")
+        lines += ["", f"Settings: {'; '.join(parts)}."]
     if meta.get("prompts", "standard") != "standard":
         lines += ["", f"Prompts: **{meta['prompts']}** wording (see `prompts.py`)."]
     if report["served_models"]:
