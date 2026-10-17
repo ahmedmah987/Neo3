@@ -60,7 +60,23 @@
       },
       "certain": 0,
       "certain_right": 0,
-      "median_error": 0.024525811361231144
+      "median_error": 0.024525811361231144,
+      "fell": {
+        "n": 104,
+        "bins": [
+          7.0,
+          12.940685045948204,
+          26.74728487886383,
+          32.85839598997494,
+          10.201002506265667,
+          14.252631578947367
+        ],
+        "above": 57.0,
+        "above_ci": [
+          0.4675937383125802,
+          0.6261216821615684
+        ]
+      }
     },
     "worked": {
       "asked": 104,
@@ -108,7 +124,23 @@
       },
       "certain": 0,
       "certain_right": 0,
-      "median_error": 0.0070239147074697625
+      "median_error": 0.0070239147074697625,
+      "fell": {
+        "n": 104,
+        "bins": [
+          5.105263157894736,
+          12.53216374269006,
+          22.129490392648293,
+          35.24060150375941,
+          20.79248120300751,
+          8.2
+        ],
+        "above": 64.0,
+        "above_ci": [
+          0.534928892673366,
+          0.6899881164645905
+        ]
+      }
     }
   },
   "kinds": {
@@ -147,7 +179,23 @@
         },
         "certain": 0,
         "certain_right": 0,
-        "median_error": 0.0007645210649779775
+        "median_error": 0.0007645210649779775,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.0,
+            0.0,
+            3.0,
+            5.0,
+            0.0,
+            0.0
+          ],
+          "above": 5.0,
+          "above_ci": [
+            0.34797064700488106,
+            0.8388400507097236
+          ]
+        }
       },
       "knowledge": {
         "n": 48,
@@ -183,7 +231,23 @@
         },
         "certain": 0,
         "certain_right": 0,
-        "median_error": 0.13400969109630528
+        "median_error": 0.13400969109630528,
+        "fell": {
+          "n": 48,
+          "bins": [
+            6.0,
+            3.9406850459482037,
+            10.747284878863827,
+            13.302840434419384,
+            4.756558061821219,
+            9.252631578947367
+          ],
+          "above": 27.0,
+          "above_ci": [
+            0.4445155650198487,
+            0.6738135684509765
+          ]
+        }
       },
       "statistical": {
         "n": 48,
@@ -219,7 +283,23 @@
         },
         "certain": 0,
         "certain_right": 0,
-        "median_error": 0.017451007590968383
+        "median_error": 0.017451007590968383,
+        "fell": {
+          "n": 48,
+          "bins": [
+            1.0,
+            9.0,
+            13.0,
+            14.555555555555555,
+            5.444444444444445,
+            5.0
+          ],
+          "above": 25.0,
+          "above_ci": [
+            0.40431005638822487,
+            0.6351329881020502
+          ]
+        }
       }
     },
     "worked": {
@@ -257,7 +337,23 @@
         },
         "certain": 0,
         "certain_right": 0,
-        "median_error": 2.0976370658666727e-05
+        "median_error": 2.0976370658666727e-05,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.0,
+            0.0,
+            2.0,
+            6.0,
+            0.0,
+            0.0
+          ],
+          "above": 6.0,
+          "above_ci": [
+            0.46012839880848877,
+            0.9134929966207204
+          ]
+        }
       },
       "knowledge": {
         "n": 48,
@@ -293,7 +389,23 @@
         },
         "certain": 0,
         "certain_right": 0,
-        "median_error": 0.017016826694552713
+        "median_error": 0.017016826694552713,
+        "fell": {
+          "n": 48,
+          "bins": [
+            3.1052631578947367,
+            4.532163742690059,
+            11.129490392648288,
+            12.2406015037594,
+            10.792481203007517,
+            6.2
+          ],
+          "above": 29.0,
+          "above_ci": [
+            0.4854989560279377,
+            0.7117162664234375
+          ]
+        }
       },
       "statistical": {
         "n": 48,
@@ -329,7 +441,1381 @@
         },
         "certain": 0,
         "certain_right": 0,
-        "median_error": 0.007403474935228815
+        "median_error": 0.007403474935228815,
+        "fell": {
+          "n": 48,
+          "bins": [
+            2.0,
+            8.0,
+            9.0,
+            17.0,
+            10.0,
+            2.0
+          ],
+          "above": 29.0,
+          "above_ci": [
+            0.4854989560279377,
+            0.7117162664234375
+          ]
+        }
+      }
+    }
+  },
+  "families": {
+    "instinct": {
+      "birthday": {
+        "n": 8,
+        "score_mean": 0.121728620834368,
+        "score_median": 0.11958060527960071,
+        "score_ci": [
+          0.11956302211756409,
+          0.12451244344842496
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.7812679288397164,
+          "hits": 8,
+          "hits_ci": [
+            0.7472427908584185,
+            1.0
+          ],
+          "ranged": 8,
+          "ranged_hits": 8,
+          "verdict": "too wide (underconfident)"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 2.0972471622807487,
+          "hits": 8,
+          "hits_ci": [
+            0.7472427908584185,
+            1.0
+          ],
+          "ranged": 8,
+          "ranged_hits": 8,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.0007645210649779775,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.0,
+            0.0,
+            3.0,
+            5.0,
+            0.0,
+            0.0
+          ],
+          "above": 5.0,
+          "above_ci": [
+            0.34797064700488106,
+            0.8388400507097236
+          ]
+        }
+      },
+      "collatz_steps": {
+        "n": 8,
+        "score_mean": 0.25055672798855777,
+        "score_median": 0.15606824752805154,
+        "score_ci": [
+          0.15195544999055804,
+          0.35588192421987885
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 1.2380503539289893,
+          "hits": 2,
+          "hits_ci": [
+            0.0865070033792796,
+            0.5398716011915111
+          ],
+          "ranged": 8,
+          "ranged_hits": 2,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 2.3249437105720325,
+          "hits": 5,
+          "hits_ci": [
+            0.34797064700488106,
+            0.8388400507097236
+          ],
+          "ranged": 8,
+          "ranged_hits": 5,
+          "verdict": "too narrow (overconfident)"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.3556991496828182,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.0,
+            2.0,
+            0.0,
+            1.5555555555555556,
+            1.4444444444444444,
+            3.0
+          ],
+          "above": 6.0,
+          "above_ci": [
+            0.46012839880848877,
+            0.9134929966207204
+          ]
+        }
+      },
+      "digit_sum_pow2": {
+        "n": 8,
+        "score_mean": 0.03875056552719728,
+        "score_median": 0.011753328051194601,
+        "score_ci": [
+          0.010054114605299952,
+          0.08614167669489792
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.17783740798675018,
+          "hits": 2,
+          "hits_ci": [
+            0.0865070033792796,
+            0.5398716011915111
+          ],
+          "ranged": 8,
+          "ranged_hits": 2,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.5331715019116917,
+          "hits": 6,
+          "hits_ci": [
+            0.46012839880848877,
+            0.9134929966207204
+          ],
+          "ranged": 8,
+          "ranged_hits": 6,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.02210338941091871,
+        "fell": {
+          "n": 8,
+          "bins": [
+            1.0,
+            4.0,
+            1.0,
+            1.0,
+            0.0,
+            1.0
+          ],
+          "above": 2.0,
+          "above_ci": [
+            0.0865070033792796,
+            0.5398716011915111
+          ]
+        }
+      },
+      "lis": {
+        "n": 8,
+        "score_mean": 0.010727196510618082,
+        "score_median": 0.007705356677224269,
+        "score_ci": [
+          0.007485191466718282,
+          0.014492477740667722
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.04844812976790336,
+          "hits": 6,
+          "hits_ci": [
+            0.46012839880848877,
+            0.9134929966207204
+          ],
+          "ranged": 8,
+          "ranged_hits": 6,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.13114303714726638,
+          "hits": 8,
+          "hits_ci": [
+            0.7472427908584185,
+            1.0
+          ],
+          "ranged": 8,
+          "ranged_hits": 8,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.013405465046319537,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.0,
+            1.0,
+            0.0,
+            6.0,
+            1.0,
+            0.0
+          ],
+          "above": 7.0,
+          "above_ci": [
+            0.5888281744971084,
+            0.9716039186467054
+          ]
+        }
+      },
+      "module_all": {
+        "n": 8,
+        "score_mean": 0.13872897050491026,
+        "score_median": 0.08568850643344783,
+        "score_ci": [
+          0.06590786740728853,
+          0.2540049499465266
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.7197402790607776,
+          "hits": 6,
+          "hits_ci": [
+            0.46012839880848877,
+            0.9134929966207204
+          ],
+          "ranged": 8,
+          "ranged_hits": 6,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 1.1796115754326384,
+          "hits": 7,
+          "hits_ci": [
+            0.5888281744971084,
+            0.9716039186467054
+          ],
+          "ranged": 8,
+          "ranged_hits": 7,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.16025641025641024,
+        "fell": {
+          "n": 8,
+          "bins": [
+            1.0,
+            0.0,
+            1.8571428571428572,
+            2.9682539682539684,
+            2.1746031746031744,
+            0.0
+          ],
+          "above": 5.0,
+          "above_ci": [
+            0.34797064700488106,
+            0.8388400507097236
+          ]
+        }
+      },
+      "primes_in_range": {
+        "n": 8,
+        "score_mean": 0.005629520163417758,
+        "score_median": 0.004536369097223316,
+        "score_ci": [
+          0.0038318787200493955,
+          0.007575757523950322
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.02631189192439909,
+          "hits": 5,
+          "hits_ci": [
+            0.34797064700488106,
+            0.8388400507097236
+          ],
+          "ranged": 8,
+          "ranged_hits": 5,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.06938333110877615,
+          "hits": 7,
+          "hits_ci": [
+            0.5888281744971084,
+            0.9716039186467054
+          ],
+          "ranged": 8,
+          "ranged_hits": 7,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.006751425669869542,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.0,
+            1.0,
+            2.0,
+            3.0,
+            1.0,
+            1.0
+          ],
+          "above": 5.0,
+          "above_ci": [
+            0.34797064700488106,
+            0.8388400507097236
+          ]
+        }
+      },
+      "rect_distance": {
+        "n": 8,
+        "score_mean": 0.015583964287320123,
+        "score_median": 0.014472147169147152,
+        "score_ci": [
+          0.009892225451995643,
+          0.02207000583840237
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.0819122277456023,
+          "hits": 5,
+          "hits_ci": [
+            0.34797064700488106,
+            0.8388400507097236
+          ],
+          "ranged": 8,
+          "ranged_hits": 5,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.1561344290607994,
+          "hits": 8,
+          "hits_ci": [
+            0.7472427908584185,
+            1.0
+          ],
+          "ranged": 8,
+          "ranged_hits": 8,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.013962759981222008,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.0,
+            1.0,
+            4.0,
+            1.0,
+            2.0,
+            0.0
+          ],
+          "above": 3.0,
+          "above_ci": [
+            0.16115994929027644,
+            0.652029352995119
+          ]
+        }
+      },
+      "stdlib_defs": {
+        "n": 8,
+        "score_mean": 0.41812883935892003,
+        "score_median": 0.25624238166063595,
+        "score_ci": [
+          0.23527990518904218,
+          0.622878397951294
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 1.941394750030737,
+          "hits": 3,
+          "hits_ci": [
+            0.16115994929027644,
+            0.652029352995119
+          ],
+          "ranged": 8,
+          "ranged_hits": 3,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 5.285885148927987,
+          "hits": 5,
+          "hits_ci": [
+            0.34797064700488106,
+            0.8388400507097236
+          ],
+          "ranged": 8,
+          "ranged_hits": 5,
+          "verdict": "too narrow (overconfident)"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.707983193277311,
+        "fell": {
+          "n": 8,
+          "bins": [
+            3.0,
+            2.4444444444444446,
+            1.5555555555555556,
+            1.0,
+            0.0,
+            0.0
+          ],
+          "above": 1.0,
+          "above_ci": [
+            0.02839608135329466,
+            0.41117182550289144
+          ]
+        }
+      },
+      "stdlib_lines": {
+        "n": 8,
+        "score_mean": 0.24115705770124693,
+        "score_median": 0.16076538571903032,
+        "score_ci": [
+          0.10862248633420929,
+          0.3893528157310192
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 1.1701387129660006,
+          "hits": 2,
+          "hits_ci": [
+            0.0865070033792796,
+            0.5398716011915111
+          ],
+          "ranged": 8,
+          "ranged_hits": 2,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 2.9093020395826414,
+          "hits": 5,
+          "hits_ci": [
+            0.34797064700488106,
+            0.8388400507097236
+          ],
+          "ranged": 8,
+          "ranged_hits": 5,
+          "verdict": "too narrow (overconfident)"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.2774936061381074,
+        "fell": {
+          "n": 8,
+          "bins": [
+            1.0,
+            1.0,
+            0.0,
+            2.0,
+            1.8,
+            2.2
+          ],
+          "above": 6.0,
+          "above_ci": [
+            0.46012839880848877,
+            0.9134929966207204
+          ]
+        }
+      },
+      "unicode_block": {
+        "n": 8,
+        "score_mean": 0.010003767916250367,
+        "score_median": 0.004138038054607147,
+        "score_ci": [
+          0.0036361657235358317,
+          0.018775390243087983
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.05224752361221263,
+          "hits": 7,
+          "hits_ci": [
+            0.5888281744971084,
+            0.9716039186467054
+          ],
+          "ranged": 7,
+          "ranged_hits": 6,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.17012605627267113,
+          "hits": 7,
+          "hits_ci": [
+            0.5888281744971084,
+            0.9716039186467054
+          ],
+          "ranged": 8,
+          "ranged_hits": 7,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.0,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.0,
+            0.4962406015037594,
+            2.8345864661654137,
+            2.8345864661654137,
+            0.7819548872180452,
+            1.0526315789473684
+          ],
+          "above": 4.5,
+          "above_ci": [
+            0.2486251757128503,
+            0.7513748242871496
+          ]
+        }
+      },
+      "unicode_category": {
+        "n": 8,
+        "score_mean": 0.30681952561353737,
+        "score_median": 0.025834994998055277,
+        "score_ci": [
+          0.020885109578799133,
+          0.8720414549151038
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 1.3032382489629963,
+          "hits": 7,
+          "hits_ci": [
+            0.5888281744971084,
+            0.9716039186467054
+          ],
+          "ranged": 8,
+          "ranged_hits": 7,
+          "verdict": "too wide (underconfident)"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 5.812016680684594,
+          "hits": 7,
+          "hits_ci": [
+            0.5888281744971084,
+            0.9716039186467054
+          ],
+          "ranged": 8,
+          "ranged_hits": 7,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.0,
+        "fell": {
+          "n": 8,
+          "bins": [
+            1.0,
+            0.0,
+            4.5,
+            2.5,
+            0.0,
+            0.0
+          ],
+          "above": 2.5,
+          "above_ci": [
+            0.0865070033792796,
+            0.5398716011915111
+          ]
+        }
+      },
+      "unicode_word": {
+        "n": 8,
+        "score_mean": 0.6288896875244142,
+        "score_median": 0.5353099034565283,
+        "score_ci": [
+          0.3300220257281449,
+          0.965272580064682
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 2.892165167218903,
+          "hits": 2,
+          "hits_ci": [
+            0.0865070033792796,
+            0.5398716011915111
+          ],
+          "ranged": 8,
+          "ranged_hits": 2,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 9.095503978032015,
+          "hits": 2,
+          "hits_ci": [
+            0.0865070033792796,
+            0.5398716011915111
+          ],
+          "ranged": 8,
+          "ranged_hits": 2,
+          "verdict": "too narrow (overconfident)"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.5240708296144481,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            0.0,
+            6.0
+          ],
+          "above": 8.0,
+          "above_ci": [
+            0.7472427908584185,
+            1.0
+          ]
+        }
+      },
+      "walk_max": {
+        "n": 8,
+        "score_mean": 0.12797330838451632,
+        "score_median": 0.18526205108474256,
+        "score_ci": [
+          0.08188676132374617,
+          0.17388741325183718
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.8424297613995433,
+          "hits": 8,
+          "hits_ci": [
+            0.7472427908584185,
+            1.0
+          ],
+          "ranged": 8,
+          "ranged_hits": 8,
+          "verdict": "too wide (underconfident)"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 1.9964028561456235,
+          "hits": 8,
+          "hits_ci": [
+            0.7472427908584185,
+            1.0
+          ],
+          "ranged": 8,
+          "ranged_hits": 8,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.020548956497049697,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.0,
+            0.0,
+            6.0,
+            2.0,
+            0.0,
+            0.0
+          ],
+          "above": 2.0,
+          "above_ci": [
+            0.0865070033792796,
+            0.5398716011915111
+          ]
+        }
+      }
+    },
+    "worked": {
+      "birthday": {
+        "n": 8,
+        "score_mean": 0.045359919131829865,
+        "score_median": 0.0012153970604630083,
+        "score_ci": [
+          0.01569163627142965,
+          0.07503867007583225
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.29846870851912766,
+          "hits": 8,
+          "hits_ci": [
+            0.7472427908584185,
+            1.0
+          ],
+          "ranged": 8,
+          "ranged_hits": 8,
+          "verdict": "too wide (underconfident)"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.7751364065863682,
+          "hits": 8,
+          "hits_ci": [
+            0.7472427908584185,
+            1.0
+          ],
+          "ranged": 8,
+          "ranged_hits": 8,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 2.0976370658666727e-05,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.0,
+            0.0,
+            2.0,
+            6.0,
+            0.0,
+            0.0
+          ],
+          "above": 6.0,
+          "above_ci": [
+            0.46012839880848877,
+            0.9134929966207204
+          ]
+        }
+      },
+      "collatz_steps": {
+        "n": 8,
+        "score_mean": 0.13343846287161557,
+        "score_median": 0.08304203070560309,
+        "score_ci": [
+          0.06023113141863786,
+          0.21739937271253237
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.654133233193612,
+          "hits": 4,
+          "hits_ci": [
+            0.2486251757128503,
+            0.7513748242871496
+          ],
+          "ranged": 8,
+          "ranged_hits": 4,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 1.468327488902077,
+          "hits": 7,
+          "hits_ci": [
+            0.5888281744971084,
+            0.9716039186467054
+          ],
+          "ranged": 8,
+          "ranged_hits": 7,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.1387787470261697,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.0,
+            0.0,
+            2.0,
+            2.0,
+            3.0,
+            1.0
+          ],
+          "above": 6.0,
+          "above_ci": [
+            0.46012839880848877,
+            0.9134929966207204
+          ]
+        }
+      },
+      "digit_sum_pow2": {
+        "n": 8,
+        "score_mean": 0.013624699238185423,
+        "score_median": 0.010271499757646792,
+        "score_ci": [
+          0.008364003174838628,
+          0.0202672150187488
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.07111604487105583,
+          "hits": 3,
+          "hits_ci": [
+            0.16115994929027644,
+            0.652029352995119
+          ],
+          "ranged": 8,
+          "ranged_hits": 3,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.09654850101761037,
+          "hits": 7,
+          "hits_ci": [
+            0.5888281744971084,
+            0.9716039186467054
+          ],
+          "ranged": 8,
+          "ranged_hits": 7,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.018958105468761463,
+        "fell": {
+          "n": 8,
+          "bins": [
+            1.0,
+            4.0,
+            1.0,
+            2.0,
+            0.0,
+            0.0
+          ],
+          "above": 2.0,
+          "above_ci": [
+            0.0865070033792796,
+            0.5398716011915111
+          ]
+        }
+      },
+      "lis": {
+        "n": 8,
+        "score_mean": 0.008571198692034062,
+        "score_median": 0.006086689908416964,
+        "score_ci": [
+          0.004890601567987979,
+          0.012647236046664146
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.04268148469191074,
+          "hits": 3,
+          "hits_ci": [
+            0.16115994929027644,
+            0.652029352995119
+          ],
+          "ranged": 8,
+          "ranged_hits": 3,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.06489989643514782,
+          "hits": 7,
+          "hits_ci": [
+            0.5888281744971084,
+            0.9716039186467054
+          ],
+          "ranged": 8,
+          "ranged_hits": 7,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.011715090843438438,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.0,
+            0.0,
+            0.0,
+            3.0,
+            4.0,
+            1.0
+          ],
+          "above": 8.0,
+          "above_ci": [
+            0.7472427908584185,
+            1.0
+          ]
+        }
+      },
+      "module_all": {
+        "n": 8,
+        "score_mean": 0.01403527367135222,
+        "score_median": 0.0055961578793542275,
+        "score_ci": [
+          0.006232003501485435,
+          0.022513245053852875
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.048180801882697355,
+          "hits": 7,
+          "hits_ci": [
+            0.5888281744971084,
+            0.9716039186467054
+          ],
+          "ranged": 3,
+          "ranged_hits": 2,
+          "verdict": "too few to tell"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.20131046818131867,
+          "hits": 8,
+          "hits_ci": [
+            0.7472427908584185,
+            1.0
+          ],
+          "ranged": 8,
+          "ranged_hits": 8,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.0,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.10526315789473684,
+            1.5321637426900585,
+            1.915204678362573,
+            1.915204678362573,
+            2.3321637426900588,
+            0.2
+          ],
+          "above": 4.5,
+          "above_ci": [
+            0.2486251757128503,
+            0.7513748242871496
+          ]
+        }
+      },
+      "primes_in_range": {
+        "n": 8,
+        "score_mean": 0.005799206830821812,
+        "score_median": 0.004903649822686349,
+        "score_ci": [
+          0.004253476950530437,
+          0.007326601047770253
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.030333122597809625,
+          "hits": 4,
+          "hits_ci": [
+            0.2486251757128503,
+            0.7513748242871496
+          ],
+          "ranged": 8,
+          "ranged_hits": 4,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.05423320188724212,
+          "hits": 8,
+          "hits_ci": [
+            0.7472427908584185,
+            1.0
+          ],
+          "ranged": 8,
+          "ranged_hits": 8,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.006751425669869542,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.0,
+            1.0,
+            2.0,
+            2.0,
+            3.0,
+            0.0
+          ],
+          "above": 5.0,
+          "above_ci": [
+            0.34797064700488106,
+            0.8388400507097236
+          ]
+        }
+      },
+      "rect_distance": {
+        "n": 8,
+        "score_mean": 0.0004989065932861623,
+        "score_median": 0.0005167986781244825,
+        "score_ci": [
+          0.0004272182643897337,
+          0.0005758907104316193
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.0024721696610384997,
+          "hits": 8,
+          "hits_ci": [
+            0.7472427908584185,
+            1.0
+          ],
+          "ranged": 8,
+          "ranged_hits": 8,
+          "verdict": "too wide (underconfident)"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.008290660051788582,
+          "hits": 8,
+          "hits_ci": [
+            0.7472427908584185,
+            1.0
+          ],
+          "ranged": 8,
+          "ranged_hits": 8,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.0003349485926137756,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.0,
+            0.0,
+            2.0,
+            6.0,
+            0.0,
+            0.0
+          ],
+          "above": 6.0,
+          "above_ci": [
+            0.46012839880848877,
+            0.9134929966207204
+          ]
+        }
+      },
+      "stdlib_defs": {
+        "n": 8,
+        "score_mean": 0.11694284696431041,
+        "score_median": 0.06425061056127512,
+        "score_ci": [
+          0.05570195149831424,
+          0.19023578292700555
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.5481974916388954,
+          "hits": 4,
+          "hits_ci": [
+            0.2486251757128503,
+            0.7513748242871496
+          ],
+          "ranged": 8,
+          "ranged_hits": 4,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 1.4431960026271091,
+          "hits": 6,
+          "hits_ci": [
+            0.46012839880848877,
+            0.9134929966207204
+          ],
+          "ranged": 8,
+          "ranged_hits": 6,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.11512667660208643,
+        "fell": {
+          "n": 8,
+          "bins": [
+            2.0,
+            1.4444444444444444,
+            0.5555555555555556,
+            2.5555555555555554,
+            1.4444444444444444,
+            0.0
+          ],
+          "above": 4.0,
+          "above_ci": [
+            0.2486251757128503,
+            0.7513748242871496
+          ]
+        }
+      },
+      "stdlib_lines": {
+        "n": 8,
+        "score_mean": 0.16799305216743032,
+        "score_median": 0.022978881907261082,
+        "score_ci": [
+          0.04912070822497734,
+          0.3055719020039156
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.753004380545218,
+          "hits": 4,
+          "hits_ci": [
+            0.2486251757128503,
+            0.7513748242871496
+          ],
+          "ranged": 8,
+          "ranged_hits": 4,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 2.607695140417887,
+          "hits": 5,
+          "hits_ci": [
+            0.34797064700488106,
+            0.8388400507097236
+          ],
+          "ranged": 8,
+          "ranged_hits": 5,
+          "verdict": "too narrow (overconfident)"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.042549788247684996,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.0,
+            0.0,
+            2.5,
+            1.5,
+            1.0,
+            3.0
+          ],
+          "above": 5.5,
+          "above_ci": [
+            0.46012839880848877,
+            0.9134929966207204
+          ]
+        }
+      },
+      "unicode_block": {
+        "n": 8,
+        "score_mean": 0.0037057939614223577,
+        "score_median": 0.001305006263474726,
+        "score_ci": [
+          0.0010728155949230023,
+          0.006993878157965274
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.01148265998064335,
+          "hits": 8,
+          "hits_ci": [
+            0.7472427908584185,
+            1.0
+          ],
+          "ranged": 4,
+          "ranged_hits": 4,
+          "verdict": "too few to tell"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.08241684295430834,
+          "hits": 8,
+          "hits_ci": [
+            0.7472427908584185,
+            1.0
+          ],
+          "ranged": 8,
+          "ranged_hits": 8,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.0,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.0,
+            0.888888888888889,
+            1.8253968253968256,
+            2.9365079365079363,
+            2.3492063492063493,
+            0.0
+          ],
+          "above": 5.0,
+          "above_ci": [
+            0.34797064700488106,
+            0.8388400507097236
+          ]
+        }
+      },
+      "unicode_category": {
+        "n": 8,
+        "score_mean": 0.02895547251879302,
+        "score_median": 0.0052472852893498175,
+        "score_ci": [
+          0.004011936424818485,
+          0.07706294026473316
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.12203128710501876,
+          "hits": 7,
+          "hits_ci": [
+            0.5888281744971084,
+            0.9716039186467054
+          ],
+          "ranged": 5,
+          "ranged_hits": 4,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.5410103506812769,
+          "hits": 7,
+          "hits_ci": [
+            0.5888281744971084,
+            0.9716039186467054
+          ],
+          "ranged": 8,
+          "ranged_hits": 7,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.0,
+        "fell": {
+          "n": 8,
+          "bins": [
+            1.0,
+            0.6666666666666667,
+            2.833333333333333,
+            2.8333333333333335,
+            0.6666666666666667,
+            0.0
+          ],
+          "above": 3.5,
+          "above_ci": [
+            0.2486251757128503,
+            0.7513748242871496
+          ]
+        }
+      },
+      "unicode_word": {
+        "n": 8,
+        "score_mean": 0.09936818741469051,
+        "score_median": 0.06596362543317826,
+        "score_ci": [
+          0.03816489953890195,
+          0.1808751717365597
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.4621423605690711,
+          "hits": 2,
+          "hits_ci": [
+            0.0865070033792796,
+            0.5398716011915111
+          ],
+          "ranged": 8,
+          "ranged_hits": 2,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 1.4146048857132696,
+          "hits": 5,
+          "hits_ci": [
+            0.34797064700488106,
+            0.8388400507097236
+          ],
+          "ranged": 8,
+          "ranged_hits": 5,
+          "verdict": "too narrow (overconfident)"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.09111551089897546,
+        "fell": {
+          "n": 8,
+          "bins": [
+            0.0,
+            0.0,
+            1.5,
+            0.5,
+            3.0,
+            3.0
+          ],
+          "above": 6.5,
+          "above_ci": [
+            0.46012839880848877,
+            0.9134929966207204
+          ]
+        }
+      },
+      "walk_max": {
+        "n": 8,
+        "score_mean": 0.007171451568536443,
+        "score_median": 0.004838143226377833,
+        "score_ci": [
+          0.004292402671370951,
+          0.01078259221093114
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.0376312232871181,
+          "hits": 4,
+          "hits_ci": [
+            0.2486251757128503,
+            0.7513748242871496
+          ],
+          "ranged": 8,
+          "ranged_hits": 4,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.06506843548427993,
+          "hits": 7,
+          "hits_ci": [
+            0.5888281744971084,
+            0.9716039186467054
+          ],
+          "ranged": 8,
+          "ranged_hits": 7,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.008231488890573846,
+        "fell": {
+          "n": 8,
+          "bins": [
+            1.0,
+            3.0,
+            2.0,
+            2.0,
+            0.0,
+            0.0
+          ],
+          "above": 2.0,
+          "above_ci": [
+            0.0865070033792796,
+            0.5398716011915111
+          ]
+        }
       }
     }
   },

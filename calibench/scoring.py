@@ -115,6 +115,36 @@ def spearman(a, b):
         return None
 
 
+# The five stated values are quantiles at these levels, so they split the belief into six bins
+# that should hold these shares of the true answers.
+BINS = ("below the 90% interval", "in the 90% interval, below the 50%", "in the 50% interval, below the estimate",
+        "in the 50% interval, above the estimate", "in the 90% interval, above the 50%", "above the 90% interval")
+BIN_SHARES = (0.05, 0.20, 0.25, 0.25, 0.20, 0.05)
+
+
+def bin_weights(answer, x):
+    """Which of the six bins the true answer fell in. An answer on a boundary is shared between the
+    bins it touches in proportion to their expected shares, as a randomised PIT would place it.
+    Values out of order (an estimate outside its own interval) are sorted first."""
+    edges = sorted([answer["p90"][0], answer["p50"][0], answer["estimate"], answer["p50"][1], answer["p90"][1]])
+    lower, upper = [-math.inf] + edges, edges + [math.inf]
+    touched = [i for i in range(6) if lower[i] <= x <= upper[i]]
+    total = sum(BIN_SHARES[i] for i in touched)
+    return {i: BIN_SHARES[i] / total for i in touched}
+
+
+def where_answers_fell(pairs):
+    """Shares of true answers in each bin, and above the estimate, leaving out single-number answers."""
+    ranged = [(a, x) for a, x in pairs if a["p90"][0] != a["p90"][1]]
+    counts = [0.0] * 6
+    for a, x in ranged:
+        for i, w in bin_weights(a, x).items():
+            counts[i] += w
+    above = sum(1.0 if x > a["estimate"] else 0.5 if x == a["estimate"] else 0.0 for a, x in ranged)
+    return {"n": len(ranged), "bins": counts, "above": above,
+            "above_ci": wilson(round(above), len(ranged)) if ranged else None}
+
+
 def summarize(items):
     """Metrics for a list of (answer, truth, shift) triples.
 
@@ -145,4 +175,5 @@ def summarize(items):
     out["certain"] = len(points)
     out["certain_right"] = sum(a["estimate"] == x for a, x in points)
     out["median_error"] = statistics.median(abs(a["estimate"] - x) / max(abs(x), 1) for a, x in pairs)
+    out["fell"] = where_answers_fell(pairs)
     return out

@@ -23,7 +23,7 @@ import time
 import unicodedata
 
 from . import __version__
-from .prompts import PROMPTS, RETRY, parse_answer
+from .prompts import PROMPT_SETS, RETRY, parse_answer
 from .questions import draw, rng_from_seed, solve
 from .scoring import PHASES, SCORING
 
@@ -48,9 +48,9 @@ def read_json(path):
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def ask(model, question, phase):
+def ask(model, question, phase, prompts=PROMPT_SETS["standard"]):
     """One question in one phase, with one more try if the reply can't be read."""
-    prompt = PROMPTS[phase].format(text=question["text"])
+    prompt = prompts[phase].format(text=question["text"])
     record = {"q": question["q"], "phase": phase, "status": None, "answer": None, "attempts": []}
     start = time.time()
     for attempt in range(2 if model.retries else 1):
@@ -85,13 +85,14 @@ def load_records(path):
     return records
 
 
-def run(model, model_spec, seed, count=26, families=None, out=None, workers=4, suite=None):
+def run(model, model_spec, seed, count=26, families=None, out=None, workers=4, suite=None, prompt_set="standard"):
     out = pathlib.Path(out or default_dir(model_spec, seed))
     out.mkdir(parents=True, exist_ok=True)
     questions = draw(rng_from_seed(seed), count, families)
     if (out / "questions.json").exists():
         old = read_json(out / "questions.json")
-        if old["questions"] != questions or old["model"] != model_spec:
+        earlier = read_json(out / "run.json").get("prompts", "standard") if (out / "run.json").exists() else prompt_set
+        if old["questions"] != questions or old["model"] != model_spec or earlier != prompt_set:
             sys.exit(f"{out} holds a different run; choose another --out")
     else:
         write_json(out / "questions.json", {"seed": str(seed), "model": model_spec, "questions": questions})
@@ -110,7 +111,7 @@ def run(model, model_spec, seed, count=26, families=None, out=None, workers=4, s
         pool_size = max(1, workers) if model.parallel else 1
         with concurrent.futures.ThreadPoolExecutor(pool_size) as pool:
             for phase in PHASES:                    # every instinct answer before any worked one
-                jobs = [pool.submit(ask, model, q, p) for q, p in pending if p == phase]
+                jobs = [pool.submit(ask, model, q, p, PROMPT_SETS[prompt_set]) for q, p in pending if p == phase]
                 for done, job in enumerate(concurrent.futures.as_completed(jobs), 1):
                     record = job.result()
                     records[(record["q"], phase)] = record
@@ -133,6 +134,7 @@ def run(model, model_spec, seed, count=26, families=None, out=None, workers=4, s
         "count": count,
         "families": sorted(families) if families else "all",
         "suite": suite,
+        "prompts": prompt_set,
         "scoring": SCORING,
         "python": platform.python_version(),
         "unicode": unicodedata.unidata_version,

@@ -7,7 +7,7 @@ import sys
 
 from . import __version__
 from .families import FAMILIES, KINDS
-from .prompts import PROMPTS
+from .prompts import PROMPT_SETS
 from .questions import SUITES, draw, rng_from_seed
 from .scoring import PHASES
 
@@ -35,6 +35,8 @@ def add_draw_options(p):
     p.add_argument("--seed", help="any string; the same seed gives the same questions (default: a new random seed)")
     p.add_argument("--count", type=int, help="number of questions (default 26: every family twice)")
     p.add_argument("--families", type=family_list, help="comma-separated families to draw from (default: all)")
+    p.add_argument("--prompts", choices=sorted(PROMPT_SETS), default="standard",
+                   help="the wording of the two prompts (default standard; alt measures sensitivity to wording)")
 
 
 def resolve_draw(args, seed_required=False):
@@ -43,6 +45,7 @@ def resolve_draw(args, seed_required=False):
         if args.seed or args.count or args.families:
             sys.exit("--suite fixes the questions; leave out --seed, --count and --families")
         args.seed, args.count = SUITES[args.suite]["seed"], SUITES[args.suite]["count"]
+        args.families = SUITES[args.suite]["families"]
         python = ".".join(map(str, sys.version_info[:2]))
         if python != SUITES[args.suite]["python"]:
             print(f"warning: suite {args.suite} is settled on Python {SUITES[args.suite]['python']}; on Python {python} "
@@ -61,7 +64,8 @@ def cmd_run(args):
     resolve_draw(args)
     model = make_model(args.model, base_url=args.base_url, api_key_env=args.api_key_env,
                        instinct_effort=args.instinct_effort, worked_effort=args.worked_effort, timeout=args.timeout)
-    report = run(model, args.model, args.seed, args.count, args.families, args.out, args.workers, args.suite)
+    report = run(model, args.model, args.seed, args.count, args.families, args.out, args.workers, args.suite,
+                 args.prompts)
     print(render(report), end="")
     failed = sum(n for p in PHASES for s, n in report["phases"][p]["statuses"].items() if s not in ("ok", "refused"))
     if failed:
@@ -82,14 +86,16 @@ def cmd_export(args):
     for phase in PHASES:
         for q in questions:
             lines.append(json.dumps({"id": f"{phase}-{q['q']}", "q": q["q"], "phase": phase,
-                                     "prompt": PROMPTS[phase].format(text=q["text"])}, ensure_ascii=False))
+                                     "prompt": PROMPT_SETS[args.prompts][phase].format(text=q["text"])},
+                                    ensure_ascii=False))
     text = "\n".join(lines) + "\n"
     if args.out:
         pathlib.Path(args.out).write_text(text, encoding="utf-8")
         print(f"wrote {len(lines)} prompts to {args.out}. Add a \"reply\" to each line, then run:\n"
               f"  python3 -m calibench run --model replies:{args.out} "
-              + (f"--suite {args.suite}" if args.suite else f"--seed {args.seed} --count {args.count}")
-              + (f" --families {','.join(args.families)}" if args.families else ""), file=sys.stderr)
+              + (f"--suite {args.suite}" if args.suite else f"--seed {args.seed} --count {args.count}"
+                 + (f" --families {','.join(args.families)}" if args.families else ""))
+              + (f" --prompts {args.prompts}" if args.prompts != "standard" else ""), file=sys.stderr)
     else:
         print(text, end="")
 

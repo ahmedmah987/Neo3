@@ -24,7 +24,7 @@ Questions come from thirteen families (`families.py`). Each family has a generat
 
 **Python dependence.** Knowledge answers come from the Python installation and Unicode database of the machine running Calibench, and each knowledge question names its Python version. Modules that aren't single source files on that Python are skipped, so a seed can draw different knowledge questions on different versions.
 
-**Standard suites.** A suite fixes a seed, a question count and a Python version, so every model is asked the same questions and nobody chooses the seed. Suite `v1` is the seed `calibench-v1`, 104 questions (every family 8 times), settled on Python 3.13. Its seed was fixed before any question was drawn from it. Suites never change; a new one gets a new name.
+**Standard suites.** A suite fixes a seed, a question count, a list of families and a Python version, so every model is asked the same questions and nobody chooses the seed. Suite `v1` is the seed `calibench-v1`, 104 questions from the original thirteen families (each 8 times), settled on Python 3.13. Its seed was fixed before any question was drawn from it. Suites never change, and `selftest` checks a fingerprint of v1's questions; a new suite gets a new name.
 
 ## Elicitation
 
@@ -54,6 +54,8 @@ The worked prompt:
 
 The worked prompt allows written working rather than demanding it, because some current models decline prompts that ask them to reproduce their internal reasoning.
 
+**A second wording.** `--prompts alt` asks for the same thing in different words, to measure how much the wording moves the results. It drops the "calibration test" framing, asks for ranges "you'd bet" on, and in the worked prompt says what calibration means ("a well-calibrated forecaster's 90% ranges contain the truth about nine times in ten"). The texts are in `prompts.py`. Standard results use the standard wording.
+
 **Effort.** Where the API allows it, the instinct call uses low reasoning effort and the worked call high (Claude through the official SDK: `output_config.effort`; OpenRouter: `reasoning.effort`, and then only providers that honour the parameter). Models that always reason, such as Claude Opus 5.5, still reason a little on instinct calls, so instinct is "little reasoning", not "none", and isn't comparable across providers.
 
 **Reading replies.** The answer is the last JSON object in the reply that has an `estimate`. Numbers may be given as strings with thousands separators. Interval ends are put in order. The estimate isn't required to lie inside its intervals, because each part is scored on its own. If no answer can be read, the question is asked once more with a reminder of the format. Each call ends with a status: `ok`, `unparsed`, `refused` (the API's refusal stop reason or a content filter) or `error`.
@@ -82,6 +84,8 @@ This approximates the continuous ranked probability score of the belief about *g
 
 **Coverage.** For each interval level the report gives the number of intervals containing the answer and a 90% Wilson interval for the proportion. A verdict (*too narrow*, *too wide*, *consistent with calibrated*) is given when coverage is two or more binomial standard errors from the level, with at least five intervals. Verdicts leave out single-number intervals, which claim exact knowledge rather than uncertainty; those are counted separately with how often they were exactly right. With 26 questions a 90% level can't be found too wide: even 26 of 26 is within two standard errors.
 
+**Where the true answers fell.** The estimate and the four interval ends are quantiles at levels 0.05, 0.25, 0.5, 0.75 and 0.95, so they split the belief into six bins that a calibrated model's true answers fill in shares of 5%, 20%, 25%, 25%, 20% and 5%. This is a probability integral transform (PIT) histogram at the resolution the answers allow. The report gives the observed share in each bin, and the share of true answers above the estimate, which should be 50% and has a 90% Wilson interval. Too much in the outer bins means intervals too narrow; too much on one side means a lean in that direction. If a model's five values are out of order, they are sorted first. A true answer exactly on a boundary is shared between the bins it touches in proportion to their expected shares, as a randomised PIT would place it, and counts as half above the estimate when it equals it. Single-number answers are left out. The report also breaks the scores, 90% coverage and share above the estimate down by family.
+
 **Uncertainty.** Means come with 90% percentile bootstrap intervals over questions (4,000 resamples, fixed seed). Differences between phases, and between runs on the same questions, are bootstrapped over paired per-question differences. These intervals treat the questions as a sample from the families' question distribution. They don't cover variation from rerunning the model, which test–retest measures.
 
 ## Comparing models
@@ -104,7 +108,7 @@ When publishing a result, report: the suite (or seed, count and families), the C
 4. **Python dependence.** Knowledge answers differ between Python versions. Standard results use the suite's version.
 5. **The instinct phase isn't comparable across providers,** since effort controls differ and some models always reason.
 6. **Providers.** On OpenRouter one model may be served by different providers, possibly with different quantisation. The provider is recorded for every call.
-7. **One prompt wording.** Results may depend on the wording; Calibench doesn't yet measure that sensitivity.
+7. **Prompt wording.** Results may depend on the wording. `--prompts alt` measures this; see Reliability.
 8. **One sample per question.** Model outputs are stochastic. Test–retest measures the resulting variation.
 9. **Simulated answers.** Three families are settled by simulation. Their noise is stated and part of the question, but it is part of what is scored.
 10. **The know-nothing convention.** Scoring unanswered questions as a fixed naive answer is a convention. It penalises refusal on most questions, but it is gentler on questions whose answer happens to be near 100.
@@ -123,6 +127,7 @@ When publishing a result, report: the suite (or seed, count and families), the C
 - **The score is stable.** The worked scores differ by 0.007, with a paired 90% interval of [−0.011, 0.030]; the instinct scores differ by 0.002. From this one pair of runs, a difference between two models smaller than about 0.03 on suite v1 could come from rerunning alone.
 - **Per-question results agree moderately.** Per-question scores have a rank correlation of 0.75, and the 90% intervals hit or missed alike on 90 of 104 questions.
 - **A coverage verdict near the boundary does not reproduce.** The same model's worked 90% intervals were judged too narrow in one run and consistent with calibrated in the other. Pooled, they held the answer 176 times out of 208 (85%). Read coverage with its interval, and pool runs when the verdict matters.
+- **So is the direction of the misses.** In both runs the true answer lay above the worked estimate 62% of the time (90% interval 53–69%), and 8–14% of true answers lay above the 90% interval against 5% below it. Haiku underestimates. By family, the lean repeats too: the longest increasing subsequence was above the estimate in all 8 questions in both runs, module lengths and Unicode name counts mostly above, and random-walk peaks and digit sums mostly below.
 - **Repeated misses are properties of the model.** Nine questions were missed by both runs' 90% intervals. Seven are underestimates of open-ended counts: Unicode names containing MUSICAL, FACE and DIGIT, and the lengths of `glob`, `statistics` and `reprlib`, which grew in Python 3.13. The guessbook found the same two biases in Claude's own answers.
 
 ## References

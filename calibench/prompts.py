@@ -21,7 +21,27 @@ Question: {text}
 End your reply with this JSON object on its own line:
 {{"estimate": <number>, "p50": [<low>, <high>], "p90": [<low>, <high>]}}"""
 
-PROMPTS = {"instinct": INSTINCT, "worked": WORKED}
+# A second wording of the same request, to measure how much the wording moves the results. It drops
+# the "calibration test" framing, asks for ranges you'd bet on, and says what calibration means.
+INSTINCT_ALT = """Quick estimate, please. Without calculating or looking anything up, say what your gut tells you for the question below.
+
+Question: {text}
+
+Give three things: your best single guess (the middle of what you believe), a range you'd bet is 50% likely to contain the true value, and a range you'd bet is 90% likely to contain it. Reply with nothing but this JSON:
+{{"estimate": <number>, "p50": [<low>, <high>], "p90": [<low>, <high>]}}"""
+
+WORKED_ALT = """Here is a question with a single numeric answer. Think it through properly before you answer: use what you know, and do whatever calculation you can. No tools are available.
+
+Question: {text}
+
+Then give three things: your best single guess (the middle of what you believe), a range you'd bet is 50% likely to contain the true value, and a range you'd bet is 90% likely to contain it. Calibration matters more than precision: a well-calibrated forecaster's 90% ranges contain the truth about nine times in ten. Finish with this JSON on its own line:
+{{"estimate": <number>, "p50": [<low>, <high>], "p90": [<low>, <high>]}}"""
+
+PROMPT_SETS = {
+    "standard": {"instinct": INSTINCT, "worked": WORKED},
+    "alt": {"instinct": INSTINCT_ALT, "worked": WORKED_ALT},
+}
+PROMPTS = PROMPT_SETS["standard"]
 
 RETRY = ("\n\nYour previous reply didn't end with a valid JSON object of that form. "
          "Answer again and end with exactly that JSON object, using plain numbers.")

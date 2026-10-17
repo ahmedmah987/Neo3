@@ -58,7 +58,23 @@
       },
       "certain": 0,
       "certain_right": 0,
-      "median_error": 0.026887219296846065
+      "median_error": 0.026887219296846065,
+      "fell": {
+        "n": 26,
+        "bins": [
+          2.0,
+          2.2222222222222223,
+          7.777777777777778,
+          7.333333333333333,
+          2.666666666666667,
+          4.0
+        ],
+        "above": 14.0,
+        "above_ci": [
+          0.3817333243517173,
+          0.6879384605784498
+        ]
+      }
     },
     "worked": {
       "asked": 26,
@@ -106,7 +122,23 @@
       },
       "certain": 0,
       "certain_right": 0,
-      "median_error": 0.02385903510392376
+      "median_error": 0.02385903510392376,
+      "fell": {
+        "n": 26,
+        "bins": [
+          4.0,
+          1.4444444444444446,
+          6.912698412698412,
+          6.023809523809524,
+          3.6190476190476195,
+          4.0
+        ],
+        "above": 13.5,
+        "above_ci": [
+          0.3817333243517173,
+          0.6879384605784498
+        ]
+      }
     }
   },
   "kinds": {
@@ -145,7 +177,23 @@
         },
         "certain": 0,
         "certain_right": 0,
-        "median_error": 0.002159610646659456
+        "median_error": 0.002159610646659456,
+        "fell": {
+          "n": 2,
+          "bins": [
+            0.0,
+            0.0,
+            1.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          "above": 1.0,
+          "above_ci": [
+            0.12085198061245211,
+            0.8791480193875478
+          ]
+        }
       },
       "knowledge": {
         "n": 12,
@@ -181,7 +229,23 @@
         },
         "certain": 0,
         "certain_right": 0,
-        "median_error": 0.16781411359724613
+        "median_error": 0.16781411359724613,
+        "fell": {
+          "n": 12,
+          "bins": [
+            2.0,
+            0.22222222222222224,
+            2.2777777777777777,
+            1.8333333333333335,
+            2.666666666666667,
+            3.0
+          ],
+          "above": 7.5,
+          "above_ci": [
+            0.4314719755601717,
+            0.8405253860654207
+          ]
+        }
       },
       "statistical": {
         "n": 12,
@@ -217,7 +281,23 @@
         },
         "certain": 0,
         "certain_right": 0,
-        "median_error": 0.024048180877749275
+        "median_error": 0.024048180877749275,
+        "fell": {
+          "n": 12,
+          "bins": [
+            0.0,
+            2.0,
+            4.5,
+            4.5,
+            0.0,
+            1.0
+          ],
+          "above": 5.5,
+          "above_ci": [
+            0.28551928109779695,
+            0.7144807189022031
+          ]
+        }
       }
     },
     "worked": {
@@ -255,7 +335,23 @@
         },
         "certain": 0,
         "certain_right": 0,
-        "median_error": 9.009423681138521e-05
+        "median_error": 9.009423681138521e-05,
+        "fell": {
+          "n": 2,
+          "bins": [
+            0.0,
+            0.0,
+            2.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "above": 0.0,
+          "above_ci": [
+            0.0,
+            0.5750128824220015
+          ]
+        }
       },
       "knowledge": {
         "n": 12,
@@ -291,7 +387,23 @@
         },
         "certain": 0,
         "certain_right": 0,
-        "median_error": 0.05717220130092434
+        "median_error": 0.05717220130092434,
+        "fell": {
+          "n": 12,
+          "bins": [
+            1.0,
+            0.4444444444444445,
+            2.9126984126984126,
+            3.0238095238095237,
+            1.619047619047619,
+            3.0
+          ],
+          "above": 7.5,
+          "above_ci": [
+            0.4314719755601717,
+            0.8405253860654207
+          ]
+        }
       },
       "statistical": {
         "n": 12,
@@ -327,7 +439,1381 @@
         },
         "certain": 0,
         "certain_right": 0,
-        "median_error": 0.023562865697200595
+        "median_error": 0.023562865697200595,
+        "fell": {
+          "n": 12,
+          "bins": [
+            3.0,
+            1.0,
+            2.0,
+            3.0,
+            2.0,
+            1.0
+          ],
+          "above": 6.0,
+          "above_ci": [
+            0.28551928109779695,
+            0.7144807189022031
+          ]
+        }
+      }
+    }
+  },
+  "families": {
+    "instinct": {
+      "birthday": {
+        "n": 2,
+        "score_mean": 0.11004618248432219,
+        "score_median": 0.11004618248432219,
+        "score_ci": [
+          0.10082278262743963,
+          0.11926958234120474
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.6915695366997754,
+          "hits": 2,
+          "hits_ci": [
+            0.42498711757799845,
+            1.0
+          ],
+          "ranged": 2,
+          "ranged_hits": 2,
+          "verdict": "too few to tell"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 2.022832020582225,
+          "hits": 2,
+          "hits_ci": [
+            0.42498711757799845,
+            1.0
+          ],
+          "ranged": 2,
+          "ranged_hits": 2,
+          "verdict": "too few to tell"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.002159610646659456,
+        "fell": {
+          "n": 2,
+          "bins": [
+            0.0,
+            0.0,
+            1.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          "above": 1.0,
+          "above_ci": [
+            0.12085198061245211,
+            0.8791480193875478
+          ]
+        }
+      },
+      "collatz_steps": {
+        "n": 2,
+        "score_mean": 0.1345228897449136,
+        "score_median": 0.1345228897449136,
+        "score_ci": [
+          0.0957921001781316,
+          0.1732536793116956
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.6710786679093377,
+          "hits": 1,
+          "hits_ci": [
+            0.12085198061245211,
+            0.8791480193875478
+          ],
+          "ranged": 2,
+          "ranged_hits": 1,
+          "verdict": "too few to tell"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 1.0735837428869637,
+          "hits": 2,
+          "hits_ci": [
+            0.42498711757799845,
+            1.0
+          ],
+          "ranged": 2,
+          "ranged_hits": 2,
+          "verdict": "too few to tell"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.26666666666666666,
+        "fell": {
+          "n": 2,
+          "bins": [
+            0.0,
+            1.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "above": 0.0,
+          "above_ci": [
+            0.0,
+            0.5750128824220015
+          ]
+        }
+      },
+      "digit_sum_pow2": {
+        "n": 2,
+        "score_mean": 0.018610714752993633,
+        "score_median": 0.018610714752993633,
+        "score_ci": [
+          0.003947863381142476,
+          0.03327356612484479
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.09004204028246665,
+          "hits": 1,
+          "hits_ci": [
+            0.12085198061245211,
+            0.8791480193875478
+          ],
+          "ranged": 2,
+          "ranged_hits": 1,
+          "verdict": "too few to tell"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.2082556503105195,
+          "hits": 1,
+          "hits_ci": [
+            0.12085198061245211,
+            0.8791480193875478
+          ],
+          "ranged": 2,
+          "ranged_hits": 1,
+          "verdict": "too few to tell"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.026670970730206366,
+        "fell": {
+          "n": 2,
+          "bins": [
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "above": 1.0,
+          "above_ci": [
+            0.12085198061245211,
+            0.8791480193875478
+          ]
+        }
+      },
+      "lis": {
+        "n": 2,
+        "score_mean": 0.013372121908509412,
+        "score_median": 0.013372121908509412,
+        "score_ci": [
+          0.002488837772915424,
+          0.0242554060441034
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.06488451260813655,
+          "hits": 2,
+          "hits_ci": [
+            0.42498711757799845,
+            1.0
+          ],
+          "ranged": 2,
+          "ranged_hits": 2,
+          "verdict": "too few to tell"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.17678733611079567,
+          "hits": 2,
+          "hits_ci": [
+            0.42498711757799845,
+            1.0
+          ],
+          "ranged": 2,
+          "ranged_hits": 2,
+          "verdict": "too few to tell"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.01652725011755191,
+        "fell": {
+          "n": 2,
+          "bins": [
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            0.0,
+            0.0
+          ],
+          "above": 2.0,
+          "above_ci": [
+            0.42498711757799845,
+            1.0
+          ]
+        }
+      },
+      "module_all": {
+        "n": 2,
+        "score_mean": 0.4482423743033592,
+        "score_median": 0.4482423743033592,
+        "score_ci": [
+          0.27159231141403806,
+          0.6248924371926804
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 2.3303178031385605,
+          "hits": 0,
+          "hits_ci": [
+            0.0,
+            0.5750128824220015
+          ],
+          "ranged": 2,
+          "ranged_hits": 0,
+          "verdict": "too few to tell"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 3.746411384119654,
+          "hits": 1,
+          "hits_ci": [
+            0.12085198061245211,
+            0.8791480193875478
+          ],
+          "ranged": 2,
+          "ranged_hits": 1,
+          "verdict": "too few to tell"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 1.0186335403726707,
+        "fell": {
+          "n": 2,
+          "bins": [
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          "above": 1.0,
+          "above_ci": [
+            0.12085198061245211,
+            0.8791480193875478
+          ]
+        }
+      },
+      "primes_in_range": {
+        "n": 2,
+        "score_mean": 0.008301194572089514,
+        "score_median": 0.008301194572089514,
+        "score_ci": [
+          0.0033380901982165236,
+          0.013264298945962505
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.039524033301141515,
+          "hits": 1,
+          "hits_ci": [
+            0.12085198061245211,
+            0.8791480193875478
+          ],
+          "ranged": 2,
+          "ranged_hits": 1,
+          "verdict": "too few to tell"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.09662831570337005,
+          "hits": 2,
+          "hits_ci": [
+            0.42498711757799845,
+            1.0
+          ],
+          "ranged": 2,
+          "ranged_hits": 2,
+          "verdict": "too few to tell"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.01226158038147139,
+        "fell": {
+          "n": 2,
+          "bins": [
+            0.0,
+            1.0,
+            0.5,
+            0.5,
+            0.0,
+            0.0
+          ],
+          "above": 0.5,
+          "above_ci": [
+            0.0,
+            0.5750128824220015
+          ]
+        }
+      },
+      "rect_distance": {
+        "n": 2,
+        "score_mean": 0.01729855634742161,
+        "score_median": 0.01729855634742161,
+        "score_ci": [
+          0.013406413135876713,
+          0.021190699558966505
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.11621987120345302,
+          "hits": 2,
+          "hits_ci": [
+            0.42498711757799845,
+            1.0
+          ],
+          "ranged": 2,
+          "ranged_hits": 2,
+          "verdict": "too few to tell"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.26573575919476883,
+          "hits": 2,
+          "hits_ci": [
+            0.42498711757799845,
+            1.0
+          ],
+          "ranged": 2,
+          "ranged_hits": 2,
+          "verdict": "too few to tell"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.0016902896634358056,
+        "fell": {
+          "n": 2,
+          "bins": [
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            0.0,
+            0.0
+          ],
+          "above": 2.0,
+          "above_ci": [
+            0.42498711757799845,
+            1.0
+          ]
+        }
+      },
+      "stdlib_defs": {
+        "n": 2,
+        "score_mean": 0.09946795550339664,
+        "score_median": 0.09946795550339664,
+        "score_ci": [
+          0.09608323481156139,
+          0.10285267619523189
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.48127712107524667,
+          "hits": 2,
+          "hits_ci": [
+            0.42498711757799845,
+            1.0
+          ],
+          "ranged": 2,
+          "ranged_hits": 2,
+          "verdict": "too few to tell"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 1.1956654686015655,
+          "hits": 2,
+          "hits_ci": [
+            0.42498711757799845,
+            1.0
+          ],
+          "ranged": 2,
+          "ranged_hits": 2,
+          "verdict": "too few to tell"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.13835770528683916,
+        "fell": {
+          "n": 2,
+          "bins": [
+            0.0,
+            0.0,
+            1.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          "above": 1.0,
+          "above_ci": [
+            0.12085198061245211,
+            0.8791480193875478
+          ]
+        }
+      },
+      "stdlib_lines": {
+        "n": 2,
+        "score_mean": 0.04957986813892326,
+        "score_median": 0.04957986813892326,
+        "score_ci": [
+          0.019164450869557738,
+          0.07999528540828879
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.25214388146924005,
+          "hits": 1,
+          "hits_ci": [
+            0.12085198061245211,
+            0.8791480193875478
+          ],
+          "ranged": 2,
+          "ranged_hits": 1,
+          "verdict": "too few to tell"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.4196489088600637,
+          "hits": 2,
+          "hits_ci": [
+            0.42498711757799845,
+            1.0
+          ],
+          "ranged": 2,
+          "ranged_hits": 2,
+          "verdict": "too few to tell"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.0744466800804829,
+        "fell": {
+          "n": 2,
+          "bins": [
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          "above": 1.0,
+          "above_ci": [
+            0.12085198061245211,
+            0.8791480193875478
+          ]
+        }
+      },
+      "unicode_block": {
+        "n": 2,
+        "score_mean": 0.0750496880754613,
+        "score_median": 0.0750496880754613,
+        "score_ci": [
+          0.008628093923410258,
+          0.14147128222751232
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.4138921960471986,
+          "hits": 1,
+          "hits_ci": [
+            0.12085198061245211,
+            0.8791480193875478
+          ],
+          "ranged": 2,
+          "ranged_hits": 1,
+          "verdict": "too few to tell"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.6125309447631477,
+          "hits": 1,
+          "hits_ci": [
+            0.12085198061245211,
+            0.8791480193875478
+          ],
+          "ranged": 2,
+          "ranged_hits": 1,
+          "verdict": "too few to tell"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.09778219021336744,
+        "fell": {
+          "n": 2,
+          "bins": [
+            0.0,
+            0.0,
+            0.0,
+            0.5555555555555556,
+            0.4444444444444445,
+            1.0
+          ],
+          "above": 2.0,
+          "above_ci": [
+            0.42498711757799845,
+            1.0
+          ]
+        }
+      },
+      "unicode_category": {
+        "n": 2,
+        "score_mean": 0.1581202726767693,
+        "score_median": 0.1581202726767693,
+        "score_ci": [
+          0.002224512702204482,
+          0.31401603265133415
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.7308426179403771,
+          "hits": 1,
+          "hits_ci": [
+            0.12085198061245211,
+            0.8791480193875478
+          ],
+          "ranged": 1,
+          "ranged_hits": 0,
+          "verdict": "too few to tell"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 2.1271746358221972,
+          "hits": 1,
+          "hits_ci": [
+            0.12085198061245211,
+            0.8791480193875478
+          ],
+          "ranged": 2,
+          "ranged_hits": 1,
+          "verdict": "too few to tell"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.2650273224043716,
+        "fell": {
+          "n": 2,
+          "bins": [
+            1.0,
+            0.22222222222222224,
+            0.2777777777777778,
+            0.2777777777777778,
+            0.22222222222222224,
+            0.0
+          ],
+          "above": 0.5,
+          "above_ci": [
+            0.0,
+            0.5750128824220015
+          ]
+        }
+      },
+      "unicode_word": {
+        "n": 2,
+        "score_mean": 1.0954682678157228,
+        "score_median": 1.0954682678157228,
+        "score_ci": [
+          1.0440096950895057,
+          1.1469268405419402
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 4.907193160920855,
+          "hits": 0,
+          "hits_ci": [
+            0.0,
+            0.5750128824220015
+          ],
+          "ranged": 2,
+          "ranged_hits": 0,
+          "verdict": "too few to tell"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 16.895184842081203,
+          "hits": 0,
+          "hits_ci": [
+            0.0,
+            0.5750128824220015
+          ],
+          "ranged": 2,
+          "ranged_hits": 0,
+          "verdict": "too few to tell"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.7387137023593466,
+        "fell": {
+          "n": 2,
+          "bins": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            2.0
+          ],
+          "above": 2.0,
+          "above_ci": [
+            0.42498711757799845,
+            1.0
+          ]
+        }
+      },
+      "walk_max": {
+        "n": 2,
+        "score_mean": 0.18300758644174717,
+        "score_median": 0.18300758644174717,
+        "score_ci": [
+          0.18138350746906584,
+          0.1846316654144285
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 1.2216563762445816,
+          "hits": 2,
+          "hits_ci": [
+            0.42498711757799845,
+            1.0
+          ],
+          "ranged": 2,
+          "ranged_hits": 2,
+          "verdict": "too few to tell"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 2.8008616908037145,
+          "hits": 2,
+          "hits_ci": [
+            0.42498711757799845,
+            1.0
+          ],
+          "ranged": 2,
+          "ranged_hits": 2,
+          "verdict": "too few to tell"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.02441725011322888,
+        "fell": {
+          "n": 2,
+          "bins": [
+            0.0,
+            0.0,
+            2.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "above": 0.0,
+          "above_ci": [
+            0.0,
+            0.5750128824220015
+          ]
+        }
+      }
+    },
+    "worked": {
+      "birthday": {
+        "n": 2,
+        "score_mean": 0.11176171134846978,
+        "score_median": 0.11176171134846978,
+        "score_ci": [
+          0.10450355323101865,
+          0.11901986946592091
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.7379885320292436,
+          "hits": 2,
+          "hits_ci": [
+            0.42498711757799845,
+            1.0
+          ],
+          "ranged": 2,
+          "ranged_hits": 2,
+          "verdict": "too few to tell"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 1.8972420288134786,
+          "hits": 2,
+          "hits_ci": [
+            0.42498711757799845,
+            1.0
+          ],
+          "ranged": 2,
+          "ranged_hits": 2,
+          "verdict": "too few to tell"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 9.009423681138521e-05,
+        "fell": {
+          "n": 2,
+          "bins": [
+            0.0,
+            0.0,
+            2.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "above": 0.0,
+          "above_ci": [
+            0.0,
+            0.5750128824220015
+          ]
+        }
+      },
+      "collatz_steps": {
+        "n": 2,
+        "score_mean": 0.28070905839981797,
+        "score_median": 0.28070905839981797,
+        "score_ci": [
+          0.15523087094412696,
+          0.4061872458555089
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 1.368792104779574,
+          "hits": 0,
+          "hits_ci": [
+            0.0,
+            0.5750128824220015
+          ],
+          "ranged": 2,
+          "ranged_hits": 0,
+          "verdict": "too few to tell"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 2.590407463291532,
+          "hits": 1,
+          "hits_ci": [
+            0.12085198061245211,
+            0.8791480193875478
+          ],
+          "ranged": 2,
+          "ranged_hits": 1,
+          "verdict": "too few to tell"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.6041666666666667,
+        "fell": {
+          "n": 2,
+          "bins": [
+            1.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "above": 0.0,
+          "above_ci": [
+            0.0,
+            0.5750128824220015
+          ]
+        }
+      },
+      "digit_sum_pow2": {
+        "n": 2,
+        "score_mean": 0.01895753903899017,
+        "score_median": 0.01895753903899017,
+        "score_ci": [
+          0.004017548020395907,
+          0.03389753005758443
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.09110223993482869,
+          "hits": 1,
+          "hits_ci": [
+            0.12085198061245211,
+            0.8791480193875478
+          ],
+          "ranged": 2,
+          "ranged_hits": 1,
+          "verdict": "too few to tell"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.216382113129578,
+          "hits": 1,
+          "hits_ci": [
+            0.12085198061245211,
+            0.8791480193875478
+          ],
+          "ranged": 2,
+          "ranged_hits": 1,
+          "verdict": "too few to tell"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.027053676941457133,
+        "fell": {
+          "n": 2,
+          "bins": [
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "above": 1.0,
+          "above_ci": [
+            0.12085198061245211,
+            0.8791480193875478
+          ]
+        }
+      },
+      "lis": {
+        "n": 2,
+        "score_mean": 0.010526108644127445,
+        "score_median": 0.010526108644127445,
+        "score_ci": [
+          0.0025207805161775987,
+          0.018531436772077293
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.05440540107988778,
+          "hits": 0,
+          "hits_ci": [
+            0.0,
+            0.5750128824220015
+          ],
+          "ranged": 2,
+          "ranged_hits": 0,
+          "verdict": "too few to tell"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.061819521415220846,
+          "hits": 2,
+          "hits_ci": [
+            0.42498711757799845,
+            1.0
+          ],
+          "ranged": 2,
+          "ranged_hits": 2,
+          "verdict": "too few to tell"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.018955967269152472,
+        "fell": {
+          "n": 2,
+          "bins": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            0.0
+          ],
+          "above": 2.0,
+          "above_ci": [
+            0.42498711757799845,
+            1.0
+          ]
+        }
+      },
+      "module_all": {
+        "n": 2,
+        "score_mean": 0.012863208445617929,
+        "score_median": 0.012863208445617929,
+        "score_ci": [
+          0.005026288565618127,
+          0.020700128325617732
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.04350568849481484,
+          "hits": 2,
+          "hits_ci": [
+            0.42498711757799845,
+            1.0
+          ],
+          "ranged": 1,
+          "ranged_hits": 1,
+          "verdict": "too few to tell"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.21283390771284194,
+          "hits": 2,
+          "hits_ci": [
+            0.42498711757799845,
+            1.0
+          ],
+          "ranged": 2,
+          "ranged_hits": 2,
+          "verdict": "too few to tell"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.021739130434782608,
+        "fell": {
+          "n": 2,
+          "bins": [
+            0.0,
+            0.22222222222222224,
+            0.2777777777777778,
+            0.8333333333333334,
+            0.6666666666666667,
+            0.0
+          ],
+          "above": 1.5,
+          "above_ci": [
+            0.42498711757799845,
+            1.0
+          ]
+        }
+      },
+      "primes_in_range": {
+        "n": 2,
+        "score_mean": 0.008832752010774386,
+        "score_median": 0.008832752010774386,
+        "score_ci": [
+          0.005189897119922762,
+          0.012475606901626008
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.04298860427716278,
+          "hits": 2,
+          "hits_ci": [
+            0.42498711757799845,
+            1.0
+          ],
+          "ranged": 2,
+          "ranged_hits": 2,
+          "verdict": "too few to tell"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.09955822122457292,
+          "hits": 2,
+          "hits_ci": [
+            0.42498711757799845,
+            1.0
+          ],
+          "ranged": 2,
+          "ranged_hits": 2,
+          "verdict": "too few to tell"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.012894491773876453,
+        "fell": {
+          "n": 2,
+          "bins": [
+            0.0,
+            0.0,
+            1.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          "above": 1.0,
+          "above_ci": [
+            0.12085198061245211,
+            0.8791480193875478
+          ]
+        }
+      },
+      "rect_distance": {
+        "n": 2,
+        "score_mean": 0.000525029214637973,
+        "score_median": 0.000525029214637973,
+        "score_ci": [
+          0.0004241140893304218,
+          0.000625944339945524
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.0027972014109962223,
+          "hits": 2,
+          "hits_ci": [
+            0.42498711757799845,
+            1.0
+          ],
+          "ranged": 2,
+          "ranged_hits": 2,
+          "verdict": "too few to tell"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.008283256921041482,
+          "hits": 2,
+          "hits_ci": [
+            0.42498711757799845,
+            1.0
+          ],
+          "ranged": 2,
+          "ranged_hits": 2,
+          "verdict": "too few to tell"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.0003902896634358378,
+        "fell": {
+          "n": 2,
+          "bins": [
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            0.0,
+            0.0
+          ],
+          "above": 2.0,
+          "above_ci": [
+            0.42498711757799845,
+            1.0
+          ]
+        }
+      },
+      "stdlib_defs": {
+        "n": 2,
+        "score_mean": 0.04260798652291367,
+        "score_median": 0.04260798652291367,
+        "score_ci": [
+          0.04039915708294112,
+          0.04481681596288622
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.19387309067538405,
+          "hits": 2,
+          "hits_ci": [
+            0.42498711757799845,
+            1.0
+          ],
+          "ranged": 2,
+          "ranged_hits": 2,
+          "verdict": "too few to tell"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.4562327025032489,
+          "hits": 2,
+          "hits_ci": [
+            0.42498711757799845,
+            1.0
+          ],
+          "ranged": 2,
+          "ranged_hits": 2,
+          "verdict": "too few to tell"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.07114735658042745,
+        "fell": {
+          "n": 2,
+          "bins": [
+            0.0,
+            0.0,
+            1.0,
+            0.5555555555555556,
+            0.4444444444444445,
+            0.0
+          ],
+          "above": 1.0,
+          "above_ci": [
+            0.12085198061245211,
+            0.8791480193875478
+          ]
+        }
+      },
+      "stdlib_lines": {
+        "n": 2,
+        "score_mean": 0.013856543697696067,
+        "score_median": 0.013856543697696067,
+        "score_ci": [
+          0.013494429563806509,
+          0.014218657831585624
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.0626508957717391,
+          "hits": 2,
+          "hits_ci": [
+            0.42498711757799845,
+            1.0
+          ],
+          "ranged": 2,
+          "ranged_hits": 2,
+          "verdict": "too few to tell"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.16775422838316123,
+          "hits": 2,
+          "hits_ci": [
+            0.42498711757799845,
+            1.0
+          ],
+          "ranged": 2,
+          "ranged_hits": 2,
+          "verdict": "too few to tell"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.021163343698554965,
+        "fell": {
+          "n": 2,
+          "bins": [
+            0.0,
+            0.0,
+            1.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          "above": 1.0,
+          "above_ci": [
+            0.12085198061245211,
+            0.8791480193875478
+          ]
+        }
+      },
+      "unicode_block": {
+        "n": 2,
+        "score_mean": 0.03219914312858402,
+        "score_median": 0.03219914312858402,
+        "score_ci": [
+          0.002818880897476426,
+          0.06157940535969161
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.16385643816150042,
+          "hits": 1,
+          "hits_ci": [
+            0.12085198061245211,
+            0.8791480193875478
+          ],
+          "ranged": 2,
+          "ranged_hits": 1,
+          "verdict": "too few to tell"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.3556180806735525,
+          "hits": 1,
+          "hits_ci": [
+            0.12085198061245211,
+            0.8791480193875478
+          ],
+          "ranged": 2,
+          "ranged_hits": 1,
+          "verdict": "too few to tell"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.04216867469879518,
+        "fell": {
+          "n": 2,
+          "bins": [
+            0.0,
+            0.0,
+            0.35714285714285715,
+            0.35714285714285715,
+            0.28571428571428575,
+            1.0
+          ],
+          "above": 1.5,
+          "above_ci": [
+            0.42498711757799845,
+            1.0
+          ]
+        }
+      },
+      "unicode_category": {
+        "n": 2,
+        "score_mean": 0.05051310665726638,
+        "score_median": 0.05051310665726638,
+        "score_ci": [
+          0.002224512702204482,
+          0.09880170061232828
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.23999716754378753,
+          "hits": 1,
+          "hits_ci": [
+            0.12085198061245211,
+            0.8791480193875478
+          ],
+          "ranged": 1,
+          "ranged_hits": 0,
+          "verdict": "too few to tell"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.6382644641302737,
+          "hits": 1,
+          "hits_ci": [
+            0.12085198061245211,
+            0.8791480193875478
+          ],
+          "ranged": 2,
+          "ranged_hits": 1,
+          "verdict": "too few to tell"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.07377049180327869,
+        "fell": {
+          "n": 2,
+          "bins": [
+            1.0,
+            0.22222222222222224,
+            0.2777777777777778,
+            0.2777777777777778,
+            0.22222222222222224,
+            0.0
+          ],
+          "above": 0.5,
+          "above_ci": [
+            0.0,
+            0.5750128824220015
+          ]
+        }
+      },
+      "unicode_word": {
+        "n": 2,
+        "score_mean": 0.7543645601739206,
+        "score_median": 0.7543645601739206,
+        "score_ci": [
+          0.6098788319979332,
+          0.8988502883499081
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 3.433242260316243,
+          "hits": 0,
+          "hits_ci": [
+            0.0,
+            0.5750128824220015
+          ],
+          "ranged": 2,
+          "ranged_hits": 0,
+          "verdict": "too few to tell"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 11.082446493538017,
+          "hits": 0,
+          "hits_ci": [
+            0.0,
+            0.5750128824220015
+          ],
+          "ranged": 2,
+          "ranged_hits": 0,
+          "verdict": "too few to tell"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.6133734119782215,
+        "fell": {
+          "n": 2,
+          "bins": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            2.0
+          ],
+          "above": 2.0,
+          "above_ci": [
+            0.42498711757799845,
+            1.0
+          ]
+        }
+      },
+      "walk_max": {
+        "n": 2,
+        "score_mean": 0.014825504779856492,
+        "score_median": 0.014825504779856492,
+        "score_ci": [
+          0.01468678510110662,
+          0.014964224458606363
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.08254308726749282,
+          "hits": 0,
+          "hits_ci": [
+            0.0,
+            0.5750128824220015
+          ],
+          "ranged": 2,
+          "ranged_hits": 0,
+          "verdict": "too few to tell"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.09566433809811037,
+          "hits": 0,
+          "hits_ci": [
+            0.0,
+            0.5750128824220015
+          ],
+          "ranged": 2,
+          "ranged_hits": 0,
+          "verdict": "too few to tell"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.023562865697200595,
+        "fell": {
+          "n": 2,
+          "bins": [
+            2.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "above": 0.0,
+          "above_ci": [
+            0.0,
+            0.5750128824220015
+          ]
+        }
       }
     }
   },

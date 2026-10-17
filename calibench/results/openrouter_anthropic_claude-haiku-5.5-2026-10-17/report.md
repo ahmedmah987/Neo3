@@ -28,6 +28,20 @@ Working it out lowered the score on 19 of 26 questions answered both ways, from 
 
 The score is the weighted interval score (Bracher et al., 2021) on a log scale: it combines the estimate and both intervals, is lowest when the stated intervals are the ones the model believes, and treats a miss by a factor in either direction alike. Lower is better; 0.1 is roughly a 10% miss. Intervals in brackets are 90% intervals over questions. Coverage verdicts leave out single-number intervals, which say "I know this exactly" and are counted on their own line.
 
+## Where the true answers fell
+
+The estimate and the two intervals are five quantiles of the model's belief, so they split it into six bins, and a calibrated model's true answers land in each bin in the expected share. Too many in the outer bins means intervals too narrow; too many on one side of the estimate means a lean in that direction. Single-number answers are left out, and an answer on a boundary is shared between the bins it touches.
+
+| The true answer was | Expected | Instinct | Worked |
+|---|---|---|---|
+| below the 90% interval | 5% | 8% (2) | 15% (4) |
+| in the 90% interval, below the 50% | 20% | 9% (2.222) | 6% (1.444) |
+| in the 50% interval, below the estimate | 25% | 30% (7.778) | 27% (6.913) |
+| in the 50% interval, above the estimate | 25% | 28% (7.333) | 23% (6.024) |
+| in the 90% interval, above the 50% | 20% | 10% (2.667) | 14% (3.619) |
+| above the 90% interval | 5% | 15% (4) | 15% (4) |
+| **above the estimate**, with 90% interval | 50% | 54% [38%, 69%] | 52% [38%, 69%] |
+
 ## By kind of question
 
 Knowledge questions ask what is known (the Python standard library, the Unicode database); statistical ones need noise or irregularity modelled; exact ones have a closed-form answer that must be evaluated.
@@ -40,6 +54,24 @@ Knowledge questions ask what is known (the Python standard library, the Unicode 
 | knowledge | worked | 12 | 0.151 | 8 of 12 (67%) | 8 of 12 (67%) |
 | statistical | instinct | 12 | 0.063 | 9 of 12 (75%) | 11 of 12 (92%) |
 | statistical | worked | 12 | 0.056 | 5 of 12 (42%) | 8 of 12 (67%) |
+
+## By family
+
+| Family | Kind | Questions | Score, worked | Score, instinct | Worked 90% hits | Worked answers above the estimate |
+|---|---|---|---|---|---|---|
+| `birthday` | exact | 2 | 0.112 | 0.110 | 2 of 2 (100%) | 0% |
+| `collatz_steps` | statistical | 2 | 0.281 | 0.135 | 1 of 2 (50%) | 0% |
+| `digit_sum_pow2` | statistical | 2 | 0.019 | 0.019 | 1 of 2 (50%) | 50% |
+| `lis` | statistical | 2 | 0.011 | 0.013 | 2 of 2 (100%) | 100% |
+| `module_all` | knowledge | 2 | 0.013 | 0.448 | 2 of 2 (100%) | 75% |
+| `primes_in_range` | statistical | 2 | 0.009 | 0.008 | 2 of 2 (100%) | 50% |
+| `rect_distance` | statistical | 2 | 0.001 | 0.017 | 2 of 2 (100%) | 100% |
+| `stdlib_defs` | knowledge | 2 | 0.043 | 0.099 | 2 of 2 (100%) | 50% |
+| `stdlib_lines` | knowledge | 2 | 0.014 | 0.050 | 2 of 2 (100%) | 50% |
+| `unicode_block` | knowledge | 2 | 0.032 | 0.075 | 1 of 2 (50%) | 75% |
+| `unicode_category` | knowledge | 2 | 0.051 | 0.158 | 1 of 2 (50%) | 25% |
+| `unicode_word` | knowledge | 2 | 0.754 | 1.095 | 0 of 2 (0%) | 100% |
+| `walk_max` | statistical | 2 | 0.015 | 0.183 | 0 of 2 (0%) | 0% |
 
 ## Questions
 

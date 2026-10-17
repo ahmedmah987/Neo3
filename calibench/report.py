@@ -5,7 +5,8 @@ import statistics
 
 from .families import KINDS
 from .questions import SUITES
-from .scoring import (KNOW_NOTHING, LEVELS, PHASES, bootstrap_mean, inside, log_wis, offset, spearman, summarize)
+from .scoring import (BIN_SHARES, BINS, KNOW_NOTHING, LEVELS, PHASES, bootstrap_mean, inside, log_wis, offset,
+                      spearman, summarize)
 
 
 def question_key(q):
@@ -24,7 +25,7 @@ def suite_status(meta):
 
 def build(meta, questions, records, results):
     truth = {r["q"]: r["answer"] for r in results}
-    report = {"meta": meta, "suite": suite_status(meta), "phases": {}, "kinds": {}, "questions": []}
+    report = {"meta": meta, "suite": suite_status(meta), "phases": {}, "kinds": {}, "families": {}, "questions": []}
     for phase in PHASES:
         recs = [records.get((q["q"], phase)) for q in questions]
         ok = [(q, r) for q, r in zip(questions, recs) if r and r["status"] == "ok"]
@@ -40,6 +41,10 @@ def build(meta, questions, records, results):
         report["kinds"][phase] = {
             kind: summarize([(r["answer"], truth[q["q"]], offset(q["family"])) for q, r in ok if q["kind"] == kind])
             for kind in sorted(set(KINDS.values()))
+        }
+        report["families"][phase] = {
+            family: summarize([(r["answer"], truth[q["q"]], offset(family)) for q, r in ok if q["family"] == family])
+            for family in sorted({q["family"] for q in questions})
         }
 
     closer = {"instinct": 0, "worked": 0, "tie": 0}
@@ -123,6 +128,8 @@ def render(report):
         lines[-1] += f" Scored with Calibench {scored['calibench']} ({scored['scoring']})."
     if report.get("suite"):
         lines += ["", f"**{report['suite'][0].upper() + report['suite'][1:]}.**"]
+    if meta.get("prompts", "standard") != "standard":
+        lines += ["", f"Prompts: **{meta['prompts']}** wording (see `prompts.py`)."]
     if report["served_models"]:
         lines += ["", f"Served by: {', '.join(report['served_models'])}."]
     if report["tokens"]:
@@ -174,6 +181,21 @@ def render(report):
                   f"`{json.dumps(KNOW_NOTHING)}`, as a model that knows nothing would; the rows below it use "
                   "answered questions only."]
 
+    fell = {p: phases[p].get("fell") for p in PHASES}
+    if any(f and f["n"] for f in fell.values()):
+        lines += ["", "## Where the true answers fell", "",
+                  "The estimate and the two intervals are five quantiles of the model's belief, so they split it into six "
+                  "bins, and a calibrated model's true answers land in each bin in the expected share. Too many in the "
+                  "outer bins means intervals too narrow; too many on one side of the estimate means a lean in that "
+                  "direction. Single-number answers are left out, and an answer on a boundary is shared between the "
+                  "bins it touches.", "",
+                  "| The true answer was | Expected | Instinct | Worked |", "|---|---|---|---|"]
+        for i, (label, share) in enumerate(zip(BINS, BIN_SHARES)):
+            cells = [f"{f['bins'][i] / f['n']:.0%} ({f['bins'][i]:.4g})" if f and f["n"] else "—" for f in fell.values()]
+            lines.append(f"| {label} | {share:.0%} | {cells[0]} | {cells[1]} |")
+        cells = [f"{f['above'] / f['n']:.0%}{ci(f['above_ci'], pct)}" if f and f["n"] else "—" for f in fell.values()]
+        lines.append(f"| **above the estimate**, with 90% interval | 50% | {cells[0]} | {cells[1]} |")
+
     lines += ["", "## By kind of question", "",
               "Knowledge questions ask what is known (the Python standard library, the Unicode database); statistical "
               "ones need noise or irregularity modelled; exact ones have a closed-form answer that must be evaluated.", "",
@@ -184,6 +206,14 @@ def render(report):
             if s["n"]:
                 lines.append(f"| {kind} | {phase} | {s['n']} | {sc(s['score_mean'])} | "
                              f"{frac(s['p50']['hits'], s['n'])} | {frac(s['p90']['hits'], s['n'])} |")
+
+    lines += ["", "## By family", "", "| Family | Kind | Questions | Score, worked | Score, instinct | Worked 90% hits "
+              "| Worked answers above the estimate |", "|---|---|---|---|---|---|---|"]
+    for family, s in report["families"]["worked"].items():
+        si = report["families"]["instinct"][family]
+        above = f"{s['fell']['above'] / s['fell']['n']:.0%}" if s["n"] and s["fell"]["n"] else "—"
+        lines.append(f"| `{family}` | {KINDS[family]} | {s['n']} | {sc(s.get('score_mean'))} | {sc(si.get('score_mean'))} "
+                     f"| {frac(s['p90']['hits'], s['n']) if s['n'] else '—'} | {above} |")
 
     lines += ["", "## Questions", "", "Each answer is shown as estimate [90% interval], ✓ or ✗ for whether the 50% "
               "and 90% intervals contain the true answer, and its score.", "",
@@ -216,9 +246,12 @@ def compare(reports, names=None):
         rows = [by_key[k] for k in order]
         ok = [r for r in rows if r["worked"]["status"] == "ok"]
         scores = [r["worked"]["score"] for r in rows]
+        prompts = rep["meta"].get("prompts", "standard")
         stats.append({
-            "label": model if models.count(model) == 1 else f"{model} ({name})",
+            "label": (model if models.count(model) == 1 else f"{model} ({name})")
+            + (f" [{prompts} prompts]" if prompts != "standard" else ""),
             "model": model,
+            "prompts": prompts,
             "scores": scores,
             "mean": statistics.fmean(scores),
             "instinct": statistics.fmean(r["instinct"]["score"] for r in rows),
@@ -251,14 +284,16 @@ def compare(reports, names=None):
 
     pairs = [(a, b) for i, a in enumerate(stats) for b in stats[i + 1:] if a["model"] == b["model"]]
     if pairs:
-        lines += ["", "## Test–retest", "", "Runs of the same model on the same questions. A good benchmark gives "
-                  "a model nearly the same score each time.", "",
-                  "| Runs | Difference in score [90% interval] | Rank correlation of question scores | Same 90% hit or miss |",
-                  "|---|---|---|---|"]
+        lines += ["", "## Runs of the same model", "", "Runs of the same model on the same questions. With the same "
+                  "prompts this is test–retest: a good benchmark gives a model nearly the same score each time. With "
+                  "different prompts it measures sensitivity to wording, which matters only if it exceeds test–retest.", "",
+                  "| Runs | Prompts | Difference in score [90% interval] | Rank correlation of question scores | Same 90% hit or miss |",
+                  "|---|---|---|---|---|"]
         for a, b in pairs:
             d = [x - y for x, y in zip(b["scores"], a["scores"])]
             both = [(x, y) for x, y in zip(a["hits90_by_key"], b["hits90_by_key"]) if x is not None and y is not None]
             rho = spearman(a["scores"], b["scores"])
-            lines.append(f"| {a['label']} / {b['label']} | {sc(statistics.fmean(d))}{ci(bootstrap_mean(d))} "
+            same = "same" if a["prompts"] == b["prompts"] else f"{a['prompts']} / {b['prompts']}"
+            lines.append(f"| {a['label']} / {b['label']} | {same} | {sc(statistics.fmean(d))}{ci(bootstrap_mean(d))} "
                          f"| {sc(rho)} | {frac(sum(x == y for x, y in both), len(both))} |")
     return "\n".join(lines) + "\n"

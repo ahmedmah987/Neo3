@@ -14,7 +14,7 @@ import subprocess
 import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))   # the calibench package
-from calibench.questions import draw                                       # noqa: E402
+from calibench.questions import ORIGINAL_FAMILIES, draw                    # noqa: E402
 
 ROOT = pathlib.Path(__file__).parent
 
@@ -36,7 +36,9 @@ def main():
     if round_dir.exists():
         sys.exit(f"{round_dir.name} already exists: one round per seed")
 
-    questions = draw(random.Random(int(head, 16)), count)    # every family once before any repeats
+    # Every family once before any repeats. The guessbook keeps to the original thirteen families,
+    # so its old rounds still regenerate; adopting a new family is a deliberate change.
+    questions = draw(random.Random(int(head, 16)), count, ORIGINAL_FAMILIES)
 
     round_dir.mkdir(parents=True)
     (round_dir / "questions.json").write_text(

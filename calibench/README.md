@@ -67,6 +67,8 @@ python3 -m calibench compare calibench-runs/*-calibench-v1
 
 To compare models, use `--suite v1`: 104 questions, every family 8 times, settled on Python 3.13. A seed you choose is for exploring; a comparison on a seed someone chose can be cherry-picked.
 
+`--prompts alt` asks the same questions in a second wording, to measure how much the wording matters.
+
 A run asks 26 questions by default (every family twice), each in two phases, so 52 calls. Use `--count` for more or fewer, `--families` to limit the kinds of question, and `--workers` for how many calls run at once. If a run is interrupted or some calls fail, run the same command again: answers already recorded are kept, and only the rest are asked. If the first three calls all fail, which usually means a wrong key, address or model name, the run stops and shows the error.
 
 Other commands: `questions` prints the questions a seed draws, `families` lists the families, `report <dir>` re-scores a run, and `selftest` checks everything without contacting a real model.
@@ -101,7 +103,8 @@ Every true answer is positive, so answers are scored on a log scale: questions o
 - **Interval score** for each interval (Gneiting and Raftery, 2007): its width plus 2/α times any distance by which the answer falls outside, with α = 0.5 for the 50% interval and 0.1 for the 90% one.
 - **Coverage**: how often each interval contains the answer, with a 90% Wilson interval and a verdict of *too narrow*, *too wide* or *consistent with calibrated* at about two standard errors. Verdicts leave out single-number intervals, which claim exact knowledge; those are counted on their own line with how often they were exactly right.
 - **Instinct against worked**: how much working a question out improves the score, with a 90% interval.
-- **By kind**: the same scores for knowledge, statistical and exact questions, which tend to fail in different ways.
+- **Where the true answers fell**: the estimate and intervals are five quantiles, so they split the belief into six bins that should hold 5%, 20%, 25%, 25%, 20% and 5% of the true answers. This shows the shape of any miscalibration, and whether the model leans high or low.
+- **By kind and by family**: the same scores for knowledge, statistical and exact questions, and for each family, which tend to fail in different ways.
 - **Unanswered questions** (refused, unreadable or failed) count as if the model had given the answer of a model that knows nothing, so refusing hard questions can't improve a score.
 
 `compare` needs runs asked the same questions. It gives each run's score with a 90% bootstrap interval over questions and its difference from the best with a paired interval: when that interval includes zero, the questions don't separate the two. Runs of the same model also get a **test–retest** table: how much the score moved between runs, and how well the per-question scores agree.

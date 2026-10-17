@@ -8,8 +8,15 @@ from .families import FAMILIES, KINDS
 # Standard suites: a fixed set of questions every model is asked, so nobody chooses the seed. The seed
 # was fixed before any question was drawn from it. Knowledge answers depend on the Python version, so
 # a suite names the one its answers are settled on. A new suite gets a new name; a suite never changes.
+# The thirteen families Calibench started with. Suite v1 and the guessbook draw from exactly these,
+# so adding a family later changes neither.
+ORIGINAL_FAMILIES = [
+    "birthday", "collatz_steps", "digit_sum_pow2", "lis", "module_all", "primes_in_range", "rect_distance",
+    "stdlib_defs", "stdlib_lines", "unicode_block", "unicode_category", "unicode_word", "walk_max",
+]
+
 SUITES = {
-    "v1": {"seed": "calibench-v1", "count": 104, "python": "3.13",      # every family 8 times
+    "v1": {"seed": "calibench-v1", "count": 104, "python": "3.13", "families": ORIGINAL_FAMILIES,  # each 8 times
            "sha256": "8a91a6e055e6f0f71efb4e615e42cb16725e35d5faac19b7fe51b78b6681aa51"},
 }
 

@@ -22,9 +22,10 @@ import time
 
 from . import families as F
 from . import models, report, runner
-from .prompts import PROMPTS, parse_answer
-from .questions import SUITES, draw, fingerprint, rng_from_seed, solve
-from .scoring import (KNOW_NOTHING, interval_score, log_interval_score, log_wis, offset, spearman, verdict, wilson)
+from .prompts import PROMPT_SETS, parse_answer
+from .questions import ORIGINAL_FAMILIES, SUITES, draw, fingerprint, rng_from_seed, solve
+from .scoring import (KNOW_NOTHING, bin_weights, interval_score, log_interval_score, log_wis, offset, spearman,
+                      verdict, where_answers_fell, wilson)
 
 failures = []
 
@@ -116,8 +117,9 @@ def check_core():
     check("a reply with no usable answer is refused",
           raises(parse_answer, "about 12") and raises(parse_answer, '{"estimate": 5, "p50": [4]}')
           and raises(parse_answer, '{"estimate": NaN, "p50": [1, 2], "p90": [0, 3]}') and raises(parse_answer, None))
-    check("both prompts carry the question and the answer format",
-          all("Q?" in p.format(text="Q?") and '"p90"' in p.format(text="Q?") for p in PROMPTS.values()))
+    check("every prompt carries the question and the answer format",
+          all("Q?" in p.format(text="Q?") and '"p90"' in p.format(text="Q?")
+              for prompts in PROMPT_SETS.values() for p in prompts.values()))
 
     check("relative interval score (the guessbook's): width over the answer, plus 2/alpha times a miss",
           abs(interval_score([10, 20], 15, 0.1) - 10 / 15) < 1e-12 and abs(interval_score([10, 20], 25, 0.1) - 110 / 25) < 1e-12)
@@ -148,11 +150,22 @@ def check_core():
     check("the relative score rewards stating intervals lower than believed",
           expected(interval_score, 0.85) < expected(interval_score, 1))
 
+    a = {"estimate": 50, "p50": [40, 60], "p90": [20, 80]}
+    check("a true answer inside one bin goes to that bin", bin_weights(a, 45) == {2: 1.0} and bin_weights(a, 99) == {5: 1.0})
+    check("a true answer on a boundary is shared by expected shares",
+          bin_weights(a, 50) == {2: 0.5, 3: 0.5} and abs(bin_weights(a, 60)[3] - 0.25 / 0.45) < 1e-12)
+    fell = where_answers_fell([(a, 45), (a, 50), (a, 99), ({"estimate": 7, "p50": [7, 7], "p90": [7, 7]}, 7)])
+    check("where answers fell leaves out single numbers and counts ties as half above",
+          fell["n"] == 3 and fell["above"] == 1.5 and abs(sum(fell["bins"]) - 3) < 1e-12)
+
     w = wilson(5, 10)
     check("Wilson interval for 5 of 10", abs(w[0] - 0.2693) < 1e-3 and abs(w[1] - 0.7307) < 1e-3)
     check("rank correlation", spearman([1, 2, 3, 4], [10, 20, 30, 40]) == 1 and spearman([1, 2, 3, 4], [4, 3, 2, 1]) == -1
           and spearman([1, 1, 1], [1, 2, 3]) is None)
-    suite = draw(rng_from_seed(SUITES["v1"]["seed"]), SUITES["v1"]["count"])
+    suite = draw(rng_from_seed(SUITES["v1"]["seed"]), SUITES["v1"]["count"], SUITES["v1"]["families"])
+    check("suite v1 and the guessbook keep to the original thirteen families",
+          SUITES["v1"]["families"] is ORIGINAL_FAMILIES and len(ORIGINAL_FAMILIES) == 13
+          and set(ORIGINAL_FAMILIES) <= set(F.FAMILIES))
     check("suite v1: 104 questions, every family 8 times, none repeated",
           len(suite) == 104 and all(sum(q["family"] == f for q in suite) == 8 for f in F.FAMILIES)
           and len({(q["family"], json.dumps(q["params"])) for q in suite}) == 104)
@@ -247,7 +260,14 @@ def check_run(tmp):
     quiet(runner.run, models.NaiveModel(), "mock:naive", seed, count, FAST, tmp / "naive2", 3)
     table = report.compare([load("naive"), load("naive2")], ["naive", "naive2"])
     check("compare shows test–retest for two runs of one model",
-          "## Test–retest" in table and "| mock:naive (naive) / mock:naive (naive2) | 0.000" in table)
+          "## Runs of the same model" in table and "| mock:naive (naive) / mock:naive (naive2) | same | 0.000" in table)
+    quiet(runner.run, models.NaiveModel(), "mock:naive", seed, count, FAST, tmp / "naive-alt", 3, None, "alt")
+    table = report.compare([load("naive"), load("naive-alt")], ["naive", "naive-alt"])
+    check("compare marks runs with other prompts", "[alt prompts]" in table and "| standard / alt |" in table)
+    check("a run with other prompts is refused in the same directory",
+          raises(quiet, runner.run, models.NaiveModel(), "mock:naive", seed, count, FAST, tmp / "naive", 3, None, "alt"))
+    check("the report shows where answers fell, and each family",
+          all(s in md for s in ("## Where the true answers fell", "## By family", "above the estimate")))
     quiet(runner.run, models.NaiveModel(), "mock:naive", "other-seed", count, FAST, tmp / "naive3", 3)
     check("compare refuses runs asked different questions",
           "weren't asked the same questions" in report.compare([load("naive"), load("naive3")]))
