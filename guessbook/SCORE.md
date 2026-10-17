@@ -78,18 +78,18 @@ Worked answers by kind of question: knowledge means recalling, statistical means
 
 | # | Question | Answer | Instinct | Worked |
 |---|---|---|---|---|
-| 1 | highest point of a 1,362-step walk | pending | 28.95 | — |
-| 2 | assigned in the Mongolian block | pending | 158 | — |
-| 3 | longest increasing subsequence, n = 185 | pending | 23.5 | — |
-| 4 | names in `inspect.__all__` | pending | 90 | — |
-| 5 | Collatz steps from 772,456,875,771 | pending | 285 | — |
-| 6 | mean distance in a 1 × 3.2 rectangle | pending | 1.17 | — |
-| 7 | draws until a repeat, d = 1,190,973 | pending | 1,368 | — |
-| 8 | function definitions in `argparse` | pending | 180 | — |
-| 9 | Unicode names with the word SMALL | pending | 3,500 | — |
-| 10 | lines in `shutil` | pending | 1,600 | — |
-| 11 | digit sum of 2^8832 | pending | 11,965 | — |
-| 12 | primes in [314,525, 387,797] | pending | 5,770 | — |
+| 1 | highest point of a 1,362-step walk | pending | 28.95 | 28.95 |
+| 2 | assigned in the Mongolian block | pending | 158 | 158 |
+| 3 | longest increasing subsequence, n = 185 | pending | 23.5 | 23.51 |
+| 4 | names in `inspect.__all__` | pending | 90 | 99 |
+| 5 | Collatz steps from 772,456,875,771 | pending | 285 | 337 |
+| 6 | mean distance in a 1 × 3.2 rectangle | pending | 1.17 | 1.174 |
+| 7 | draws until a repeat, d = 1,190,973 | pending | 1,368 | 1,368 |
+| 8 | function definitions in `argparse` | pending | 180 | 140 |
+| 9 | Unicode names with the word SMALL | pending | 3,500 | 2,710 |
+| 10 | lines in `shutil` | pending | 1,600 | 1,600 |
+| 11 | digit sum of 2^8832 | pending | 11,965 | 11,966 |
+| 12 | primes in [314,525, 387,797] | pending | 5,770 | 5,766 |
 
 ### 2026-10-17-61dc17e5
 
