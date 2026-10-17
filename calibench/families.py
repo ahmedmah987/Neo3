@@ -8,6 +8,7 @@ the benchmark, and their questions name that Python version.
 import ast
 import bisect
 import datetime
+import decimal
 import importlib.util
 import itertools
 import math
@@ -416,6 +417,71 @@ def solve_multiply(a, b):
     return a * b
 
 
+# ---- harder calculation: beyond what even a strong model can be sure of -------------------
+
+def make_multiply_big(rng):
+    a, b = log_uniform_int(rng, 6, 12), log_uniform_int(rng, 6, 12)
+    return {"a": a, "b": b}, f"What is {a:,} × {b:,}?", f"{a:,} × {b:,}"
+
+
+def decimal_pi():
+    """π to the current decimal precision (the recipe from the decimal module's documentation)."""
+    decimal.getcontext().prec += 2
+    three = decimal.Decimal(3)
+    last, t, s, n, na, d, da = 0, three, 3, 1, 0, 0, 24
+    while s != last:
+        last = s
+        n, na = n + na, na + 8
+        d, da = d + da, da + 32
+        t = (t * n) / d
+        s += t
+    decimal.getcontext().prec -= 2
+    return +s
+
+
+EXACT_FACTORIAL_LIMIT = 200_000
+
+
+def make_factorial_digits_big(rng):
+    n = log_uniform_int(rng, 5, 9)
+    return {"n": n}, f"How many decimal digits does {n:,}! (the factorial of {n:,}) have?", f"digits of {n:,}!"
+
+
+def solve_factorial_digits_big(n):
+    """Exact for n up to EXACT_FACTORIAL_LIMIT, and from Stirling's series beyond it."""
+    return solve_factorial_digits(n) if n <= EXACT_FACTORIAL_LIMIT else stirling_factorial_digits(n)
+
+
+def stirling_factorial_digits(n):
+    """Digits of n! from log10(n!) by Stirling's series at 80 significant digits. For n ≥ 1,000 the first
+    omitted term is below 1/(1680 n^7), far smaller than any distance to an integer allowed here."""
+    with decimal.localcontext() as ctx:
+        ctx.prec = 80
+        N = decimal.Decimal(n)
+        ln_factorial = (N * N.ln() - N + (2 * decimal_pi() * N).ln() / 2
+                        + 1 / (12 * N) - 1 / (360 * N ** 3) + 1 / (1260 * N ** 5))
+        log10 = ln_factorial / decimal.Decimal(10).ln()
+        whole = int(log10)
+        if min(log10 - whole, whole + 1 - log10) < decimal.Decimal("1e-40"):
+            raise ValueError(f"log10({n}!) is too close to an integer to settle safely")
+        return whole + 1
+
+
+def make_partitions_big(rng):
+    n = log_uniform_int(rng, 2.8, 3.7)
+    text = (f"In how many ways can {n:,} be written as a sum of positive integers, where the order of the terms "
+            f"doesn't matter (the partition number p({n:,}))?")
+    return {"n": n}, text, f"partitions of {n:,}"
+
+
+def make_days_between_far(rng):
+    start = datetime.date(1, 1, 1) + datetime.timedelta(days=rng.randrange(3000 * 365))
+    end = start + datetime.timedelta(days=log_uniform_int(rng, 5, 6.4))
+    text = (f"How many days are there from {spell_date(start)} to {spell_date(end)}, in the proleptic Gregorian "
+            f"calendar (the Gregorian calendar extended to all years)? (From one day to the next counts as 1.)")
+    return {"start": start.isoformat(), "end": end.isoformat()}, text, f"days from {start} to {end}"
+
+
 FAMILIES = {
     "primes_in_range": (make_primes_in_range, solve_primes_in_range),
     "digit_sum_pow2": (make_digit_sum_pow2, solve_digit_sum_pow2),
@@ -435,13 +501,17 @@ FAMILIES = {
     "friday13": (make_friday13, solve_friday13),
     "partitions": (make_partitions, solve_partitions),
     "multiply": (make_multiply, solve_multiply),
+    "multiply_big": (make_multiply_big, solve_multiply),
+    "factorial_digits_big": (make_factorial_digits_big, solve_factorial_digits_big),
+    "partitions_big": (make_partitions_big, solve_partitions),
+    "days_between_far": (make_days_between_far, solve_days_between),
 }
 
 # Families whose answer is a count, which can be 0 (`opcode` has no function definitions in 3.13).
 # Scoring uses log(1 + x) for these and log(x) for the rest, whose answers are all at least 0.5.
 COUNTS = {"primes_in_range", "digit_sum_pow2", "collatz_steps", "stdlib_lines", "stdlib_defs", "unicode_word",
           "unicode_category", "unicode_block", "module_all", "days_between", "factorial_digits", "friday13",
-          "partitions", "multiply"}
+          "partitions", "multiply", "multiply_big", "factorial_digits_big", "partitions_big", "days_between_far"}
 
 # What working a question out means for each family: recalling what is known (knowledge),
 # modelling noise or irregularity (statistical), evaluating a known formula (exact), or carrying out
@@ -453,5 +523,6 @@ KINDS = {
     "digit_sum_pow2": "statistical", "collatz_steps": "statistical", "primes_in_range": "statistical",
     "birthday": "exact",
     "days_between": "calculation", "factorial_digits": "calculation", "friday13": "calculation",
-    "partitions": "calculation", "multiply": "calculation",
+    "partitions": "calculation", "multiply": "calculation", "multiply_big": "calculation",
+    "factorial_digits_big": "calculation", "partitions_big": "calculation", "days_between_far": "calculation",
 }

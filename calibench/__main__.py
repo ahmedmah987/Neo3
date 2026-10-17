@@ -31,7 +31,8 @@ def family_list(value):
 
 def add_draw_options(p):
     p.add_argument("--suite", choices=sorted(SUITES), help="a standard suite: fixed questions every model is asked "
-                   "(v2: 108 questions, all 18 families 6 times; v1: 104 questions, the original 13 families 8 times). "
+                   "(v2: 108 questions, 18 families 6 times; v1: 104 questions, the original 13 families 8 times; "
+                   "calc1: 40 harder calculation questions). "
                    "Use this to compare models")
     p.add_argument("--seed", help="any string; the same seed gives the same questions (default: a new random seed)")
     p.add_argument("--count", type=int, help="number of questions (default: every family twice)")

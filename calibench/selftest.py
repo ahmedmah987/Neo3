@@ -93,6 +93,13 @@ def check_families():
     check("partition numbers p(1) to p(10), and p(100) = 190,569,292",
           [F.solve_partitions(n) for n in range(1, 11)] == [1, 2, 3, 5, 7, 11, 15, 22, 30, 42]
           and F.solve_partitions(100) == 190_569_292)
+    check("Stirling's series gives the exact digits of n! where both can be computed",
+          all(F.stirling_factorial_digits(n) == F.solve_factorial_digits(n) for n in (1_000, 54_321, 100_000, 199_999))
+          and F.solve_factorial_digits_big(10 ** 9) == 8_565_705_523)
+    check("p(1000) = 24,061,467,864,032,622,473,692,149,727,991",
+          F.solve_partitions(1000) == 24_061_467_864_032_622_473_692_149_727_991)
+    check("2,000 years from January 1 of year 1 hold 485 leap days", F.solve_days_between("0001-01-01", "2001-01-01")
+          == 2000 * 365 + 485)
     check("month names don't depend on the locale", F.spell_date(F.datetime.date(1999, 12, 31)) == "December 31, 1999")
     bad_blocks = [name for name, lo, hi in F.UNICODE_BLOCKS if not lo < hi or (hi + 1) % 16]
     check("block ranges are well formed", not bad_blocks)
@@ -182,9 +189,13 @@ def check_core():
           and len({(q["family"], json.dumps(q["params"])) for q in suite}) == 104)
     v2 = draw(rng_from_seed(SUITES["v2"]["seed"]), SUITES["v2"]["count"], SUITES["v2"]["families"])
     check("suite v2: 108 questions, all 18 families 6 times, none repeated",
-          len(v2) == 108 and len(F.FAMILIES) == 18 and all(sum(q["family"] == f for q in v2) == 6 for f in F.FAMILIES)
+          len(v2) == 108 and len(SUITES["v2"]["families"]) == 18
+          and all(sum(q["family"] == f for q in v2) == 6 for f in SUITES["v2"]["families"])
           and len({(q["family"], json.dumps(q["params"])) for q in v2}) == 108)
-    for name, questions in (("v1", suite), ("v2", v2)):
+    calc1 = draw(rng_from_seed(SUITES["calc1"]["seed"]), SUITES["calc1"]["count"], SUITES["calc1"]["families"])
+    check("suite calc1: 40 questions, the 4 harder calculation families 10 times each",
+          len(calc1) == 40 and all(sum(q["family"] == f for q in calc1) == 10 for f in SUITES["calc1"]["families"]))
+    for name, questions in (("v1", suite), ("v2", v2), ("calc1", calc1)):
         if f"{sys.version_info.major}.{sys.version_info.minor}" == SUITES[name]["python"]:
             check(f"suite {name} draws exactly the questions it always has",
                   fingerprint(questions) == SUITES[name]["sha256"])

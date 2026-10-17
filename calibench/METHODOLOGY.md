@@ -1,6 +1,6 @@
 # Calibench methodology
 
-This document describes what Calibench measures, how, and where the measurement can mislead. It describes Calibench 2.1.0 with scoring `log-wis-1`.
+This document describes what Calibench measures, how, and where the measurement can mislead. It describes Calibench 2.2.0 with scoring `log-wis-1`.
 
 ## What is measured
 
@@ -10,16 +10,16 @@ It does not measure verbal expressions of confidence, probabilities on multiple-
 
 ## Questions
 
-Questions come from eighteen families (`families.py`). Each family has a generator that draws parameters from a random number generator and writes the question, and a solver that computes the answer.
+Questions come from twenty-two families (`families.py`). Each family has a generator that draws parameters from a random number generator and writes the question, and a solver that computes the answer.
 
 | Kind | Families | What answering needs |
 |---|---|---|
 | Statistical | primes in a range, digit sum of 2^n, longest increasing subsequence, distance in a rectangle, Collatz steps, peak of a random walk | A model of noise or irregularity around a known asymptotic or average |
 | Exact | expected draws until a repeat | Evaluating a closed form |
 | Knowledge | lines, function definitions and `__all__` names in standard-library modules; Unicode code points by name word, general category and block | Recall of facts that can be checked exactly |
-| Calculation | days between two dates, digits of n!, Friday the 13ths in a span of years, partition numbers, products of two numbers | A long exact calculation, where the uncertainty is in one's own arithmetic |
+| Calculation | days between two dates, digits of n!, Friday the 13ths in a span of years, partition numbers, products of two numbers; and harder versions of four of them: dates thousands of years apart, digits of n! for n up to 10⁹, p(n) for n up to 5,000, products of two 7- to 12-digit numbers | A long exact calculation, where the uncertainty is in one's own arithmetic |
 
-The calculation families, added in Calibench 2.1, ask whether a model knows when its own arithmetic can be trusted. Their answers need nothing from the running Python, so they are the same on every machine.
+The calculation families, added in Calibench 2.1, ask whether a model knows when its own arithmetic can be trusted. Their answers need nothing from the running Python, so they are the same on every machine. The harder four (Calibench 2.2) go beyond what a strong model can do exactly. Digits of n! are computed exactly up to n = 200,000 and from Stirling's series at 80 significant digits beyond it; the two methods agree wherever both run, and the series refuses a case too close to an integer to settle.
 
 **Drawing.** A seed string is hashed with SHA-256 to seed Python's `random.Random`. Families are shuffled and every family is used once before any repeats. A question already drawn in the same run is redrawn, so a run never asks the same thing twice unless a family runs out of distinct questions. The same seed gives the same questions on the same Python version.
 
@@ -27,7 +27,7 @@ The calculation families, added in Calibench 2.1, ask whether a model knows when
 
 **Python dependence.** Knowledge answers come from the Python installation and Unicode database of the machine running Calibench, and each knowledge question names its Python version. Modules that aren't single source files on that Python are skipped, so a seed can draw different knowledge questions on different versions.
 
-**Standard suites.** A suite fixes a seed, a question count, a list of families and a Python version, so every model is asked the same questions and nobody chooses the seed. Suite `v2`, the one to use, is the seed `calibench-v2`, 108 questions from all eighteen families (each 6 times), settled on Python 3.13. Suite `v1` is the seed `calibench-v1`, 104 questions from the original thirteen families (each 8 times), on Python 3.13; it is kept so earlier results stay comparable. Each seed was fixed before any question was drawn from it. Suites never change, and `selftest` checks a fingerprint of each suite's questions; a new suite gets a new name.
+**Standard suites.** A suite fixes a seed, a question count, a list of families and a Python version, so every model is asked the same questions and nobody chooses the seed. Suite `v2`, the one to use, is the seed `calibench-v2`, 108 questions from all eighteen families (each 6 times), settled on Python 3.13. Suite `v1` is the seed `calibench-v1`, 104 questions from the original thirteen families (each 8 times), on Python 3.13; it is kept so earlier results stay comparable. Suite `calc1` is a focused probe beside them: the seed `calibench-calc1`, 40 questions from the four harder calculation families (each 10 times). Each seed was fixed before any question was drawn from it. Suites never change, and `selftest` checks a fingerprint of each suite's questions; a new suite gets a new name.
 
 ## Elicitation
 

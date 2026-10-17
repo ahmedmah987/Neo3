@@ -15,7 +15,7 @@ url: "https://github.com/ahmedmah987/Neo3/tree/main/calibench"
 license:
   - MIT
   - CC-BY-4.0
-version: 2.1.0
+version: 2.2.0
 date-released: "2026-10-17"
 keywords:
   - calibration
