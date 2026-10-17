@@ -10,6 +10,7 @@ Specs:
   mock:naive                a built-in model that knows nothing, as a floor to compare against
 """
 import difflib
+import http.client
 import json
 import os
 import subprocess
@@ -72,7 +73,8 @@ class AnthropicModel(Model):
 
 
 def _request_json(url, payload, headers, timeout, attempts=3):
-    """POST a JSON payload, or GET if there is none, retrying rate limits, server errors and lost connections."""
+    """POST a JSON payload, or GET if there is none, retrying rate limits, server errors, lost connections
+    and replies cut off partway."""
     body = json.dumps(payload).encode() if payload is not None else None
     for attempt in range(attempts):
         request = urllib.request.Request(url, data=body, headers={"Content-Type": "application/json", **headers})
@@ -84,9 +86,10 @@ def _request_json(url, payload, headers, timeout, attempts=3):
             if not retryable or attempt == attempts - 1:
                 detail = error.read().decode(errors="replace")[:500]
                 raise RuntimeError(f"HTTP {error.code} from {url}: {detail}") from None
-        except urllib.error.URLError as error:
+        except (OSError, http.client.HTTPException) as error:     # refused, reset, timed out or cut off
             if attempt == attempts - 1:
-                raise RuntimeError(f"could not reach {url}: {error.reason}") from None
+                reason = getattr(error, "reason", None) or f"{type(error).__name__}: {error}"
+                raise RuntimeError(f"could not reach {url}: {reason}") from None
         time.sleep(2 ** (attempt + 1))
 
 
@@ -230,7 +233,9 @@ class NaiveModel(Model):
     """Knows nothing: the same guess for every question. A floor, not a competitor."""
 
     def ask(self, prompt, phase):
-        return '{"estimate": 100, "p50": [30, 300], "p90": [3, 3000]}', {}
+        from .scoring import KNOW_NOTHING
+
+        return json.dumps(KNOW_NOTHING), {}
 
 
 def make_model(spec, base_url=None, api_key_env=None, instinct_effort="low", worked_effort="high", timeout=600):

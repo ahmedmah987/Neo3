@@ -348,6 +348,11 @@ FAMILIES = {
     "module_all": (make_module_all, solve_module_all),
 }
 
+# Families whose answer is a count, which can be 0 (`opcode` has no function definitions in 3.13).
+# Scoring uses log(1 + x) for these and log(x) for the rest, whose answers are all at least 0.5.
+COUNTS = {"primes_in_range", "digit_sum_pow2", "collatz_steps", "stdlib_lines", "stdlib_defs", "unicode_word",
+          "unicode_category", "unicode_block", "module_all"}
+
 # What working a question out means for each family: recalling what is known (knowledge),
 # modelling noise or irregularity (statistical), or evaluating a known formula (exact).
 KINDS = {

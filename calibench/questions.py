@@ -5,6 +5,14 @@ import random
 
 from .families import FAMILIES, KINDS
 
+# Standard suites: a fixed set of questions every model is asked, so nobody chooses the seed. The seed
+# was fixed before any question was drawn from it. Knowledge answers depend on the Python version, so
+# a suite names the one its answers are settled on. A new suite gets a new name; a suite never changes.
+SUITES = {
+    "v1": {"seed": "calibench-v1", "count": 104, "python": "3.13",      # every family 8 times
+           "sha256": "8a91a6e055e6f0f71efb4e615e42cb16725e35d5faac19b7fe51b78b6681aa51"},
+}
+
 
 def rng_from_seed(seed):
     """Any string works as a seed; hashing it means similar seeds give unrelated questions."""
@@ -37,6 +45,11 @@ def draw(rng, count=12, families=None):
         questions.append({"q": i, "family": family, "kind": KINDS[family], "params": params,
                           "short": short, "text": text})
     return questions
+
+
+def fingerprint(questions):
+    """A hash of a set of questions, to check that a suite still draws exactly what it always has."""
+    return hashlib.sha256(json.dumps(questions, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
 
 
 def solve(question):

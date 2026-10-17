@@ -10,9 +10,11 @@ import importlib.util
 import io
 import itertools
 import json
+import math
 import os
 import pathlib
 import random
+import statistics
 import sys
 import tempfile
 import threading
@@ -21,8 +23,8 @@ import time
 from . import families as F
 from . import models, report, runner
 from .prompts import PROMPTS, parse_answer
-from .questions import draw, rng_from_seed, solve
-from .scoring import interval_score, verdict, weighted_interval_score
+from .questions import SUITES, draw, fingerprint, rng_from_seed, solve
+from .scoring import (KNOW_NOTHING, interval_score, log_interval_score, log_wis, offset, spearman, verdict, wilson)
 
 failures = []
 
@@ -117,13 +119,47 @@ def check_core():
     check("both prompts carry the question and the answer format",
           all("Q?" in p.format(text="Q?") and '"p90"' in p.format(text="Q?") for p in PROMPTS.values()))
 
-    check("interval score of a hit is its width over the answer", abs(interval_score([10, 20], 15, 0.1) - 10 / 15) < 1e-12)
-    check("interval score of a miss adds 2/alpha times the miss", abs(interval_score([10, 20], 25, 0.1) - 110 / 25) < 1e-12)
-    check("an exact single-number answer scores 0",
-          weighted_interval_score({"estimate": 7, "p50": [7, 7], "p90": [7, 7]}, 7) == 0)
+    check("relative interval score (the guessbook's): width over the answer, plus 2/alpha times a miss",
+          abs(interval_score([10, 20], 15, 0.1) - 10 / 15) < 1e-12 and abs(interval_score([10, 20], 25, 0.1) - 110 / 25) < 1e-12)
+    check("log interval score of a miss adds 2/alpha times the miss in log units",
+          abs(log_interval_score([10, 20], 40, 0.1) - (math.log(2) + 20 * math.log(2))) < 1e-12)
+    check("an exact single-number answer scores 0", log_wis({"estimate": 7, "p50": [7, 7], "p90": [7, 7]}, 7) == 0)
     check("a wider interval around the answer scores worse",
-          weighted_interval_score({"estimate": 7, "p50": [6, 8], "p90": [5, 9]}, 7)
-          < weighted_interval_score({"estimate": 7, "p50": [3, 11], "p90": [1, 20]}, 7))
+          log_wis({"estimate": 7, "p50": [6, 8], "p90": [5, 9]}, 7) < log_wis({"estimate": 7, "p50": [3, 11], "p90": [1, 20]}, 7))
+    check("a miss by a factor of ten costs the same in either direction",
+          abs(log_interval_score([10, 10], 100, 0.1) - log_interval_score([1000, 1000], 100, 0.1)) < 1e-12)
+    check("values at or below zero are floored, not an error", log_interval_score([0, 50], 20, 0.1) > 0)
+    check("a count of zero is scored on log(1 + x)", log_wis({"estimate": 0, "p50": [0, 0], "p90": [0, 0]}, 0, 1) == 0
+          and log_wis({"estimate": 0, "p50": [0, 1], "p90": [0, 3]}, 0, 1) > 0)
+    check("counts are shifted by 1 and continuous answers aren't",
+          F.COUNTS < set(F.FAMILIES) and offset("stdlib_defs") == 1 and offset("rect_distance") == 0
+          and all(offset(f) == 0 for f in ("lis", "walk_max", "birthday", "rect_distance")))
+
+    # Propriety: for a lognormal belief, stating its true 5% and 95% quantiles must minimise the
+    # expected log score. The relative score rewards shading them low, which is why it isn't used.
+    rng = random.Random(5)
+    belief = sorted(math.exp(rng.gauss(math.log(150), 0.5)) for _ in range(20_000))
+    lo, hi = belief[1_000], belief[19_000]
+    def expected(score, k):
+        return statistics.fmean(score([lo * k, hi * k], x, 0.1) for x in belief[::4])
+    log_best = expected(log_interval_score, 1)
+    check("the log score is lowest for the intervals actually believed",
+          all(expected(log_interval_score, k) > log_best for k in (0.8, 0.9, 1.1, 1.25)))
+    check("the relative score rewards stating intervals lower than believed",
+          expected(interval_score, 0.85) < expected(interval_score, 1))
+
+    w = wilson(5, 10)
+    check("Wilson interval for 5 of 10", abs(w[0] - 0.2693) < 1e-3 and abs(w[1] - 0.7307) < 1e-3)
+    check("rank correlation", spearman([1, 2, 3, 4], [10, 20, 30, 40]) == 1 and spearman([1, 2, 3, 4], [4, 3, 2, 1]) == -1
+          and spearman([1, 1, 1], [1, 2, 3]) is None)
+    suite = draw(rng_from_seed(SUITES["v1"]["seed"]), SUITES["v1"]["count"])
+    check("suite v1: 104 questions, every family 8 times, none repeated",
+          len(suite) == 104 and all(sum(q["family"] == f for q in suite) == 8 for f in F.FAMILIES)
+          and len({(q["family"], json.dumps(q["params"])) for q in suite}) == 104)
+    if f"{sys.version_info.major}.{sys.version_info.minor}" == SUITES["v1"]["python"]:
+        check("suite v1 draws exactly the questions it always has", fingerprint(suite) == SUITES["v1"]["sha256"])
+    else:
+        print(f"skip  suite v1 fingerprint: it is fixed on Python {SUITES['v1']['python']}")
     check("coverage verdicts", verdict(13, 26, 0.5) == "consistent with calibrated"
           and verdict(15, 26, 0.9) == "too narrow (overconfident)" and verdict(26, 26, 0.5) == "too wide (underconfident)"
           and verdict(2, 3, 0.9) == "too few to tell")
@@ -171,7 +207,7 @@ def check_run(tmp):
     worked = rep["phases"]["worked"]
     check("a run writes every file", all((tmp / "oracle" / f).exists() for f in
           ("run.json", "questions.json", "answers.jsonl", "results.json", "report.json", "report.md")))
-    check("an oracle scores 0 with every interval hit", worked["n"] == count and worked["wis_mean"] == 0
+    check("an oracle scores 0 with every interval hit", worked["n"] == count and worked["all"]["score_mean"] == 0
           and worked["p90"]["hits"] == count and worked["certain_right"] == count)
     check("the served model is reported", rep["served_models"] == ["oracle"])
     before = (tmp / "oracle" / "answers.jsonl").read_text()
@@ -183,9 +219,14 @@ def check_run(tmp):
     flaky = FlakyModel(questions[::2])
     rep = quiet(runner.run, flaky, "flaky", seed, count, FAST, tmp / "flaky", 1)
     check("failed calls are recorded as errors", rep["phases"]["worked"]["statuses"] == {"error": count // 2, "ok": count // 2})
+    rows = rep["questions"]
+    check("an unanswered question scores as the know-nothing answer",
+          all(r["worked"]["score"] == log_wis(KNOW_NOTHING, r["answer"], offset(r["family"])) for r in rows if r["worked"].get("imputed"))
+          and sum(bool(r["worked"].get("imputed")) for r in rows) == count // 2
+          and abs(rep["phases"]["worked"]["all"]["score_mean"] - statistics.fmean(r["worked"]["score"] for r in rows)) < 1e-12)
     rep = quiet(runner.run, flaky, "flaky", seed, count, FAST, tmp / "flaky", 1)
     check("running again retries failed calls",
-          rep["phases"]["worked"]["statuses"] == {"ok": count} and rep["phases"]["worked"]["wis_mean"] > 0)
+          rep["phases"]["worked"]["statuses"] == {"ok": count} and rep["phases"]["worked"]["score_mean"] > 0)
 
     broken = models.make_model("openai-compat:none", base_url="http://127.0.0.1:9", timeout=5)
     with environ_and_sleep():
@@ -195,11 +236,21 @@ def check_run(tmp):
 
     rep = quiet(runner.run, models.NaiveModel(), "mock:naive", seed, count, FAST, tmp / "naive", 3)
     md = (tmp / "naive" / "report.md").read_text()
-    check("a naive model scores worse than the oracle", rep["phases"]["worked"]["wis_mean"] > 0.1)
+    check("a naive model scores worse than the oracle", rep["phases"]["worked"]["all"]["score_mean"] > 0.1)
     check("the report has a summary, kinds and questions",
           all(s in md for s in ("## Summary", "## By kind of question", "## Questions")))
-    table = report.compare([json.loads((tmp / d / "report.json").read_text()) for d in ("naive", "oracle")])
+    def load(d):
+        return json.loads((tmp / d / "report.json").read_text())
+
+    table = report.compare([load("naive"), load("oracle")])
     check("compare ranks the oracle first", table.index("| oracle |") < table.index("| mock:naive |"))
+    quiet(runner.run, models.NaiveModel(), "mock:naive", seed, count, FAST, tmp / "naive2", 3)
+    table = report.compare([load("naive"), load("naive2")], ["naive", "naive2"])
+    check("compare shows test–retest for two runs of one model",
+          "## Test–retest" in table and "| mock:naive (naive) / mock:naive (naive2) | 0.000" in table)
+    quiet(runner.run, models.NaiveModel(), "mock:naive", "other-seed", count, FAST, tmp / "naive3", 3)
+    check("compare refuses runs asked different questions",
+          "weren't asked the same questions" in report.compare([load("naive"), load("naive3")]))
 
     with open(tmp / "naive" / "answers.jsonl", "a") as f:
         f.write("\n")
@@ -224,7 +275,8 @@ class FakeServer:
                 self.send_response(status)
                 for k, v in headers.items():
                     self.send_header(k, v)
-                self.send_header("Content-Length", str(len(payload)))
+                if "Content-Length" not in headers:      # a larger one given here simulates a cut-off reply
+                    self.send_header("Content-Length", str(len(payload)))
                 self.end_headers()
                 self.wfile.write(payload)
 
@@ -291,6 +343,12 @@ def check_openai_compat():
                   reply == ANSWER and info.get("refused"))
             server.json(400, {"error": "bad request"})
             check("openai-compat: a 400 is an error, not retried", raises(model.ask, "PROMPT", "worked"))
+            body = json.dumps({"choices": [{"message": {"content": ANSWER}, "finish_reason": "stop"}]}).encode()
+            server.queue.append((200, {"Content-Type": "application/json", "Content-Length": str(len(body) + 50)}, body))
+            server.json(200, {"choices": [{"message": {"content": ANSWER}, "finish_reason": "stop"}]})
+            before = len(server.requests)
+            reply, _ = model.ask("PROMPT", "worked")
+            check("openai-compat: a reply cut off partway is retried", reply == ANSWER and len(server.requests) == before + 2)
     finally:
         server.close()
 

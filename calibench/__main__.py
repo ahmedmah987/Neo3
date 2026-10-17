@@ -8,7 +8,7 @@ import sys
 from . import __version__
 from .families import FAMILIES, KINDS
 from .prompts import PROMPTS
-from .questions import draw, rng_from_seed
+from .questions import SUITES, draw, rng_from_seed
 from .scoring import PHASES
 
 MODEL_HELP = """model to test:
@@ -29,11 +29,28 @@ def family_list(value):
     return names
 
 
-def add_draw_options(p, seed_required=False):
-    p.add_argument("--seed", required=seed_required, help="any string; the same seed gives the same questions"
-                   + ("" if seed_required else " (default: a new random seed)"))
-    p.add_argument("--count", type=int, default=26, help="number of questions (default 26: every family twice)")
+def add_draw_options(p):
+    p.add_argument("--suite", choices=sorted(SUITES), help="a standard suite: fixed questions every model is asked "
+                   "(v1: 104 questions, every family 8 times). Use this to compare models")
+    p.add_argument("--seed", help="any string; the same seed gives the same questions (default: a new random seed)")
+    p.add_argument("--count", type=int, help="number of questions (default 26: every family twice)")
     p.add_argument("--families", type=family_list, help="comma-separated families to draw from (default: all)")
+
+
+def resolve_draw(args, seed_required=False):
+    """Fill in seed and count from a suite, or from the defaults."""
+    if args.suite:
+        if args.seed or args.count or args.families:
+            sys.exit("--suite fixes the questions; leave out --seed, --count and --families")
+        args.seed, args.count = SUITES[args.suite]["seed"], SUITES[args.suite]["count"]
+        python = ".".join(map(str, sys.version_info[:2]))
+        if python != SUITES[args.suite]["python"]:
+            print(f"warning: suite {args.suite} is settled on Python {SUITES[args.suite]['python']}; on Python {python} "
+                  "its knowledge questions differ, so results won't be comparable with standard ones", file=sys.stderr)
+    if seed_required and not args.seed:
+        sys.exit("give --seed or --suite")
+    args.seed = args.seed or secrets.token_hex(4)
+    args.count = args.count or 26
 
 
 def cmd_run(args):
@@ -41,10 +58,10 @@ def cmd_run(args):
     from .report import render
     from .runner import run
 
-    seed = args.seed or secrets.token_hex(4)
+    resolve_draw(args)
     model = make_model(args.model, base_url=args.base_url, api_key_env=args.api_key_env,
                        instinct_effort=args.instinct_effort, worked_effort=args.worked_effort, timeout=args.timeout)
-    report = run(model, args.model, seed, args.count, args.families, args.out, args.workers)
+    report = run(model, args.model, args.seed, args.count, args.families, args.out, args.workers, args.suite)
     print(render(report), end="")
     failed = sum(n for p in PHASES for s, n in report["phases"][p]["statuses"].items() if s not in ("ok", "refused"))
     if failed:
@@ -52,13 +69,14 @@ def cmd_run(args):
 
 
 def cmd_questions(args):
-    seed = args.seed or secrets.token_hex(4)
-    print(f"seed {seed}\n")
-    for q in draw(rng_from_seed(seed), args.count, args.families):
+    resolve_draw(args)
+    print(f"seed {args.seed}\n")
+    for q in draw(rng_from_seed(args.seed), args.count, args.families):
         print(f"{q['q']:>3}. [{q['kind']}] {q['text']}")
 
 
 def cmd_export(args):
+    resolve_draw(args, seed_required=True)
     lines = []
     questions = draw(rng_from_seed(args.seed), args.count, args.families)
     for phase in PHASES:
@@ -69,7 +87,8 @@ def cmd_export(args):
     if args.out:
         pathlib.Path(args.out).write_text(text, encoding="utf-8")
         print(f"wrote {len(lines)} prompts to {args.out}. Add a \"reply\" to each line, then run:\n"
-              f"  python3 -m calibench run --model replies:{args.out} --seed {args.seed} --count {args.count}"
+              f"  python3 -m calibench run --model replies:{args.out} "
+              + (f"--suite {args.suite}" if args.suite else f"--seed {args.seed} --count {args.count}")
               + (f" --families {','.join(args.families)}" if args.families else ""), file=sys.stderr)
     else:
         print(text, end="")
@@ -91,7 +110,7 @@ def cmd_compare(args):
         if not path.exists():
             sys.exit(f"{path} not found; run `python3 -m calibench report {d}` first")
         reports.append(json.loads(path.read_text(encoding="utf-8")))
-    print(compare(reports), end="")
+    print(compare(reports, [pathlib.Path(d).name for d in args.dirs]), end="")
 
 
 def cmd_families(args):
@@ -132,7 +151,7 @@ def main(argv=None):
     p.set_defaults(func=cmd_questions)
 
     p = sub.add_parser("export", help="write the prompts for a seed as JSON lines, to answer with your own harness")
-    add_draw_options(p, seed_required=True)
+    add_draw_options(p)
     p.add_argument("--out", help="file to write (default: standard output)")
     p.set_defaults(func=cmd_export)
 

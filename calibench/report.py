@@ -1,36 +1,53 @@
 """Reports for one run, and comparisons between runs."""
 import collections
 import json
-import random
 import statistics
 
 from .families import KINDS
-from .scoring import PHASES, LEVELS, inside, summarize, weighted_interval_score
+from .questions import SUITES
+from .scoring import (KNOW_NOTHING, LEVELS, PHASES, bootstrap_mean, inside, log_wis, offset, spearman, summarize)
 
 
 def question_key(q):
     return f"{q['family']} {json.dumps(q['params'], sort_keys=True)}"
 
 
+def suite_status(meta):
+    suite = meta.get("suite")
+    if not suite:
+        return None
+    if meta["python"].rsplit(".", 1)[0] == SUITES[suite]["python"]:
+        return f"standard suite {suite}"
+    return (f"suite {suite} questions on Python {meta['python']}, so not comparable with standard {suite} "
+            f"results, which use Python {SUITES[suite]['python']}")
+
+
 def build(meta, questions, records, results):
     truth = {r["q"]: r["answer"] for r in results}
-    report = {"meta": meta, "phases": {}, "kinds": {}, "questions": []}
+    report = {"meta": meta, "suite": suite_status(meta), "phases": {}, "kinds": {}, "questions": []}
     for phase in PHASES:
         recs = [records.get((q["q"], phase)) for q in questions]
         ok = [(q, r) for q, r in zip(questions, recs) if r and r["status"] == "ok"]
         statuses = collections.Counter(r["status"] if r else "missing" for r in recs)
-        report["phases"][phase] = {"asked": len(questions), "statuses": dict(statuses),
-                                   **summarize([(r["answer"], truth[q["q"]]) for q, r in ok])}
+        every = [log_wis(r["answer"] if r and r["status"] == "ok" else KNOW_NOTHING, truth[q["q"]], offset(q["family"]))
+                 for q, r in zip(questions, recs)]
+        report["phases"][phase] = {
+            "asked": len(questions), "statuses": dict(statuses),
+            "all": {"score_mean": statistics.fmean(every), "score_median": statistics.median(every),
+                    "score_ci": bootstrap_mean(every)},
+            **summarize([(r["answer"], truth[q["q"]], offset(q["family"])) for q, r in ok]),
+        }
         report["kinds"][phase] = {
-            kind: summarize([(r["answer"], truth[q["q"]]) for q, r in ok if q["kind"] == kind])
+            kind: summarize([(r["answer"], truth[q["q"]], offset(q["family"])) for q, r in ok if q["kind"] == kind])
             for kind in sorted(set(KINDS.values()))
         }
 
     closer = {"instinct": 0, "worked": 0, "tie": 0}
     served, tokens, cost = set(), collections.Counter(), 0.0
     for q in questions:
+        x, shift = truth[q["q"]], offset(q["family"])
         row = {"q": q["q"], "key": question_key(q), "family": q["family"], "kind": q["kind"],
-               "short": q["short"], "answer": truth[q["q"]]}
+               "short": q["short"], "answer": x}
         for phase in PHASES:
             r = records.get((q["q"], phase))
             cell = {"status": r["status"] if r else "missing"}
@@ -41,23 +58,27 @@ def build(meta, questions, records, results):
                     tokens[name] += attempt.get(name) or 0
                 cost += attempt.get("cost") or 0
             if r and r["status"] == "ok":
-                a = r["answer"]
-                cell.update(a)
-                cell["wis"] = weighted_interval_score(a, truth[q["q"]])
-                cell["hits"] = {key: inside(a[key], truth[q["q"]]) for key, _ in LEVELS}
+                cell.update(r["answer"])
+                cell["score"] = log_wis(r["answer"], x, shift)
+                cell["hits"] = {key: inside(r["answer"][key], x) for key, _ in LEVELS}
+            else:
+                cell["score"] = log_wis(KNOW_NOTHING, x, shift)
+                cell["imputed"] = True
             row[phase] = cell
-        if all("estimate" in row[p] for p in PHASES):
-            errors = {p: abs(row[p]["estimate"] - row["answer"]) for p in PHASES}
+        if all(row[p]["status"] == "ok" for p in PHASES):
+            errors = {p: abs(row[p]["estimate"] - x) for p in PHASES}
             closer["tie" if errors["instinct"] == errors["worked"] else min(errors, key=errors.get)] += 1
         report["questions"].append(row)
 
-    paired = [row for row in report["questions"] if all("wis" in row[p] for p in PHASES)]
+    paired = [row for row in report["questions"] if all(row[p]["status"] == "ok" for p in PHASES)]
+    gains = [r["instinct"]["score"] - r["worked"]["score"] for r in paired]
     report["paired"] = {
         "n": len(paired),
         "closer": closer,
-        "wis_instinct": statistics.fmean(r["instinct"]["wis"] for r in paired) if paired else None,
-        "wis_worked": statistics.fmean(r["worked"]["wis"] for r in paired) if paired else None,
-        "worked_better": sum(r["worked"]["wis"] < r["instinct"]["wis"] for r in paired),
+        "score_instinct": statistics.fmean(r["instinct"]["score"] for r in paired) if paired else None,
+        "score_worked": statistics.fmean(r["worked"]["score"] for r in paired) if paired else None,
+        "gain_ci": bootstrap_mean(gains),
+        "worked_better": sum(g > 0 for g in gains),
     }
     report["served_models"] = sorted(served)
     report["tokens"] = {k: v for k, v in tokens.items() if v}
@@ -65,8 +86,16 @@ def build(meta, questions, records, results):
     return report
 
 
+def sc(x):
+    return "—" if x is None else f"{x:.3f}"
+
+
+def ci(interval, fmt=sc):
+    return "" if not interval else f" [{fmt(interval[0])}, {fmt(interval[1])}]"
+
+
 def pct(x):
-    return "—" if x is None else f"{x:.1%}"
+    return "—" if x is None else f"{x:.0%}"
 
 
 def frac(k, n):
@@ -89,6 +118,11 @@ def render(report):
     lines = [f"# Calibench report: {meta['model']}", "",
              f"Seed `{meta['seed']}`, {meta['count']} questions, Calibench {meta['calibench']}, "
              f"Python {meta['python']} (Unicode {meta['unicode']}), started {meta['started']}."]
+    scored = report.get("scored_with")
+    if scored and scored["calibench"] != meta["calibench"]:
+        lines[-1] += f" Scored with Calibench {scored['calibench']} ({scored['scoring']})."
+    if report.get("suite"):
+        lines += ["", f"**{report['suite'][0].upper() + report['suite'][1:]}.**"]
     if report["served_models"]:
         lines += ["", f"Served by: {', '.join(report['served_models'])}."]
     if report["tokens"]:
@@ -103,108 +137,128 @@ def render(report):
 
     def coverage(key, ranged):
         def cell(s):
-            if not ranged:
-                return frac(s[key]["hits"], s["n"])
-            return frac(s[key]["ranged_hits"], s[key]["ranged"]) + f": {s[key]['verdict']}"
+            if ranged:
+                return frac(s[key]["ranged_hits"], s[key]["ranged"]) + f": {s[key]['verdict']}"
+            return frac(s[key]["hits"], s["n"]) + ci(s[key]["hits_ci"], pct)
         return cell
 
+    unanswered = any(phases[p]["n"] < phases[p]["asked"] for p in PHASES)
     lines += ["", "## Summary", "", "| | Instinct | Worked |", "|---|---|---|",
               f"| Answered | {answered(phases['instinct'])} | {answered(phases['worked'])} |",
-              row("**Weighted interval score**, mean (median)", lambda s: f"**{pct(s['wis_mean'])}** ({pct(s['wis_median'])})"),
-              row("Interval score, 50% intervals", lambda s: pct(s["p50"]["interval_score"])),
-              row("Interval score, 90% intervals", lambda s: pct(s["p90"]["interval_score"])),
-              row("50% intervals containing the answer", coverage("p50", False)),
+              "| **Score**, mean [90% interval] | " + " | ".join(
+                  f"**{sc(phases[p]['all']['score_mean'])}**{ci(phases[p]['all']['score_ci'])}" for p in PHASES) + " |",
+              "| Score, median | " + " | ".join(sc(phases[p]["all"]["score_median"]) for p in PHASES) + " |"]
+    if unanswered:
+        lines.append(row("Score, answered questions only", lambda s: f"{sc(s['score_mean'])}{ci(s['score_ci'])}"))
+    lines += [row("Interval score, 50% / 90% intervals",
+                  lambda s: f"{sc(s['p50']['interval_score'])} / {sc(s['p90']['interval_score'])}"),
+              row("50% intervals containing the answer [90% interval]", coverage("p50", False)),
               row("… leaving out single numbers", coverage("p50", True)),
-              row("90% intervals containing the answer", coverage("p90", False)),
+              row("90% intervals containing the answer [90% interval]", coverage("p90", False)),
               row("… leaving out single numbers", coverage("p90", True)),
               row("Answers given as certain (a single number)", lambda s: f"{s['certain']}, {s['certain_right']} exactly right"),
-              row("Median error of the estimate", lambda s: pct(s["median_error"]))]
+              row("Median error of the estimate", lambda s: f"{s['median_error']:.1%}")]
     paired = report["paired"]
     if paired["n"]:
         lines.append(f"| Estimate closer to the answer | {paired['closer']['instinct']} | {paired['closer']['worked']} |")
-        lines += ["", f"Working it out lowered the weighted interval score on {paired['worked_better']} of "
-                  f"{paired['n']} questions answered both ways, from {pct(paired['wis_instinct'])} to "
-                  f"{pct(paired['wis_worked'])} on average."]
-    lines += ["", "Scores are relative to the true answer, and lower is better. The weighted interval score "
-              "combines the estimate and both intervals (Bracher et al., 2021): narrow intervals score well only if "
-              "the answer lands inside them, so it can't be improved by stating intervals you don't believe. "
-              "Coverage verdicts leave out single-number intervals, which say \"I know this exactly\" and are "
-              "counted on their own line."]
+        lines += ["", f"Working it out lowered the score on {paired['worked_better']} of {paired['n']} questions answered "
+                  f"both ways, from {sc(paired['score_instinct'])} to {sc(paired['score_worked'])} on average "
+                  f"(improvement{ci(paired['gain_ci']) or ' —'})."]
+    lines += ["", "The score is the weighted interval score (Bracher et al., 2021) on a log scale: it combines the "
+              "estimate and both intervals, is lowest when the stated intervals are the ones the model believes, "
+              "and treats a miss by a factor in either direction alike. Lower is better; 0.1 is roughly a 10% miss. "
+              "Intervals in brackets are 90% intervals over questions. Coverage verdicts leave out single-number "
+              "intervals, which say \"I know this exactly\" and are counted on their own line."]
+    if unanswered:
+        lines += ["", "The score counts each unanswered question as if the model had answered "
+                  f"`{json.dumps(KNOW_NOTHING)}`, as a model that knows nothing would; the rows below it use "
+                  "answered questions only."]
 
     lines += ["", "## By kind of question", "",
               "Knowledge questions ask what is known (the Python standard library, the Unicode database); statistical "
               "ones need noise or irregularity modelled; exact ones have a closed-form answer that must be evaluated.", "",
-              "| Kind | Phase | Questions | Weighted interval score | 50% hits | 90% hits |", "|---|---|---|---|---|---|"]
+              "| Kind | Phase | Questions | Score | 50% hits | 90% hits |", "|---|---|---|---|---|---|"]
     for kind in sorted(report["kinds"]["worked"]):
         for phase in PHASES:
             s = report["kinds"][phase][kind]
             if s["n"]:
-                lines.append(f"| {kind} | {phase} | {s['n']} | {pct(s['wis_mean'])} | "
+                lines.append(f"| {kind} | {phase} | {s['n']} | {sc(s['score_mean'])} | "
                              f"{frac(s['p50']['hits'], s['n'])} | {frac(s['p90']['hits'], s['n'])} |")
 
-    lines += ["", "## Questions", "", "Each answer is shown as estimate [90% interval], with ✓ or ✗ for whether "
-              "the 50% and 90% intervals contain the true answer.", "",
+    lines += ["", "## Questions", "", "Each answer is shown as estimate [90% interval], ✓ or ✗ for whether the 50% "
+              "and 90% intervals contain the true answer, and its score.", "",
               "| # | Question | True answer | Instinct | Worked |", "|---|---|---|---|---|"]
     for r in report["questions"]:
         cells = []
         for phase in PHASES:
             c = r[phase]
             if c["status"] != "ok":
-                cells.append(c["status"])
+                cells.append(f"{c['status']} · {sc(c['score'])}")
                 continue
             marks = " ".join(f"{key[1:]}{'✓' if hit else '✗'}" for key, hit in c["hits"].items())
-            cells.append(f"{num(c['estimate'])} [{num(c['p90'][0])}, {num(c['p90'][1])}] {marks}")
+            cells.append(f"{num(c['estimate'])} [{num(c['p90'][0])}, {num(c['p90'][1])}] {marks} · {sc(c['score'])}")
         lines.append(f"| {r['q']} | {r['short']} | {num(r['answer'])} | {cells[0]} | {cells[1]} |")
     return "\n".join(lines) + "\n"
 
 
-def bootstrap_interval(differences, level=0.9, samples=4_000):
-    rng = random.Random(0)
-    n = len(differences)
-    means = sorted(statistics.fmean(rng.choices(differences, k=n)) for _ in range(samples))
-    return means[int(samples * (1 - level) / 2)], means[int(samples * (1 + level) / 2) - 1]
-
-
-def compare(reports):
-    """Compare runs on the questions every run answered in both phases."""
-    rows = [{r["key"]: r for r in rep["questions"] if all("wis" in r[p] for p in PHASES)} for rep in reports]
-    shared = sorted(set.intersection(*(set(r) for r in rows)))
-    if not shared:
-        return ("These runs have no questions in common that all of them answered. "
-                "Run every model with the same --seed and --count.\n")
-    pythons = {rep["meta"]["python"] for rep in reports}
+def compare(reports, names=None):
+    """Compare runs on the same questions. Unanswered questions score as the know-nothing answer."""
+    names = names or [rep["meta"]["model"] for rep in reports]
+    keys = [[r["key"] for r in rep["questions"]] for rep in reports]
+    if any(sorted(k) != sorted(keys[0]) for k in keys):
+        return ("These runs weren't asked the same questions. Run every model with the same --suite, "
+                "or the same --seed, --count and --families, on the same Python.\n")
+    order = sorted(keys[0])
+    models = [rep["meta"]["model"] for rep in reports]
     stats = []
-    for rep, by_key in zip(reports, rows):
-        mine = [by_key[k] for k in shared]
+    for rep, name, model in zip(reports, names, models):
+        by_key = {r["key"]: r for r in rep["questions"]}
+        rows = [by_key[k] for k in order]
+        ok = [r for r in rows if r["worked"]["status"] == "ok"]
+        scores = [r["worked"]["score"] for r in rows]
         stats.append({
-            "model": rep["meta"]["model"],
-            "wis": [r["worked"]["wis"] for r in mine],
-            "instinct": statistics.fmean(r["instinct"]["wis"] for r in mine),
-            "hits50": sum(r["worked"]["hits"]["p50"] for r in mine),
-            "hits90": sum(r["worked"]["hits"]["p90"] for r in mine),
+            "label": model if models.count(model) == 1 else f"{model} ({name})",
+            "model": model,
+            "scores": scores,
+            "mean": statistics.fmean(scores),
+            "instinct": statistics.fmean(r["instinct"]["score"] for r in rows),
+            "answered": len(ok),
+            "hits50": sum(r["worked"]["hits"]["p50"] for r in ok),
+            "hits90": sum(r["worked"]["hits"]["p90"] for r in ok),
+            "hits90_by_key": [r["worked"].get("hits", {}).get("p90") for r in rows],
         })
-    for s in stats:
-        s["mean"] = statistics.fmean(s["wis"])
     stats.sort(key=lambda s: s["mean"])
-    best = stats[0]
+    best, n = stats[0], len(order)
+    pythons = {rep["meta"]["python"] for rep in reports}
     lines = ["# Calibench comparison", "",
-             f"{len(shared)} questions that every run answered in both phases. Scores are for worked answers "
-             f"unless marked; lower is better.", ""]
+             f"{n} questions, the same for every run. Scores are for worked answers unless marked; lower is better. "
+             "An unanswered question scores as the know-nothing answer.", ""]
     if len(pythons) > 1:
-        lines += [f"**Note:** runs used different Python versions ({', '.join(sorted(pythons))}), so knowledge "
-                  "questions were settled against different data.", ""]
-    lines += ["| Model | Weighted interval score, mean (median) | 50% hits | 90% hits | Instinct score | Difference from the best, 90% interval |",
-              "|---|---|---|---|---|---|"]
-    n = len(shared)
+        lines += [f"**Note:** runs used different Python versions ({', '.join(sorted(pythons))}).", ""]
+    lines += ["| Run | Answered | Score [90% interval] | Median | 50% hits | 90% hits | Instinct score | Difference from the best [90% interval] |",
+              "|---|---|---|---|---|---|---|---|"]
     for s in stats:
         if s is best:
             diff = "best"
         else:
-            d = [a - b for a, b in zip(s["wis"], best["wis"])]
-            lo, hi = bootstrap_interval(d)
-            diff = f"+{pct(statistics.fmean(d))} ({pct(lo)} to {pct(hi)})"
-        lines.append(f"| {s['model']} | {pct(s['mean'])} ({pct(statistics.median(s['wis']))}) | {frac(s['hits50'], n)} "
-                     f"| {frac(s['hits90'], n)} | {pct(s['instinct'])} | {diff} |")
+            d = [a - b for a, b in zip(s["scores"], best["scores"])]
+            diff = f"+{sc(statistics.fmean(d))}{ci(bootstrap_mean(d))}"
+        lines.append(f"| {s['label']} | {s['answered']} of {n} | {sc(s['mean'])}{ci(bootstrap_mean(s['scores']))} "
+                     f"| {sc(statistics.median(s['scores']))} | {frac(s['hits50'], s['answered'])} "
+                     f"| {frac(s['hits90'], s['answered'])} | {sc(s['instinct'])} | {diff} |")
     lines += ["", "The interval for a difference is a bootstrap over questions. When it includes zero, these "
-              "questions don't separate the two models; more questions would."]
+              "questions don't separate the two runs; more questions would."]
+
+    pairs = [(a, b) for i, a in enumerate(stats) for b in stats[i + 1:] if a["model"] == b["model"]]
+    if pairs:
+        lines += ["", "## Test–retest", "", "Runs of the same model on the same questions. A good benchmark gives "
+                  "a model nearly the same score each time.", "",
+                  "| Runs | Difference in score [90% interval] | Rank correlation of question scores | Same 90% hit or miss |",
+                  "|---|---|---|---|"]
+        for a, b in pairs:
+            d = [x - y for x, y in zip(b["scores"], a["scores"])]
+            both = [(x, y) for x, y in zip(a["hits90_by_key"], b["hits90_by_key"]) if x is not None and y is not None]
+            rho = spearman(a["scores"], b["scores"])
+            lines.append(f"| {a['label']} / {b['label']} | {sc(statistics.fmean(d))}{ci(bootstrap_mean(d))} "
+                         f"| {sc(rho)} | {frac(sum(x == y for x, y in both), len(both))} |")
     return "\n".join(lines) + "\n"

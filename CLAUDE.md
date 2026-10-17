@@ -21,6 +21,8 @@ Prefer drawn rounds (`generate.py`) over hand-picked guesses, because they remov
 ## Calibench
 `calibench/` turns the guessbook's question families into a benchmark for any model. The guessbook draws and settles its rounds through it. Adding a family changes what every seed draws, as it did after the first two rounds; any other change must leave the questions of existing rounds unchanged. Before committing a change to either, run `python3 -m calibench selftest` and `python3 guessbook/check.py`, and check that `python3 guessbook/score.py` leaves `SCORE.md` unchanged.
 
+A standard suite (`--suite v1`) never changes: `selftest` checks its fingerprint. If the scoring changes, give it a new id (`SCORING` in `scoring.py`) and update `METHODOLOGY.md` in the same commit. Experiments that cost money use only the models the owner has approved.
+
 ## Conventions
 - Everything in the repository is in English (code, docs, journal) so anyone can work with it.
 - The owner's language is Arabic. In conversation, reply in the language the owner writes in.

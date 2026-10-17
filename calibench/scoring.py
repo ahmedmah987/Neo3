@@ -1,38 +1,83 @@
-"""Scoring: interval scores, coverage, and what coverage says about calibration.
+"""Scoring: interval scores on a log scale, coverage, and their uncertainty.
 
-All scores are relative to the true answer, so questions of very different sizes can be averaged.
-Lower is better for every score, and none can be improved by stating intervals other than
-the ones you believe.
+Answers are scored on a log scale: log(x) for continuous answers, which are all at least 0.5, and
+log(1 + x) for counts, which can be 0. A fixed increasing transform keeps the scores proper (stating
+the quantiles you believe is the best strategy), makes questions of every size comparable, and treats
+a miss by a factor the same in either direction. A score is in natural-log units: 0.1 is roughly a
+10% miss. Lower is better.
+
+The relative interval score (divided by the true answer) is kept only for the guessbook. It is not
+proper: dividing by the answer rewards stating intervals lower than you believe. See METHODOLOGY.md.
 """
 import math
+import random
 import statistics
 
 PHASES = ("instinct", "worked")
 LEVELS = (("p50", 0.5), ("p90", 0.1))        # interval, and alpha for a central (1 − alpha) interval
+FLOOR = 1e-3                                  # a stated value (plus its offset) below this counts as this
+KNOW_NOTHING = {"estimate": 100, "p50": [30, 300], "p90": [3, 3000]}   # how an unanswered question is scored
+SCORING = "log-wis-1"           # log(x), or log(1 + x) for counts; weighted interval score
 
 
 def inside(interval, x):
     return interval[0] <= x <= interval[1]
 
 
-def interval_score(interval, x, alpha):
-    """Gneiting and Raftery's score for a central (1 − alpha) interval, relative to the answer.
+def offset(family):
+    from .families import COUNTS
 
-    Width plus 2/alpha times any distance by which the answer falls outside. It is minimised
-    by giving the true alpha/2 and 1 − alpha/2 quantiles.
+    return 1 if family in COUNTS else 0
+
+
+def _log(value, shift):
+    return math.log(max(value + shift, FLOOR))
+
+
+def log_interval_score(interval, x, alpha, shift=0):
+    """Gneiting and Raftery's interval score for a central (1 − alpha) interval, on a log scale.
+
+    Width plus 2/alpha times any distance by which the answer falls outside, after taking
+    log(value + shift). Quantiles carry over through a fixed increasing transform, so it is
+    minimised by stating the true alpha/2 and 1 − alpha/2 quantiles.
     """
+    if x + shift <= 0:
+        raise ValueError("log-scale scores need a positive true answer, or a count with shift 1")
+    lo, hi, t = _log(interval[0], shift), _log(interval[1], shift), _log(x, shift)
+    return (hi - lo) + 2 / alpha * (max(0, lo - t) + max(0, t - hi))
+
+
+def log_wis(answer, x, shift=0):
+    """Bracher et al.'s weighted interval score on a log scale: the estimate read as a median,
+    and both intervals. It approximates the continuous ranked probability score of log(answer)."""
+    total = 0.5 * abs(_log(answer["estimate"], shift) - _log(x, shift))
+    total += sum(alpha / 2 * log_interval_score(answer[key], x, alpha, shift) for key, alpha in LEVELS)
+    return total / (len(LEVELS) + 0.5)
+
+
+def interval_score(interval, x, alpha):
+    """The interval score relative to the answer, as the guessbook has always used it. Not proper."""
     lo, hi = interval
     return ((hi - lo) + 2 / alpha * (max(0, lo - x) + max(0, x - hi))) / (abs(x) or 1)
 
 
-def weighted_interval_score(answer, x):
-    """Bracher et al.'s weighted interval score: the estimate read as a median, and both intervals.
+def bootstrap_mean(values, level=0.9, samples=4_000, seed=0):
+    """A percentile bootstrap interval for the mean, resampling questions."""
+    if len(values) < 2:
+        return None
+    rng = random.Random(seed)
+    means = sorted(statistics.fmean(rng.choices(values, k=len(values))) for _ in range(samples))
+    return [means[int(samples * (1 - level) / 2)], means[int(samples * (1 + level) / 2) - 1]]
 
-    It approximates the continuous ranked probability score of the belief the answer describes.
-    """
-    total = 0.5 * abs(answer["estimate"] - x) / (abs(x) or 1)
-    total += sum(alpha / 2 * interval_score(answer[key], x, alpha) for key, alpha in LEVELS)
-    return total / (len(LEVELS) + 0.5)
+
+def wilson(hits, n, z=1.645):
+    """A 90% Wilson interval for a proportion."""
+    if not n:
+        return None
+    p = hits / n
+    centre = (p + z * z / (2 * n)) / (1 + z * z / n)
+    half = z * math.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / (1 + z * z / n)
+    return [max(0.0, centre - half), min(1.0, centre + half)]
 
 
 def verdict(hits, n, level):
@@ -47,26 +92,51 @@ def verdict(hits, n, level):
     return "consistent with calibrated"
 
 
-def summarize(pairs):
-    """Metrics for a list of (answer, truth) pairs.
+def spearman(a, b):
+    """Rank correlation, with ties given their average rank."""
+    def ranks(values):
+        order = sorted(range(len(values)), key=values.__getitem__)
+        r = [0.0] * len(values)
+        i = 0
+        while i < len(order):
+            j = i
+            while j + 1 < len(order) and values[order[j + 1]] == values[order[i]]:
+                j += 1
+            for k in range(i, j + 1):
+                r[order[k]] = (i + j) / 2
+            i = j + 1
+        return r
+    if len(a) < 3:
+        return None
+    ra, rb = ranks(a), ranks(b)
+    try:
+        return statistics.correlation(ra, rb)
+    except statistics.StatisticsError:      # every score the same in one run
+        return None
+
+
+def summarize(items):
+    """Metrics for a list of (answer, truth, shift) triples.
 
     Coverage verdicts leave out single-number intervals: an exact answer that is known is
     knowledge, not evidence about calibration. Those are counted separately.
     """
-    n = len(pairs)
+    n = len(items)
     if not n:
         return {"n": 0}
-    out = {"n": n}
-    wis = [weighted_interval_score(a, x) for a, x in pairs]
-    out["wis_mean"] = statistics.fmean(wis)
-    out["wis_median"] = statistics.median(wis)
+    scores = [log_wis(a, x, s) for a, x, s in items]
+    pairs = [(a, x) for a, x, _ in items]
+    out = {"n": n, "score_mean": statistics.fmean(scores), "score_median": statistics.median(scores),
+           "score_ci": bootstrap_mean(scores)}
     for key, alpha in LEVELS:
         level = round(1 - alpha, 2)
         ranged = [(a, x) for a, x in pairs if a[key][0] != a[key][1]]
+        hits = sum(inside(a[key], x) for a, x in pairs)
         out[key] = {
             "level": level,
-            "interval_score": statistics.fmean(interval_score(a[key], x, alpha) for a, x in pairs),
-            "hits": sum(inside(a[key], x) for a, x in pairs),
+            "interval_score": statistics.fmean(log_interval_score(a[key], x, alpha, s) for a, x, s in items),
+            "hits": hits,
+            "hits_ci": wilson(hits, n),
             "ranged": len(ranged),
             "ranged_hits": sum(inside(a[key], x) for a, x in ranged),
         }
@@ -74,5 +144,5 @@ def summarize(pairs):
     points = [(a, x) for a, x in pairs if a["p90"][0] == a["p90"][1]]
     out["certain"] = len(points)
     out["certain_right"] = sum(a["estimate"] == x for a, x in points)
-    out["median_error"] = statistics.median(abs(a["estimate"] - x) / (abs(x) or 1) for a, x in pairs)
+    out["median_error"] = statistics.median(abs(a["estimate"] - x) / max(abs(x), 1) for a, x in pairs)
     return out

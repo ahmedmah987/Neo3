@@ -25,7 +25,7 @@ import unicodedata
 from . import __version__
 from .prompts import PROMPTS, RETRY, parse_answer
 from .questions import draw, rng_from_seed, solve
-from .scoring import PHASES
+from .scoring import PHASES, SCORING
 
 KEPT = ("ok", "refused")
 GIVE_UP_AFTER = 3          # calls that fail before any succeeds, which usually means a wrong key, URL or model
@@ -85,7 +85,7 @@ def load_records(path):
     return records
 
 
-def run(model, model_spec, seed, count=26, families=None, out=None, workers=4):
+def run(model, model_spec, seed, count=26, families=None, out=None, workers=4, suite=None):
     out = pathlib.Path(out or default_dir(model_spec, seed))
     out.mkdir(parents=True, exist_ok=True)
     questions = draw(rng_from_seed(seed), count, families)
@@ -132,6 +132,8 @@ def run(model, model_spec, seed, count=26, families=None, out=None, workers=4):
         "seed": str(seed),
         "count": count,
         "families": sorted(families) if families else "all",
+        "suite": suite,
+        "scoring": SCORING,
         "python": platform.python_version(),
         "unicode": unicodedata.unidata_version,
         "started": started,
@@ -170,6 +172,7 @@ def finish(out):
     results = settle(out, questions)
     report = build(meta, questions, records, results)
     report["answers_changed_after_run"] = digest != meta["answers_sha256"]
+    report["scored_with"] = {"calibench": __version__, "scoring": SCORING}
     write_json(out / "report.json", report)
     (out / "report.md").write_text(render(report), encoding="utf-8")
     return report

@@ -4,11 +4,13 @@
 
 A model is asked numeric questions it can't look up. For each one it gives an estimate, a 50% interval and a 90% interval, first by instinct and then after working it out. Calibench then computes the true answers and scores the stated uncertainty against them.
 
-- **Fresh questions every time.** Questions are drawn from a seed, so there's no fixed answer key to memorise, and two models given the same seed get the same questions.
+- **A standard suite, and fresh questions.** `--suite v1` asks every model the same 104 questions, fixed before any were drawn. Any other seed draws new ones, so there's no fixed answer key to memorise.
 - **Every answer is computed.** Calibench settles each question itself, exactly or by a seeded simulation, and only after every answer has been recorded.
-- **Proper scores.** The main score can't be improved by stating intervals other than the ones the model believes.
+- **Proper scores, with their uncertainty.** The score can't be improved by stating intervals other than the ones the model believes, and every headline number comes with a 90% interval over questions.
 - **Any model.** Claude, OpenRouter's hundreds of models, any OpenAI-compatible API, local models, any command-line program, replies collected by your own harness, or a chat window.
 - **No dependencies** beyond Python 3.11 or later. The Claude adapter needs the official `anthropic` SDK.
+
+The full method, its statistics and its known weaknesses are in [METHODOLOGY.md](METHODOLOGY.md).
 
 ## Quick start
 
@@ -58,9 +60,12 @@ python3 -m calibench export --seed october --out prompts.jsonl
 #   ...add a "reply" field to every line, keeping the rest...
 python3 -m calibench run --model replies:prompts-with-replies.jsonl --seed october
 
-# Compare models that were run with the same seed and count
-python3 -m calibench compare calibench-runs/*-october
+# Compare models on the standard suite
+python3 -m calibench run --model openrouter:<model id> --suite v1
+python3 -m calibench compare calibench-runs/*-calibench-v1
 ```
+
+To compare models, use `--suite v1`: 104 questions, every family 8 times, settled on Python 3.13. A seed you choose is for exploring; a comparison on a seed someone chose can be cherry-picked.
 
 A run asks 26 questions by default (every family twice), each in two phases, so 52 calls. Use `--count` for more or fewer, `--families` to limit the kinds of question, and `--workers` for how many calls run at once. If a run is interrupted or some calls fail, run the same command again: answers already recorded are kept, and only the rest are asked. If the first three calls all fail, which usually means a wrong key, address or model name, the run stops and shows the error.
 
@@ -90,15 +95,16 @@ Thirteen families, each with parameters drawn from the seed:
 
 ## How it's scored
 
-Every score is relative to the true answer, so questions of very different sizes can be averaged, and lower is always better.
+Every true answer is positive, so answers are scored on a log scale: questions of every size can be averaged, a miss by a factor of ten costs the same in either direction, and the scores stay proper. Lower is always better; a score of 0.1 is roughly a 10% miss.
 
-- **Weighted interval score** (Bracher et al., 2021), the headline. It reads the estimate as a median and combines it with both intervals, approximating the continuous ranked probability score. A narrow interval scores well only if the answer lands inside it; a wide one pays for its width.
+- **Score**: the weighted interval score (Bracher et al., 2021) on a log scale, the headline. It reads the estimate as a median and combines it with both intervals, approximating the continuous ranked probability score. A narrow interval scores well only if the answer lands inside it; a wide one pays for its width.
 - **Interval score** for each interval (Gneiting and Raftery, 2007): its width plus 2/α times any distance by which the answer falls outside, with α = 0.5 for the 50% interval and 0.1 for the 90% one.
-- **Coverage**: how often each interval contains the answer, with a verdict of *too narrow*, *too wide* or *consistent with calibrated* at about two standard errors. Verdicts leave out single-number intervals, which claim exact knowledge; those are counted on their own line with how often they were exactly right.
-- **Instinct against worked**: how much working a question out improves the answer and its uncertainty.
+- **Coverage**: how often each interval contains the answer, with a 90% Wilson interval and a verdict of *too narrow*, *too wide* or *consistent with calibrated* at about two standard errors. Verdicts leave out single-number intervals, which claim exact knowledge; those are counted on their own line with how often they were exactly right.
+- **Instinct against worked**: how much working a question out improves the score, with a 90% interval.
 - **By kind**: the same scores for knowledge, statistical and exact questions, which tend to fail in different ways.
+- **Unanswered questions** (refused, unreadable or failed) count as if the model had given the answer of a model that knows nothing, so refusing hard questions can't improve a score.
 
-`compare` scores runs on the questions all of them answered in both phases, and gives each model's difference from the best with a 90% bootstrap interval over questions. When that interval includes zero, the questions don't separate the two models.
+`compare` needs runs asked the same questions. It gives each run's score with a 90% bootstrap interval over questions and its difference from the best with a paired interval: when that interval includes zero, the questions don't separate the two. Runs of the same model also get a **test–retest** table: how much the score moved between runs, and how well the per-question scores agree.
 
 ## What a run leaves behind
 
@@ -117,7 +123,7 @@ If `answers.jsonl` changes after its hash was recorded, the report says so.
 ## Choices worth knowing
 
 - **No fallbacks.** Some APIs can quietly retry a refused request on a different model. Calibench leaves that off, because it would let one model answer under another's name. A refusal is recorded as a refusal, and every call records the model that actually served it.
-- **Refusals and failures aren't scored.** They're counted on the report's *Answered* line, and `compare` only uses questions every run answered. Check that line before reading the scores.
+- **Refusals and failures count against the model.** They score as the know-nothing answer and are listed on the report's *Answered* line, with the score over answered questions alone shown beside it.
 - **Instinct versus worked.** The two phases use different prompts, and with the Claude adapter different effort levels (`--instinct-effort`, default `low`; `--worked-effort`, default `high`; pass `none` for models that don't take an effort setting). Some models always think before answering, Claude Opus 5.5 among them, so for them "instinct" means little thinking, not none.
 - **OpenRouter.** The adapter checks the model id before asking anything, sends the effort through OpenRouter's `reasoning` setting to models that support it (and then only to providers that honour it), and records the model, the provider and the cost of every call. The report adds up the cost. OpenRouter can route a model to different providers, which may serve it differently; the provider is recorded so that's visible.
 - **Keys stay in the environment.** API keys are read from environment variables and sent only to the API they belong to. They're never written into a run directory, and `.env` files are ignored by git.
@@ -125,13 +131,15 @@ If `answers.jsonl` changes after its hash was recorded, the report says so.
 
 ## Limits
 
-- **Small samples are noisy.** With 26 questions a coverage verdict is coarse, and one wild miss can move a mean. The report gives medians next to means; for comparing close models use more questions or several seeds.
-- **The knowledge pool is finite.** Statistical questions draw fresh parameters every time, but knowledge questions choose from 72 modules, 24 words, 24 categories and 30 blocks, so they repeat across seeds and could leak into training data over time.
-- **A narrow slice of knowledge.** The knowledge questions cover Python and Unicode. They test recall that can be checked exactly, not knowledge in general.
+- **Samples are small.** Even 104 questions leave real uncertainty, which is why every headline number carries an interval. Read the intervals, not just the means.
+- **A narrow slice of knowledge.** The knowledge questions cover Python and Unicode. They test recall that can be checked exactly, not knowledge in general, and a score here says nothing direct about calibration elsewhere.
+- **The suite is public.** Once its questions and answers are published they can leak into training data. Knowledge questions also repeat across seeds (72 modules, 24 words, 24 categories, 30 blocks). A model that does much better on the suite than on fresh seeds deserves suspicion.
+
+[METHODOLOGY.md](METHODOLOGY.md) lists these and the other threats to validity in full.
 
 ## Results
 
-Runs on real models, with every raw reply, are in [results/](results/). The first is Claude Haiku 5.5 through OpenRouter: working it out halved its score, but its worked 90% intervals held the answer only 69% of the time.
+Runs on real models, with every raw reply, are in [results/](results/). The first is Claude Haiku 5.5 through OpenRouter: working it out nearly halved its score, but its worked 90% intervals held the answer only 69% of the time.
 
 ## Where it came from
 
