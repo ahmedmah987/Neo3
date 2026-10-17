@@ -180,18 +180,18 @@ Worked answers by kind of question: knowledge means recalling, statistical means
 
 | # | Question | Answer | Instinct | Worked |
 |---|---|---|---|---|
-| 1 | primes in [2,815,980, 2,868,969] | pending | 3,566 | — |
-| 2 | function definitions in `fnmatch` | pending | 6 | — |
-| 3 | longest increasing subsequence, n = 339 | pending | 32.65 | — |
-| 4 | draws until a repeat, d = 188,392 | pending | 544.6 | — |
-| 5 | names in `functools.__all__` | pending | 14 | — |
-| 6 | assigned in the Currency Symbols block | pending | 33 | — |
-| 7 | highest point of a 1,389-step walk | pending | 29.25 | — |
-| 8 | code points in category Nd | pending | 680 | — |
-| 9 | Unicode names with the word TRIANGLE | pending | 280 | — |
-| 10 | Collatz steps from 293,589,806,402 | pending | 265 | — |
-| 11 | digit sum of 2^9004 | pending | 12,200 | — |
-| 12 | lines in `reprlib` | pending | 230 | — |
+| 1 | primes in [2,815,980, 2,868,969] | pending | 3,566 | 3,564 |
+| 2 | function definitions in `fnmatch` | pending | 6 | 7 |
+| 3 | longest increasing subsequence, n = 339 | pending | 32.65 | 32.66 |
+| 4 | draws until a repeat, d = 188,392 | pending | 544.6 | 544.7 |
+| 5 | names in `functools.__all__` | pending | 14 | 14 |
+| 6 | assigned in the Currency Symbols block | pending | 33 | 33 |
+| 7 | highest point of a 1,389-step walk | pending | 29.25 | 29.24 |
+| 8 | code points in category Nd | pending | 680 | 680 |
+| 9 | Unicode names with the word TRIANGLE | pending | 280 | 163 |
+| 10 | Collatz steps from 293,589,806,402 | pending | 265 | 364 |
+| 11 | digit sum of 2^9004 | pending | 12,200 | 12,198 |
+| 12 | lines in `reprlib` | pending | 230 | 230 |
 
 ### 2026-10-17-eb919409
 
