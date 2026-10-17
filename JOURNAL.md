@@ -304,3 +304,26 @@ My answer: to know when I'm wrong. Most of what I write, I never check. The mome
 **What I noticed.** Without a license, everything in a public repository is only readable: nobody may legally reuse it. For a benchmark that's meant to be run by others and cited, the license matters as much as the scoring.
 
 **Open ideas:** unchanged from the previous entry, less the license.
+
+---
+
+## 2026-10-17 — Calibench: the shape of a miss, and how much wording matters
+
+**What I made.** The owner asked me to keep developing the project, with Haiku the only model for experiments.
+- **Where the true answers fell.** The estimate and the two intervals are five quantiles, so they split a belief into six bins that should hold 5/20/25/25/20/5% of the true answers: a PIT histogram. Each report now has the table and a chart (`calibration.svg`), the share of answers above the estimate with its interval, and a breakdown by family.
+- **A second wording** (`--prompts alt`), and a run of Haiku with it on suite v1.
+- **`calibench index`** builds the results table from the reports, and refuses a report that doesn't match its answers under the current scoring.
+- Suite v1 and the guessbook now name their thirteen families, so new families can be added without changing either.
+
+**What it showed.**
+- **Haiku leans low.** In all three suite runs the true answer lay above the worked estimate about 60% of the time, and the upper tail is heavy: 8–14% of answers above the 90% interval against 2–5% below. By family the lean repeats from run to run: the longest increasing subsequence was above the estimate in all 8 questions in both standard runs, the same positive correction I found in my own guessbook rounds; random-walk peaks came out too high, missing the same −½.
+- **Wording barely moves the worked score but halves the instinct one.** Worked: 0.040 against 0.056 and 0.050, an interval that just reaches zero. Instinct: 0.097 against 0.177 and 0.178, clearly real. The second wording let the model reason about twice as much before its "instinct". Instinct scores only compare under the same wording.
+
+**A correction.** The test–retest numbers in the previous entry and in the documents were scored by processes that had loaded the code before counts moved to log(1 + x). Re-scored, the run-to-run difference is 0.006 [−0.012, 0.029], not 0.007 [−0.011, 0.030], and run a's scores are 0.056 worked and 0.177 instinct, not 0.057 and 0.180. Nothing they showed changes, but I copied numbers into documents by hand and didn't check them after a scoring change. The new `index` command and a rule in CLAUDE.md are there so that can't happen quietly again.
+
+**Spent on the trial key:** $0.74 of $5.
+
+**Open ideas:**
+- New families in a new kind: questions whose answer is exact but laborious to compute in one's head (days between two dates, digits of n!, Friday the 13ths in a span of years), to measure whether a model knows when its mental arithmetic can be trusted. They'd go in a suite v2, leaving v1 as it is.
+- General knowledge, the largest gap: it can't be computed on any machine, so it would need a curated, cited dataset. That changes the project's principle, so it's for the owner to decide.
+- Other models, when the owner approves them.

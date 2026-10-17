@@ -9,6 +9,7 @@ Scores are Calibench 2.0's log-scale weighted interval score (lower is better; 0
 |---|---|---|---|---|---|---|---|---|
 | [haiku-5.5-v1-a](haiku-5.5-v1-a/report.md) | openrouter:anthropic/claude-haiku-5.5 | standard | suite v1, 104 | 0.056 [0.035, 0.082] | 0.177 | 62 / 85 of 104 | 62% | $0.225 |
 | [haiku-5.5-v1-b](haiku-5.5-v1-b/report.md) | openrouter:anthropic/claude-haiku-5.5 | standard | suite v1, 104 | 0.050 [0.034, 0.067] | 0.178 | 66 / 91 of 104 | 62% | $0.226 |
+| [haiku-5.5-v1-alt](haiku-5.5-v1-alt/report.md) | openrouter:anthropic/claude-haiku-5.5 | alt | suite v1, 104 | 0.040 [0.027, 0.054] | 0.097 | 66 / 92 of 104 | 59% | $0.217 |
 | [openrouter_anthropic_claude-haiku-5.5-2026-10-17](openrouter_anthropic_claude-haiku-5.5-2026-10-17/report.md) | openrouter:anthropic/claude-haiku-5.5 | standard | seed `2026-10-17`, 26 | 0.104 [0.044, 0.177] | 0.185 | 15 / 18 of 26 | 52% | $0.072 |
 <!-- index:end -->
 
@@ -20,6 +21,14 @@ Two independent runs of the same model on the standard suite, to measure how far
 - **The coverage verdict doesn't:** worked 90% intervals held the answer 82% of the time in one run (too narrow) and 88% in the other (consistent with calibrated). Pooled: 176 of 208, 85%. Haiku is somewhat overconfident in its 90% intervals, by less than the 26-question run suggested.
 - **Working it out helps a lot:** in both runs the worked score is about a third of the instinct score, and the median error falls from about 3% to 0.7%.
 - **The same misses twice:** nine questions fell outside both runs' 90% intervals, seven of them underestimated open-ended counts (Unicode names with a common word, and modules that grew in Python 3.13).
+
+## Claude Haiku 5.5 on suite v1: a second wording
+
+One run with `--prompts alt`, to measure how much the wording of the prompts matters. The full analysis is in [METHODOLOGY.md](../METHODOLOGY.md#reliability).
+
+- **Worked answers barely moved:** 0.040 against 0.056 and 0.050, a difference whose interval just reaches zero.
+- **Instinct answers changed a lot:** 0.097 against 0.177 and 0.178, a clear difference. The second wording ("say what your gut tells you") let the model reason about twice as much before its instinct answer.
+- **The lean stayed:** the true answer was above the worked estimate 59% of the time.
 
 ## Claude Haiku 5.5 on seed 2026-10-17, the first run
 

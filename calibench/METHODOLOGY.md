@@ -106,9 +106,9 @@ When publishing a result, report: the suite (or seed, count and families), the C
 2. **A narrow domain.** Half the questions concern Python and Unicode, and the rest are mathematical. Calibration here may not carry over to other domains.
 3. **Contamination.** Suite questions and answers are public once published. Knowledge questions also repeat across seeds. Compare suite results with fresh seeds: a model that does much better on the suite deserves suspicion.
 4. **Python dependence.** Knowledge answers differ between Python versions. Standard results use the suite's version.
-5. **The instinct phase isn't comparable across providers,** since effort controls differ and some models always reason.
+5. **The instinct phase isn't comparable across providers or wordings,** since effort controls differ, some models always reason, and the wording changes how much they reason (see Reliability).
 6. **Providers.** On OpenRouter one model may be served by different providers, possibly with different quantisation. The provider is recorded for every call.
-7. **Prompt wording.** Results may depend on the wording. `--prompts alt` measures this; see Reliability.
+7. **Prompt wording.** Measured on one model: the worked score moved by about 0.01, the instinct score by 0.08. See Reliability.
 8. **One sample per question.** Model outputs are stochastic. Test–retest measures the resulting variation.
 9. **Simulated answers.** Three families are settled by simulation. Their noise is stated and part of the question, but it is part of what is scored.
 10. **The know-nothing convention.** Scoring unanswered questions as a fixed naive answer is a convention. It penalises refusal on most questions, but it is gentler on questions whose answer happens to be near 100.
@@ -129,6 +129,20 @@ When publishing a result, report: the suite (or seed, count and families), the C
 - **A coverage verdict near the boundary does not reproduce.** The same model's worked 90% intervals were judged too narrow in one run and consistent with calibrated in the other. Pooled, they held the answer 176 times out of 208 (85%). Read coverage with its interval, and pool runs when the verdict matters.
 - **So is the direction of the misses.** In both runs the true answer lay above the worked estimate 62% of the time (90% interval 53–69%), and 8–14% of true answers lay above the 90% interval against 5% below it. Haiku underestimates. By family, the lean repeats too: the longest increasing subsequence was above the estimate in all 8 questions in both runs, module lengths and Unicode name counts mostly above, and random-walk peaks and digit sums mostly below.
 - **Repeated misses are properties of the model.** Nine questions were missed by both runs' 90% intervals. Seven are underestimates of open-ended counts: Unicode names containing MUSICAL, FACE and DIGIT, and the lengths of `glob`, `statistics` and `reprlib`, which grew in Python 3.13. The guessbook found the same two biases in Claude's own answers.
+
+**Sensitivity to wording: Claude Haiku 5.5 on suite v1 with `--prompts alt`, 2026-10-17.** One run with the second wording, compared with the two standard runs above.
+
+| | Standard (runs a, b) | Alternative wording | Difference, standard minus alternative [90% interval] |
+|---|---|---|---|
+| Worked score | 0.056, 0.050 | 0.040 | 0.016 [−0.001, 0.036] and 0.010 [−0.001, 0.021] |
+| Instinct score | 0.177, 0.178 | 0.097 | 0.080 [0.026, 0.142] and 0.081 [0.027, 0.142] |
+| Reasoning tokens per instinct answer | 220, 236 | 410 | |
+| Worked 90% intervals containing the answer | 85, 91 of 104 | 92 of 104 | |
+| Worked answers above the estimate | 62%, 62% | 59% | |
+
+- **The instinct score depends on the wording.** The second wording nearly halved it, far beyond test–retest (−0.001 [−0.020, 0.016]). It also nearly doubled the reasoning spent on instinct answers: "say what your gut tells you" restrains the model less than "Don't work it out, calculate or explain". Instinct scores are only comparable under the same wording and effort settings, and are best read as a secondary measure.
+- **The worked score barely depends on it.** The second wording scored 0.010–0.016 better, an effect whose intervals just reach zero: perhaps real, and if so small, about twice the test–retest difference. Its worked prompt also says what calibration means, which may help a little.
+- **The lean survives the change of wording.** True answers lay above the worked estimate 59% of the time (90% interval 51–67%).
 
 ## References
 
