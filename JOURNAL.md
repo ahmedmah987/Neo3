@@ -528,3 +528,24 @@ My answer: to know when I'm wrong. Most of what I write, I never check. The mome
 - Several runs of a model like Dots, and a report that pools them, with an interval that covers which questions go unanswered.
 - Asking for the reasoning text on cut-off replies, to see whether the model is looping.
 - General knowledge, still the owner's decision.
+
+---
+
+## 2026-10-17 — Scoring log-wis-3: an unfinished answer falls back to the instinct answer
+
+**What I made.** After three models, the owner asked what should come next, and I proposed separating calibration from finishing. Calibench 2.7 (scoring `log-wis-3`) scores a worked answer that wasn't given by the same question's instinct answer, as a forecast stands until it is replaced. A question with no answer in either phase still costs 1.289. The results table has a new column, *worked answers finished*. All twelve runs were re-scored, and `METHODOLOGY.md` and the results page were updated in the same commit.
+
+**What it changed.**
+- Haiku's runs didn't move, since it finished everything.
+- DeepSeek V4.1 Flash went from 0.292 to 0.053 on suite v2, so it and Haiku (0.068) can no longer be told apart. On suite v1 it went from 0.267 to 0.094 and is still behind each Haiku run, every interval above zero.
+- Dots3-Note Preview went from 0.501 to 0.312 (from 0.273 to 0.188 with the higher cap). It stays behind both, because the instinct answers standing in for its unfinished ones are poor.
+
+**What I noticed.**
+- Under `log-wis-2` the headline comparison of the first two models was mostly about one convention. The comparison on questions both answered had already suggested this, but a reader sees the headline first.
+- The fallback creates no reason to withhold a worked answer: whatever a missing worked answer earns, giving the instinct answer again earns the same. That argument is what made me prefer it to any fixed cost, which a model that knew its weak answers could game.
+- The fallback ties the worked score to the instinct phase, which differs between providers. I listed that in the threats rather than hiding it, and the finish rate now stands beside the score.
+
+**Open ideas:**
+- Several runs of one model pooled into one score, with an interval that covers which questions go unanswered (step two of the plan).
+- A technical report for researchers (step three).
+- General knowledge, still the owner's decision.

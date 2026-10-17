@@ -54,6 +54,7 @@
         "output": 1290.3148148148148,
         "reasoning": 1259.0185185185185
       },
+      "fallback": 0,
       "all": {
         "score_mean": 0.11319891389333597,
         "score_median": 0.016820342596324867,
@@ -124,12 +125,13 @@
         "output": 14699.598130841121,
         "reasoning": 14647.981308411216
       },
+      "fallback": 22,
       "all": {
-        "score_mean": 0.29153401608837753,
+        "score_mean": 0.0526493163367742,
         "score_median": 0.002211052525172188,
         "score_ci": [
-          0.21018137192980088,
-          0.37365399993917925
+          0.032243723098024805,
+          0.0756233478348995
         ]
       },
       "n": 86,
@@ -2553,8 +2555,8 @@
       },
       "worked": {
         "status": "truncated",
-        "score": 1.2894476520766656,
-        "imputed": true
+        "score": 0.026363931127205798,
+        "fallback": "instinct"
       }
     },
     {
@@ -2751,8 +2753,8 @@
       },
       "worked": {
         "status": "truncated",
-        "score": 1.2894476520766656,
-        "imputed": true
+        "score": 0.2360689791154354,
+        "fallback": "instinct"
       }
     },
     {
@@ -3159,8 +3161,8 @@
       },
       "worked": {
         "status": "truncated",
-        "score": 1.2894476520766656,
-        "imputed": true
+        "score": 0.005720441156021998,
+        "fallback": "instinct"
       }
     },
     {
@@ -3189,8 +3191,8 @@
       },
       "worked": {
         "status": "truncated",
-        "score": 1.2894476520766656,
-        "imputed": true
+        "score": 0.05708898431048397,
+        "fallback": "instinct"
       }
     },
     {
@@ -3303,8 +3305,8 @@
       },
       "worked": {
         "status": "truncated",
-        "score": 1.2894476520766656,
-        "imputed": true
+        "score": 0.00438784604691901,
+        "fallback": "instinct"
       }
     },
     {
@@ -3657,8 +3659,8 @@
       },
       "worked": {
         "status": "truncated",
-        "score": 1.2894476520766656,
-        "imputed": true
+        "score": 0.2903958991447883,
+        "fallback": "instinct"
       }
     },
     {
@@ -3855,8 +3857,8 @@
       },
       "worked": {
         "status": "truncated",
-        "score": 1.2894476520766656,
-        "imputed": true
+        "score": 0.294806218061349,
+        "fallback": "instinct"
       }
     },
     {
@@ -3927,8 +3929,8 @@
       },
       "worked": {
         "status": "truncated",
-        "score": 1.2894476520766656,
-        "imputed": true
+        "score": 0.2980322700515273,
+        "fallback": "instinct"
       }
     },
     {
@@ -3999,8 +4001,8 @@
       },
       "worked": {
         "status": "truncated",
-        "score": 1.2894476520766656,
-        "imputed": true
+        "score": 0.014790969290522718,
+        "fallback": "instinct"
       }
     },
     {
@@ -4323,8 +4325,8 @@
       },
       "worked": {
         "status": "truncated",
-        "score": 1.2894476520766656,
-        "imputed": true
+        "score": 0.13208333136006942,
+        "fallback": "instinct"
       }
     },
     {
@@ -4353,8 +4355,8 @@
       },
       "worked": {
         "status": "truncated",
-        "score": 1.2894476520766656,
-        "imputed": true
+        "score": 0.010204930405366417,
+        "fallback": "instinct"
       }
     },
     {
@@ -4749,8 +4751,8 @@
       },
       "worked": {
         "status": "truncated",
-        "score": 1.2894476520766656,
-        "imputed": true
+        "score": 0.018237697651147525,
+        "fallback": "instinct"
       }
     },
     {
@@ -5115,8 +5117,8 @@
       },
       "worked": {
         "status": "truncated",
-        "score": 1.2894476520766656,
-        "imputed": true
+        "score": 0.5144829431106371,
+        "fallback": "instinct"
       }
     },
     {
@@ -5187,8 +5189,8 @@
       },
       "worked": {
         "status": "error",
-        "score": 1.2894476520766656,
-        "imputed": true
+        "score": 0.009777988775664444,
+        "fallback": "instinct"
       }
     },
     {
@@ -5217,8 +5219,8 @@
       },
       "worked": {
         "status": "truncated",
-        "score": 1.2894476520766656,
-        "imputed": true
+        "score": 0.12929841226259325,
+        "fallback": "instinct"
       }
     },
     {
@@ -5247,8 +5249,8 @@
       },
       "worked": {
         "status": "truncated",
-        "score": 1.2894476520766656,
-        "imputed": true
+        "score": 0.2531847537139957,
+        "fallback": "instinct"
       }
     },
     {
@@ -5319,8 +5321,8 @@
       },
       "worked": {
         "status": "truncated",
-        "score": 1.2894476520766656,
-        "imputed": true
+        "score": 0.1763345741562534,
+        "fallback": "instinct"
       }
     },
     {
@@ -5643,8 +5645,8 @@
       },
       "worked": {
         "status": "truncated",
-        "score": 1.2894476520766656,
-        "imputed": true
+        "score": 0.04119578325397555,
+        "fallback": "instinct"
       }
     },
     {
@@ -5967,8 +5969,8 @@
       },
       "worked": {
         "status": "truncated",
-        "score": 1.2894476520766656,
-        "imputed": true
+        "score": 0.006889695159330192,
+        "fallback": "instinct"
       }
     },
     {
@@ -5997,8 +5999,8 @@
       },
       "worked": {
         "status": "truncated",
-        "score": 1.2894476520766656,
-        "imputed": true
+        "score": 0.003174142834210762,
+        "fallback": "instinct"
       }
     },
     {
@@ -6279,8 +6281,8 @@
       },
       "worked": {
         "status": "truncated",
-        "score": 1.2894476520766656,
-        "imputed": true
+        "score": 0.0319404508682898,
+        "fallback": "instinct"
       }
     },
     {
@@ -6351,8 +6353,8 @@
       },
       "worked": {
         "status": "truncated",
-        "score": 1.2894476520766656,
-        "imputed": true
+        "score": 0.013840530657696243,
+        "fallback": "instinct"
       }
     },
     {
@@ -6908,9 +6910,9 @@
       ]
     },
     "worked": {
-      "top1_share": 0.04095347181785336,
-      "top5_share": 0.2047673590892668,
-      "mean_without_top": 0.2822077204249356,
+      "top1_share": 0.18354876963673036,
+      "top5_share": 0.48298395017503576,
+      "mean_without_top": 0.04338733367198116,
       "misses": [
         {
           "q": 4,
@@ -6924,7 +6926,7 @@
           "factor": 2.5714285714285716,
           "width": 1.4,
           "score": 1.0436814614696306,
-          "share": 0.033147820503046856,
+          "share": 0.18354876963673036,
           "side": "above"
         },
         {
@@ -6939,7 +6941,7 @@
           "factor": 1.3048827374086889,
           "width": 3.710413694721826,
           "score": 0.5890871401873576,
-          "share": 0.018709688256881945,
+          "share": 0.1036007860463045,
           "side": "above"
         },
         {
@@ -6954,7 +6956,7 @@
           "factor": 1.3355704697986577,
           "width": 1.0419580419580419,
           "score": 0.30102386124267416,
-          "share": 0.00956066126302139,
+          "share": 0.05294006016413126,
           "side": "above"
         },
         {
@@ -6969,7 +6971,7 @@
           "factor": 1.3333333333333333,
           "width": 1.0,
           "score": 0.2876820724517808,
-          "share": 0.009136919694011097,
+          "share": 0.0505936843706269,
           "side": "above"
         },
         {
@@ -6984,7 +6986,7 @@
           "factor": 1.0666666666666667,
           "width": 1.3636363636363635,
           "score": 0.142374005009289,
-          "share": 0.004521866236564491,
+          "share": 0.025038840309485652,
           "side": "above"
         },
         {
@@ -6999,7 +7001,7 @@
           "factor": 1.018151815181518,
           "width": 1.4321988114532684,
           "score": 0.12832510622325716,
-          "share": 0.004075666517189282,
+          "share": 0.022568107444981157,
           "side": "below"
         },
         {
@@ -7014,7 +7016,7 @@
           "factor": 1.082670906200318,
           "width": 1.1615271659324522,
           "score": 0.12540422139506813,
-          "share": 0.003982897823321186,
+          "share": 0.02205442119466704,
           "side": "below"
         },
         {
@@ -7029,7 +7031,7 @@
           "factor": 1.114002478314746,
           "width": 1.0202275600505688,
           "score": 0.11408751397507229,
-          "share": 0.003623473803548621,
+          "share": 0.02006418969208369,
           "side": "above"
         },
         {
@@ -7044,7 +7046,7 @@
           "factor": 1.0434782608695652,
           "width": 1.15,
           "score": 0.08127581601722868,
-          "share": 0.0025813586424962586,
+          "share": 0.01429370606063762,
           "side": "above"
         },
         {
@@ -7059,7 +7061,7 @@
           "factor": 1.0375,
           "width": 1.0240963855421688,
           "score": 0.04447590072462049,
-          "share": 0.0014125757986110886,
+          "share": 0.007821827979002575,
           "side": "below"
         },
         {
@@ -7074,7 +7076,7 @@
           "factor": 1.0175438596491229,
           "width": 1.0344827586206897,
           "score": 0.028326433760962822,
-          "share": 0.0008996610330489848,
+          "share": 0.004981675211227614,
           "side": "below"
         },
         {
@@ -7089,7 +7091,7 @@
           "factor": 1.0103351382760273,
           "width": 1.0406934420543639,
           "score": 0.02130463715455612,
-          "share": 0.0006766454271280725,
+          "share": 0.0037467753156881526,
           "side": "above"
         },
         {
@@ -7104,7 +7106,7 @@
           "factor": 1.0057661748013622,
           "width": 1.009163802978236,
           "score": 0.008343674744169478,
-          "share": 0.00026499908541643014,
+          "share": 0.0014673741846337586,
           "side": "above"
         },
         {
@@ -7119,7 +7121,7 @@
           "factor": 1.0000081740692326,
           "width": 1.003510271359238,
           "score": 0.000984321822764369,
-          "share": 3.1262530094460846e-05,
+          "share": 0.00017310938841490664,
           "side": "above"
         },
         {
@@ -7134,7 +7136,7 @@
           "factor": 1.0000507202272266,
           "width": 1.0,
           "score": 5.071894100083796e-05,
-          "share": 1.610857732428278e-06,
+          "share": 8.919770602107809e-06,
           "side": "below"
         }
       ]
@@ -7153,7 +7155,7 @@
   "cost": 0.910394,
   "answers_changed_after_run": false,
   "scored_with": {
-    "calibench": "2.5.0",
-    "scoring": "log-wis-2"
+    "calibench": "2.7.0",
+    "scoring": "log-wis-3"
   }
 }

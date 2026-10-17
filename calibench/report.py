@@ -67,6 +67,17 @@ def suite_status(meta):
             f"results, which use Python {SUITES[suite]['python']}")
 
 
+def standing(records, q, phase):
+    """The answer that stands for a question in a phase, and the earlier phase it came from if not this one.
+    A worked answer that wasn't given leaves the instinct answer standing, as a forecast stands until it is
+    replaced; with neither, nothing stands and the question scores UNANSWERED."""
+    for earlier in reversed(PHASES[:PHASES.index(phase) + 1]):
+        r = records.get((q["q"], earlier))
+        if r and r["status"] == "ok":
+            return r, (None if earlier == phase else earlier)
+    return None, None
+
+
 def build(meta, questions, records, results):
     truth = {r["q"]: r["answer"] for r in results}
     zero_fill = legacy_zero(meta, records.values())
@@ -75,10 +86,12 @@ def build(meta, questions, records, results):
         recs = [records.get((q["q"], phase)) for q in questions]
         ok = [(q, r) for q, r in zip(questions, recs) if r and r["status"] == "ok"]
         statuses = collections.Counter(r["status"] if r else "missing" for r in recs)
-        every = [log_wis(r["answer"], truth[q["q"]], offset(q["family"])) if r and r["status"] == "ok" else UNANSWERED
-                 for q, r in zip(questions, recs)]
+        stood = [standing(records, q, phase) for q in questions]
+        every = [log_wis(r["answer"], truth[q["q"]], offset(q["family"])) if r else UNANSWERED
+                 for q, (r, _) in zip(questions, stood)]
         report["phases"][phase] = {
             "asked": len(questions), "statuses": dict(statuses), "tokens": tokens_per_answer(recs, zero_fill),
+            "fallback": sum(1 for _, by in stood if by),
             "all": {"score_mean": statistics.fmean(every), "score_median": statistics.median(every),
                     "score_ci": bootstrap_mean(every)},
             **summarize([(r["answer"], truth[q["q"]], offset(q["family"])) for q, r in ok]),
@@ -113,8 +126,13 @@ def build(meta, questions, records, results):
                 cell["score"] = log_wis(r["answer"], x, shift)
                 cell["hits"] = {key: inside(r["answer"][key], x) for key, _ in LEVELS}
             else:
-                cell["score"] = UNANSWERED
-                cell["imputed"] = True
+                stands, by = standing(records, q, phase)
+                if stands:
+                    cell["score"] = log_wis(stands["answer"], x, shift)
+                    cell["fallback"] = by
+                else:
+                    cell["score"] = UNANSWERED
+                    cell["imputed"] = True
             row[phase] = cell
         if all(row[p]["status"] == "ok" for p in PHASES):
             errors = {p: abs(row[p]["estimate"] - x) for p in PHASES}
@@ -270,9 +288,13 @@ def render(report):
               "Intervals in brackets are 90% intervals over questions. Coverage verdicts leave out single-number "
               "intervals, which say \"I know this exactly\" and are counted on their own line."]
     if unanswered:
-        lines += ["", f"The score counts each unanswered question as {UNANSWERED:.3f}, the score of an answer off by a "
-                  "factor of ten with wide intervals, whatever the size of the true answer; the rows below it use "
-                  "answered questions only."]
+        fallback = phases["worked"].get("fallback", 0)
+        lines += ["", "A worked answer that wasn't given (cut off, refused, unreadable or failed) is scored by the "
+                  "question's instinct answer, as a forecast stands until it is replaced"
+                  + (f"; {fallback} worked {'answer was' if fallback == 1 else 'answers were'} scored so" if fallback else "")
+                  + f". A question with no answer standing counts as {UNANSWERED:.3f}, the score of an answer off by a "
+                  "factor of ten with wide intervals, whatever the size of the true answer. The rows after the "
+                  "median use answered questions only."]
 
     fell = {p: phases[p].get("fell") for p in PHASES}
     if any(f and f["n"] for f in fell.values()):
@@ -343,7 +365,7 @@ def render(report):
         for phase in PHASES:
             c = r[phase]
             if c["status"] != "ok":
-                cells.append(f"{c['status']} · {sc(c['score'])}")
+                cells.append(f"{c['status']}" + (f" → {c['fallback']}" if c.get("fallback") else "") + f" · {sc(c['score'])}")
                 continue
             marks = " ".join(f"{key[1:]}{'✓' if hit else '✗'}" for key, hit in c["hits"].items())
             cells.append(f"{num(c['estimate'])} [{num(c['p90'][0])}, {num(c['p90'][1])}] {marks} · {sc(c['score'])}")
@@ -357,9 +379,9 @@ def index(runs):
         return f"suite {meta['suite']}" if meta.get("suite") else f"seed `{meta['seed']}`"
 
     rows = sorted(runs, key=lambda r: (not r[1]["meta"].get("suite"), r[1]["meta"]["started"], r[0]))
-    lines = ["| Run | Model | Prompts | Questions | Score, worked [90% interval] | Score, instinct "
-             "| Worked 50% / 90% hits | Worked answers above the estimate | Reasoning tokens per answer, instinct / worked "
-             "| Cost |", "|---|---|---|---|---|---|---|---|---|---|"]
+    lines = ["| Run | Model | Prompts | Questions | Worked answers finished | Score, worked [90% interval] "
+             "| Score, instinct | Worked 50% / 90% hits | Worked answers above the estimate "
+             "| Reasoning tokens per answer, instinct / worked | Cost |", "|---|---|---|---|---|---|---|---|---|---|---|"]
     for name, rep in rows:
         meta, worked, instinct = rep["meta"], rep["phases"]["worked"], rep["phases"]["instinct"]
         fell = worked.get("fell") or {}
@@ -369,7 +391,8 @@ def index(runs):
         thought = [(rep["phases"][p].get("tokens") or {}).get("reasoning") for p in PHASES]
         thought = "—" if None in thought else f"{thought[0]:,.0f} / {thought[1]:,.0f}"
         lines.append(f"| [{name}]({name}/report.md) | {meta['model']} | {meta.get('prompts', 'standard')} "
-                     f"| {where(meta)}, {meta['count']} | {sc(worked['all']['score_mean'])}{ci(worked['all']['score_ci'])} "
+                     f"| {where(meta)}, {meta['count']} | {frac(worked['n'], worked['asked'])} "
+                     f"| {sc(worked['all']['score_mean'])}{ci(worked['all']['score_ci'])} "
                      f"| {sc(instinct['all']['score_mean'])} | {hits} | {above} | {thought} | {cost} |")
     return "\n".join(lines) + "\n"
 
@@ -512,7 +535,8 @@ def settings_difference(a, b):
 
 
 def compare(reports, names=None):
-    """Compare runs on the same questions. Unanswered questions score as UNANSWERED."""
+    """Compare runs on the same questions. A worked answer that wasn't given is scored by the instinct answer,
+    and a question with neither as UNANSWERED."""
     names = names or [rep["meta"]["model"] for rep in reports]
     keys = [[r["key"] for r in rep["questions"]] for rep in reports]
     if any(sorted(k) != sorted(keys[0]) for k in keys):
@@ -547,7 +571,8 @@ def compare(reports, names=None):
     pythons = {rep["meta"]["python"] for rep in reports}
     lines = ["# Calibench comparison", "",
              f"{n} questions, the same for every run. Scores are for worked answers unless marked; lower is better. "
-             f"An unanswered question scores {UNANSWERED:.3f}, as if off by a factor of ten.", ""]
+             "A worked answer that wasn't given is scored by the same run's instinct answer; a question with "
+             f"neither scores {UNANSWERED:.3f}, as if off by a factor of ten.", ""]
     if len(pythons) > 1:
         lines += [f"**Note:** runs used different Python versions ({', '.join(sorted(pythons))}).", ""]
     lines += ["| Run | Answered | Score [90% interval] | Median | 50% hits | 90% hits | Instinct score "

@@ -1,6 +1,6 @@
 # Calibench report: openrouter:anthropic/claude-haiku-5.5
 
-Seed `2026-10-17`, 26 questions, Calibench 1.0.0, Python 3.13.16 (Unicode 15.1.0), started 2026-10-17T03:01:02+00:00. Scored with Calibench 2.5.0 (log-wis-2).
+Seed `2026-10-17`, 26 questions, Calibench 1.0.0, Python 3.13.16 (Unicode 15.1.0), started 2026-10-17T03:01:02+00:00. Scored with Calibench 2.7.0 (log-wis-3).
 
 Served by: anthropic/claude-haiku-5.5 via Claude Platform on AWS.
 

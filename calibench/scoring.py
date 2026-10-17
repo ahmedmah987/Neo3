@@ -17,7 +17,8 @@ PHASES = ("instinct", "worked")
 LEVELS = (("p50", 0.5), ("p90", 0.1))        # interval, and alpha for a central (1 − alpha) interval
 FLOOR = 1e-3                                  # a stated value (plus its offset) below this counts as this
 KNOW_NOTHING = {"estimate": 100, "p50": [30, 300], "p90": [3, 3000]}   # the answer of mock:naive
-SCORING = "log-wis-2"           # log(x), or log(1 + x) for counts; weighted interval score; UNANSWERED below
+SCORING = "log-wis-3"           # log(x), or log(1 + x) for counts; weighted interval score; an unfinished worked
+                                # answer scored by the instinct answer (report.standing), else UNANSWERED below
 
 
 def inside(interval, x):

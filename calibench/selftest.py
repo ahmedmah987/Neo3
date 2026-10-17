@@ -315,7 +315,7 @@ def check_run(tmp):
     rep = quiet(runner.run, flaky, "flaky", seed, count, FAST, tmp / "flaky", 1)
     check("failed calls are recorded as errors", rep["phases"]["worked"]["statuses"] == {"error": count // 2, "ok": count // 2})
     rows = rep["questions"]
-    check("an unanswered question scores the same fixed amount, whatever the size of its answer",
+    check("a question with no answer standing in either phase scores the same fixed amount, whatever the size of its answer",
           abs(UNANSWERED - 1.2894) < 1e-3
           and all(r["worked"]["score"] == UNANSWERED for r in rows if r["worked"].get("imputed"))
           and sum(bool(r["worked"].get("imputed")) for r in rows) == count // 2
@@ -368,9 +368,14 @@ def check_run(tmp):
 
     cut = TruncatingModel()
     rep = quiet(runner.run, cut, "cut", seed, count, FAST, tmp / "cut", 2)
-    check("a reply cut off at its token cap is truncated, asked once, and counts as unanswered",
+    check("a reply cut off at its token cap is truncated and asked once, and the instinct answer stands for it",
           rep["phases"]["worked"]["statuses"] == {"truncated": count} and cut.calls == 2 * count
-          and all(r["worked"].get("imputed") for r in rep["questions"]))
+          and all(r["worked"].get("fallback") == "instinct" and r["worked"]["score"] == r["instinct"]["score"]
+                  and not r["worked"].get("imputed") for r in rep["questions"])
+          and rep["phases"]["worked"]["fallback"] == count
+          and rep["phases"]["worked"]["all"]["score_mean"] == rep["phases"]["instinct"]["all"]["score_mean"]
+          and "| truncated → instinct · " in (tmp / "cut" / "report.md").read_text()
+          and f"{count} worked answers were scored so" in (tmp / "cut" / "report.md").read_text())
     quiet(runner.run, cut, "cut", seed, count, FAST, tmp / "cut", 2)
     meta = json.loads((tmp / "cut" / "run.json").read_text())
     check("truncated replies aren't asked again on resuming, and the run records its settings",

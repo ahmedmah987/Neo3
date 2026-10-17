@@ -1,6 +1,6 @@
 # Calibench report: openrouter:dots-studio/dots-3-note-preview:free
 
-Seed `calibench-v2`, 108 questions, Calibench 2.6.0, Python 3.13.16 (Unicode 15.1.0), started 2026-10-17T14:42:06+00:00. Scored with Calibench 2.6.1 (log-wis-2).
+Seed `calibench-v2`, 108 questions, Calibench 2.6.0, Python 3.13.16 (Unicode 15.1.0), started 2026-10-17T14:42:06+00:00. Scored with Calibench 2.7.0 (log-wis-3).
 
 **Standard suite v2.**
 
@@ -17,8 +17,8 @@ Cost reported by the API: 0.0000 (US dollars on OpenRouter).
 | | Instinct | Worked |
 |---|---|---|
 | Answered | 84 of 108 (24 truncated) | 71 of 108 (1 refused, 36 truncated) |
-| **Score**, mean [90% interval] | **0.425** [0.337, 0.519] | **0.501** [0.406, 0.597] |
-| Score, median | 0.069 | 0.057 |
+| **Score**, mean [90% interval] | **0.425** [0.337, 0.519] | **0.312** [0.233, 0.396] |
+| Score, median | 0.069 | 0.030 |
 | Score, answered questions only | 0.179 [0.115, 0.249] | 0.090 [0.054, 0.131] |
 | Interval score, 50% / 90% intervals | 0.815 / 2.771 | 0.420 / 1.327 |
 | 50% intervals containing the answer [90% interval] | 54 of 84 (64%) [55%, 72%] | 51 of 71 (72%) [62%, 80%] |
@@ -34,7 +34,7 @@ Working it out lowered the score on 41 of 62 questions answered both ways, from 
 
 The score is the weighted interval score (Bracher et al., 2021) on a log scale: it combines the estimate and both intervals, is lowest when the stated intervals are the ones the model believes, and treats a miss by a factor in either direction alike. Lower is better; 0.1 is roughly a 10% miss. Intervals in brackets are 90% intervals over questions. Coverage verdicts leave out single-number intervals, which say "I know this exactly" and are counted on their own line.
 
-The score counts each unanswered question as 1.289, the score of an answer off by a factor of ten with wide intervals, whatever the size of the true answer; the rows below it use answered questions only.
+A worked answer that wasn't given (cut off, refused, unreadable or failed) is scored by the question's instinct answer, as a forecast stands until it is replaced; 22 worked answers were scored so. A question with no answer standing counts as 1.289, the score of an answer off by a factor of ten with wide intervals, whatever the size of the true answer. The rows after the median use answered questions only.
 
 ## Where the true answers fell
 
@@ -58,19 +58,19 @@ A few large misses can carry a mean. This shows how much of each score its large
 
 | | Instinct | Worked |
 |---|---|---|
-| Share of the score from the largest question | 4% | 2% |
-| Share from the five largest | 17% | 12% |
-| Mean score without the largest question | 0.412 | 0.493 |
+| Share of the score from the largest question | 4% | 5% |
+| Share from the five largest | 17% | 22% |
+| Mean score without the largest question | 0.412 | 0.298 |
 
 **Worked answers outside their 90% interval.** *Outside by* is the factor between the true answer and the nearer end of the interval; *width* is the ratio of the interval's ends, so a narrow interval that misses by a wide factor is a confident miss.
 
 | # | Question | True answer | Estimate [90% interval] | Width | Outside by | Score | Share of score |
 |---|---|---|---|---|---|---|---|
-| 94 | lines in `warnings` | 735 | 245 [200, 290] | ×1.45 | ×2.53 above | 1.025 | 2% |
-| 4 | function definitions in `tabnanny` | 17 | 6 [3, 10] | ×2.75 | ×1.64 above | 0.759 | 1% |
-| 26 | code points in category Lm | 397 | 192 [180, 204] | ×1.13 | ×1.94 above | 0.698 | 1% |
-| 3 | lines in `statistics` | 1,817 | 850 [600, 1,100] | ×1.83 | ×1.65 above | 0.657 | 1% |
-| 108 | code points in category Mn | 1,985 | 1,100 [950, 1,250] | ×1.32 | ×1.59 above | 0.536 | 1% |
+| 94 | lines in `warnings` | 735 | 245 [200, 290] | ×1.45 | ×2.53 above | 1.025 | 3% |
+| 4 | function definitions in `tabnanny` | 17 | 6 [3, 10] | ×2.75 | ×1.64 above | 0.759 | 2% |
+| 26 | code points in category Lm | 397 | 192 [180, 204] | ×1.13 | ×1.94 above | 0.698 | 2% |
+| 3 | lines in `statistics` | 1,817 | 850 [600, 1,100] | ×1.83 | ×1.65 above | 0.657 | 2% |
+| 108 | code points in category Mn | 1,985 | 1,100 [950, 1,250] | ×1.32 | ×1.59 above | 0.536 | 2% |
 | 45 | lines in `subprocess` | 2,259 | 1,500 [1,200, 1,800] | ×1.5 | ×1.25 above | 0.332 | 1% |
 | 81 | lines in `timeit` | 381 | 250 [180, 320] | ×1.77 | ×1.19 above | 0.312 | 1% |
 | 100 | Collatz steps from 142,916,784,243 | 164 | 260 [180, 340] | ×1.88 | ×1.1 below | 0.299 | 1% |
@@ -130,14 +130,14 @@ Each answer is shown as estimate [90% interval], ✓ or ✗ for whether the 50% 
 | 6 | mean distance in a 1 × 1.33 rectangle | 0.6103 | truncated · 1.289 | truncated · 1.289 |
 | 7 | Unicode names with the word LATIN | 1,567 | truncated · 1.289 | truncated · 1.289 |
 | 8 | draws until a repeat, d = 303 | 22.49 | truncated · 1.289 | 22.49 [22.44, 22.54] 50✓ 90✓ · 0.000 |
-| 9 | names in `random.__all__` | 26 | 28 [25, 31] 50✗ 90✓ · 0.040 | truncated · 1.289 |
+| 9 | names in `random.__all__` | 26 | 28 [25, 31] 50✗ 90✓ · 0.040 | truncated → instinct · 0.040 |
 | 10 | assigned in the Cherokee block | 92 | 92 [89, 95] 50✓ 90✓ · 0.003 | 94 [90, 96] 50✗ 90✓ · 0.012 |
 | 11 | Collatz steps from 611,221,186,107 | 378 | 350 [150, 650] 50✓ 90✓ · 0.103 | 250 [50, 600] 50✗ 90✓ · 0.247 |
 | 12 | longest increasing subsequence, n = 600 | 44.3 | truncated · 1.289 | truncated · 1.289 |
 | 13 | highest point of a 901-step walk | 23.33 | 24.5 [20, 30] 50✓ 90✓ · 0.030 | 23.94 [23.47, 24.41] 50✗ 90✗ · 0.017 |
 | 14 | 6,787 × 2,142 | 14,537,754 | 14,500,000 [13,500,000, 15,500,000] 50✓ 90✓ · 0.007 | 14,537,754 [14,537,700, 14,537,800] 50✓ 90✓ · 0.000 |
 | 15 | days from 2381-11-09 to 2400-03-01 | 6,687 | 6,687 [6,670, 6,710] 50✓ 90✓ · 0.000 | 6,687 [6,687, 6,687] 50✓ 90✓ · 0.000 |
-| 16 | code points in category Nd | 680 | 600 [500, 700] 50✗ 90✓ · 0.066 | truncated · 1.289 |
+| 16 | code points in category Nd | 680 | 600 [500, 700] 50✗ 90✓ · 0.066 | truncated → instinct · 0.066 |
 | 17 | digit sum of 2^2579 | 3,479 | 3,500 [2,000, 5,000] 50✓ 90✓ · 0.048 | 3,497 [3,365, 3,629] 50✓ 90✓ · 0.006 |
 | 18 | partitions of 246 | 169,296,722,391,554 | 170,000,000,000,000 [100,000,000,000,000, 300,000,000,000,000] 50✓ 90✓ · 0.052 | 169,000,000,000,000 [150,000,000,000,000, 190,000,000,000,000] 50✓ 90✓ · 0.010 |
 | 19 | Collatz steps from 273,342,000,302 | 201 | 260 [100, 500] 50✓ 90✓ · 0.139 | 201 [190, 210] 50✓ 90✓ · 0.003 |
@@ -145,7 +145,7 @@ Each answer is shown as estimate [90% interval], ✓ or ✗ for whether the 50% 
 | 21 | longest increasing subsequence, n = 880 | 54.39 | truncated · 1.289 | refused · 1.289 |
 | 22 | digits of 10,938! | 39,431 | truncated · 1.289 | 39,431 [39,431, 39,431] 50✓ 90✓ · 0.000 |
 | 23 | draws until a repeat, d = 3,428 | 74.05 | 74 [70, 78] 50✓ 90✓ · 0.005 | 74.05 [74, 74.1] 50✓ 90✓ · 0.000 |
-| 24 | assigned in the Arabic Presentation Forms-B block | 141 | 126 [120, 130] 50✗ 90✗ · 0.099 | truncated · 1.289 |
+| 24 | assigned in the Arabic Presentation Forms-B block | 141 | 126 [120, 130] 50✗ 90✗ · 0.099 | truncated → instinct · 0.099 |
 | 25 | 21,339 × 2,935 | 62,629,965 | 62,500,000 [59,000,000, 66,000,000] 50✓ 90✓ · 0.007 | 62,629,965 [62,629,965, 62,629,965] 50✓ 90✓ · 0.000 |
 | 26 | code points in category Lm | 397 | 150 [100, 200] 50✗ 90✗ · 0.856 | 192 [180, 204] 50✗ 90✗ · 0.698 |
 | 27 | mean distance in a 1 × 6.93 rectangle | 2.377 | truncated · 1.289 | 2.377 [2.372, 2.382] 50✓ 90✓ · 0.000 |
@@ -155,44 +155,44 @@ Each answer is shown as estimate [90% interval], ✓ or ✗ for whether the 50% 
 | 31 | primes in [3,705,675, 3,741,104] | 2,356 | 2,341 [2,261, 2,421] 50✓ 90✓ · 0.005 | 2,340 [2,260, 2,420] 50✓ 90✓ · 0.006 |
 | 32 | Friday the 13ths in 2120–2204 | 147 | 146 [126, 166] 50✓ 90✓ · 0.018 | 147 [144, 150] 50✓ 90✓ · 0.002 |
 | 33 | names in `fractions.__all__` | 1 | 1 [1, 1] 50✓ 90✓ · 0.000 | 1 [1, 1] 50✓ 90✓ · 0.000 |
-| 34 | highest point of a 608-step walk | 19.36 | 20 [14, 26] 50✓ 90✓ · 0.039 | truncated · 1.289 |
+| 34 | highest point of a 608-step walk | 19.36 | 20 [14, 26] 50✓ 90✓ · 0.039 | truncated → instinct · 0.039 |
 | 35 | function definitions in `inspect` | 148 | 135 [90, 180] 50✓ 90✓ · 0.054 | 120 [90, 160] 50✗ 90✓ · 0.121 |
 | 36 | digit sum of 2^4112 | 5,575 | 5,571 [5,405, 5,737] 50✓ 90✓ · 0.004 | 5,571 [5,405, 5,737] 50✓ 90✓ · 0.004 |
 | 37 | Unicode names with the word STAR | 61 | truncated · 1.289 | truncated · 1.289 |
-| 38 | highest point of a 400-step walk | 15.36 | 13.5 [1, 39] 50✓ 90✓ · 0.233 | truncated · 1.289 |
+| 38 | highest point of a 400-step walk | 15.36 | 13.5 [1, 39] 50✓ 90✓ · 0.233 | truncated → instinct · 0.233 |
 | 39 | digit sum of 2^4557 | 6,011 | 6,174 [6,000, 6,350] 50✗ 90✓ · 0.015 | 6,174 [5,999, 6,349] 50✗ 90✓ · 0.015 |
-| 40 | names in `bdb.__all__` | 3 | 10 [7, 13] 50✗ 90✗ · 0.876 | truncated · 1.289 |
+| 40 | names in `bdb.__all__` | 3 | 10 [7, 13] 50✗ 90✗ · 0.876 | truncated → instinct · 0.876 |
 | 41 | days from 2360-02-08 to 2360-03-27 | 48 | 48 [45, 51] 50✓ 90✓ · 0.007 | 48 [48, 48] 50✓ 90✓ · 0.000 |
-| 42 | code points in category Ps | 79 | 30 [20, 50] 50✗ 90✗ · 0.739 | truncated · 1.289 |
+| 42 | code points in category Ps | 79 | 30 [20, 50] 50✗ 90✗ · 0.739 | truncated → instinct · 0.739 |
 | 43 | digits of 395! | 856 | truncated · 1.289 | 856 [855, 857] 50✓ 90✓ · 0.000 |
-| 44 | Collatz steps from 257,793,746,753 | 170 | 1,000 [700, 1,300] 50✗ 90✗ · 1.615 | truncated · 1.289 |
+| 44 | Collatz steps from 257,793,746,753 | 170 | 1,000 [700, 1,300] 50✗ 90✗ · 1.615 | truncated → instinct · 1.615 |
 | 45 | lines in `subprocess` | 2,259 | 2,000 [1,700, 2,300] 50✗ 90✓ · 0.070 | 1,500 [1,200, 1,800] 50✗ 90✗ · 0.332 |
-| 46 | assigned in the Georgian block | 88 | 84 [75, 93] 50✗ 90✓ · 0.027 | truncated · 1.289 |
+| 46 | assigned in the Georgian block | 88 | 84 [75, 93] 50✗ 90✓ · 0.027 | truncated → instinct · 0.027 |
 | 47 | partitions of 229 | 44,132,934,884,255 | 45,000,000,000,000 [20,000,000,000,000, 80,000,000,000,000] 50✓ 90✓ · 0.077 | 44,000,000,000,000 [38,000,000,000,000, 50,000,000,000,000] 50✓ 90✓ · 0.015 |
-| 48 | longest increasing subsequence, n = 156 | 21.48 | 25 [20, 30] 50✗ 90✓ · 0.082 | truncated · 1.289 |
+| 48 | longest increasing subsequence, n = 156 | 21.48 | 25 [20, 30] 50✗ 90✓ · 0.082 | truncated → instinct · 0.082 |
 | 49 | primes in [203,866, 205,144] | 103 | 105 [88, 121] 50✓ 90✓ · 0.022 | 105 [88, 122] 50✓ 90✓ · 0.024 |
 | 50 | 156,899 × 30,667 | 4,811,621,633 | 4,820,000,000 [4,804,000,000, 4,836,000,000] 50✗ 90✓ · 0.001 | 4,811,621,633 [4,811,621,633, 4,811,621,633] 50✓ 90✓ · 0.000 |
 | 51 | Friday the 13ths in 2295–2567 | 469 | 470 [437, 503] 50✓ 90✓ · 0.009 | 469 [465, 473] 50✓ 90✓ · 0.001 |
 | 52 | mean distance in a 1 × 2.74 rectangle | 1.029 | truncated · 1.289 | truncated · 1.289 |
-| 53 | draws until a repeat, d = 9,424 | 122.3 | 122.3 [118, 128] 50✓ 90✓ · 0.004 | truncated · 1.289 |
-| 54 | function definitions in `uuid` | 47 | 45 [20, 70] 50✓ 90✓ · 0.077 | truncated · 1.289 |
+| 53 | draws until a repeat, d = 9,424 | 122.3 | 122.3 [118, 128] 50✓ 90✓ · 0.004 | truncated → instinct · 0.004 |
+| 54 | function definitions in `uuid` | 47 | 45 [20, 70] 50✓ 90✓ · 0.077 | truncated → instinct · 0.077 |
 | 55 | draws until a repeat, d = 1,449,835 | 1,510 | truncated · 1.289 | 1,510 [1,510, 1,510] 50✓ 90✓ · 0.000 |
-| 56 | names in `zipapp.__all__` | 3 | 2 [1, 3] 50✗ 90✓ · 0.186 | truncated · 1.289 |
+| 56 | names in `zipapp.__all__` | 3 | 2 [1, 3] 50✗ 90✓ · 0.186 | truncated → instinct · 0.186 |
 | 57 | digit sum of 2^2312 | 3,136 | 3,132 [3,007, 3,257] 50✓ 90✓ · 0.005 | 3,136 [3,011, 3,261] 50✓ 90✓ · 0.005 |
 | 58 | primes in [2,973,871, 2,977,273] | 227 | 229 [205, 253] 50✓ 90✓ · 0.014 | 228 [203, 253] 50✓ 90✓ · 0.014 |
 | 59 | Friday the 13ths in 2041–2047 | 13 | 12 [9, 15] 50✓ 90✓ · 0.040 | 13 [13, 13] 50✓ 90✓ · 0.000 |
 | 60 | 34,718 × 1,419 | 49,264,842 | 49,000,000 [48,000,000, 50,000,000] 50✓ 90✓ · 0.004 | 49,264,842 [49,264,837, 49,264,847] 50✓ 90✓ · 0.000 |
-| 61 | mean distance in a 1 × 3.73 rectangle | 1.34 | 1.45 [0.9, 2.1] 50✓ 90✓ · 0.067 | truncated · 1.289 |
+| 61 | mean distance in a 1 × 3.73 rectangle | 1.34 | 1.45 [0.9, 2.1] 50✓ 90✓ · 0.067 | truncated → instinct · 0.067 |
 | 62 | Collatz steps from 720,780,470,611 | 249 | 200 [100, 350] 50✓ 90✓ · 0.119 | 249 [249, 249] 50✓ 90✓ · 0.000 |
 | 63 | digits of 206! | 389 | 389 [389, 389] 50✓ 90✓ · 0.000 | 389 [388, 391] 50✓ 90✓ · 0.000 |
-| 64 | highest point of a 1,243-step walk | 27.4 | 28 [27.5, 28.6] 50✗ 90✗ · 0.014 | truncated · 1.289 |
+| 64 | highest point of a 1,243-step walk | 27.4 | 28 [27.5, 28.6] 50✗ 90✗ · 0.014 | truncated → instinct · 0.014 |
 | 65 | lines in `configparser` | 1,398 | 950 [700, 1,300] 50✗ 90✗ · 0.254 | 1,600 [1,200, 2,000] 50✗ 90✓ · 0.078 |
 | 66 | days from 1748-02-09 to 1752-09-26 | 1,691 | truncated · 1.289 | 1,691 [1,680, 1,700] 50✓ 90✓ · 0.000 |
-| 67 | function definitions in `mailbox` | 191 | 35 [20, 50] 50✗ 90✗ · 1.528 | truncated · 1.289 |
+| 67 | function definitions in `mailbox` | 191 | 35 [20, 50] 50✗ 90✗ · 1.528 | truncated → instinct · 1.528 |
 | 68 | code points in category Lt | 31 | 35 [20, 50] 50✓ 90✓ · 0.069 | 33 [20, 50] 50✓ 90✓ · 0.048 |
-| 69 | longest increasing subsequence, n = 406 | 36.11 | 40.3 [36.3, 44.3] 50✗ 90✗ · 0.064 | truncated · 1.289 |
+| 69 | longest increasing subsequence, n = 406 | 36.11 | 40.3 [36.3, 44.3] 50✗ 90✗ · 0.064 | truncated → instinct · 0.064 |
 | 70 | partitions of 387 | 2,998,964,447,736,452,194 | 3.03e+18 [2e+18, 4.5e+18] 50✓ 90✓ · 0.035 | 3e+18 [1e+18, 1e+19] 50✓ 90✓ · 0.138 |
-| 71 | Unicode names with the word FRACTION | 98 | 12 [5, 20] 50✗ 90✗ · 1.837 | truncated · 1.289 |
+| 71 | Unicode names with the word FRACTION | 98 | 12 [5, 20] 50✗ 90✗ · 1.837 | truncated → instinct · 1.837 |
 | 72 | assigned in the Egyptian Hieroglyphs block | 1,072 | 1,071 [1,065, 1,072] 50✓ 90✓ · 0.001 | 1,071 [1,069, 1,072] 50✓ 90✓ · 0.000 |
 | 73 | Unicode names with the word SMALL | 3,296 | 2,000 [1,700, 2,300] 50✗ 90✗ · 0.440 | 2,000 [800, 3,500] 50✗ 90✓ · 0.291 |
 | 74 | mean distance in a 1 × 7.69 rectangle | 2.63 | truncated · 1.289 | truncated · 1.289 |
@@ -200,11 +200,11 @@ Each answer is shown as estimate [90% interval], ✓ or ✗ for whether the 50% 
 | 76 | partitions of 134 | 8,149,040,695 | 8,500,000,000 [4,000,000,000, 14,000,000,000] 50✓ 90✓ · 0.069 | 8,300,000,000 [5,000,000,000, 15,000,000,000] 50✓ 90✓ · 0.049 |
 | 77 | code points in category Ll | 2,233 | 1,400 [1,200, 1,600] 50✗ 90✗ · 0.406 | 2,800 [2,000, 4,000] 50✗ 90✓ · 0.134 |
 | 78 | days from 1735-03-13 to 1738-03-23 | 1,106 | 1,106 [1,000, 1,200] 50✓ 90✓ · 0.008 | 1,106 [1,106, 1,106] 50✓ 90✓ · 0.000 |
-| 79 | names in `fnmatch.__all__` | 4 | 4 [3, 5] 50✓ 90✓ · 0.008 | truncated · 1.289 |
+| 79 | names in `fnmatch.__all__` | 4 | 4 [3, 5] 50✓ 90✓ · 0.008 | truncated → instinct · 0.008 |
 | 80 | highest point of a 1,783-step walk | 34.21 | truncated · 1.289 | truncated · 1.289 |
 | 81 | lines in `timeit` | 381 | 380 [320, 440] 50✓ 90✓ · 0.017 | 250 [180, 320] 50✗ 90✗ · 0.312 |
 | 82 | draws until a repeat, d = 6,507,924 | 3,198 | 3,004 [817, 6,246] 50✓ 90✓ · 0.132 | 3,198 [818, 6,245] 50✓ 90✓ · 0.119 |
-| 83 | function definitions in `shlex` | 15 | 22 [12, 32] 50✗ 90✓ · 0.195 | truncated · 1.289 |
+| 83 | function definitions in `shlex` | 15 | 22 [12, 32] 50✗ 90✓ · 0.195 | truncated → instinct · 0.195 |
 | 84 | Friday the 13ths in 2246–2329 | 145 | 145 [134, 156] 50✓ 90✓ · 0.009 | 144 [140, 150] 50✓ 90✓ · 0.004 |
 | 85 | primes in [2,647,606, 2,665,661] | 1,242 | 1,220 [1,162, 1,278] 50✓ 90✓ · 0.009 | 1,309 [1,249, 1,368] 50✗ 90✗ · 0.032 |
 | 86 | Collatz steps from 823,122,992,864 | 195 | 990 [680, 1,300] 50✗ 90✗ · 1.454 | 190 [140, 260] 50✓ 90✓ · 0.039 |
@@ -212,9 +212,9 @@ Each answer is shown as estimate [90% interval], ✓ or ✗ for whether the 50% 
 | 88 | 2,025 × 311,373 | 630,530,325 | 630,000,000 [620,000,000, 640,000,000] 50✓ 90✓ · 0.002 | 630,530,325 [630,530,325, 630,530,325] 50✓ 90✓ · 0.000 |
 | 89 | longest increasing subsequence, n = 803 | 51.71 | truncated · 1.289 | truncated · 1.289 |
 | 90 | digit sum of 2^9436 | 12,832 | 12,780 [12,530, 13,030] 50✓ 90✓ · 0.003 | 12,787 [12,535, 13,039] 50✓ 90✓ · 0.003 |
-| 91 | function definitions in `numbers` | 56 | 80 [60, 100] 50✗ 90✗ · 0.220 | truncated · 1.289 |
+| 91 | function definitions in `numbers` | 56 | 80 [60, 100] 50✗ 90✗ · 0.220 | truncated → instinct · 0.220 |
 | 92 | 61,640 × 5,178 | 319,171,920 | 319,000,000 [315,000,000, 323,000,000] 50✓ 90✓ · 0.001 | 319,171,920 [319,171,920, 319,171,920] 50✓ 90✓ · 0.000 |
-| 93 | longest increasing subsequence, n = 105 | 17.17 | 17 [16.5, 17.5] 50✓ 90✓ · 0.005 | truncated · 1.289 |
+| 93 | longest increasing subsequence, n = 105 | 17.17 | 17 [16.5, 17.5] 50✓ 90✓ · 0.005 | truncated → instinct · 0.005 |
 | 94 | lines in `warnings` | 735 | 650 [300, 1,000] 50✓ 90✓ · 0.080 | 245 [200, 290] 50✗ 90✗ · 1.025 |
 | 95 | partitions of 507 | 3,384,893,356,244,349,844,341 | 3.4e+21 [3e+21, 3.8e+21] 50✓ 90✓ · 0.012 | 3.38e+21 [3.2e+21, 3.6e+21] 50✓ 90✓ · 0.005 |
 | 96 | days from 2193-08-10 to 2194-03-25 | 227 | truncated · 1.289 | 227 [227, 227] 50✓ 90✓ · 0.000 |

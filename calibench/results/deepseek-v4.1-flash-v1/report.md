@@ -1,6 +1,6 @@
 # Calibench report: openrouter:deepseek/deepseek-v4.1-flash-1017
 
-Seed `calibench-v1`, 104 questions, Calibench 2.4.0, Python 3.13.16 (Unicode 15.1.0), started 2026-10-17T11:41:16+00:00. Scored with Calibench 2.5.0 (log-wis-2).
+Seed `calibench-v1`, 104 questions, Calibench 2.4.0, Python 3.13.16 (Unicode 15.1.0), started 2026-10-17T11:41:16+00:00. Scored with Calibench 2.7.0 (log-wis-3).
 
 **Standard suite v1.**
 
@@ -17,8 +17,8 @@ Cost reported by the API: 0.9191 (US dollars on OpenRouter).
 | | Instinct | Worked |
 |---|---|---|
 | Answered | 101 of 104 (3 truncated) | 88 of 104 (16 truncated) |
-| **Score**, mean [90% interval] | **0.164** [0.117, 0.216] | **0.267** [0.193, 0.347] |
-| Score, median | 0.039 | 0.007 |
+| **Score**, mean [90% interval] | **0.164** [0.117, 0.216] | **0.094** [0.055, 0.138] |
+| Score, median | 0.039 | 0.005 |
 | Score, answered questions only | 0.131 [0.094, 0.174] | 0.081 [0.043, 0.125] |
 | Interval score, 50% / 90% intervals | 0.637 / 1.706 | 0.352 / 1.389 |
 | 50% intervals containing the answer [90% interval] | 64 of 101 (63%) [55%, 71%] | 54 of 88 (61%) [53%, 69%] |
@@ -34,7 +34,7 @@ Working it out lowered the score on 68 of 86 questions answered both ways, from 
 
 The score is the weighted interval score (Bracher et al., 2021) on a log scale: it combines the estimate and both intervals, is lowest when the stated intervals are the ones the model believes, and treats a miss by a factor in either direction alike. Lower is better; 0.1 is roughly a 10% miss. Intervals in brackets are 90% intervals over questions. Coverage verdicts leave out single-number intervals, which say "I know this exactly" and are counted on their own line.
 
-The score counts each unanswered question as 1.289, the score of an answer off by a factor of ten with wide intervals, whatever the size of the true answer; the rows below it use answered questions only.
+A worked answer that wasn't given (cut off, refused, unreadable or failed) is scored by the question's instinct answer, as a forecast stands until it is replaced; 15 worked answers were scored so. A question with no answer standing counts as 1.289, the score of an answer off by a factor of ten with wide intervals, whatever the size of the true answer. The rows after the median use answered questions only.
 
 ## Where the true answers fell
 
@@ -58,24 +58,24 @@ A few large misses can carry a mean. This shows how much of each score its large
 
 | | Instinct | Worked |
 |---|---|---|
-| Share of the score from the largest question | 8% | 5% |
-| Share from the five largest | 37% | 23% |
-| Mean score without the largest question | 0.152 | 0.257 |
+| Share of the score from the largest question | 8% | 13% |
+| Share from the five largest | 37% | 58% |
+| Mean score without the largest question | 0.152 | 0.082 |
 
 **Worked answers outside their 90% interval.** *Outside by* is the factor between the true answer and the nearer end of the interval; *width* is the ratio of the interval's ends, so a narrow interval that misses by a wide factor is a confident miss.
 
 | # | Question | True answer | Estimate [90% interval] | Width | Outside by | Score | Share of score |
 |---|---|---|---|---|---|---|---|
-| 76 | function definitions in `operator` | 67 | 17 [14, 21] | ×1.47 | ×3.09 above | 1.246 | 4% |
-| 38 | names in `locale.__all__` | 23 | 82 [81, 83] | ×1.02 | ×3.42 below | 1.236 | 4% |
-| 16 | Unicode names with the word FRACTION | 98 | 31 [30, 33] | ×1.1 | ×2.91 above | 1.107 | 4% |
-| 80 | names in `tabnanny.__all__` | 3 | 1 [1, 1] | ×1 | ×2 above | 0.693 | 2% |
-| 18 | function definitions in `traceback` | 70 | 45 [38, 54] | ×1.41 | ×1.29 above | 0.361 | 1% |
-| 10 | function definitions in `optparse` | 122 | 93 [88, 99] | ×1.12 | ×1.23 above | 0.242 | 1% |
-| 27 | function definitions in `hmac` | 11 | 15 [13, 17] | ×1.29 | ×1.17 below | 0.239 | 1% |
-| 54 | function definitions in `webbrowser` | 25 | 19 [17, 21] | ×1.22 | ×1.18 above | 0.228 | 1% |
-| 77 | names in `difflib.__all__` | 12 | 9 [8, 10] | ×1.22 | ×1.18 above | 0.228 | 1% |
-| 83 | function definitions in `weakref` | 65 | 50 [46, 54] | ×1.17 | ×1.2 above | 0.227 | 1% |
+| 76 | function definitions in `operator` | 67 | 17 [14, 21] | ×1.47 | ×3.09 above | 1.246 | 13% |
+| 38 | names in `locale.__all__` | 23 | 82 [81, 83] | ×1.02 | ×3.42 below | 1.236 | 13% |
+| 16 | Unicode names with the word FRACTION | 98 | 31 [30, 33] | ×1.1 | ×2.91 above | 1.107 | 11% |
+| 80 | names in `tabnanny.__all__` | 3 | 1 [1, 1] | ×1 | ×2 above | 0.693 | 7% |
+| 18 | function definitions in `traceback` | 70 | 45 [38, 54] | ×1.41 | ×1.29 above | 0.361 | 4% |
+| 10 | function definitions in `optparse` | 122 | 93 [88, 99] | ×1.12 | ×1.23 above | 0.242 | 2% |
+| 27 | function definitions in `hmac` | 11 | 15 [13, 17] | ×1.29 | ×1.17 below | 0.239 | 2% |
+| 54 | function definitions in `webbrowser` | 25 | 19 [17, 21] | ×1.22 | ×1.18 above | 0.228 | 2% |
+| 77 | names in `difflib.__all__` | 12 | 9 [8, 10] | ×1.22 | ×1.18 above | 0.228 | 2% |
+| 83 | function definitions in `weakref` | 65 | 50 [46, 54] | ×1.17 | ×1.2 above | 0.227 | 2% |
 | | 9 more | | | | | | |
 
 ## By kind of question
@@ -125,7 +125,7 @@ Each answer is shown as estimate [90% interval], ✓ or ✗ for whether the 50% 
 | 8 | code points in category Po | 628 | 650 [400, 900] 50✓ 90✓ · 0.054 | 642 [636, 648] 50✗ 90✗ · 0.018 |
 | 9 | assigned in the Thaana block | 50 | 50 [45, 55] 50✓ 90✓ · 0.012 | 50 [49, 51] 50✓ 90✓ · 0.001 |
 | 10 | function definitions in `optparse` | 122 | 96 [58, 145] 50✗ 90✓ · 0.135 | 93 [88, 99] 50✗ 90✗ · 0.242 |
-| 11 | primes in [3,164,661, 3,229,443] | 4,399 | 4,325 [4,220, 4,430] 50✗ 90✓ · 0.009 | truncated · 1.289 |
+| 11 | primes in [3,164,661, 3,229,443] | 4,399 | 4,325 [4,220, 4,430] 50✗ 90✓ · 0.009 | truncated → instinct · 0.009 |
 | 12 | Collatz steps from 87,974,385,043 | 246 | 350 [150, 700] 50✗ 90✓ · 0.166 | 246 [246, 246] 50✓ 90✓ · 0.000 |
 | 13 | longest increasing subsequence, n = 112 | 17.81 | 21.2 [20.7, 21.7] 50✗ 90✗ · 0.164 | 17.84 [17.65, 18.02] 50✓ 90✓ · 0.001 |
 | 14 | mean distance in a 1 × 9.91 rectangle | 3.359 | truncated · 1.289 | 3.356 [3.354, 3.357] 50✗ 90✗ · 0.001 |
@@ -140,21 +140,21 @@ Each answer is shown as estimate [90% interval], ✓ or ✗ for whether the 50% 
 | 23 | Collatz steps from 337,264,368,477 | 248 | 198 [80, 500] 50✓ 90✓ · 0.157 | 248 [248, 248] 50✓ 90✓ · 0.000 |
 | 24 | names in `weakref.__all__` | 13 | 13 [10, 16] 50✓ 90✓ · 0.023 | 14 [13, 15] 50✗ 90✓ · 0.044 |
 | 25 | draws until a repeat, d = 6,620,093 | 3,225 | 3,225 [3,224, 3,227] 50✓ 90✓ · 0.000 | 3,225 [3,225, 3,225] 50✓ 90✓ · 0.000 |
-| 26 | digit sum of 2^1219 | 1,550 | 1,650 [1,500, 1,800] 50✗ 90✓ · 0.035 | truncated · 1.289 |
+| 26 | digit sum of 2^1219 | 1,550 | 1,650 [1,500, 1,800] 50✗ 90✓ · 0.035 | truncated → instinct · 0.035 |
 | 27 | function definitions in `hmac` | 11 | 18 [8, 35] 50✗ 90✓ · 0.239 | 15 [13, 17] 50✗ 90✗ · 0.239 |
 | 28 | assigned in the Playing Cards block | 82 | 82 [78, 86] 50✓ 90✓ · 0.004 | 82 [82, 82] 50✓ 90✓ · 0.000 |
-| 29 | longest increasing subsequence, n = 4,365 | 125.4 | 125 [114, 136] 50✓ 90✓ · 0.011 | truncated · 1.289 |
+| 29 | longest increasing subsequence, n = 4,365 | 125.4 | 125 [114, 136] 50✓ 90✓ · 0.011 | truncated → instinct · 0.011 |
 | 30 | mean distance in a 1 × 4.45 rectangle | 1.572 | truncated · 1.289 | 1.572 [1.569, 1.574] 50✓ 90✓ · 0.000 |
 | 31 | Unicode names with the word CAPITAL | 2,032 | 2,000 [1,200, 3,000] 50✓ 90✓ · 0.052 | 2,010 [1,300, 3,000] 50✓ 90✓ · 0.051 |
 | 32 | Collatz steps from 904,534,976,486 | 239 | 180 [60, 800] 50✓ 90✓ · 0.199 | 239 [239, 239] 50✓ 90✓ · 0.000 |
 | 33 | code points in category So | 6,639 | 7,000 [3,500, 12,000] 50✓ 90✓ · 0.079 | 7,000 [6,100, 7,900] 50✓ 90✓ · 0.027 |
-| 34 | digit sum of 2^2531 | 3,353 | 3,420 [3,300, 3,550] 50✗ 90✓ · 0.010 | truncated · 1.289 |
+| 34 | digit sum of 2^2531 | 3,353 | 3,420 [3,300, 3,550] 50✗ 90✓ · 0.010 | truncated → instinct · 0.010 |
 | 35 | lines in `functools` | 1,036 | 550 [350, 800] 50✗ 90✗ · 0.472 | 1,080 [930, 1,280] 50✓ 90✓ · 0.026 |
-| 36 | draws until a repeat, d = 46,781 | 271.7 | 271.8 [271.3, 272.2] 50✓ 90✓ · 0.000 | truncated · 1.289 |
+| 36 | draws until a repeat, d = 46,781 | 271.7 | 271.8 [271.3, 272.2] 50✓ 90✓ · 0.000 | truncated → instinct · 0.000 |
 | 37 | highest point of a 869-step walk | 22.92 | 23 [21.5, 24.5] 50✓ 90✓ · 0.008 | 23.03 [22.56, 23.49] 50✓ 90✓ · 0.003 |
 | 38 | names in `locale.__all__` | 23 | 72 [65, 80] 50✗ 90✗ · 1.072 | 82 [81, 83] 50✗ 90✗ · 1.236 |
 | 39 | primes in [591,475, 604,946] | 1,020 | 1,000 [940, 1,060] 50✓ 90✓ · 0.010 | 1,013 [953, 1,073] 50✓ 90✓ · 0.008 |
-| 40 | longest increasing subsequence, n = 2,201 | 87.91 | 87.6 [87, 88.4] 50✗ 90✓ · 0.002 | truncated · 1.289 |
+| 40 | longest increasing subsequence, n = 2,201 | 87.91 | 87.6 [87, 88.4] 50✗ 90✓ · 0.002 | truncated → instinct · 0.002 |
 | 41 | code points in category Me | 13 | 13 [10, 16] 50✓ 90✓ · 0.023 | 12 [11, 13] 50✗ 90✓ · 0.048 |
 | 42 | lines in `tabnanny` | 340 | 200 [100, 320] 50✗ 90✗ · 0.332 | 314 [285, 350] 50✗ 90✓ · 0.047 |
 | 43 | primes in [310,586, 338,601] | 2,242 | 2,200 [1,900, 2,500] 50✓ 90✓ · 0.018 | 2,230 [2,170, 2,290] 50✓ 90✓ · 0.004 |
@@ -167,28 +167,28 @@ Each answer is shown as estimate [90% interval], ✓ or ✗ for whether the 50% 
 | 50 | Unicode names with the word GREEK | 531 | 570 [480, 660] 50✗ 90✓ · 0.038 | 519 [505, 535] 50✗ 90✓ · 0.014 |
 | 51 | assigned in the General Punctuation block | 111 | 111 [108, 112] 50✓ 90✓ · 0.003 | 111 [110, 112] 50✓ 90✓ · 0.000 |
 | 52 | highest point of a 707-step walk | 20.72 | 20.72 [20.3, 21.15] 50✓ 90✓ · 0.002 | 20.72 [20.31, 21.14] 50✓ 90✓ · 0.002 |
-| 53 | lines in `glob` | 572 | 220 [130, 320] 50✗ 90✗ · 0.791 | truncated · 1.289 |
+| 53 | lines in `glob` | 572 | 220 [130, 320] 50✗ 90✗ · 0.791 | truncated → instinct · 0.791 |
 | 54 | function definitions in `webbrowser` | 25 | 55 [35, 80] 50✗ 90✗ · 0.564 | 19 [17, 21] 50✗ 90✗ · 0.228 |
 | 55 | assigned in the Lao block | 83 | 80 [67, 96] 50✓ 90✓ · 0.027 | 82 [79, 85] 50✓ 90✓ · 0.006 |
 | 56 | longest increasing subsequence, n = 452 | 38.19 | truncated · 1.289 | truncated · 1.289 |
 | 57 | highest point of a 1,229-step walk | 27.5 | 28 [12, 50] 50✓ 90✓ · 0.083 | 27.48 [26.93, 28.03] 50✓ 90✓ · 0.003 |
 | 58 | digit sum of 2^8596 | 11,455 | 11,646 [11,406, 11,886] 50✗ 90✓ · 0.009 | 11,644 [11,410, 11,887] 50✗ 90✓ · 0.009 |
-| 59 | draws until a repeat, d = 6,016 | 97.88 | 98 [25, 195] 50✓ 90✓ · 0.119 | truncated · 1.289 |
+| 59 | draws until a repeat, d = 6,016 | 97.88 | 98 [25, 195] 50✓ 90✓ · 0.119 | truncated → instinct · 0.119 |
 | 60 | names in `gzip.__all__` | 5 | 3 [2, 6] 50✓ 90✓ · 0.139 | 5 [5, 5] 50✓ 90✓ · 0.000 |
 | 61 | code points in category Pf | 10 | 10 [5, 15] 50✓ 90✓ · 0.056 | 10 [9, 11] 50✓ 90✓ · 0.004 |
-| 62 | primes in [335,112, 371,030] | 2,787 | 2,800 [2,640, 2,970] 50✓ 90✓ · 0.008 | truncated · 1.289 |
+| 62 | primes in [335,112, 371,030] | 2,787 | 2,800 [2,640, 2,970] 50✓ 90✓ · 0.008 | truncated → instinct · 0.008 |
 | 63 | Unicode names with the word HEBREW | 134 | 150 [70, 260] 50✓ 90✓ · 0.103 | 134 [125, 143] 50✓ 90✓ · 0.006 |
 | 64 | mean distance in a 1 × 2.07 rectangle | 0.826 | 0.826 [0.806, 0.846] 50✓ 90✓ · 0.003 | 0.8258 [0.8235, 0.8285] 50✓ 90✓ · 0.000 |
 | 65 | Collatz steps from 23,010,656,711 | 195 | 250 [130, 500] 50✗ 90✓ · 0.133 | 195 [195, 195] 50✓ 90✓ · 0.000 |
 | 66 | code points in category Sk | 125 | 125 [80, 180] 50✓ 90✓ · 0.040 | 125 [124, 126] 50✓ 90✓ · 0.000 |
 | 67 | draws until a repeat, d = 131,706 | 455.5 | 455 [116, 889] 50✓ 90✓ · 0.118 | 455.5 [455.5, 455.5] 50✓ 90✓ · 0.000 |
-| 68 | Unicode names with the word FACE | 179 | 200 [50, 500] 50✓ 90✓ · 0.159 | truncated · 1.289 |
+| 68 | Unicode names with the word FACE | 179 | 200 [50, 500] 50✓ 90✓ · 0.159 | truncated → instinct · 0.159 |
 | 69 | longest increasing subsequence, n = 827 | 52.6 | 57.6 [56, 59.2] 50✗ 90✗ · 0.078 | 52.35 [51.55, 53.15] 50✓ 90✓ · 0.003 |
-| 70 | digit sum of 2^3289 | 4,430 | 4,460 [4,310, 4,610] 50✓ 90✓ · 0.005 | truncated · 1.289 |
+| 70 | digit sum of 2^3289 | 4,430 | 4,460 [4,310, 4,610] 50✓ 90✓ · 0.005 | truncated → instinct · 0.005 |
 | 71 | assigned in the Georgian block | 88 | 88 [82, 94] 50✓ 90✓ · 0.007 | 88 [88, 88] 50✓ 90✓ · 0.000 |
 | 72 | mean distance in a 1 × 3.1 rectangle | 1.142 | 1.143 [1.139, 1.147] 50✓ 90✓ · 0.000 | 1.143 [1.141, 1.145] 50✓ 90✓ · 0.000 |
 | 73 | highest point of a 1,415-step walk | 29.89 | 30 [12, 46] 50✓ 90✓ · 0.068 | 29.52 [28.93, 30.11] 50✗ 90✓ · 0.007 |
-| 74 | primes in [188,978, 218,173] | 2,379 | 2,380 [2,280, 2,480] 50✓ 90✓ · 0.004 | truncated · 1.289 |
+| 74 | primes in [188,978, 218,173] | 2,379 | 2,380 [2,280, 2,480] 50✓ 90✓ · 0.004 | truncated → instinct · 0.004 |
 | 75 | lines in `statistics` | 1,817 | 2,200 [1,500, 3,000] 50✗ 90✓ · 0.097 | 2,450 [1,800, 3,200] 50✗ 90✓ · 0.168 |
 | 76 | function definitions in `operator` | 67 | 95 [60, 140] 50✗ 90✓ · 0.187 | 17 [14, 21] 50✗ 90✗ · 1.246 |
 | 77 | names in `difflib.__all__` | 12 | 9 [7, 11] 50✗ 90✗ · 0.179 | 9 [8, 10] 50✗ 90✗ · 0.228 |
@@ -198,7 +198,7 @@ Each answer is shown as estimate [90% interval], ✓ or ✗ for whether the 50% 
 | 81 | digit sum of 2^706 | 925 | 960 [890, 1,030] 50✗ 90✓ · 0.019 | 956.5 [889, 1,033] 50✗ 90✓ · 0.019 |
 | 82 | draws until a repeat, d = 944,525 | 1,219 | 1,219 [1,100, 1,350] 50✓ 90✓ · 0.010 | 1,219 [1,219, 1,219] 50✓ 90✓ · 0.000 |
 | 83 | function definitions in `weakref` | 65 | 60 [30, 110] 50✓ 90✓ · 0.098 | 50 [46, 54] 50✗ 90✗ · 0.227 |
-| 84 | primes in [865,988, 892,619] | 1,952 | 1,950 [1,850, 2,050] 50✓ 90✓ · 0.005 | truncated · 1.289 |
+| 84 | primes in [865,988, 892,619] | 1,952 | 1,950 [1,850, 2,050] 50✓ 90✓ · 0.005 | truncated → instinct · 0.005 |
 | 85 | code points in category Nd | 680 | 660 [630, 690] 50✗ 90✓ · 0.017 | 680 [660, 700] 50✓ 90✓ · 0.004 |
 | 86 | longest increasing subsequence, n = 121 | 18.59 | 18.5 [18, 19] 50✓ 90✓ · 0.004 | 19.9 [18.9, 20.9] 50✗ 90✗ · 0.046 |
 | 87 | highest point of a 853-step walk | 22.61 | 22.8 [21.4, 24.2] 50✓ 90✓ · 0.009 | 22.81 [22.35, 23.27] 50✗ 90✓ · 0.005 |
@@ -213,9 +213,9 @@ Each answer is shown as estimate [90% interval], ✓ or ✗ for whether the 50% 
 | 96 | mean distance in a 1 × 1.09 rectangle | 0.5454 | 0.545 [0.538, 0.552] 50✓ 90✓ · 0.001 | 0.5451 [0.5444, 0.5458] 50✓ 90✓ · 0.000 |
 | 97 | code points in category Cf | 170 | 170 [120, 220] 50✓ 90✓ · 0.036 | 170 [168, 172] 50✓ 90✓ · 0.002 |
 | 98 | Collatz steps from 70,587,310,865 | 194 | 380 [220, 560] 50✗ 90✗ · 0.434 | 194 [193, 195] 50✓ 90✓ · 0.000 |
-| 99 | digit sum of 2^5606 | 7,438 | 7,596 [7,402, 7,790] 50✗ 90✓ · 0.012 | truncated · 1.289 |
+| 99 | digit sum of 2^5606 | 7,438 | 7,596 [7,402, 7,790] 50✗ 90✓ · 0.012 | truncated → instinct · 0.012 |
 | 100 | Unicode names with the word CYRILLIC | 507 | 550 [380, 750] 50✓ 90✓ · 0.055 | 504 [499, 509] 50✗ 90✓ · 0.004 |
-| 101 | longest increasing subsequence, n = 104 | 17.15 | 21.5 [19, 24] 50✗ 90✗ · 0.172 | truncated · 1.289 |
+| 101 | longest increasing subsequence, n = 104 | 17.15 | 21.5 [19, 24] 50✗ 90✗ · 0.172 | truncated → instinct · 0.172 |
 | 102 | lines in `reprlib` | 230 | 180 [100, 300] 50✗ 90✓ · 0.126 | 181 [168, 198] 50✗ 90✗ · 0.201 |
 | 103 | function definitions in `base64` | 28 | 22 [17, 27] 50✗ 90✗ · 0.146 | 24 [22, 26] 50✗ 90✗ · 0.113 |
 | 104 | highest point of a 996-step walk | 24.79 | 24.7 [23.8, 25.6] 50✓ 90✓ · 0.005 | 24.69 [24.19, 25.18] 50✓ 90✓ · 0.003 |

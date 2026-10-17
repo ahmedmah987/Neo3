@@ -2,36 +2,51 @@
 
 Runs of Calibench on real models. Each folder is a complete run directory: the questions, every raw reply, the true answers, and the report. Rerun the scoring with `python3 -m calibench report <folder>`.
 
-Scores are Calibench 2.0's log-scale weighted interval score (lower is better; 0.1 is roughly a 10% miss), with 90% intervals over questions. The table is generated from the runs' reports by `python3 -m calibench index calibench/results --write calibench/results/README.md`; don't edit it by hand.
+Scores are the log-scale weighted interval score under scoring `log-wis-3` (lower is better; 0.1 is roughly a 10% miss), with 90% intervals over questions. A worked answer that wasn't given is scored by the question's instinct answer; *worked answers finished* counts those that were given. The table is generated from the runs' reports by `python3 -m calibench index calibench/results --write calibench/results/README.md`; don't edit it by hand.
 
 <!-- index:start -->
-| Run | Model | Prompts | Questions | Score, worked [90% interval] | Score, instinct | Worked 50% / 90% hits | Worked answers above the estimate | Reasoning tokens per answer, instinct / worked | Cost |
-|---|---|---|---|---|---|---|---|---|---|
-| [haiku-5.5-v1-a](haiku-5.5-v1-a/report.md) | openrouter:anthropic/claude-haiku-5.5 | standard | suite v1, 104 | 0.056 [0.035, 0.082] | 0.177 | 62 / 85 of 104 | 62% | 220 / 3,285 | $0.225 |
-| [haiku-5.5-v1-b](haiku-5.5-v1-b/report.md) | openrouter:anthropic/claude-haiku-5.5 | standard | suite v1, 104 | 0.050 [0.034, 0.067] | 0.178 | 66 / 91 of 104 | 62% | 236 / 3,320 | $0.226 |
-| [haiku-5.5-v1-alt](haiku-5.5-v1-alt/report.md) | openrouter:anthropic/claude-haiku-5.5 | alt | suite v1, 104 | 0.040 [0.027, 0.054] | 0.097 | 66 / 92 of 104 | 59% | 410 / 3,140 | $0.217 |
-| [haiku-5.5-v2](haiku-5.5-v2/report.md) | openrouter:anthropic/claude-haiku-5.5 | standard | suite v2, 108 | 0.068 [0.035, 0.111] | 0.098 | 80 / 94 of 108 | 51% | 244 / 4,253 | $0.285 |
-| [haiku-5.5-calc1](haiku-5.5-calc1/report.md) | openrouter:anthropic/claude-haiku-5.5 | standard | suite calc1, 40 | 0.000 [0.000, 0.000] | 0.019 | 40 / 40 of 40 | 52% | 493 / 3,679 | $0.100 |
-| [haiku-5.5-v1-c](haiku-5.5-v1-c/report.md) | openrouter:anthropic/claude-haiku-5.5 | standard | suite v1, 104 | 0.051 [0.034, 0.069] | 0.188 | 58 / 88 of 104 | 59% | 218 / 3,463 | $0.233 |
-| [haiku-5.5-v1-quantiles](haiku-5.5-v1-quantiles/report.md) | openrouter:anthropic/claude-haiku-5.5 | quantiles | suite v1, 104 | 0.047 [0.033, 0.063] | 0.249 | 61 / 85 of 104 | 62% | 167 / 3,412 | $0.229 |
-| [deepseek-v4.1-flash-v1](deepseek-v4.1-flash-v1/report.md) | openrouter:deepseek/deepseek-v4.1-flash-1017 | standard | suite v1, 104 | 0.267 [0.193, 0.347] | 0.164 | 54 / 69 of 88 | 62% | 1,435 / 15,330 | $0.919 |
-| [deepseek-v4.1-flash-v2](deepseek-v4.1-flash-v2/report.md) | openrouter:deepseek/deepseek-v4.1-flash-1017 | standard | suite v2, 108 | 0.292 [0.210, 0.374] | 0.113 | 63 / 71 of 86 | 47% | 1,259 / 14,648 | $0.910 |
-| [dots-3-note-preview-v2](dots-3-note-preview-v2/report.md) | openrouter:dots-studio/dots-3-note-preview:free | standard | suite v2, 108 | 0.501 [0.406, 0.597] | 0.425 | 51 / 60 of 71 | 50% | 2,948 / 11,053 | $0.000 |
-| [dots-3-note-preview-v2-128k](dots-3-note-preview-v2-128k/report.md) | openrouter:dots-studio/dots-3-note-preview:free | standard | suite v2, 108 | 0.273 [0.201, 0.351] | 0.415 | 60 / 77 of 91 | 46% | 2,955 / 24,274 | $0.000 |
-| [openrouter_anthropic_claude-haiku-5.5-2026-10-17](openrouter_anthropic_claude-haiku-5.5-2026-10-17/report.md) | openrouter:anthropic/claude-haiku-5.5 | standard | seed `2026-10-17`, 26 | 0.104 [0.044, 0.177] | 0.185 | 15 / 18 of 26 | 52% | 182 / 4,513 | $0.072 |
+| Run | Model | Prompts | Questions | Worked answers finished | Score, worked [90% interval] | Score, instinct | Worked 50% / 90% hits | Worked answers above the estimate | Reasoning tokens per answer, instinct / worked | Cost |
+|---|---|---|---|---|---|---|---|---|---|---|
+| [haiku-5.5-v1-a](haiku-5.5-v1-a/report.md) | openrouter:anthropic/claude-haiku-5.5 | standard | suite v1, 104 | 104 of 104 (100%) | 0.056 [0.035, 0.082] | 0.177 | 62 / 85 of 104 | 62% | 220 / 3,285 | $0.225 |
+| [haiku-5.5-v1-b](haiku-5.5-v1-b/report.md) | openrouter:anthropic/claude-haiku-5.5 | standard | suite v1, 104 | 104 of 104 (100%) | 0.050 [0.034, 0.067] | 0.178 | 66 / 91 of 104 | 62% | 236 / 3,320 | $0.226 |
+| [haiku-5.5-v1-alt](haiku-5.5-v1-alt/report.md) | openrouter:anthropic/claude-haiku-5.5 | alt | suite v1, 104 | 104 of 104 (100%) | 0.040 [0.027, 0.054] | 0.097 | 66 / 92 of 104 | 59% | 410 / 3,140 | $0.217 |
+| [haiku-5.5-v2](haiku-5.5-v2/report.md) | openrouter:anthropic/claude-haiku-5.5 | standard | suite v2, 108 | 108 of 108 (100%) | 0.068 [0.035, 0.111] | 0.098 | 80 / 94 of 108 | 51% | 244 / 4,253 | $0.285 |
+| [haiku-5.5-calc1](haiku-5.5-calc1/report.md) | openrouter:anthropic/claude-haiku-5.5 | standard | suite calc1, 40 | 40 of 40 (100%) | 0.000 [0.000, 0.000] | 0.019 | 40 / 40 of 40 | 52% | 493 / 3,679 | $0.100 |
+| [haiku-5.5-v1-c](haiku-5.5-v1-c/report.md) | openrouter:anthropic/claude-haiku-5.5 | standard | suite v1, 104 | 104 of 104 (100%) | 0.051 [0.034, 0.069] | 0.188 | 58 / 88 of 104 | 59% | 218 / 3,463 | $0.233 |
+| [haiku-5.5-v1-quantiles](haiku-5.5-v1-quantiles/report.md) | openrouter:anthropic/claude-haiku-5.5 | quantiles | suite v1, 104 | 104 of 104 (100%) | 0.047 [0.033, 0.063] | 0.249 | 61 / 85 of 104 | 62% | 167 / 3,412 | $0.229 |
+| [deepseek-v4.1-flash-v1](deepseek-v4.1-flash-v1/report.md) | openrouter:deepseek/deepseek-v4.1-flash-1017 | standard | suite v1, 104 | 88 of 104 (85%) | 0.094 [0.055, 0.138] | 0.164 | 54 / 69 of 88 | 62% | 1,435 / 15,330 | $0.919 |
+| [deepseek-v4.1-flash-v2](deepseek-v4.1-flash-v2/report.md) | openrouter:deepseek/deepseek-v4.1-flash-1017 | standard | suite v2, 108 | 86 of 108 (80%) | 0.053 [0.032, 0.076] | 0.113 | 63 / 71 of 86 | 47% | 1,259 / 14,648 | $0.910 |
+| [dots-3-note-preview-v2](dots-3-note-preview-v2/report.md) | openrouter:dots-studio/dots-3-note-preview:free | standard | suite v2, 108 | 71 of 108 (66%) | 0.312 [0.233, 0.396] | 0.425 | 51 / 60 of 71 | 50% | 2,948 / 11,053 | $0.000 |
+| [dots-3-note-preview-v2-128k](dots-3-note-preview-v2-128k/report.md) | openrouter:dots-studio/dots-3-note-preview:free | standard | suite v2, 108 | 91 of 108 (84%) | 0.188 [0.131, 0.251] | 0.415 | 60 / 77 of 91 | 46% | 2,955 / 24,274 | $0.000 |
+| [openrouter_anthropic_claude-haiku-5.5-2026-10-17](openrouter_anthropic_claude-haiku-5.5-2026-10-17/report.md) | openrouter:anthropic/claude-haiku-5.5 | standard | seed `2026-10-17`, 26 | 26 of 26 (100%) | 0.104 [0.044, 0.177] | 0.185 | 15 / 18 of 26 | 52% | 182 / 4,513 | $0.072 |
 <!-- index:end -->
+
+## Scoring `log-wis-3`: unfinished answers
+
+Calibench 2.7 scores a worked answer that wasn't given by the question's instinct answer, instead of a fixed 1.289; a question with no answer in either phase still costs 1.289 (see [METHODOLOGY.md](../METHODOLOGY.md)). Only runs with unfinished worked answers changed:
+
+| Run | Worked answers finished | Under `log-wis-2` | Under `log-wis-3` | Scored by the instinct answer | Still unanswered |
+|---|---|---|---|---|---|
+| deepseek-v4.1-flash-v2 | 86 of 108 | 0.292 | 0.053 | 22 | 0 |
+| deepseek-v4.1-flash-v1 | 88 of 104 | 0.267 | 0.094 | 15 | 1 |
+| dots-3-note-preview-v2 | 71 of 108 | 0.501 | 0.312 | 22 | 15 |
+| dots-3-note-preview-v2-128k | 91 of 108 | 0.273 | 0.188 | 12 | 5 |
+
+- **The ranking changed.** On suite v2, DeepSeek and Haiku can no longer be told apart: 0.053 against 0.068, a difference of 0.015 [−0.020, 0.060]. Under `log-wis-2` Haiku was ahead by 0.223. On suite v1 DeepSeek is still behind each of the three Haiku runs, by 0.038–0.044, with every interval above zero.
+- **Dots stays behind because its instinct answers are weak.** The instinct answers that stood in for its unfinished worked answers scored 0.365 on average under the 32,000-token cap and 0.523 under 128,000, against DeepSeek's 0.117 (v2) and 0.089 (v1). Its instinct score on suite v2 is 0.415–0.425, against 0.098 for Haiku and 0.113 for DeepSeek.
+- **The finish rate is now its own column** in the table above, where it can be read instead of being folded into the score.
 
 ## Dots3-Note Preview against Claude Haiku 5.5 and DeepSeek V4.1 Flash
 
-The third model, chosen by the repository's owner: `dots-studio/dots-3-note-preview:free` through OpenRouter, free of charge, served by AtlasCloud. Suite v2, with the standard settings (effort low for instinct answers and high for worked ones, caps of 8,000 and 32,000 tokens), after a four-question trial. The run took 51 minutes with eight calls at a time and cost nothing.
+The third model, chosen by the repository's owner: `dots-studio/dots-3-note-preview:free` through OpenRouter, free of charge, served by AtlasCloud. Suite v2, with the standard settings (effort low for instinct answers and high for worked ones, caps of 8,000 and 32,000 tokens), after a four-question trial. The run took 51 minutes with eight calls at a time and cost nothing. Scores are under `log-wis-3`; when this section was first written, under `log-wis-2`, Dots scored 0.501 and DeepSeek 0.292 on all 108 questions.
 
 | Questions | Haiku | DeepSeek | Dots | Difference [90% interval] |
 |---|---|---|---|---|
-| all 108 | 0.068 | 0.292 | 0.501 | Dots worse than Haiku by 0.433 [0.332, 0.532] |
+| all 108 | 0.068 | 0.053 | 0.312 | Dots worse than Haiku by 0.244 [0.161, 0.330] |
 | the 71 Haiku and Dots both answered | 0.069 | | 0.090 | Dots worse by 0.021 [−0.047, 0.078] |
 | the 57 all three answered | 0.076 | 0.031 | 0.093 | Dots worse than DeepSeek by 0.062 [0.027, 0.104] |
 
-- **Dots didn't finish a third of its worked answers.** 36 ran past the 32,000-token cap and one more ended in a content filter, after 13,367 tokens of reasoning on a longest-increasing-subsequence question. That is what puts it far behind on the whole suite.
+- **Dots didn't finish a third of its worked answers.** 36 ran past the 32,000-token cap and one more ended in a content filter, after 13,367 tokens of reasoning on a longest-increasing-subsequence question. Under `log-wis-2` that alone put it far behind on the whole suite; under `log-wis-3` its instinct answers stand for those questions, and they are weak.
 - **It finished every calculation and failed on estimates.** Unfinished worked answers by kind: knowledge 19 of 36, statistical 16 of 36, exact 2 of 6, calculation 0 of 30. Longest increasing subsequences went unfinished 6 times out of 6, and rectangle distances, Unicode word counts and module `__all__` sizes 5 out of 6. DeepSeek showed the same pattern with fewer failures: both kept working on questions that call for an estimate and finished those that can be computed.
 - **When it answers, it is close to Haiku.** On the 71 questions both answered, the difference includes zero. On the 57 all three answered, DeepSeek is better than Dots. Its 90% intervals held the answer 85% of the time (79% leaving out single numbers): overconfident, like the others. All 18 answers it gave as a single number were exactly right.
 - **Its instinct answers aren't instinct either.** At low effort it produced 4,167 output tokens per instinct answer, against Haiku's 285 and DeepSeek's 1,290, and 24 of 108 were cut off at the 8,000-token cap.
@@ -44,31 +59,31 @@ To see whether the answers Dots didn't finish would have been any good, suite v2
 | Questions | Haiku | DeepSeek | Dots, 32,000 | Dots, 128,000 |
 |---|---|---|---|---|
 | answered (worked) | 108 | 86 | 71 | 91 |
-| all 108 | 0.068 | 0.292 | 0.501 | 0.273 |
+| all 108 | 0.068 | 0.053 | 0.312 | 0.188 |
 | the 54 all four runs answered | 0.079 | 0.013 | 0.083 | 0.080 |
 
-- **The answers it hadn't finished were as good as the rest.** Of the 37 questions cut off at 32,000 tokens, it answered 23 this time, with a mean score of 0.094; its 90% intervals held 19 of the 23. On the 68 questions it answered both times, the second run scored 0.080 and held 58 of 68. With the higher cap Dots is still behind Haiku by 0.205 [0.121, 0.289], about where DeepSeek is.
+- **The answers it hadn't finished were as good as the rest.** Of the 37 questions cut off at 32,000 tokens, it answered 23 this time, with a mean score of 0.094; its 90% intervals held 19 of the 23. On the 68 questions it answered both times, the second run scored 0.080 and held 58 of 68. With the higher cap Dots is still behind Haiku, by 0.120 [0.054, 0.187], and DeepSeek, by 0.135 [0.085, 0.192].
 - **Which questions it finishes is partly chance.** 12 of the 23 newly answered questions took under 32,000 tokens this time, five of them under 5,000. Three questions it had answered the first time ran to the new cap. Its instinct answers, under identical settings, were cut off 24 and 21 times, on only 8 of the same questions. Their scores moved little (0.425 and 0.415). So a model like this needs several runs: one run's interval resamples questions but not this.
 - **14 of the 37 it still didn't answer:** 13 ran to the new cap and one ended in a content filter after 73,588 tokens on a Unicode word count. 10 of the 14 are knowledge questions (Unicode word, category and block counts, `__all__` sizes, function counts) and 4 are longest increasing subsequences.
 - It used 33,784 output tokens per worked answer, against 15,962 under the lower cap.
 
 ## DeepSeek V4.1 Flash against Claude Haiku 5.5
 
-The second model, approved by the repository's owner: `deepseek/deepseek-v4.1-flash-1017` through OpenRouter, on suites v2 and v1, with effort low for instinct answers and **medium** for worked ones. In a four-question trial at high effort it reasoned 20,000–32,000 tokens per worked answer and ten to thirteen minutes per question; at medium it reasoned about 9,600 in the trial and about 15,000 in the full runs, still roughly four times Haiku's 3,400–4,300 at high. The two runs cost $1.83.
+The second model, approved by the repository's owner: `deepseek/deepseek-v4.1-flash-1017` through OpenRouter, on suites v2 and v1, with effort low for instinct answers and **medium** for worked ones. In a four-question trial at high effort it reasoned 20,000–32,000 tokens per worked answer and ten to thirteen minutes per question; at medium it reasoned about 9,600 in the trial and about 15,000 in the full runs, still roughly four times Haiku's 3,400–4,300 at high. The two runs cost $1.83. Scores are under `log-wis-3`; under `log-wis-2`, which charged 1.289 for every unfinished answer, Haiku was better on all questions by 0.223 [0.136, 0.310] on v2 and by about 0.22 on v1.
 
 | Suite | Questions | Haiku | DeepSeek | Difference [90% interval] |
 |---|---|---|---|---|
-| v2 | all 108 | 0.068 | 0.292 | Haiku better by 0.223 [0.136, 0.310] |
+| v2 | all 108 | 0.068 | 0.053 | DeepSeek better by 0.015 [−0.020, 0.060]: not separated |
 | v2 | the 86 both answered | 0.064 | 0.036 | DeepSeek better by 0.028 [−0.015, 0.082] |
-| v1 | all 104 | 0.050–0.056 (three runs) | 0.267 | Haiku better by about 0.22 |
+| v1 | all 104 | 0.050–0.056 (three runs) | 0.094 | Haiku better by 0.038–0.044, every interval above zero |
 | v1 | the 88 every run answered | 0.045–0.056 | 0.081 | DeepSeek worse by 0.036 [−0.002, 0.082] than the best Haiku run |
 
-- **DeepSeek didn't finish 15–20% of its worked answers.** Its reasoning ran past the 32,000-token cap on 21 questions in v2 and 16 in v1 (one more failed), and those count as unanswered. That alone is the whole difference between the models.
+- **DeepSeek didn't finish 15–20% of its worked answers.** Its reasoning ran past the 32,000-token cap on 21 questions in v2 and 16 in v1 (one more failed), and its instinct answers stand for them. Under `log-wis-2`, which counted them as unanswered, that alone was the whole difference between the models.
 - **What it didn't finish is telling.** Of the 38 unanswered worked questions, 23 were statistical (digit sums of powers of two, longest increasing subsequences, primes in a range) and 4 were partition numbers: questions whose exact answer is out of reach by hand and which call for an estimate. It seems to keep trying to compute an answer it should estimate. That is a failure of knowing what one can work out, close kin to calibration.
 - **When it answers, its calibration is comparable to Haiku's.** On the questions every run answered, the differences go in opposite directions on the two suites and both intervals include zero. Its 90% intervals held the answer 83% (v2) and 78% (v1) of the time: overconfident, like Haiku.
 - **Its instinct answers aren't instinct.** At low effort it still reasoned 1,259 (v2) and 1,435 (v1) tokens per instinct answer, against Haiku's 220–240, and 5 instinct answers were cut off at the 8,000-token cap.
 
-This first comparison of two models exposed a flaw in the scoring: an unanswered question used to cost far more when its true answer was large (over 30 for a partition number near 10¹⁸, against 0.4 near 100), so 98% of DeepSeek's first v2 score came from its unanswered questions, most of it from four partition numbers. Calibench 2.5 (scoring `log-wis-2`) charges every unanswered question the same 1.289; see [METHODOLOGY.md](../METHODOLOGY.md). Haiku's scores are unchanged, since it answered everything.
+This first comparison of two models exposed a flaw in the scoring: an unanswered question used to cost far more when its true answer was large (over 30 for a partition number near 10¹⁸, against 0.4 near 100), so 98% of DeepSeek's first v2 score came from its unanswered questions, most of it from four partition numbers. Calibench 2.5 (scoring `log-wis-2`) charged every unanswered question the same 1.289, and Calibench 2.7 (`log-wis-3`) scores an unfinished worked answer by the question's instinct answer; see [METHODOLOGY.md](../METHODOLOGY.md). Haiku's scores are unchanged by both, since it answered everything.
 
 ## Claude Haiku 5.5 on suite v1: a percentile format
 

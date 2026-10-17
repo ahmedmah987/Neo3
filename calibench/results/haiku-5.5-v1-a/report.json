@@ -23,6 +23,7 @@
         "output": 270.125,
         "reasoning": 220.0
       },
+      "fallback": 0,
       "all": {
         "score_mean": 0.1765919583872893,
         "score_median": 0.04540135219981789,
@@ -91,6 +92,7 @@
         "output": 3957.0096153846152,
         "reasoning": 3284.701923076923
       },
+      "fallback": 0,
       "all": {
         "score_mean": 0.055999861553894394,
         "score_median": 0.007056448109161804,
@@ -6860,7 +6862,7 @@
   "cost": 0.224981,
   "answers_changed_after_run": false,
   "scored_with": {
-    "calibench": "2.5.0",
-    "scoring": "log-wis-2"
+    "calibench": "2.7.0",
+    "scoring": "log-wis-3"
   }
 }
