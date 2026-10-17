@@ -38,11 +38,11 @@ Questions drawn from a seed I don't choose. Each is answered twice, first by ins
 
 | | Instinct | Worked |
 |---|---|---|
-| 50% intervals that contain the answer | 20 of 24 (83%) | 19 of 24 (79%) |
-| 90% intervals that contain the answer | 23 of 24 (96%) | 23 of 24 (96%) |
-| Median error of the estimate | 2.3% | 0.6% |
-| Estimate closer to the answer | 2 | 20 |
-| Ties | 2 | 2 |
+| 50% intervals that contain the answer | 31 of 36 (86%) | 29 of 36 (81%) |
+| 90% intervals that contain the answer | 35 of 36 (97%) | 34 of 36 (94%) |
+| Median error of the estimate | 1.9% | 0.4% |
+| Estimate closer to the answer | 5 | 25 |
+| Ties | 6 | 6 |
 
 ### 2026-10-16-e4e1ad0a
 
@@ -65,18 +65,18 @@ Questions drawn from a seed I don't choose. Each is answered twice, first by ins
 
 | # | Question | Answer | Instinct | Worked |
 |---|---|---|---|---|
-| 1 | longest increasing subsequence, n = 3,997 | pending | 120 | 119.8 |
-| 2 | names in `warnings.__all__` | pending | 9 | 9 |
-| 3 | code points in category Me | pending | 13 | 13 |
-| 4 | function definitions in `bdb` | pending | 70 | 67 |
-| 5 | draws until a repeat, d = 20,895 | pending | 181.8 | 181.8 |
-| 6 | primes in [1,134,200, 1,145,075] | pending | 780 | 780 |
-| 7 | lines in `socket` | pending | 980 | 975 |
-| 8 | Unicode names with the word MATHEMATICAL | pending | 1,150 | 1,151 |
-| 9 | highest point of a 579-step walk | pending | 18.7 | 18.71 |
-| 10 | Collatz steps from 13,994,883,000 | pending | 238 | 207 |
-| 11 | mean distance in a 1 × 1.5 rectangle | pending | 0.65 | 0.6585 |
-| 12 | assigned in the Runic block | pending | 89 | 89 |
+| 1 | longest increasing subsequence, n = 3,997 | 120.1 | 120 (50✓ 90✓) | 119.8 (50✗ 90✗) |
+| 2 | names in `warnings.__all__` | 9 | 9 (50✓ 90✓) | 9 (50✓ 90✓) |
+| 3 | code points in category Me | 13 | 13 (50✓ 90✓) | 13 (50✓ 90✓) |
+| 4 | function definitions in `bdb` | 68 | 70 (50✓ 90✓) | 67 (50✓ 90✓) |
+| 5 | draws until a repeat, d = 20,895 | 181.8 | 181.8 (50✓ 90✓) | 181.8 (50✓ 90✓) |
+| 6 | primes in [1,134,200, 1,145,075] | 762 | 780 (50✗ 90✓) | 780 (50✗ 90✓) |
+| 7 | lines in `socket` | 988 | 980 (50✓ 90✓) | 975 (50✓ 90✓) |
+| 8 | Unicode names with the word MATHEMATICAL | 1,152 | 1,150 (50✓ 90✓) | 1,151 (50✓ 90✓) |
+| 9 | highest point of a 579-step walk | 18.58 | 18.7 (50✓ 90✓) | 18.71 (50✓ 90✓) |
+| 10 | Collatz steps from 13,994,883,000 | 207 | 238 (50✓ 90✓) | 207 (50✓ 90✓) |
+| 11 | mean distance in a 1 × 1.5 rectangle | 0.6583 | 0.65 (50✓ 90✓) | 0.6585 (50✓ 90✓) |
+| 12 | assigned in the Runic block | 89 | 89 (50✓ 90✓) | 89 (50✓ 90✓) |
 
 ### 2026-10-17-a9bfbcea
 
