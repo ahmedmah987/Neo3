@@ -350,6 +350,13 @@ def check_run(tmp):
     svg = ElementTree.parse(tmp / "naive" / "calibration.svg").getroot()
     check("the calibration chart is valid SVG with a bar per bin and series",
           svg.tag.endswith("svg") and len(svg.findall("{http://www.w3.org/2000/svg}rect")) == 3 + 6 * 3)
+    same = report.consistency([load("naive"), load("naive2")], ["naive", "naive2"])
+    check("consistency: identical runs agree everywhere, and averaging changes nothing",
+          f"| Questions where every run gave the same estimate | {count} of {count} (100%) |" in same
+          and "| Improvement from averaging [90% interval] | 0.000" in same)
+    mixed = report.consistency([load("naive"), load("oracle")], ["naive", "oracle"])
+    check("consistency: an oracle and a naive model disagree, and averaging them beats the naive one alone",
+          "| Questions where every run gave the same estimate | 0 of" in mixed and "differ in model" in mixed)
     pooled = report.pool([load("naive"), load("naive2")], ["naive", "naive2"])
     check("pool counts every answer of every run, by family and in all",
           f"| **all** |  | {2 * count} |" in pooled and pooled.count("| `") == len({q["family"] for q in questions}))

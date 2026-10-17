@@ -61,6 +61,17 @@ def interval_score(interval, x, alpha):
     return ((hi - lo) + 2 / alpha * (max(0, lo - x) + max(0, x - hi))) / (abs(x) or 1)
 
 
+def bootstrap(items, statistic, level=0.9, samples=2_000, seed=0):
+    """A percentile bootstrap interval for any statistic of a list, resampling its items."""
+    if len(items) < 3:
+        return None
+    rng = random.Random(seed)
+    values = sorted(v for v in (statistic(rng.choices(items, k=len(items))) for _ in range(samples)) if v is not None)
+    if len(values) < samples // 2:
+        return None
+    return [values[int(len(values) * (1 - level) / 2)], values[int(len(values) * (1 + level) / 2) - 1]]
+
+
 def bootstrap_mean(values, level=0.9, samples=4_000, seed=0):
     """A percentile bootstrap interval for the mean, resampling questions."""
     if len(values) < 2:

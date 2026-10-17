@@ -5,8 +5,8 @@ import statistics
 
 from .families import KINDS
 from .questions import SUITES
-from .scoring import (BIN_SHARES, BINS, KNOW_NOTHING, LEVELS, PHASES, bootstrap_mean, inside, log_wis, offset,
-                      questions_needed, spearman, summarize, wilson)
+from .scoring import (BIN_SHARES, BINS, KNOW_NOTHING, LEVELS, PHASES, bootstrap, bootstrap_mean, inside, log_wis,
+                      offset, questions_needed, spearman, summarize, wilson)
 
 
 def question_key(q):
@@ -334,6 +334,97 @@ def pool(reports, names):
     lines += ["", "A family whose interval for *above the estimate* excludes 50% leans consistently: above 50% means "
               "the model underestimates it, below 50% that it overestimates. An answer equal to the estimate counts "
               "as half above."]
+    return "\n".join(lines) + "\n"
+
+
+def consistency(reports, names):
+    """What several runs of one model on the same questions say beyond each run: whether the runs'
+    disagreement shows where the model is wrong better than its stated intervals do, and whether
+    averaging the runs' forecasts helps."""
+    import math
+
+    keys = [[r["key"] for r in rep["questions"]] for rep in reports]
+    if len(reports) < 2 or any(sorted(k) != sorted(keys[0]) for k in keys):
+        return "Consistency needs two or more runs asked the same questions.\n"
+    by_key = [{r["key"]: r for r in rep["questions"]} for rep in reports]
+    rows = []
+    for key in keys[0]:
+        cells = [b[key] for b in by_key]
+        if any(c["worked"]["status"] != "ok" for c in cells):
+            continue
+        family, y = cells[0]["family"], cells[0]["answer"]
+        shift = offset(family)
+
+        def g(v):
+            return math.log(max(v + shift, 1e-3))
+
+        answers = [c["worked"] for c in cells]
+        logs = [g(a["estimate"]) for a in answers]
+        averaged = {"estimate": None, "p50": [], "p90": []}
+        for name, pick in (("estimate", lambda a: a["estimate"]), ("p50lo", lambda a: a["p50"][0]),
+                           ("p50hi", lambda a: a["p50"][1]), ("p90lo", lambda a: a["p90"][0]),
+                           ("p90hi", lambda a: a["p90"][1])):
+            value = math.exp(statistics.fmean(g(pick(a)) for a in answers)) - shift   # quantiles averaged on the log scale
+            if name == "estimate":
+                averaged["estimate"] = value
+            else:
+                averaged[name[:3]].append(value)
+        # Held out: run j's error against the spread of the *other* runs' estimates, which share nothing
+        # with it. (The spread of all runs bounds their mean error from below, a correlation by construction.)
+        held_out = []
+        for j, a in enumerate(answers):
+            others = logs[:j] + logs[j + 1:]
+            held_out.append({"spread": max(others) - min(others) if len(others) >= 2 else None,
+                             "width": g(a["p90"][1]) - g(a["p90"][0]), "error": abs(logs[j] - g(y))})
+        rows.append({
+            "agree": len({a["estimate"] for a in answers}) == 1,
+            "right": all(a["estimate"] == y for a in answers),
+            "hits90": [inside(a["p90"], y) for a in answers],
+            "held_out": held_out,
+            "single": statistics.fmean(c["worked"]["score"] for c in cells),
+            "averaged": log_wis(averaged, y, shift),
+        })
+    n = len(rows)
+    models = sorted({rep["meta"]["model"] for rep in reports})
+    prompts = sorted({rep["meta"].get("prompts", "standard") for rep in reports})
+    agree = [r for r in rows if r["agree"]]
+    disagree = [r for r in rows if not r["agree"]]
+
+    def cover(group):
+        hits = [h for r in group for h in r["hits90"]]
+        return frac(sum(hits), len(hits)) if hits else "—"
+
+    def corr(field):
+        if field == "spread" and len(reports) < 3:
+            return "— (needs three or more runs)"
+
+        def rho(sample):
+            pairs = [(h[field], h["error"]) for r in sample for h in r["held_out"]]
+            return spearman([p[0] for p in pairs], [p[1] for p in pairs])
+        return f"{sc(rho(rows))}{ci(bootstrap(rows, rho))}"
+
+    gain = [r["single"] - r["averaged"] for r in rows]
+    lines = ["# Calibench: consistency across runs", "",
+             f"{len(reports)} runs ({', '.join(names)}) of {', '.join(models)}, with {' and '.join(prompts)} prompts, on the "
+             f"same questions: {n} answered in every run. Worked answers only.", ""]
+    if len(models) > 1 or len(prompts) > 1:
+        lines += ["**Note:** these runs differ in model or prompts, so their disagreement isn't only sampling.", ""]
+    lines += ["| | |", "|---|---|",
+              f"| Questions where every run gave the same estimate | {frac(len(agree), n)} |",
+              f"| … and that estimate was exactly right | {frac(sum(r['right'] for r in agree), len(agree))} |",
+              f"| 90% intervals containing the answer, when the runs agree | {cover(agree)} |",
+              f"| 90% intervals containing the answer, when they disagree | {cover(disagree)} |",
+              f"| Rank correlation with a run's error: the other runs' disagreement [90% interval] | {corr('spread')} |",
+              f"| Rank correlation with a run's error: its own stated 90% width [90% interval] | {corr('width')} |",
+              f"| Score of a single run, mean | {sc(statistics.fmean(r['single'] for r in rows))} |",
+              f"| Score of the runs' averaged forecast | {sc(statistics.fmean(r['averaged'] for r in rows))} |",
+              f"| Improvement from averaging [90% interval] | {sc(statistics.fmean(gain))}{ci(bootstrap_mean(gain))} |",
+              "", "A run's *error* is the distance of its estimate from the true answer on the log scale. The *other "
+              "runs' disagreement* is the spread of the other runs' estimates on the same scale: it shares no estimate "
+              "with the error it is compared with, so the correlation isn't built in. A correlation near 1 means the "
+              "signal ranks the answers that are most wrong; the two rows compare the model's inconsistency with its "
+              "stated uncertainty as warnings. Intervals are bootstraps over questions. The averaged forecast averages "
+              "each of the five stated values across runs on the log scale."]
     return "\n".join(lines) + "\n"
 
 

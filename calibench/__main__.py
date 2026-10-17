@@ -190,6 +190,18 @@ def cmd_verify(args):
     raise SystemExit(1 if failed else 0)
 
 
+def cmd_consistency(args):
+    from .report import consistency
+
+    reports = [json.loads((pathlib.Path(d) / "report.json").read_text(encoding="utf-8")) for d in args.dirs]
+    text = consistency(reports, [pathlib.Path(d).name for d in args.dirs])
+    if args.write:
+        write_between_markers(args.write, "consistency", text.split("\n", 2)[2])
+        print(f"updated the consistency table in {args.write}", file=sys.stderr)
+    else:
+        print(text, end="")
+
+
 def cmd_families(args):
     for name in sorted(FAMILIES, key=lambda n: (KINDS[n], n)):
         print(f"{KINDS[name]:<12} {name}")
@@ -254,6 +266,12 @@ def main(argv=None):
                        "true answers recompute, reports follow")
     p.add_argument("dirs", nargs="+")
     p.set_defaults(func=cmd_verify)
+
+    p = sub.add_parser("consistency", help="what several runs of one model on the same questions say beyond "
+                       "each run: does their disagreement show where the model is wrong?")
+    p.add_argument("dirs", nargs="+")
+    p.add_argument("--write", help="replace the text between <!-- consistency:start --> and <!-- consistency:end -->")
+    p.set_defaults(func=cmd_consistency)
 
     p = sub.add_parser("families", help="list the question families")
     p.set_defaults(func=cmd_families)

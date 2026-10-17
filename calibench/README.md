@@ -1,5 +1,7 @@
 # Calibench
 
+[![checks](https://github.com/ahmedmah987/Neo3/actions/workflows/checks.yml/badge.svg)](https://github.com/ahmedmah987/Neo3/actions/workflows/checks.yml)
+
 **Does a model know what it knows?** Most benchmarks ask whether a model's answer is right. Calibench asks whether the model knows *how likely* it is to be right: whether its "I'm sure" and its "about this much, give or take" match what actually happens.
 
 A model is asked numeric questions it can't look up. For each one it gives an estimate, a 50% interval and a 90% interval, first by instinct and then after working it out. Calibench then computes the true answers and scores the stated uncertainty against them.
@@ -71,7 +73,7 @@ To compare models, use `--suite v2`: 108 questions, all eighteen families 6 time
 
 A run asks every family twice by default (44 questions), each in two phases, so 88 calls. Use `--count` for more or fewer, `--families` to limit the kinds of question, and `--workers` for how many calls run at once. If a run is interrupted or some calls fail, run the same command again: answers already recorded are kept, and only the rest are asked. If the first three calls all fail, which usually means a wrong key, address or model name, the run stops and shows the error.
 
-Other commands: `questions` prints the questions a seed draws, `families` lists the families, `report <dir>` re-scores a run, `pool <dirs>` pools several runs of one model by family to show which leans are consistent, `index <dir>` tables every run in a directory, `verify <dirs>` audits runs end to end (replies unchanged, questions as drawn, true answers recompute, reports follow), and `selftest` checks everything without contacting a real model.
+Other commands: `questions` prints the questions a seed draws, `families` lists the families, `report <dir>` re-scores a run, `pool <dirs>` pools several runs of one model by family to show which leans are consistent, `index <dir>` tables every run in a directory, `consistency <dirs>` asks whether several runs' disagreement shows where a model is wrong better than its stated intervals do, `verify <dirs>` audits runs end to end (replies unchanged, questions as drawn, true answers recompute, reports follow), and `selftest` checks everything without contacting a real model.
 
 ## The questions
 
