@@ -1,0 +1,1097 @@
+{
+  "seed": "calibench-v1",
+  "model": "openrouter:deepseek/deepseek-v4.1-flash-1017",
+  "prompts": "standard",
+  "settings": {
+    "effort": {
+      "instinct": "low",
+      "worked": "medium"
+    },
+    "max_tokens": {
+      "instinct": 8000,
+      "worked": 32000
+    }
+  },
+  "questions": [
+    {
+      "q": 1,
+      "family": "unicode_word",
+      "kind": "knowledge",
+      "params": {
+        "word": "MUSICAL"
+      },
+      "short": "Unicode names with the word MUSICAL",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have a name containing the whole word MUSICAL? (Names are split into words at spaces and hyphens.)"
+    },
+    {
+      "q": 2,
+      "family": "stdlib_lines",
+      "kind": "knowledge",
+      "params": {
+        "module": "smtplib"
+      },
+      "short": "lines in `smtplib`",
+      "text": "How many lines are in the source file of the standard-library module `smtplib` in Python 3.13 (every line, blank or not)?"
+    },
+    {
+      "q": 3,
+      "family": "walk_max",
+      "kind": "statistical",
+      "params": {
+        "n": 426,
+        "seed": 758071545
+      },
+      "short": "highest point of a 426-step walk",
+      "text": "A simple random walk on the integers starts at 0 and takes 426 steps of +1 or −1, each with probability ½. What is the expected highest position it reaches (0 if it never rises above the start)? (Settled by averaging 4,000 random walks.)"
+    },
+    {
+      "q": 4,
+      "family": "birthday",
+      "kind": "exact",
+      "params": {
+        "d": 35930
+      },
+      "short": "draws until a repeat, d = 35,930",
+      "text": "Integers are drawn uniformly at random from 1 to 35,930, with replacement, until some value appears for the second time. What is the expected number of draws, counting the repeat?"
+    },
+    {
+      "q": 5,
+      "family": "digit_sum_pow2",
+      "kind": "statistical",
+      "params": {
+        "n": 1269
+      },
+      "short": "digit sum of 2^1269",
+      "text": "What is the sum of the decimal digits of 2^1269?"
+    },
+    {
+      "q": 6,
+      "family": "module_all",
+      "kind": "knowledge",
+      "params": {
+        "module": "timeit"
+      },
+      "short": "names in `timeit.__all__`",
+      "text": "How many names are listed in `timeit.__all__` in Python 3.13?"
+    },
+    {
+      "q": 7,
+      "family": "rect_distance",
+      "kind": "statistical",
+      "params": {
+        "b": 2.52,
+        "seed": 3419691168
+      },
+      "short": "mean distance in a 1 × 2.52 rectangle",
+      "text": "Two points are chosen independently and uniformly at random in a 1 × 2.52 rectangle. What is the expected distance between them? (Settled by averaging 400,000 random pairs.)"
+    },
+    {
+      "q": 8,
+      "family": "unicode_category",
+      "kind": "knowledge",
+      "params": {
+        "category": "Po"
+      },
+      "short": "code points in category Po",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have the general category Po (other punctuation)?"
+    },
+    {
+      "q": 9,
+      "family": "unicode_block",
+      "kind": "knowledge",
+      "params": {
+        "lo": 1920,
+        "hi": 1983
+      },
+      "short": "assigned in the Thaana block",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points in U+0780–U+07BF (the Thaana block) are assigned, that is, have a category other than Cn?"
+    },
+    {
+      "q": 10,
+      "family": "stdlib_defs",
+      "kind": "knowledge",
+      "params": {
+        "module": "optparse"
+      },
+      "short": "function definitions in `optparse`",
+      "text": "How many function definitions (def and async def, counting methods and nested functions) are in the source file of the standard-library module `optparse` in Python 3.13?"
+    },
+    {
+      "q": 11,
+      "family": "primes_in_range",
+      "kind": "statistical",
+      "params": {
+        "a": 3164661,
+        "b": 3229443
+      },
+      "short": "primes in [3,164,661, 3,229,443]",
+      "text": "How many primes p satisfy 3,164,661 ≤ p ≤ 3,229,443?"
+    },
+    {
+      "q": 12,
+      "family": "collatz_steps",
+      "kind": "statistical",
+      "params": {
+        "n": 87974385043
+      },
+      "short": "Collatz steps from 87,974,385,043",
+      "text": "Starting from 87,974,385,043, how many steps does the Collatz process (halve if even, 3n + 1 if odd) take to reach 1?"
+    },
+    {
+      "q": 13,
+      "family": "lis",
+      "kind": "statistical",
+      "params": {
+        "n": 112,
+        "seed": 3552218128
+      },
+      "short": "longest increasing subsequence, n = 112",
+      "text": "What is the average length of the longest increasing subsequence of a uniformly random permutation of 112 elements? (Settled by averaging 1,000 random permutations.)"
+    },
+    {
+      "q": 14,
+      "family": "rect_distance",
+      "kind": "statistical",
+      "params": {
+        "b": 9.91,
+        "seed": 2039402934
+      },
+      "short": "mean distance in a 1 × 9.91 rectangle",
+      "text": "Two points are chosen independently and uniformly at random in a 1 × 9.91 rectangle. What is the expected distance between them? (Settled by averaging 400,000 random pairs.)"
+    },
+    {
+      "q": 15,
+      "family": "unicode_block",
+      "kind": "knowledge",
+      "params": {
+        "lo": 3584,
+        "hi": 3711
+      },
+      "short": "assigned in the Thai block",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points in U+0E00–U+0E7F (the Thai block) are assigned, that is, have a category other than Cn?"
+    },
+    {
+      "q": 16,
+      "family": "unicode_word",
+      "kind": "knowledge",
+      "params": {
+        "word": "FRACTION"
+      },
+      "short": "Unicode names with the word FRACTION",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have a name containing the whole word FRACTION? (Names are split into words at spaces and hyphens.)"
+    },
+    {
+      "q": 17,
+      "family": "unicode_category",
+      "kind": "knowledge",
+      "params": {
+        "category": "Pc"
+      },
+      "short": "code points in category Pc",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have the general category Pc (connector punctuation)?"
+    },
+    {
+      "q": 18,
+      "family": "stdlib_defs",
+      "kind": "knowledge",
+      "params": {
+        "module": "traceback"
+      },
+      "short": "function definitions in `traceback`",
+      "text": "How many function definitions (def and async def, counting methods and nested functions) are in the source file of the standard-library module `traceback` in Python 3.13?"
+    },
+    {
+      "q": 19,
+      "family": "stdlib_lines",
+      "kind": "knowledge",
+      "params": {
+        "module": "shutil"
+      },
+      "short": "lines in `shutil`",
+      "text": "How many lines are in the source file of the standard-library module `shutil` in Python 3.13 (every line, blank or not)?"
+    },
+    {
+      "q": 20,
+      "family": "lis",
+      "kind": "statistical",
+      "params": {
+        "n": 1643,
+        "seed": 187589353
+      },
+      "short": "longest increasing subsequence, n = 1,643",
+      "text": "What is the average length of the longest increasing subsequence of a uniformly random permutation of 1,643 elements? (Settled by averaging 1,000 random permutations.)"
+    },
+    {
+      "q": 21,
+      "family": "walk_max",
+      "kind": "statistical",
+      "params": {
+        "n": 1512,
+        "seed": 1440837354
+      },
+      "short": "highest point of a 1,512-step walk",
+      "text": "A simple random walk on the integers starts at 0 and takes 1,512 steps of +1 or −1, each with probability ½. What is the expected highest position it reaches (0 if it never rises above the start)? (Settled by averaging 4,000 random walks.)"
+    },
+    {
+      "q": 22,
+      "family": "primes_in_range",
+      "kind": "statistical",
+      "params": {
+        "a": 8284359,
+        "b": 8296430
+      },
+      "short": "primes in [8,284,359, 8,296,430]",
+      "text": "How many primes p satisfy 8,284,359 ≤ p ≤ 8,296,430?"
+    },
+    {
+      "q": 23,
+      "family": "collatz_steps",
+      "kind": "statistical",
+      "params": {
+        "n": 337264368477
+      },
+      "short": "Collatz steps from 337,264,368,477",
+      "text": "Starting from 337,264,368,477, how many steps does the Collatz process (halve if even, 3n + 1 if odd) take to reach 1?"
+    },
+    {
+      "q": 24,
+      "family": "module_all",
+      "kind": "knowledge",
+      "params": {
+        "module": "weakref"
+      },
+      "short": "names in `weakref.__all__`",
+      "text": "How many names are listed in `weakref.__all__` in Python 3.13?"
+    },
+    {
+      "q": 25,
+      "family": "birthday",
+      "kind": "exact",
+      "params": {
+        "d": 6620093
+      },
+      "short": "draws until a repeat, d = 6,620,093",
+      "text": "Integers are drawn uniformly at random from 1 to 6,620,093, with replacement, until some value appears for the second time. What is the expected number of draws, counting the repeat?"
+    },
+    {
+      "q": 26,
+      "family": "digit_sum_pow2",
+      "kind": "statistical",
+      "params": {
+        "n": 1219
+      },
+      "short": "digit sum of 2^1219",
+      "text": "What is the sum of the decimal digits of 2^1219?"
+    },
+    {
+      "q": 27,
+      "family": "stdlib_defs",
+      "kind": "knowledge",
+      "params": {
+        "module": "hmac"
+      },
+      "short": "function definitions in `hmac`",
+      "text": "How many function definitions (def and async def, counting methods and nested functions) are in the source file of the standard-library module `hmac` in Python 3.13?"
+    },
+    {
+      "q": 28,
+      "family": "unicode_block",
+      "kind": "knowledge",
+      "params": {
+        "lo": 127136,
+        "hi": 127231
+      },
+      "short": "assigned in the Playing Cards block",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points in U+1F0A0–U+1F0FF (the Playing Cards block) are assigned, that is, have a category other than Cn?"
+    },
+    {
+      "q": 29,
+      "family": "lis",
+      "kind": "statistical",
+      "params": {
+        "n": 4365,
+        "seed": 3575572515
+      },
+      "short": "longest increasing subsequence, n = 4,365",
+      "text": "What is the average length of the longest increasing subsequence of a uniformly random permutation of 4,365 elements? (Settled by averaging 1,000 random permutations.)"
+    },
+    {
+      "q": 30,
+      "family": "rect_distance",
+      "kind": "statistical",
+      "params": {
+        "b": 4.45,
+        "seed": 3946321271
+      },
+      "short": "mean distance in a 1 × 4.45 rectangle",
+      "text": "Two points are chosen independently and uniformly at random in a 1 × 4.45 rectangle. What is the expected distance between them? (Settled by averaging 400,000 random pairs.)"
+    },
+    {
+      "q": 31,
+      "family": "unicode_word",
+      "kind": "knowledge",
+      "params": {
+        "word": "CAPITAL"
+      },
+      "short": "Unicode names with the word CAPITAL",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have a name containing the whole word CAPITAL? (Names are split into words at spaces and hyphens.)"
+    },
+    {
+      "q": 32,
+      "family": "collatz_steps",
+      "kind": "statistical",
+      "params": {
+        "n": 904534976486
+      },
+      "short": "Collatz steps from 904,534,976,486",
+      "text": "Starting from 904,534,976,486, how many steps does the Collatz process (halve if even, 3n + 1 if odd) take to reach 1?"
+    },
+    {
+      "q": 33,
+      "family": "unicode_category",
+      "kind": "knowledge",
+      "params": {
+        "category": "So"
+      },
+      "short": "code points in category So",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have the general category So (other symbols)?"
+    },
+    {
+      "q": 34,
+      "family": "digit_sum_pow2",
+      "kind": "statistical",
+      "params": {
+        "n": 2531
+      },
+      "short": "digit sum of 2^2531",
+      "text": "What is the sum of the decimal digits of 2^2531?"
+    },
+    {
+      "q": 35,
+      "family": "stdlib_lines",
+      "kind": "knowledge",
+      "params": {
+        "module": "functools"
+      },
+      "short": "lines in `functools`",
+      "text": "How many lines are in the source file of the standard-library module `functools` in Python 3.13 (every line, blank or not)?"
+    },
+    {
+      "q": 36,
+      "family": "birthday",
+      "kind": "exact",
+      "params": {
+        "d": 46781
+      },
+      "short": "draws until a repeat, d = 46,781",
+      "text": "Integers are drawn uniformly at random from 1 to 46,781, with replacement, until some value appears for the second time. What is the expected number of draws, counting the repeat?"
+    },
+    {
+      "q": 37,
+      "family": "walk_max",
+      "kind": "statistical",
+      "params": {
+        "n": 869,
+        "seed": 3323348341
+      },
+      "short": "highest point of a 869-step walk",
+      "text": "A simple random walk on the integers starts at 0 and takes 869 steps of +1 or −1, each with probability ½. What is the expected highest position it reaches (0 if it never rises above the start)? (Settled by averaging 4,000 random walks.)"
+    },
+    {
+      "q": 38,
+      "family": "module_all",
+      "kind": "knowledge",
+      "params": {
+        "module": "locale"
+      },
+      "short": "names in `locale.__all__`",
+      "text": "How many names are listed in `locale.__all__` in Python 3.13?"
+    },
+    {
+      "q": 39,
+      "family": "primes_in_range",
+      "kind": "statistical",
+      "params": {
+        "a": 591475,
+        "b": 604946
+      },
+      "short": "primes in [591,475, 604,946]",
+      "text": "How many primes p satisfy 591,475 ≤ p ≤ 604,946?"
+    },
+    {
+      "q": 40,
+      "family": "lis",
+      "kind": "statistical",
+      "params": {
+        "n": 2201,
+        "seed": 3537523211
+      },
+      "short": "longest increasing subsequence, n = 2,201",
+      "text": "What is the average length of the longest increasing subsequence of a uniformly random permutation of 2,201 elements? (Settled by averaging 1,000 random permutations.)"
+    },
+    {
+      "q": 41,
+      "family": "unicode_category",
+      "kind": "knowledge",
+      "params": {
+        "category": "Me"
+      },
+      "short": "code points in category Me",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have the general category Me (enclosing marks)?"
+    },
+    {
+      "q": 42,
+      "family": "stdlib_lines",
+      "kind": "knowledge",
+      "params": {
+        "module": "tabnanny"
+      },
+      "short": "lines in `tabnanny`",
+      "text": "How many lines are in the source file of the standard-library module `tabnanny` in Python 3.13 (every line, blank or not)?"
+    },
+    {
+      "q": 43,
+      "family": "primes_in_range",
+      "kind": "statistical",
+      "params": {
+        "a": 310586,
+        "b": 338601
+      },
+      "short": "primes in [310,586, 338,601]",
+      "text": "How many primes p satisfy 310,586 ≤ p ≤ 338,601?"
+    },
+    {
+      "q": 44,
+      "family": "rect_distance",
+      "kind": "statistical",
+      "params": {
+        "b": 4.51,
+        "seed": 1875967922
+      },
+      "short": "mean distance in a 1 × 4.51 rectangle",
+      "text": "Two points are chosen independently and uniformly at random in a 1 × 4.51 rectangle. What is the expected distance between them? (Settled by averaging 400,000 random pairs.)"
+    },
+    {
+      "q": 45,
+      "family": "stdlib_defs",
+      "kind": "knowledge",
+      "params": {
+        "module": "csv"
+      },
+      "short": "function definitions in `csv`",
+      "text": "How many function definitions (def and async def, counting methods and nested functions) are in the source file of the standard-library module `csv` in Python 3.13?"
+    },
+    {
+      "q": 46,
+      "family": "digit_sum_pow2",
+      "kind": "statistical",
+      "params": {
+        "n": 7366
+      },
+      "short": "digit sum of 2^7366",
+      "text": "What is the sum of the decimal digits of 2^7366?"
+    },
+    {
+      "q": 47,
+      "family": "collatz_steps",
+      "kind": "statistical",
+      "params": {
+        "n": 189630655112
+      },
+      "short": "Collatz steps from 189,630,655,112",
+      "text": "Starting from 189,630,655,112, how many steps does the Collatz process (halve if even, 3n + 1 if odd) take to reach 1?"
+    },
+    {
+      "q": 48,
+      "family": "birthday",
+      "kind": "exact",
+      "params": {
+        "d": 2138
+      },
+      "short": "draws until a repeat, d = 2,138",
+      "text": "Integers are drawn uniformly at random from 1 to 2,138, with replacement, until some value appears for the second time. What is the expected number of draws, counting the repeat?"
+    },
+    {
+      "q": 49,
+      "family": "module_all",
+      "kind": "knowledge",
+      "params": {
+        "module": "base64"
+      },
+      "short": "names in `base64.__all__`",
+      "text": "How many names are listed in `base64.__all__` in Python 3.13?"
+    },
+    {
+      "q": 50,
+      "family": "unicode_word",
+      "kind": "knowledge",
+      "params": {
+        "word": "GREEK"
+      },
+      "short": "Unicode names with the word GREEK",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have a name containing the whole word GREEK? (Names are split into words at spaces and hyphens.)"
+    },
+    {
+      "q": 51,
+      "family": "unicode_block",
+      "kind": "knowledge",
+      "params": {
+        "lo": 8192,
+        "hi": 8303
+      },
+      "short": "assigned in the General Punctuation block",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points in U+2000–U+206F (the General Punctuation block) are assigned, that is, have a category other than Cn?"
+    },
+    {
+      "q": 52,
+      "family": "walk_max",
+      "kind": "statistical",
+      "params": {
+        "n": 707,
+        "seed": 4028422008
+      },
+      "short": "highest point of a 707-step walk",
+      "text": "A simple random walk on the integers starts at 0 and takes 707 steps of +1 or −1, each with probability ½. What is the expected highest position it reaches (0 if it never rises above the start)? (Settled by averaging 4,000 random walks.)"
+    },
+    {
+      "q": 53,
+      "family": "stdlib_lines",
+      "kind": "knowledge",
+      "params": {
+        "module": "glob"
+      },
+      "short": "lines in `glob`",
+      "text": "How many lines are in the source file of the standard-library module `glob` in Python 3.13 (every line, blank or not)?"
+    },
+    {
+      "q": 54,
+      "family": "stdlib_defs",
+      "kind": "knowledge",
+      "params": {
+        "module": "webbrowser"
+      },
+      "short": "function definitions in `webbrowser`",
+      "text": "How many function definitions (def and async def, counting methods and nested functions) are in the source file of the standard-library module `webbrowser` in Python 3.13?"
+    },
+    {
+      "q": 55,
+      "family": "unicode_block",
+      "kind": "knowledge",
+      "params": {
+        "lo": 3712,
+        "hi": 3839
+      },
+      "short": "assigned in the Lao block",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points in U+0E80–U+0EFF (the Lao block) are assigned, that is, have a category other than Cn?"
+    },
+    {
+      "q": 56,
+      "family": "lis",
+      "kind": "statistical",
+      "params": {
+        "n": 452,
+        "seed": 991902960
+      },
+      "short": "longest increasing subsequence, n = 452",
+      "text": "What is the average length of the longest increasing subsequence of a uniformly random permutation of 452 elements? (Settled by averaging 1,000 random permutations.)"
+    },
+    {
+      "q": 57,
+      "family": "walk_max",
+      "kind": "statistical",
+      "params": {
+        "n": 1229,
+        "seed": 2432215748
+      },
+      "short": "highest point of a 1,229-step walk",
+      "text": "A simple random walk on the integers starts at 0 and takes 1,229 steps of +1 or −1, each with probability ½. What is the expected highest position it reaches (0 if it never rises above the start)? (Settled by averaging 4,000 random walks.)"
+    },
+    {
+      "q": 58,
+      "family": "digit_sum_pow2",
+      "kind": "statistical",
+      "params": {
+        "n": 8596
+      },
+      "short": "digit sum of 2^8596",
+      "text": "What is the sum of the decimal digits of 2^8596?"
+    },
+    {
+      "q": 59,
+      "family": "birthday",
+      "kind": "exact",
+      "params": {
+        "d": 6016
+      },
+      "short": "draws until a repeat, d = 6,016",
+      "text": "Integers are drawn uniformly at random from 1 to 6,016, with replacement, until some value appears for the second time. What is the expected number of draws, counting the repeat?"
+    },
+    {
+      "q": 60,
+      "family": "module_all",
+      "kind": "knowledge",
+      "params": {
+        "module": "gzip"
+      },
+      "short": "names in `gzip.__all__`",
+      "text": "How many names are listed in `gzip.__all__` in Python 3.13?"
+    },
+    {
+      "q": 61,
+      "family": "unicode_category",
+      "kind": "knowledge",
+      "params": {
+        "category": "Pf"
+      },
+      "short": "code points in category Pf",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have the general category Pf (final quotes)?"
+    },
+    {
+      "q": 62,
+      "family": "primes_in_range",
+      "kind": "statistical",
+      "params": {
+        "a": 335112,
+        "b": 371030
+      },
+      "short": "primes in [335,112, 371,030]",
+      "text": "How many primes p satisfy 335,112 ≤ p ≤ 371,030?"
+    },
+    {
+      "q": 63,
+      "family": "unicode_word",
+      "kind": "knowledge",
+      "params": {
+        "word": "HEBREW"
+      },
+      "short": "Unicode names with the word HEBREW",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have a name containing the whole word HEBREW? (Names are split into words at spaces and hyphens.)"
+    },
+    {
+      "q": 64,
+      "family": "rect_distance",
+      "kind": "statistical",
+      "params": {
+        "b": 2.07,
+        "seed": 2957713222
+      },
+      "short": "mean distance in a 1 × 2.07 rectangle",
+      "text": "Two points are chosen independently and uniformly at random in a 1 × 2.07 rectangle. What is the expected distance between them? (Settled by averaging 400,000 random pairs.)"
+    },
+    {
+      "q": 65,
+      "family": "collatz_steps",
+      "kind": "statistical",
+      "params": {
+        "n": 23010656711
+      },
+      "short": "Collatz steps from 23,010,656,711",
+      "text": "Starting from 23,010,656,711, how many steps does the Collatz process (halve if even, 3n + 1 if odd) take to reach 1?"
+    },
+    {
+      "q": 66,
+      "family": "unicode_category",
+      "kind": "knowledge",
+      "params": {
+        "category": "Sk"
+      },
+      "short": "code points in category Sk",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have the general category Sk (modifier symbols)?"
+    },
+    {
+      "q": 67,
+      "family": "birthday",
+      "kind": "exact",
+      "params": {
+        "d": 131706
+      },
+      "short": "draws until a repeat, d = 131,706",
+      "text": "Integers are drawn uniformly at random from 1 to 131,706, with replacement, until some value appears for the second time. What is the expected number of draws, counting the repeat?"
+    },
+    {
+      "q": 68,
+      "family": "unicode_word",
+      "kind": "knowledge",
+      "params": {
+        "word": "FACE"
+      },
+      "short": "Unicode names with the word FACE",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have a name containing the whole word FACE? (Names are split into words at spaces and hyphens.)"
+    },
+    {
+      "q": 69,
+      "family": "lis",
+      "kind": "statistical",
+      "params": {
+        "n": 827,
+        "seed": 2595016099
+      },
+      "short": "longest increasing subsequence, n = 827",
+      "text": "What is the average length of the longest increasing subsequence of a uniformly random permutation of 827 elements? (Settled by averaging 1,000 random permutations.)"
+    },
+    {
+      "q": 70,
+      "family": "digit_sum_pow2",
+      "kind": "statistical",
+      "params": {
+        "n": 3289
+      },
+      "short": "digit sum of 2^3289",
+      "text": "What is the sum of the decimal digits of 2^3289?"
+    },
+    {
+      "q": 71,
+      "family": "unicode_block",
+      "kind": "knowledge",
+      "params": {
+        "lo": 4256,
+        "hi": 4351
+      },
+      "short": "assigned in the Georgian block",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points in U+10A0–U+10FF (the Georgian block) are assigned, that is, have a category other than Cn?"
+    },
+    {
+      "q": 72,
+      "family": "rect_distance",
+      "kind": "statistical",
+      "params": {
+        "b": 3.1,
+        "seed": 3310015775
+      },
+      "short": "mean distance in a 1 × 3.1 rectangle",
+      "text": "Two points are chosen independently and uniformly at random in a 1 × 3.1 rectangle. What is the expected distance between them? (Settled by averaging 400,000 random pairs.)"
+    },
+    {
+      "q": 73,
+      "family": "walk_max",
+      "kind": "statistical",
+      "params": {
+        "n": 1415,
+        "seed": 2532029842
+      },
+      "short": "highest point of a 1,415-step walk",
+      "text": "A simple random walk on the integers starts at 0 and takes 1,415 steps of +1 or −1, each with probability ½. What is the expected highest position it reaches (0 if it never rises above the start)? (Settled by averaging 4,000 random walks.)"
+    },
+    {
+      "q": 74,
+      "family": "primes_in_range",
+      "kind": "statistical",
+      "params": {
+        "a": 188978,
+        "b": 218173
+      },
+      "short": "primes in [188,978, 218,173]",
+      "text": "How many primes p satisfy 188,978 ≤ p ≤ 218,173?"
+    },
+    {
+      "q": 75,
+      "family": "stdlib_lines",
+      "kind": "knowledge",
+      "params": {
+        "module": "statistics"
+      },
+      "short": "lines in `statistics`",
+      "text": "How many lines are in the source file of the standard-library module `statistics` in Python 3.13 (every line, blank or not)?"
+    },
+    {
+      "q": 76,
+      "family": "stdlib_defs",
+      "kind": "knowledge",
+      "params": {
+        "module": "operator"
+      },
+      "short": "function definitions in `operator`",
+      "text": "How many function definitions (def and async def, counting methods and nested functions) are in the source file of the standard-library module `operator` in Python 3.13?"
+    },
+    {
+      "q": 77,
+      "family": "module_all",
+      "kind": "knowledge",
+      "params": {
+        "module": "difflib"
+      },
+      "short": "names in `difflib.__all__`",
+      "text": "How many names are listed in `difflib.__all__` in Python 3.13?"
+    },
+    {
+      "q": 78,
+      "family": "collatz_steps",
+      "kind": "statistical",
+      "params": {
+        "n": 360172167088
+      },
+      "short": "Collatz steps from 360,172,167,088",
+      "text": "Starting from 360,172,167,088, how many steps does the Collatz process (halve if even, 3n + 1 if odd) take to reach 1?"
+    },
+    {
+      "q": 79,
+      "family": "collatz_steps",
+      "kind": "statistical",
+      "params": {
+        "n": 905376815232
+      },
+      "short": "Collatz steps from 905,376,815,232",
+      "text": "Starting from 905,376,815,232, how many steps does the Collatz process (halve if even, 3n + 1 if odd) take to reach 1?"
+    },
+    {
+      "q": 80,
+      "family": "module_all",
+      "kind": "knowledge",
+      "params": {
+        "module": "tabnanny"
+      },
+      "short": "names in `tabnanny.__all__`",
+      "text": "How many names are listed in `tabnanny.__all__` in Python 3.13?"
+    },
+    {
+      "q": 81,
+      "family": "digit_sum_pow2",
+      "kind": "statistical",
+      "params": {
+        "n": 706
+      },
+      "short": "digit sum of 2^706",
+      "text": "What is the sum of the decimal digits of 2^706?"
+    },
+    {
+      "q": 82,
+      "family": "birthday",
+      "kind": "exact",
+      "params": {
+        "d": 944525
+      },
+      "short": "draws until a repeat, d = 944,525",
+      "text": "Integers are drawn uniformly at random from 1 to 944,525, with replacement, until some value appears for the second time. What is the expected number of draws, counting the repeat?"
+    },
+    {
+      "q": 83,
+      "family": "stdlib_defs",
+      "kind": "knowledge",
+      "params": {
+        "module": "weakref"
+      },
+      "short": "function definitions in `weakref`",
+      "text": "How many function definitions (def and async def, counting methods and nested functions) are in the source file of the standard-library module `weakref` in Python 3.13?"
+    },
+    {
+      "q": 84,
+      "family": "primes_in_range",
+      "kind": "statistical",
+      "params": {
+        "a": 865988,
+        "b": 892619
+      },
+      "short": "primes in [865,988, 892,619]",
+      "text": "How many primes p satisfy 865,988 ≤ p ≤ 892,619?"
+    },
+    {
+      "q": 85,
+      "family": "unicode_category",
+      "kind": "knowledge",
+      "params": {
+        "category": "Nd"
+      },
+      "short": "code points in category Nd",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have the general category Nd (decimal digits)?"
+    },
+    {
+      "q": 86,
+      "family": "lis",
+      "kind": "statistical",
+      "params": {
+        "n": 121,
+        "seed": 2680340972
+      },
+      "short": "longest increasing subsequence, n = 121",
+      "text": "What is the average length of the longest increasing subsequence of a uniformly random permutation of 121 elements? (Settled by averaging 1,000 random permutations.)"
+    },
+    {
+      "q": 87,
+      "family": "walk_max",
+      "kind": "statistical",
+      "params": {
+        "n": 853,
+        "seed": 3752496263
+      },
+      "short": "highest point of a 853-step walk",
+      "text": "A simple random walk on the integers starts at 0 and takes 853 steps of +1 or −1, each with probability ½. What is the expected highest position it reaches (0 if it never rises above the start)? (Settled by averaging 4,000 random walks.)"
+    },
+    {
+      "q": 88,
+      "family": "rect_distance",
+      "kind": "statistical",
+      "params": {
+        "b": 7.13,
+        "seed": 1173174960
+      },
+      "short": "mean distance in a 1 × 7.13 rectangle",
+      "text": "Two points are chosen independently and uniformly at random in a 1 × 7.13 rectangle. What is the expected distance between them? (Settled by averaging 400,000 random pairs.)"
+    },
+    {
+      "q": 89,
+      "family": "unicode_word",
+      "kind": "knowledge",
+      "params": {
+        "word": "DIGIT"
+      },
+      "short": "Unicode names with the word DIGIT",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have a name containing the whole word DIGIT? (Names are split into words at spaces and hyphens.)"
+    },
+    {
+      "q": 90,
+      "family": "unicode_block",
+      "kind": "knowledge",
+      "params": {
+        "lo": 66352,
+        "hi": 66383
+      },
+      "short": "assigned in the Gothic block",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points in U+10330–U+1034F (the Gothic block) are assigned, that is, have a category other than Cn?"
+    },
+    {
+      "q": 91,
+      "family": "stdlib_lines",
+      "kind": "knowledge",
+      "params": {
+        "module": "string"
+      },
+      "short": "lines in `string`",
+      "text": "How many lines are in the source file of the standard-library module `string` in Python 3.13 (every line, blank or not)?"
+    },
+    {
+      "q": 92,
+      "family": "birthday",
+      "kind": "exact",
+      "params": {
+        "d": 4022
+      },
+      "short": "draws until a repeat, d = 4,022",
+      "text": "Integers are drawn uniformly at random from 1 to 4,022, with replacement, until some value appears for the second time. What is the expected number of draws, counting the repeat?"
+    },
+    {
+      "q": 93,
+      "family": "primes_in_range",
+      "kind": "statistical",
+      "params": {
+        "a": 1135630,
+        "b": 1167274
+      },
+      "short": "primes in [1,135,630, 1,167,274]",
+      "text": "How many primes p satisfy 1,135,630 ≤ p ≤ 1,167,274?"
+    },
+    {
+      "q": 94,
+      "family": "unicode_block",
+      "kind": "knowledge",
+      "params": {
+        "lo": 880,
+        "hi": 1023
+      },
+      "short": "assigned in the Greek and Coptic block",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points in U+0370–U+03FF (the Greek and Coptic block) are assigned, that is, have a category other than Cn?"
+    },
+    {
+      "q": 95,
+      "family": "module_all",
+      "kind": "knowledge",
+      "params": {
+        "module": "mailbox"
+      },
+      "short": "names in `mailbox.__all__`",
+      "text": "How many names are listed in `mailbox.__all__` in Python 3.13?"
+    },
+    {
+      "q": 96,
+      "family": "rect_distance",
+      "kind": "statistical",
+      "params": {
+        "b": 1.09,
+        "seed": 1575797736
+      },
+      "short": "mean distance in a 1 × 1.09 rectangle",
+      "text": "Two points are chosen independently and uniformly at random in a 1 × 1.09 rectangle. What is the expected distance between them? (Settled by averaging 400,000 random pairs.)"
+    },
+    {
+      "q": 97,
+      "family": "unicode_category",
+      "kind": "knowledge",
+      "params": {
+        "category": "Cf"
+      },
+      "short": "code points in category Cf",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have the general category Cf (format characters)?"
+    },
+    {
+      "q": 98,
+      "family": "collatz_steps",
+      "kind": "statistical",
+      "params": {
+        "n": 70587310865
+      },
+      "short": "Collatz steps from 70,587,310,865",
+      "text": "Starting from 70,587,310,865, how many steps does the Collatz process (halve if even, 3n + 1 if odd) take to reach 1?"
+    },
+    {
+      "q": 99,
+      "family": "digit_sum_pow2",
+      "kind": "statistical",
+      "params": {
+        "n": 5606
+      },
+      "short": "digit sum of 2^5606",
+      "text": "What is the sum of the decimal digits of 2^5606?"
+    },
+    {
+      "q": 100,
+      "family": "unicode_word",
+      "kind": "knowledge",
+      "params": {
+        "word": "CYRILLIC"
+      },
+      "short": "Unicode names with the word CYRILLIC",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have a name containing the whole word CYRILLIC? (Names are split into words at spaces and hyphens.)"
+    },
+    {
+      "q": 101,
+      "family": "lis",
+      "kind": "statistical",
+      "params": {
+        "n": 104,
+        "seed": 1997747997
+      },
+      "short": "longest increasing subsequence, n = 104",
+      "text": "What is the average length of the longest increasing subsequence of a uniformly random permutation of 104 elements? (Settled by averaging 1,000 random permutations.)"
+    },
+    {
+      "q": 102,
+      "family": "stdlib_lines",
+      "kind": "knowledge",
+      "params": {
+        "module": "reprlib"
+      },
+      "short": "lines in `reprlib`",
+      "text": "How many lines are in the source file of the standard-library module `reprlib` in Python 3.13 (every line, blank or not)?"
+    },
+    {
+      "q": 103,
+      "family": "stdlib_defs",
+      "kind": "knowledge",
+      "params": {
+        "module": "base64"
+      },
+      "short": "function definitions in `base64`",
+      "text": "How many function definitions (def and async def, counting methods and nested functions) are in the source file of the standard-library module `base64` in Python 3.13?"
+    },
+    {
+      "q": 104,
+      "family": "walk_max",
+      "kind": "statistical",
+      "params": {
+        "n": 996,
+        "seed": 4060233402
+      },
+      "short": "highest point of a 996-step walk",
+      "text": "A simple random walk on the integers starts at 0 and takes 996 steps of +1 or −1, each with probability ½. What is the expected highest position it reaches (0 if it never rises above the start)? (Settled by averaging 4,000 random walks.)"
+    }
+  ]
+}

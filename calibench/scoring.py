@@ -16,8 +16,8 @@ import statistics
 PHASES = ("instinct", "worked")
 LEVELS = (("p50", 0.5), ("p90", 0.1))        # interval, and alpha for a central (1 − alpha) interval
 FLOOR = 1e-3                                  # a stated value (plus its offset) below this counts as this
-KNOW_NOTHING = {"estimate": 100, "p50": [30, 300], "p90": [3, 3000]}   # how an unanswered question is scored
-SCORING = "log-wis-1"           # log(x), or log(1 + x) for counts; weighted interval score
+KNOW_NOTHING = {"estimate": 100, "p50": [30, 300], "p90": [3, 3000]}   # the answer of mock:naive
+SCORING = "log-wis-2"           # log(x), or log(1 + x) for counts; weighted interval score; UNANSWERED below
 
 
 def inside(interval, x):
@@ -53,6 +53,13 @@ def log_wis(answer, x, shift=0):
     total = 0.5 * abs(_log(answer["estimate"], shift) - _log(x, shift))
     total += sum(alpha / 2 * log_interval_score(answer[key], x, alpha, shift) for key, alpha in LEVELS)
     return total / (len(LEVELS) + 0.5)
+
+
+# An unanswered question costs the same everywhere: the score of an answer off by a factor of ten, with a
+# 50% interval spanning a factor of ten and a 90% interval a factor of a thousand. (log-wis-1 scored it as
+# the fixed answer KNOW_NOTHING, which cost 0.4 when the truth was near 100 and over 30 when it was 10^18.)
+UNANSWERED = log_wis({"estimate": 10.0, "p50": [10 / 10 ** 0.5, 10 * 10 ** 0.5],
+                      "p90": [10 / 1000 ** 0.5, 10 * 1000 ** 0.5]}, 1.0)
 
 
 def interval_score(interval, x, alpha):

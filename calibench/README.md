@@ -117,7 +117,7 @@ Every true answer is positive, so answers are scored on a log scale: questions o
 - **Where the true answers fell**: the estimate and intervals are five quantiles, so they split the belief into six bins that should hold 5%, 20%, 25%, 25%, 20% and 5% of the true answers. This shows the shape of any miscalibration, and whether the model leans high or low.
 - **Where the score comes from**: how much of the score the largest questions carry, the mean without the largest one, and every worked answer outside its 90% interval, with how narrow the interval was and how far outside the answer fell. One confident miss can carry a run, and this shows it.
 - **By kind and by family**: the same scores for knowledge, statistical and exact questions, and for each family, which tend to fail in different ways.
-- **Unanswered questions** (refused, unreadable or failed) count as if the model had given the answer of a model that knows nothing, so refusing hard questions can't improve a score.
+- **Unanswered questions** (refused, unreadable, cut off at the token cap or failed) cost a fixed 1.289 each, the score of an answer off by a factor of ten with wide intervals, whatever the size of the true answer. `compare` also compares runs on the questions all of them answered.
 
 `compare` needs runs asked the same questions. It gives each run's score with a 90% bootstrap interval over questions and its difference from the best with a paired interval: when that interval includes zero, the questions don't separate the two. It also estimates how many questions would separate them. For scale: one run of a suite separates differences of about 0.02–0.03, and three runs about 0.01–0.02. Runs of the same model also get a **test–retest** table: how much the score moved between runs, and how well the per-question scores agree.
 
@@ -139,7 +139,7 @@ If `answers.jsonl` changes after its hash was recorded, the report says so.
 ## Choices worth knowing
 
 - **No fallbacks.** Some APIs can quietly retry a refused request on a different model. Calibench leaves that off, because it would let one model answer under another's name. A refusal is recorded as a refusal, and every call records the model that actually served it.
-- **Refusals and failures count against the model.** They score as the know-nothing answer and are listed on the report's *Answered* line, with the score over answered questions alone shown beside it.
+- **Refusals and failures count against the model.** They cost a fixed amount each and are listed on the report's *Answered* line, with the score over answered questions alone shown beside it.
 - **Instinct versus worked.** The two phases use different prompts, and with the Claude adapter different effort levels (`--instinct-effort`, default `low`; `--worked-effort`, default `high`; pass `none` for models that don't take an effort setting). Some models always think before answering, Claude Opus 5.5 among them, so for them "instinct" means little thinking, not none.
 - **OpenRouter.** The adapter checks the model id before asking anything, sends the effort through OpenRouter's `reasoning` setting to models that support it (and then only to providers that honour it), and records the model, the provider and the cost of every call. The report adds up the cost. OpenRouter can route a model to different providers, which may serve it differently; the provider is recorded so that's visible.
 - **Keys stay in the environment.** API keys are read from environment variables and sent only to the API they belong to. They're never written into a run directory, and `.env` files are ignored by git.
@@ -155,7 +155,7 @@ If `answers.jsonl` changes after its hash was recorded, the report says so.
 
 ## Results
 
-Runs on real models, with every raw reply, are in [results/](results/). So far that's Claude Haiku 5.5 through OpenRouter, in eight runs across the three suites. Its worked score reproduces to within 0.006 between runs on the same suite and barely moves with the wording or format of the prompts; pooled over 694 answers, its worked 90% intervals hold the answer 85% of the time [83%, 88%] and the true answer lies above its estimate 58% of the time [55%, 61%]; and its intervals hold almost always when repeated runs agree, and far less often when they don't.
+Runs on real models, with every raw reply, are in [results/](results/). Two models so far, both through OpenRouter. DeepSeek V4.1 Flash reasoned past its token cap on 15–20% of worked questions, mostly ones that call for an estimate, which decided the comparison; on the questions both answered, its calibration and Haiku's can't be told apart. Claude Haiku 5.5 has eight runs across the three suites. Its worked score reproduces to within 0.006 between runs on the same suite and barely moves with the wording or format of the prompts; pooled over 694 answers, its worked 90% intervals hold the answer 85% of the time [83%, 88%] and the true answer lies above its estimate 58% of the time [55%, 61%]; and its intervals hold almost always when repeated runs agree, and far less often when they don't.
 
 ## Where it came from
 

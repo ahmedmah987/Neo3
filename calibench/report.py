@@ -5,7 +5,7 @@ import statistics
 
 from .families import KINDS
 from .questions import SUITES
-from .scoring import (BIN_SHARES, BINS, KNOW_NOTHING, LEVELS, PHASES, bootstrap, bootstrap_mean, inside, log_wis,
+from .scoring import (BIN_SHARES, BINS, LEVELS, PHASES, UNANSWERED, bootstrap, bootstrap_mean, inside, log_wis,
                       offset, questions_needed, spearman, summarize, wilson)
 
 
@@ -75,7 +75,7 @@ def build(meta, questions, records, results):
         recs = [records.get((q["q"], phase)) for q in questions]
         ok = [(q, r) for q, r in zip(questions, recs) if r and r["status"] == "ok"]
         statuses = collections.Counter(r["status"] if r else "missing" for r in recs)
-        every = [log_wis(r["answer"] if r and r["status"] == "ok" else KNOW_NOTHING, truth[q["q"]], offset(q["family"]))
+        every = [log_wis(r["answer"], truth[q["q"]], offset(q["family"])) if r and r["status"] == "ok" else UNANSWERED
                  for q, r in zip(questions, recs)]
         report["phases"][phase] = {
             "asked": len(questions), "statuses": dict(statuses), "tokens": tokens_per_answer(recs, zero_fill),
@@ -112,7 +112,7 @@ def build(meta, questions, records, results):
                 cell["score"] = log_wis(r["answer"], x, shift)
                 cell["hits"] = {key: inside(r["answer"][key], x) for key, _ in LEVELS}
             else:
-                cell["score"] = log_wis(KNOW_NOTHING, x, shift)
+                cell["score"] = UNANSWERED
                 cell["imputed"] = True
             row[phase] = cell
         if all(row[p]["status"] == "ok" for p in PHASES):
@@ -269,8 +269,8 @@ def render(report):
               "Intervals in brackets are 90% intervals over questions. Coverage verdicts leave out single-number "
               "intervals, which say \"I know this exactly\" and are counted on their own line."]
     if unanswered:
-        lines += ["", "The score counts each unanswered question as if the model had answered "
-                  f"`{json.dumps(KNOW_NOTHING)}`, as a model that knows nothing would; the rows below it use "
+        lines += ["", f"The score counts each unanswered question as {UNANSWERED:.3f}, the score of an answer off by a "
+                  "factor of ten with wide intervals, whatever the size of the true answer; the rows below it use "
                   "answered questions only."]
 
     fell = {p: phases[p].get("fell") for p in PHASES}
@@ -494,7 +494,7 @@ def consistency(reports, names):
 
 
 def compare(reports, names=None):
-    """Compare runs on the same questions. Unanswered questions score as the know-nothing answer."""
+    """Compare runs on the same questions. Unanswered questions score as UNANSWERED."""
     names = names or [rep["meta"]["model"] for rep in reports]
     keys = [[r["key"] for r in rep["questions"]] for rep in reports]
     if any(sorted(k) != sorted(keys[0]) for k in keys):
@@ -528,7 +528,7 @@ def compare(reports, names=None):
     pythons = {rep["meta"]["python"] for rep in reports}
     lines = ["# Calibench comparison", "",
              f"{n} questions, the same for every run. Scores are for worked answers unless marked; lower is better. "
-             "An unanswered question scores as the know-nothing answer.", ""]
+             f"An unanswered question scores {UNANSWERED:.3f}, as if off by a factor of ten.", ""]
     if len(pythons) > 1:
         lines += [f"**Note:** runs used different Python versions ({', '.join(sorted(pythons))}).", ""]
     lines += ["| Run | Answered | Score [90% interval] | Median | 50% hits | 90% hits | Instinct score "

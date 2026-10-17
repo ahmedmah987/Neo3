@@ -1,0 +1,43 @@
+{
+  "calibench": "2.4.0",
+  "model": "openrouter:deepseek/deepseek-v4.1-flash-1017",
+  "seed": "calibench-v2",
+  "count": 108,
+  "families": [
+    "birthday",
+    "collatz_steps",
+    "days_between",
+    "digit_sum_pow2",
+    "factorial_digits",
+    "friday13",
+    "lis",
+    "module_all",
+    "multiply",
+    "partitions",
+    "primes_in_range",
+    "rect_distance",
+    "stdlib_defs",
+    "stdlib_lines",
+    "unicode_block",
+    "unicode_category",
+    "unicode_word",
+    "walk_max"
+  ],
+  "suite": "v2",
+  "prompts": "standard",
+  "settings": {
+    "effort": {
+      "instinct": "low",
+      "worked": "medium"
+    },
+    "max_tokens": {
+      "instinct": 8000,
+      "worked": 32000
+    }
+  },
+  "scoring": "log-wis-1",
+  "python": "3.13.16",
+  "unicode": "15.1.0",
+  "started": "2026-10-17T11:41:16+00:00",
+  "answers_sha256": "a3af3b7f227d9132a3af978fff09692b97c1a96d62ac80a9c4e8abd1b5f298c8"
+}

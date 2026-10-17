@@ -1,6 +1,6 @@
 # Calibench methodology
 
-This document describes what Calibench measures, how, and where the measurement can mislead. It describes Calibench 2.4.0 with scoring `log-wis-1`.
+This document describes what Calibench measures, how, and where the measurement can mislead. It describes Calibench 2.5.0 with scoring `log-wis-2`.
 
 ## What is measured
 
@@ -85,7 +85,9 @@ This approximates the continuous ranked probability score of the belief about *g
 
 **Why not a relative score.** Calibench 1.0 and the guessbook divided the interval score by *y*. Dividing by the outcome weights each possible outcome by 1/*y*, so the expected score is minimised by the quantiles of a distribution tilted toward small values, not of the belief itself. The relative score therefore rewards stating intervals lower than believed. For a lognormal belief with σ = 0.5, shifting the believed 90% interval down by 15% lowers the expected relative score from 2.52 to 2.25, while the log score is lowest at the believed interval. `selftest` checks both facts.
 
-**Unanswered questions.** A question with any status other than `ok` is scored as if the model had answered {"estimate": 100, "p50": [30, 300], "p90": [3, 3000]}, the answer of a model that knows nothing. Refusing a question therefore helps a score only if the model's real answer would have been worse than knowing nothing. The score over answered questions alone is reported beside it.
+**Unanswered questions.** A question with any status other than `ok` (refused, unreadable, cut off at the token cap, or failed) scores a fixed 1.289: the score of an answer off by a factor of ten, with a 50% interval spanning a factor of ten and a 90% interval spanning a factor of a thousand. The cost is the same whatever the size of the true answer. The score over answered questions alone is reported beside it, and `compare` adds a comparison on the questions every run answered.
+
+Scoring `log-wis-1` (Calibench 2.0–2.4) scored an unanswered question as the fixed answer {"estimate": 100, "p50": [30, 300], "p90": [3, 3000]}. That cost about 0.4 when the true answer was near 100 and more than 30 when it was 10¹⁸, so the first model to leave large-answer questions unanswered (DeepSeek V4.1 Flash, whose reasoning ran past its token cap on 22 worked questions, four of them partition numbers) had 98% of its suite-v2 score come from its unanswered questions, most of it from those four. `log-wis-2` replaced it with the fixed cost. Runs where every question was answered score the same under both.
 
 **Coverage.** For each interval level the report gives the number of intervals containing the answer and a 90% Wilson interval for the proportion. A verdict (*too narrow*, *too wide*, *consistent with calibrated*) is given when coverage is two or more binomial standard errors from the level, with at least five intervals. Verdicts leave out single-number intervals, which claim exact knowledge rather than uncertainty; those are counted separately with how often they were exactly right. With 26 questions a 90% level can't be found too wide: even 26 of 26 is within two standard errors.
 
@@ -121,7 +123,7 @@ When publishing a result, report: the suite (or seed, count and families), the C
 8. **One sample per question.** Model outputs are stochastic. Test–retest measures the resulting variation.
 9. **Simulated answers.** Three families are settled by simulation. Their noise is stated and part of the question, but it is part of what is scored.
 10. **Calculation questions can be nearly solved.** A capable model may compute most of them exactly, as Claude Haiku 5.5 did. Their information is then in rare confident slips, which cost a great deal, and in interval width, which on a log scale costs little when the answer is large.
-11. **The know-nothing convention.** Scoring unanswered questions as a fixed naive answer is a convention. It penalises refusal on most questions, but it is gentler on questions whose answer happens to be near 100.
+11. **The cost of an unanswered question.** Scoring an unanswered question as a fixed 1.289 is a convention. It is larger than most honest answers score, so leaving questions unanswered rarely helps, but a model that knew which of its answers would miss badly could gain by not answering them. A model that can't finish within its token cap loses those questions; the comparison on questions every run answered separates that from calibration.
 
 ## Reliability
 

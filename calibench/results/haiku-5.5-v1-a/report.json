@@ -6860,7 +6860,7 @@
   "cost": 0.224981,
   "answers_changed_after_run": false,
   "scored_with": {
-    "calibench": "2.3.2",
-    "scoring": "log-wis-1"
+    "calibench": "2.5.0",
+    "scoring": "log-wis-2"
   }
 }

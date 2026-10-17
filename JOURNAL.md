@@ -448,3 +448,30 @@ My answer: to know when I'm wrong. Most of what I write, I never check. The mome
 **What I noticed.** The review found thirteen problems in code I had tested and audited. Tests check what I thought to check; a reviewer reading for failure finds what I didn't think of. For a measuring tool, both are needed.
 
 **Open ideas:** unchanged: general knowledge and other models, both the owner's decisions.
+
+---
+
+## 2026-10-17 — A second model: DeepSeek V4.1 Flash, and a flaw it exposed
+
+**What I made.** The owner approved `deepseek/deepseek-v4.1-flash-1017` for testing.
+- A four-question trial at high effort showed it reasoning 20,000–32,000 tokens per worked answer, ten to thirteen minutes each, with one reply cut off at the 32,000-token cap, and then retried and cut off again. So Calibench 2.4 records each run's settings (effort, token caps), stops retrying replies cut off at the cap (status `truncated`), and takes `--worked-max-tokens`.
+- At medium effort the trial reasoned about 9,600 tokens, so the full runs used medium for worked answers: suites v2 and v1, $1.83 together.
+- `compare` now adds a comparison on the questions every run answered.
+- Calibench 2.5 (scoring `log-wis-2`): an unanswered question costs a fixed 1.289.
+
+**What it showed.**
+- DeepSeek didn't finish 15–20% of its worked answers within 32,000 tokens, mostly digit sums, longest increasing subsequences, prime counts and partition numbers: questions that call for an estimate, not an exact answer. Counting those as unanswered, Haiku is clearly better (by about 0.22 on both suites). On the questions both answered, they can't be told apart: DeepSeek better on v2, worse on v1, both intervals including zero.
+- Its "low effort" instinct answers took 1,259–1,435 reasoning tokens, against Haiku's 220–240.
+
+**A flaw in the scoring.** Under `log-wis-1`, an unanswered question was scored as the fixed answer "100, between 30 and 300, between 3 and 3,000". That cost about 0.4 when the truth was near 100 and over 30 when it was a partition number near 10¹⁸, so 98% of DeepSeek's first v2 score (1.300) came from its unanswered questions. Haiku had answered everything, so nine runs never showed it; I'd even listed "the know-nothing convention" among the threats to validity, but as "gentler on questions near 100", the mild side of the problem. A fixed cost per unanswered question doesn't depend on the answer's size. Haiku's scores didn't change.
+
+**What I noticed.**
+- The second model tested the benchmark more than the first did. Haiku fit the assumptions I had built in: it always finished, never refused and reasoned briefly. DeepSeek broke three of them in one afternoon: the token cap, the retry and the imputation.
+- A model that keeps calculating when it should estimate is miscalibrated about its own abilities, not about the answer. Calibench sees that only as unanswered questions; the reasoning that ran out isn't returned, so I can't confirm what it was doing.
+
+**Spent on the trial key:** $3.50 of $5.
+
+**Open ideas:**
+- DeepSeek with a higher worked cap on just the questions it didn't finish, as a separate run, to see whether it would have answered them well.
+- A way to see why a model doesn't finish, where an API returns the reasoning.
+- General knowledge, still the owner's decision.

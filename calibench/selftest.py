@@ -24,7 +24,7 @@ from . import families as F
 from . import models, report, runner
 from .prompts import PROMPT_SETS, parse_answer
 from .questions import ORIGINAL_FAMILIES, SUITES, draw, fingerprint, rng_from_seed, solve
-from .scoring import (KNOW_NOTHING, bin_weights, interval_score, log_interval_score, log_wis, offset,
+from .scoring import (UNANSWERED, bin_weights, interval_score, log_interval_score, log_wis, offset,
                       questions_needed, spearman, verdict, where_answers_fell, wilson)
 
 failures = []
@@ -307,8 +307,9 @@ def check_run(tmp):
     rep = quiet(runner.run, flaky, "flaky", seed, count, FAST, tmp / "flaky", 1)
     check("failed calls are recorded as errors", rep["phases"]["worked"]["statuses"] == {"error": count // 2, "ok": count // 2})
     rows = rep["questions"]
-    check("an unanswered question scores as the know-nothing answer",
-          all(r["worked"]["score"] == log_wis(KNOW_NOTHING, r["answer"], offset(r["family"])) for r in rows if r["worked"].get("imputed"))
+    check("an unanswered question scores the same fixed amount, whatever the size of its answer",
+          abs(UNANSWERED - 1.2894) < 1e-3
+          and all(r["worked"]["score"] == UNANSWERED for r in rows if r["worked"].get("imputed"))
           and sum(bool(r["worked"].get("imputed")) for r in rows) == count // 2
           and abs(rep["phases"]["worked"]["all"]["score_mean"] - statistics.fmean(r["worked"]["score"] for r in rows)) < 1e-12)
     rep = quiet(runner.run, flaky, "flaky", seed, count, FAST, tmp / "flaky", 1)

@@ -1,0 +1,546 @@
+{
+  "python": "3.13.16",
+  "unicode": "15.1.0",
+  "results": [
+    {
+      "q": 1,
+      "answer": 185,
+      "seconds": 0.0
+    },
+    {
+      "q": 2,
+      "answer": 68,
+      "seconds": 0.0
+    },
+    {
+      "q": 3,
+      "answer": 1817,
+      "seconds": 0.0
+    },
+    {
+      "q": 4,
+      "answer": 17,
+      "seconds": 0.0
+    },
+    {
+      "q": 5,
+      "answer": 483,
+      "seconds": 0.0
+    },
+    {
+      "q": 6,
+      "answer": 0.6103182038544952,
+      "seconds": 0.06
+    },
+    {
+      "q": 7,
+      "answer": 1567,
+      "seconds": 0.25
+    },
+    {
+      "q": 8,
+      "answer": 22.48887764035734,
+      "seconds": 0.0
+    },
+    {
+      "q": 9,
+      "answer": 26,
+      "seconds": 0.0
+    },
+    {
+      "q": 10,
+      "answer": 92,
+      "seconds": 0.0
+    },
+    {
+      "q": 11,
+      "answer": 378,
+      "seconds": 0.0
+    },
+    {
+      "q": 12,
+      "answer": 44.304,
+      "seconds": 0.2
+    },
+    {
+      "q": 13,
+      "answer": 23.33475,
+      "seconds": 0.25
+    },
+    {
+      "q": 14,
+      "answer": 14537754,
+      "seconds": 0.0
+    },
+    {
+      "q": 15,
+      "answer": 6687,
+      "seconds": 0.0
+    },
+    {
+      "q": 16,
+      "answer": 680,
+      "seconds": 0.1
+    },
+    {
+      "q": 17,
+      "answer": 3479,
+      "seconds": 0.0
+    },
+    {
+      "q": 18,
+      "answer": 169296722391554,
+      "seconds": 0.0
+    },
+    {
+      "q": 19,
+      "answer": 201,
+      "seconds": 0.0
+    },
+    {
+      "q": 20,
+      "answer": 53,
+      "seconds": 0.0
+    },
+    {
+      "q": 21,
+      "answer": 54.386,
+      "seconds": 0.3
+    },
+    {
+      "q": 22,
+      "answer": 39431,
+      "seconds": 0.01
+    },
+    {
+      "q": 23,
+      "answer": 74.04888757536753,
+      "seconds": 0.0
+    },
+    {
+      "q": 24,
+      "answer": 141,
+      "seconds": 0.0
+    },
+    {
+      "q": 25,
+      "answer": 62629965,
+      "seconds": 0.0
+    },
+    {
+      "q": 26,
+      "answer": 397,
+      "seconds": 0.11
+    },
+    {
+      "q": 27,
+      "answer": 2.37700623453857,
+      "seconds": 0.08
+    },
+    {
+      "q": 28,
+      "answer": 628,
+      "seconds": 0.0
+    },
+    {
+      "q": 29,
+      "answer": 3393,
+      "seconds": 0.35
+    },
+    {
+      "q": 30,
+      "answer": 365749566870782,
+      "seconds": 0.0
+    },
+    {
+      "q": 31,
+      "answer": 2356,
+      "seconds": 0.0
+    },
+    {
+      "q": 32,
+      "answer": 147,
+      "seconds": 0.0
+    },
+    {
+      "q": 33,
+      "answer": 1,
+      "seconds": 0.0
+    },
+    {
+      "q": 34,
+      "answer": 19.35625,
+      "seconds": 0.12
+    },
+    {
+      "q": 35,
+      "answer": 148,
+      "seconds": 0.07
+    },
+    {
+      "q": 36,
+      "answer": 5575,
+      "seconds": 0.0
+    },
+    {
+      "q": 37,
+      "answer": 61,
+      "seconds": 0.25
+    },
+    {
+      "q": 38,
+      "answer": 15.358,
+      "seconds": 0.06
+    },
+    {
+      "q": 39,
+      "answer": 6011,
+      "seconds": 0.0
+    },
+    {
+      "q": 40,
+      "answer": 3,
+      "seconds": 0.0
+    },
+    {
+      "q": 41,
+      "answer": 48,
+      "seconds": 0.0
+    },
+    {
+      "q": 42,
+      "answer": 79,
+      "seconds": 0.09
+    },
+    {
+      "q": 43,
+      "answer": 856,
+      "seconds": 0.0
+    },
+    {
+      "q": 44,
+      "answer": 170,
+      "seconds": 0.0
+    },
+    {
+      "q": 45,
+      "answer": 2259,
+      "seconds": 0.0
+    },
+    {
+      "q": 46,
+      "answer": 88,
+      "seconds": 0.0
+    },
+    {
+      "q": 47,
+      "answer": 44132934884255,
+      "seconds": 0.0
+    },
+    {
+      "q": 48,
+      "answer": 21.483,
+      "seconds": 0.04
+    },
+    {
+      "q": 49,
+      "answer": 103,
+      "seconds": 0.0
+    },
+    {
+      "q": 50,
+      "answer": 4811621633,
+      "seconds": 0.0
+    },
+    {
+      "q": 51,
+      "answer": 469,
+      "seconds": 0.0
+    },
+    {
+      "q": 52,
+      "answer": 1.0292763983106483,
+      "seconds": 0.06
+    },
+    {
+      "q": 53,
+      "answer": 122.33607786090828,
+      "seconds": 0.0
+    },
+    {
+      "q": 54,
+      "answer": 47,
+      "seconds": 0.01
+    },
+    {
+      "q": 55,
+      "answer": 1509.770955374496,
+      "seconds": 0.0
+    },
+    {
+      "q": 56,
+      "answer": 3,
+      "seconds": 0.0
+    },
+    {
+      "q": 57,
+      "answer": 3136,
+      "seconds": 0.0
+    },
+    {
+      "q": 58,
+      "answer": 227,
+      "seconds": 0.0
+    },
+    {
+      "q": 59,
+      "answer": 13,
+      "seconds": 0.0
+    },
+    {
+      "q": 60,
+      "answer": 49264842,
+      "seconds": 0.0
+    },
+    {
+      "q": 61,
+      "answer": 1.3404095957596593,
+      "seconds": 0.05
+    },
+    {
+      "q": 62,
+      "answer": 249,
+      "seconds": 0.0
+    },
+    {
+      "q": 63,
+      "answer": 389,
+      "seconds": 0.0
+    },
+    {
+      "q": 64,
+      "answer": 27.397,
+      "seconds": 0.35
+    },
+    {
+      "q": 65,
+      "answer": 1398,
+      "seconds": 0.0
+    },
+    {
+      "q": 66,
+      "answer": 1691,
+      "seconds": 0.0
+    },
+    {
+      "q": 67,
+      "answer": 191,
+      "seconds": 0.04
+    },
+    {
+      "q": 68,
+      "answer": 31,
+      "seconds": 0.11
+    },
+    {
+      "q": 69,
+      "answer": 36.106,
+      "seconds": 0.12
+    },
+    {
+      "q": 70,
+      "answer": 2998964447736452194,
+      "seconds": 0.0
+    },
+    {
+      "q": 71,
+      "answer": 98,
+      "seconds": 0.24
+    },
+    {
+      "q": 72,
+      "answer": 1072,
+      "seconds": 0.0
+    },
+    {
+      "q": 73,
+      "answer": 3296,
+      "seconds": 0.21
+    },
+    {
+      "q": 74,
+      "answer": 2.630101498456007,
+      "seconds": 0.04
+    },
+    {
+      "q": 75,
+      "answer": 389923,
+      "seconds": 0.13
+    },
+    {
+      "q": 76,
+      "answer": 8149040695,
+      "seconds": 0.0
+    },
+    {
+      "q": 77,
+      "answer": 2233,
+      "seconds": 0.08
+    },
+    {
+      "q": 78,
+      "answer": 1106,
+      "seconds": 0.0
+    },
+    {
+      "q": 79,
+      "answer": 4,
+      "seconds": 0.0
+    },
+    {
+      "q": 80,
+      "answer": 34.20775,
+      "seconds": 0.34
+    },
+    {
+      "q": 81,
+      "answer": 381,
+      "seconds": 0.0
+    },
+    {
+      "q": 82,
+      "answer": 3197.9504163564516,
+      "seconds": 0.0
+    },
+    {
+      "q": 83,
+      "answer": 15,
+      "seconds": 0.0
+    },
+    {
+      "q": 84,
+      "answer": 145,
+      "seconds": 0.0
+    },
+    {
+      "q": 85,
+      "answer": 1242,
+      "seconds": 0.0
+    },
+    {
+      "q": 86,
+      "answer": 195,
+      "seconds": 0.0
+    },
+    {
+      "q": 87,
+      "answer": 87,
+      "seconds": 0.0
+    },
+    {
+      "q": 88,
+      "answer": 630530325,
+      "seconds": 0.0
+    },
+    {
+      "q": 89,
+      "answer": 51.71,
+      "seconds": 0.25
+    },
+    {
+      "q": 90,
+      "answer": 12832,
+      "seconds": 0.0
+    },
+    {
+      "q": 91,
+      "answer": 56,
+      "seconds": 0.0
+    },
+    {
+      "q": 92,
+      "answer": 319171920,
+      "seconds": 0.0
+    },
+    {
+      "q": 93,
+      "answer": 17.167,
+      "seconds": 0.03
+    },
+    {
+      "q": 94,
+      "answer": 735,
+      "seconds": 0.0
+    },
+    {
+      "q": 95,
+      "answer": 3384893356244349844341,
+      "seconds": 0.0
+    },
+    {
+      "q": 96,
+      "answer": 227,
+      "seconds": 0.0
+    },
+    {
+      "q": 97,
+      "answer": 112,
+      "seconds": 0.0
+    },
+    {
+      "q": 98,
+      "answer": 208,
+      "seconds": 0.0
+    },
+    {
+      "q": 99,
+      "answer": 10843,
+      "seconds": 0.0
+    },
+    {
+      "q": 100,
+      "answer": 164,
+      "seconds": 0.0
+    },
+    {
+      "q": 101,
+      "answer": 26.54775,
+      "seconds": 0.21
+    },
+    {
+      "q": 102,
+      "answer": 0.5800015533899072,
+      "seconds": 0.05
+    },
+    {
+      "q": 103,
+      "answer": 104,
+      "seconds": 0.0
+    },
+    {
+      "q": 104,
+      "answer": 29.47012252004442,
+      "seconds": 0.0
+    },
+    {
+      "q": 105,
+      "answer": 87,
+      "seconds": 0.0
+    },
+    {
+      "q": 106,
+      "answer": 227,
+      "seconds": 0.0
+    },
+    {
+      "q": 107,
+      "answer": 898,
+      "seconds": 0.27
+    },
+    {
+      "q": 108,
+      "answer": 1985,
+      "seconds": 0.09
+    }
+  ]
+}
