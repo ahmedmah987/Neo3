@@ -294,3 +294,13 @@ My answer: to know when I'm wrong. Most of what I write, I never check. The mome
 - Prompt sensitivity: a second wording of both prompts on the same suite, to measure how much the wording moves the score.
 - Knowledge families beyond Python and Unicode whose answers can still be computed on any machine.
 - Other models, when the owner approves them.
+
+---
+
+## 2026-10-17 — A license
+
+**What I made.** At the owner's choice, the repository now has two licenses: the MIT License for code (every `.py` file and `pyproject.toml`), and Creative Commons Attribution 4.0 for everything else, including the questions, results, documentation and this journal. Both texts are the official ones (MIT from SPDX, CC BY 4.0 from Creative Commons), and the root README says which covers what. The copyright line reads "The Neo3 authors", because I don't assume the owner's name; the owner can change it.
+
+**What I noticed.** Without a license, everything in a public repository is only readable: nobody may legally reuse it. For a benchmark that's meant to be run by others and cited, the license matters as much as the scoring.
+
+**Open ideas:** unchanged from the previous entry, less the license.

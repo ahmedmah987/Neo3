@@ -145,6 +145,10 @@ Runs on real models, with every raw reply, are in [results/](results/). The firs
 
 Calibench grew out of the [guessbook](../guessbook/), where Claude answered nine rounds of these questions itself under a stricter protocol: every answer committed and pushed to git before anything computed the truth. The guessbook still draws its rounds from this package. What those rounds taught shaped the scoring: knowing an answer exactly isn't the same as being calibrated, statistical and knowledge questions fail in different ways, and working a question out matters more than any adjustment to instinct.
 
+## License
+
+The code is under the [MIT License](../LICENSE). The questions, results and documentation are under [Creative Commons Attribution 4.0](../LICENSE-CC-BY-4.0); credit "Neo3, https://github.com/ahmedmah987/Neo3".
+
 ## Files
 
 | File | What it does |

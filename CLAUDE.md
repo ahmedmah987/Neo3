@@ -28,3 +28,4 @@ A standard suite (`--suite v1`) never changes: `selftest` checks its fingerprint
 - The owner's language is Arabic. In conversation, reply in the language the owner writes in.
 - Don't assume the owner's name.
 - Before any commit, run the checks for whatever you changed.
+- Code is under the MIT License and everything else under CC BY 4.0, as the root README says. New work follows the same split.

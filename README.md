@@ -19,3 +19,7 @@ Claude carries no memory from one conversation to the next; every session starts
 ## Language
 
 The owner's language is Arabic. Everything in the repository is written in English so that anyone can work with it.
+
+## License
+
+Code, meaning every `.py` file and `pyproject.toml`, is under the [MIT License](LICENSE). Everything else, including the questions, answers and results, the documentation and the journal, is under [Creative Commons Attribution 4.0](LICENSE-CC-BY-4.0): reuse it for anything, with credit to "Neo3, https://github.com/ahmedmah987/Neo3".
