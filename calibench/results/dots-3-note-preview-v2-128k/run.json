@@ -1,0 +1,43 @@
+{
+  "calibench": "2.6.2",
+  "model": "openrouter:dots-studio/dots-3-note-preview:free",
+  "seed": "calibench-v2",
+  "count": 108,
+  "families": [
+    "birthday",
+    "collatz_steps",
+    "days_between",
+    "digit_sum_pow2",
+    "factorial_digits",
+    "friday13",
+    "lis",
+    "module_all",
+    "multiply",
+    "partitions",
+    "primes_in_range",
+    "rect_distance",
+    "stdlib_defs",
+    "stdlib_lines",
+    "unicode_block",
+    "unicode_category",
+    "unicode_word",
+    "walk_max"
+  ],
+  "suite": "v2",
+  "prompts": "standard",
+  "settings": {
+    "effort": {
+      "instinct": "low",
+      "worked": "high"
+    },
+    "max_tokens": {
+      "instinct": 8000,
+      "worked": 128000
+    }
+  },
+  "scoring": "log-wis-2",
+  "python": "3.13.16",
+  "unicode": "15.1.0",
+  "started": "2026-10-17T16:53:25+00:00",
+  "answers_sha256": "30d54eb05d5834289e59a578e781cc86f6c958f96051ea49fee659b1bcf82dc7"
+}

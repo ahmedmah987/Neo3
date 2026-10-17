@@ -121,7 +121,7 @@ Every true answer is positive, so answers are scored on a log scale: questions o
 - **By kind and by family**: the same scores for knowledge, statistical and exact questions, and for each family, which tend to fail in different ways.
 - **Unanswered questions** (refused, unreadable, cut off at the token cap or failed) cost a fixed 1.289 each, the score of an answer off by a factor of ten with wide intervals, whatever the size of the true answer. `compare` also compares runs on the questions all of them answered.
 
-`compare` needs runs asked the same questions. It gives each run's score with a 90% bootstrap interval over questions and its difference from the best with a paired interval: when that interval includes zero, the questions don't separate the two. It also estimates how many questions would separate them. For scale: one run of a suite separates differences of about 0.02–0.03, and three runs about 0.01–0.02. Runs of the same model also get a **test–retest** table: how much the score moved between runs, and how well the per-question scores agree.
+`compare` needs runs asked the same questions. It gives each run's score with a 90% bootstrap interval over questions and its difference from the best with a paired interval: when that interval includes zero, the questions don't separate the two. It also estimates how many questions would separate them. For scale: one run of a suite separates differences of about 0.02–0.03, and three runs about 0.01–0.02. Runs of the same model also get a table of how much the score moved between runs and how well the per-question scores agree. With the same prompts and settings that is **test–retest**; any difference in prompts, effort or token caps is named in the table.
 
 ## What a run leaves behind
 

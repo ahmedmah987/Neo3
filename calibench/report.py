@@ -494,6 +494,23 @@ def consistency(reports, names):
     return "\n".join(lines) + "\n"
 
 
+def settings_difference(a, b):
+    """How two runs' recorded settings differ, as short phrases; runs before 2.4 recorded none."""
+    if a == b:
+        return []
+    if not a or not b:
+        return ["settings recorded for only one run"]
+    names = {"effort": "effort", "max_tokens": "token cap"}
+    out = []
+    for key, name in names.items():
+        for phase in PHASES:
+            x, y = (a.get(key) or {}).get(phase), (b.get(key) or {}).get(phase)
+            if x != y:
+                out.append(f"{phase} {name} {x:,} / {y:,}" if isinstance(x, int) and isinstance(y, int)
+                           else f"{phase} {name} {x} / {y}")
+    return out or ["other settings differ"]
+
+
 def compare(reports, names=None):
     """Compare runs on the same questions. Unanswered questions score as UNANSWERED."""
     names = names or [rep["meta"]["model"] for rep in reports]
@@ -515,6 +532,7 @@ def compare(reports, names=None):
             + (f" [{prompts} prompts]" if prompts != "standard" else ""),
             "model": model,
             "prompts": prompts,
+            "settings": rep["meta"].get("settings"),
             "scores": scores,
             "mean": statistics.fmean(scores),
             "instinct": statistics.fmean(r["instinct"]["score"] for r in rows),
@@ -578,15 +596,18 @@ def compare(reports, names=None):
     pairs = [(a, b) for i, a in enumerate(stats) for b in stats[i + 1:] if a["model"] == b["model"]]
     if pairs:
         lines += ["", "## Runs of the same model", "", "Runs of the same model on the same questions. With the same "
-                  "prompts this is test–retest: a good benchmark gives a model nearly the same score each time. With "
-                  "different prompts it measures sensitivity to wording, which matters only if it exceeds test–retest.", "",
-                  "| Runs | Prompts | Difference in score [90% interval] | Rank correlation of question scores | Same 90% hit or miss |",
+                  "prompts and settings this is test–retest: a good benchmark gives a model nearly the same score each "
+                  "time. With different prompts it measures sensitivity to wording, which matters only if it exceeds "
+                  "test–retest; with different settings (effort or token caps), it measures their effect.", "",
+                  "| Runs | Prompts and settings | Difference in score [90% interval] | Rank correlation of question scores "
+                  "| Same 90% hit or miss |",
                   "|---|---|---|---|---|"]
         for a, b in pairs:
             d = [x - y for x, y in zip(b["scores"], a["scores"])]
             both = [(x, y) for x, y in zip(a["hits90_by_key"], b["hits90_by_key"]) if x is not None and y is not None]
             rho = spearman(a["scores"], b["scores"])
-            same = "same" if a["prompts"] == b["prompts"] else f"{a['prompts']} / {b['prompts']}"
+            same = "; ".join(([] if a["prompts"] == b["prompts"] else [f"{a['prompts']} / {b['prompts']} prompts"])
+                             + settings_difference(a["settings"], b["settings"])) or "same"
             lines.append(f"| {a['label']} / {b['label']} | {same} | {sc(statistics.fmean(d))}{ci(bootstrap_mean(d))} "
                          f"| {sc(rho)} | {frac(sum(x == y for x, y in both), len(both))} |")
     return "\n".join(lines) + "\n"

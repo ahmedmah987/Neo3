@@ -17,6 +17,7 @@ Scores are Calibench 2.0's log-scale weighted interval score (lower is better; 0
 | [deepseek-v4.1-flash-v1](deepseek-v4.1-flash-v1/report.md) | openrouter:deepseek/deepseek-v4.1-flash-1017 | standard | suite v1, 104 | 0.267 [0.193, 0.347] | 0.164 | 54 / 69 of 88 | 62% | 1,435 / 15,330 | $0.919 |
 | [deepseek-v4.1-flash-v2](deepseek-v4.1-flash-v2/report.md) | openrouter:deepseek/deepseek-v4.1-flash-1017 | standard | suite v2, 108 | 0.292 [0.210, 0.374] | 0.113 | 63 / 71 of 86 | 47% | 1,259 / 14,648 | $0.910 |
 | [dots-3-note-preview-v2](dots-3-note-preview-v2/report.md) | openrouter:dots-studio/dots-3-note-preview:free | standard | suite v2, 108 | 0.501 [0.406, 0.597] | 0.425 | 51 / 60 of 71 | 50% | 2,948 / 11,053 | $0.000 |
+| [dots-3-note-preview-v2-128k](dots-3-note-preview-v2-128k/report.md) | openrouter:dots-studio/dots-3-note-preview:free | standard | suite v2, 108 | 0.273 [0.201, 0.351] | 0.415 | 60 / 77 of 91 | 46% | 2,955 / 24,274 | $0.000 |
 | [openrouter_anthropic_claude-haiku-5.5-2026-10-17](openrouter_anthropic_claude-haiku-5.5-2026-10-17/report.md) | openrouter:anthropic/claude-haiku-5.5 | standard | seed `2026-10-17`, 26 | 0.104 [0.044, 0.177] | 0.185 | 15 / 18 of 26 | 52% | 182 / 4,513 | $0.072 |
 <!-- index:end -->
 
@@ -35,6 +36,21 @@ The third model, chosen by the repository's owner: `dots-studio/dots-3-note-prev
 - **When it answers, it is close to Haiku.** On the 71 questions both answered, the difference includes zero. On the 57 all three answered, DeepSeek is better than Dots. Its 90% intervals held the answer 85% of the time (79% leaving out single numbers): overconfident, like the others. All 18 answers it gave as a single number were exactly right.
 - **Its instinct answers aren't instinct either.** At low effort it produced 4,167 output tokens per instinct answer, against Haiku's 285 and DeepSeek's 1,290, and 24 of 108 were cut off at the 8,000-token cap.
 - **Its reasoning count is too low.** AtlasCloud reported 1,512,179 reasoning tokens out of 2,173,892 output tokens, yet the replies average 126 characters, so about 30% of the output is counted as neither. The output tokens are the safer measure for this model, and its reasoning column in the table above understates it.
+
+### Dots with a higher token cap
+
+To see whether the answers Dots didn't finish would have been any good, suite v2 was run again with a worked cap of 128,000 tokens (`dots-3-note-preview-v2-128k`), all else the same. It took 1 hour 44 minutes and cost nothing. Six worked calls failed on an error OpenRouter sent in place of a reply, which Calibench 2.6.1 reported only as a missing field; 2.6.2 names the error, and the six were asked again.
+
+| Questions | Haiku | DeepSeek | Dots, 32,000 | Dots, 128,000 |
+|---|---|---|---|---|
+| answered (worked) | 108 | 86 | 71 | 91 |
+| all 108 | 0.068 | 0.292 | 0.501 | 0.273 |
+| the 54 all four runs answered | 0.079 | 0.013 | 0.083 | 0.080 |
+
+- **The answers it hadn't finished were as good as the rest.** Of the 37 questions cut off at 32,000 tokens, it answered 23 this time, with a mean score of 0.094; its 90% intervals held 19 of the 23. On the 68 questions it answered both times, the second run scored 0.080 and held 58 of 68. With the higher cap Dots is still behind Haiku by 0.205 [0.121, 0.289], about where DeepSeek is.
+- **Which questions it finishes is partly chance.** 12 of the 23 newly answered questions took under 32,000 tokens this time, five of them under 5,000. Three questions it had answered the first time ran to the new cap. Its instinct answers, under identical settings, were cut off 24 and 21 times, on only 8 of the same questions. Their scores moved little (0.425 and 0.415). So a model like this needs several runs: one run's interval resamples questions but not this.
+- **14 of the 37 it still didn't answer:** 13 ran to the new cap and one ended in a content filter after 73,588 tokens on a Unicode word count. 10 of the 14 are knowledge questions (Unicode word, category and block counts, `__all__` sizes, function counts) and 4 are longest increasing subsequences.
+- It used 33,784 output tokens per worked answer, against 15,962 under the lower cap.
 
 ## DeepSeek V4.1 Flash against Claude Haiku 5.5
 

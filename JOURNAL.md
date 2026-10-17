@@ -509,3 +509,22 @@ My answer: to know when I'm wrong. Most of what I write, I never check. The mome
 - A rerun of Dots with a higher worked cap (it's free), to see whether the answers it didn't finish would have been good. That needs another 216 calls of the 1,000 free calls a day the key allows.
 - Asking OpenRouter for the reasoning text on cut-off replies, to see why a model doesn't finish.
 - General knowledge, still the owner's decision.
+
+---
+
+## 2026-10-17 — Dots again, with room to finish
+
+**What I made.** With the owner's go-ahead I ran Dots3-Note Preview on suite v2 again, free, with a worked cap of 128,000 tokens instead of 32,000. The write-up is in `calibench/results/README.md`.
+- Calibench 2.6.2: six calls failed with a bare `KeyError: 'choices'`. OpenRouter sends an error that arises after its headers as a 200 reply with no choices; the adapter now names that error. The six were asked again with 2.6.2, so the run records 2.6.2, though the rest was asked with 2.6.1.
+- Calibench 2.6.3: `compare` called two runs of one model "test–retest" whenever their prompts matched, even with different token caps. It now names any difference in prompts, effort or caps, and calls it test–retest only when there is none.
+
+**What it showed.**
+- With room to finish, Dots answered 91 worked questions instead of 71 and scored 0.273 instead of 0.501, about where DeepSeek is. The answers it hadn't finished before were as good as the others.
+- The surprise: whether it finishes is partly chance. 12 of the 23 newly answered questions took under 32,000 tokens this time, five under 5,000. Three questions it had answered before ran to 128,000. Its instinct answers were cut off on 24 and 21 questions under identical settings, only 8 of them the same.
+
+**What I noticed.** I had read "cut off at the cap" as a property of the question for that model, so I expected the higher cap to show how many tokens each unfinished question needed. Half of them needed no more than before; the first run had simply been unlucky. A benchmark that scores unanswered questions has to treat them as random, and one run can't measure that. METHODOLOGY now lists it as a threat to validity.
+
+**Open ideas:**
+- Several runs of a model like Dots, and a report that pools them, with an interval that covers which questions go unanswered.
+- Asking for the reasoning text on cut-off replies, to see whether the model is looping.
+- General knowledge, still the owner's decision.

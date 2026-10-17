@@ -1,6 +1,6 @@
 # Calibench methodology
 
-This document describes what Calibench measures, how, and where the measurement can mislead. It describes Calibench 2.6.2 with scoring `log-wis-2`.
+This document describes what Calibench measures, how, and where the measurement can mislead. It describes Calibench 2.6.3 with scoring `log-wis-2`.
 
 ## What is measured
 
@@ -63,7 +63,7 @@ The worked prompt allows written working rather than demanding it, because some 
 
 **Reading replies.** The answer is the last JSON object in the reply that has an `estimate`. Numbers may be given as strings with thousands separators. Interval ends are put in order. The estimate isn't required to lie inside its intervals, because each part is scored on its own. If no answer can be read, the question is asked once more with a reminder of the format. Each call ends with a status: `ok`, `unparsed`, `refused` (the API's refusal stop reason or a content filter), `truncated` (the reply hit its token cap before giving an answer; asking again under the same cap would be cut off again, so it isn't retried) or `error`.
 
-**Settings.** From Calibench 2.4 each run records how the model was asked: the effort for each phase and the token caps (8,000 for instinct answers and, by default, 32,000 for worked ones, reasoning included; `--worked-max-tokens` changes the second). A run can't be resumed with other settings. Effort names don't mean the same amount of reasoning across models: at high effort Claude Haiku 5.5 reasoned about 3,400 tokens per worked answer, while DeepSeek V4.1 Flash reasoned 20,000–32,000 in a trial. The reasoning tokens each report gives are the comparable measure.
+**Settings.** From Calibench 2.4 each run records how the model was asked: the effort for each phase and the token caps (8,000 for instinct answers and, by default, 32,000 for worked ones, reasoning included; `--worked-max-tokens` changes the second). A run can't be resumed with other settings. Effort names don't mean the same amount of reasoning across models: at high effort Claude Haiku 5.5 reasoned about 3,400 tokens per worked answer, while DeepSeek V4.1 Flash reasoned 20,000–32,000 in a trial. The output tokens each report gives are the comparable measure. Reasoning tokens are counted by the provider, and not all count them alike: for Dots3-Note Preview, AtlasCloud counted about 70% of the output as reasoning, though the replies were a few dozen tokens each.
 
 **No model substitution.** Calibench never enables server-side fallbacks that retry a refused request on another model. Each call records the model, and on OpenRouter the provider, that actually served it.
 
@@ -124,6 +124,7 @@ When publishing a result, report: the suite (or seed, count and families), the C
 9. **Simulated answers.** Three families are settled by simulation. Their noise is stated and part of the question, but it is part of what is scored.
 10. **Calculation questions can be nearly solved.** A capable model may compute most of them exactly, as Claude Haiku 5.5 did. Their information is then in rare confident slips, which cost a great deal, and in interval width, which on a log scale costs little when the answer is large.
 11. **The cost of an unanswered question.** Scoring an unanswered question as a fixed 1.289 is a convention. It is larger than most honest answers score, so leaving questions unanswered rarely helps, but a model that knew which of its answers would miss badly could gain by not answering them. A model that can't finish within its token cap loses those questions; the comparison on questions every run answered separates that from calibration.
+12. **Whether a model finishes is partly chance.** Dots3-Note Preview ran past the 32,000-token cap on 37 worked questions of suite v2. Run again with a cap of 128,000, it answered 23 of them, and 12 of those 23 took under 32,000 tokens, five of them under 5,000; three questions it had answered the first time ran to the new cap. Its instinct answers, under the same settings both times, were cut off on 24 and 21 questions, only 8 of them the same. So for a model that often fails to finish, which questions go unanswered varies from run to run, and one run's interval, which only resamples questions, understates the uncertainty in its score. Run such a model more than once.
 
 ## Reliability
 

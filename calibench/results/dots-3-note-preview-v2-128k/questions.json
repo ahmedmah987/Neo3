@@ -1,0 +1,1145 @@
+{
+  "seed": "calibench-v2",
+  "model": "openrouter:dots-studio/dots-3-note-preview:free",
+  "prompts": "standard",
+  "settings": {
+    "effort": {
+      "instinct": "low",
+      "worked": "high"
+    },
+    "max_tokens": {
+      "instinct": 8000,
+      "worked": 128000
+    }
+  },
+  "questions": [
+    {
+      "q": 1,
+      "family": "friday13",
+      "kind": "calculation",
+      "params": {
+        "first": 1607,
+        "last": 1713
+      },
+      "short": "Friday the 13ths in 1607–1713",
+      "text": "How many Friday the 13ths are there from January 1, 1607 to December 31, 1713, in the Gregorian calendar?"
+    },
+    {
+      "q": 2,
+      "family": "primes_in_range",
+      "kind": "statistical",
+      "params": {
+        "a": 3218046,
+        "b": 3219109
+      },
+      "short": "primes in [3,218,046, 3,219,109]",
+      "text": "How many primes p satisfy 3,218,046 ≤ p ≤ 3,219,109?"
+    },
+    {
+      "q": 3,
+      "family": "stdlib_lines",
+      "kind": "knowledge",
+      "params": {
+        "module": "statistics"
+      },
+      "short": "lines in `statistics`",
+      "text": "How many lines are in the source file of the standard-library module `statistics` in Python 3.13 (every line, blank or not)?"
+    },
+    {
+      "q": 4,
+      "family": "stdlib_defs",
+      "kind": "knowledge",
+      "params": {
+        "module": "tabnanny"
+      },
+      "short": "function definitions in `tabnanny`",
+      "text": "How many function definitions (def and async def, counting methods and nested functions) are in the source file of the standard-library module `tabnanny` in Python 3.13?"
+    },
+    {
+      "q": 5,
+      "family": "factorial_digits",
+      "kind": "calculation",
+      "params": {
+        "n": 246
+      },
+      "short": "digits of 246!",
+      "text": "How many decimal digits does 246! (the factorial of 246) have?"
+    },
+    {
+      "q": 6,
+      "family": "rect_distance",
+      "kind": "statistical",
+      "params": {
+        "b": 1.33,
+        "seed": 4072120939
+      },
+      "short": "mean distance in a 1 × 1.33 rectangle",
+      "text": "Two points are chosen independently and uniformly at random in a 1 × 1.33 rectangle. What is the expected distance between them? (Settled by averaging 400,000 random pairs.)"
+    },
+    {
+      "q": 7,
+      "family": "unicode_word",
+      "kind": "knowledge",
+      "params": {
+        "word": "LATIN"
+      },
+      "short": "Unicode names with the word LATIN",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have a name containing the whole word LATIN? (Names are split into words at spaces and hyphens.)"
+    },
+    {
+      "q": 8,
+      "family": "birthday",
+      "kind": "exact",
+      "params": {
+        "d": 303
+      },
+      "short": "draws until a repeat, d = 303",
+      "text": "Integers are drawn uniformly at random from 1 to 303, with replacement, until some value appears for the second time. What is the expected number of draws, counting the repeat?"
+    },
+    {
+      "q": 9,
+      "family": "module_all",
+      "kind": "knowledge",
+      "params": {
+        "module": "random"
+      },
+      "short": "names in `random.__all__`",
+      "text": "How many names are listed in `random.__all__` in Python 3.13?"
+    },
+    {
+      "q": 10,
+      "family": "unicode_block",
+      "kind": "knowledge",
+      "params": {
+        "lo": 5024,
+        "hi": 5119
+      },
+      "short": "assigned in the Cherokee block",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points in U+13A0–U+13FF (the Cherokee block) are assigned, that is, have a category other than Cn?"
+    },
+    {
+      "q": 11,
+      "family": "collatz_steps",
+      "kind": "statistical",
+      "params": {
+        "n": 611221186107
+      },
+      "short": "Collatz steps from 611,221,186,107",
+      "text": "Starting from 611,221,186,107, how many steps does the Collatz process (halve if even, 3n + 1 if odd) take to reach 1?"
+    },
+    {
+      "q": 12,
+      "family": "lis",
+      "kind": "statistical",
+      "params": {
+        "n": 600,
+        "seed": 3808849606
+      },
+      "short": "longest increasing subsequence, n = 600",
+      "text": "What is the average length of the longest increasing subsequence of a uniformly random permutation of 600 elements? (Settled by averaging 1,000 random permutations.)"
+    },
+    {
+      "q": 13,
+      "family": "walk_max",
+      "kind": "statistical",
+      "params": {
+        "n": 901,
+        "seed": 1323090163
+      },
+      "short": "highest point of a 901-step walk",
+      "text": "A simple random walk on the integers starts at 0 and takes 901 steps of +1 or −1, each with probability ½. What is the expected highest position it reaches (0 if it never rises above the start)? (Settled by averaging 4,000 random walks.)"
+    },
+    {
+      "q": 14,
+      "family": "multiply",
+      "kind": "calculation",
+      "params": {
+        "a": 6787,
+        "b": 2142
+      },
+      "short": "6,787 × 2,142",
+      "text": "What is 6,787 × 2,142?"
+    },
+    {
+      "q": 15,
+      "family": "days_between",
+      "kind": "calculation",
+      "params": {
+        "start": "2381-11-09",
+        "end": "2400-03-01"
+      },
+      "short": "days from 2381-11-09 to 2400-03-01",
+      "text": "How many days are there from November 9, 2381 to March 1, 2400, in the Gregorian calendar? (From one day to the next counts as 1.)"
+    },
+    {
+      "q": 16,
+      "family": "unicode_category",
+      "kind": "knowledge",
+      "params": {
+        "category": "Nd"
+      },
+      "short": "code points in category Nd",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have the general category Nd (decimal digits)?"
+    },
+    {
+      "q": 17,
+      "family": "digit_sum_pow2",
+      "kind": "statistical",
+      "params": {
+        "n": 2579
+      },
+      "short": "digit sum of 2^2579",
+      "text": "What is the sum of the decimal digits of 2^2579?"
+    },
+    {
+      "q": 18,
+      "family": "partitions",
+      "kind": "calculation",
+      "params": {
+        "n": 246
+      },
+      "short": "partitions of 246",
+      "text": "In how many ways can 246 be written as a sum of positive integers, where the order of the terms doesn't matter (the partition number p(246))?"
+    },
+    {
+      "q": 19,
+      "family": "collatz_steps",
+      "kind": "statistical",
+      "params": {
+        "n": 273342000302
+      },
+      "short": "Collatz steps from 273,342,000,302",
+      "text": "Starting from 273,342,000,302, how many steps does the Collatz process (halve if even, 3n + 1 if odd) take to reach 1?"
+    },
+    {
+      "q": 20,
+      "family": "days_between",
+      "kind": "calculation",
+      "params": {
+        "start": "2367-07-04",
+        "end": "2367-08-26"
+      },
+      "short": "days from 2367-07-04 to 2367-08-26",
+      "text": "How many days are there from July 4, 2367 to August 26, 2367, in the Gregorian calendar? (From one day to the next counts as 1.)"
+    },
+    {
+      "q": 21,
+      "family": "lis",
+      "kind": "statistical",
+      "params": {
+        "n": 880,
+        "seed": 1129731977
+      },
+      "short": "longest increasing subsequence, n = 880",
+      "text": "What is the average length of the longest increasing subsequence of a uniformly random permutation of 880 elements? (Settled by averaging 1,000 random permutations.)"
+    },
+    {
+      "q": 22,
+      "family": "factorial_digits",
+      "kind": "calculation",
+      "params": {
+        "n": 10938
+      },
+      "short": "digits of 10,938!",
+      "text": "How many decimal digits does 10,938! (the factorial of 10,938) have?"
+    },
+    {
+      "q": 23,
+      "family": "birthday",
+      "kind": "exact",
+      "params": {
+        "d": 3428
+      },
+      "short": "draws until a repeat, d = 3,428",
+      "text": "Integers are drawn uniformly at random from 1 to 3,428, with replacement, until some value appears for the second time. What is the expected number of draws, counting the repeat?"
+    },
+    {
+      "q": 24,
+      "family": "unicode_block",
+      "kind": "knowledge",
+      "params": {
+        "lo": 65136,
+        "hi": 65279
+      },
+      "short": "assigned in the Arabic Presentation Forms-B block",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points in U+FE70–U+FEFF (the Arabic Presentation Forms-B block) are assigned, that is, have a category other than Cn?"
+    },
+    {
+      "q": 25,
+      "family": "multiply",
+      "kind": "calculation",
+      "params": {
+        "a": 21339,
+        "b": 2935
+      },
+      "short": "21,339 × 2,935",
+      "text": "What is 21,339 × 2,935?"
+    },
+    {
+      "q": 26,
+      "family": "unicode_category",
+      "kind": "knowledge",
+      "params": {
+        "category": "Lm"
+      },
+      "short": "code points in category Lm",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have the general category Lm (modifier letters)?"
+    },
+    {
+      "q": 27,
+      "family": "rect_distance",
+      "kind": "statistical",
+      "params": {
+        "b": 6.93,
+        "seed": 3601016345
+      },
+      "short": "mean distance in a 1 × 6.93 rectangle",
+      "text": "Two points are chosen independently and uniformly at random in a 1 × 6.93 rectangle. What is the expected distance between them? (Settled by averaging 400,000 random pairs.)"
+    },
+    {
+      "q": 28,
+      "family": "stdlib_lines",
+      "kind": "knowledge",
+      "params": {
+        "module": "base64"
+      },
+      "short": "lines in `base64`",
+      "text": "How many lines are in the source file of the standard-library module `base64` in Python 3.13 (every line, blank or not)?"
+    },
+    {
+      "q": 29,
+      "family": "unicode_word",
+      "kind": "knowledge",
+      "params": {
+        "word": "SIGN"
+      },
+      "short": "Unicode names with the word SIGN",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have a name containing the whole word SIGN? (Names are split into words at spaces and hyphens.)"
+    },
+    {
+      "q": 30,
+      "family": "partitions",
+      "kind": "calculation",
+      "params": {
+        "n": 256
+      },
+      "short": "partitions of 256",
+      "text": "In how many ways can 256 be written as a sum of positive integers, where the order of the terms doesn't matter (the partition number p(256))?"
+    },
+    {
+      "q": 31,
+      "family": "primes_in_range",
+      "kind": "statistical",
+      "params": {
+        "a": 3705675,
+        "b": 3741104
+      },
+      "short": "primes in [3,705,675, 3,741,104]",
+      "text": "How many primes p satisfy 3,705,675 ≤ p ≤ 3,741,104?"
+    },
+    {
+      "q": 32,
+      "family": "friday13",
+      "kind": "calculation",
+      "params": {
+        "first": 2120,
+        "last": 2204
+      },
+      "short": "Friday the 13ths in 2120–2204",
+      "text": "How many Friday the 13ths are there from January 1, 2120 to December 31, 2204, in the Gregorian calendar?"
+    },
+    {
+      "q": 33,
+      "family": "module_all",
+      "kind": "knowledge",
+      "params": {
+        "module": "fractions"
+      },
+      "short": "names in `fractions.__all__`",
+      "text": "How many names are listed in `fractions.__all__` in Python 3.13?"
+    },
+    {
+      "q": 34,
+      "family": "walk_max",
+      "kind": "statistical",
+      "params": {
+        "n": 608,
+        "seed": 3062015141
+      },
+      "short": "highest point of a 608-step walk",
+      "text": "A simple random walk on the integers starts at 0 and takes 608 steps of +1 or −1, each with probability ½. What is the expected highest position it reaches (0 if it never rises above the start)? (Settled by averaging 4,000 random walks.)"
+    },
+    {
+      "q": 35,
+      "family": "stdlib_defs",
+      "kind": "knowledge",
+      "params": {
+        "module": "inspect"
+      },
+      "short": "function definitions in `inspect`",
+      "text": "How many function definitions (def and async def, counting methods and nested functions) are in the source file of the standard-library module `inspect` in Python 3.13?"
+    },
+    {
+      "q": 36,
+      "family": "digit_sum_pow2",
+      "kind": "statistical",
+      "params": {
+        "n": 4112
+      },
+      "short": "digit sum of 2^4112",
+      "text": "What is the sum of the decimal digits of 2^4112?"
+    },
+    {
+      "q": 37,
+      "family": "unicode_word",
+      "kind": "knowledge",
+      "params": {
+        "word": "STAR"
+      },
+      "short": "Unicode names with the word STAR",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have a name containing the whole word STAR? (Names are split into words at spaces and hyphens.)"
+    },
+    {
+      "q": 38,
+      "family": "walk_max",
+      "kind": "statistical",
+      "params": {
+        "n": 400,
+        "seed": 1573284016
+      },
+      "short": "highest point of a 400-step walk",
+      "text": "A simple random walk on the integers starts at 0 and takes 400 steps of +1 or −1, each with probability ½. What is the expected highest position it reaches (0 if it never rises above the start)? (Settled by averaging 4,000 random walks.)"
+    },
+    {
+      "q": 39,
+      "family": "digit_sum_pow2",
+      "kind": "statistical",
+      "params": {
+        "n": 4557
+      },
+      "short": "digit sum of 2^4557",
+      "text": "What is the sum of the decimal digits of 2^4557?"
+    },
+    {
+      "q": 40,
+      "family": "module_all",
+      "kind": "knowledge",
+      "params": {
+        "module": "bdb"
+      },
+      "short": "names in `bdb.__all__`",
+      "text": "How many names are listed in `bdb.__all__` in Python 3.13?"
+    },
+    {
+      "q": 41,
+      "family": "days_between",
+      "kind": "calculation",
+      "params": {
+        "start": "2360-02-08",
+        "end": "2360-03-27"
+      },
+      "short": "days from 2360-02-08 to 2360-03-27",
+      "text": "How many days are there from February 8, 2360 to March 27, 2360, in the Gregorian calendar? (From one day to the next counts as 1.)"
+    },
+    {
+      "q": 42,
+      "family": "unicode_category",
+      "kind": "knowledge",
+      "params": {
+        "category": "Ps"
+      },
+      "short": "code points in category Ps",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have the general category Ps (opening punctuation)?"
+    },
+    {
+      "q": 43,
+      "family": "factorial_digits",
+      "kind": "calculation",
+      "params": {
+        "n": 395
+      },
+      "short": "digits of 395!",
+      "text": "How many decimal digits does 395! (the factorial of 395) have?"
+    },
+    {
+      "q": 44,
+      "family": "collatz_steps",
+      "kind": "statistical",
+      "params": {
+        "n": 257793746753
+      },
+      "short": "Collatz steps from 257,793,746,753",
+      "text": "Starting from 257,793,746,753, how many steps does the Collatz process (halve if even, 3n + 1 if odd) take to reach 1?"
+    },
+    {
+      "q": 45,
+      "family": "stdlib_lines",
+      "kind": "knowledge",
+      "params": {
+        "module": "subprocess"
+      },
+      "short": "lines in `subprocess`",
+      "text": "How many lines are in the source file of the standard-library module `subprocess` in Python 3.13 (every line, blank or not)?"
+    },
+    {
+      "q": 46,
+      "family": "unicode_block",
+      "kind": "knowledge",
+      "params": {
+        "lo": 4256,
+        "hi": 4351
+      },
+      "short": "assigned in the Georgian block",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points in U+10A0–U+10FF (the Georgian block) are assigned, that is, have a category other than Cn?"
+    },
+    {
+      "q": 47,
+      "family": "partitions",
+      "kind": "calculation",
+      "params": {
+        "n": 229
+      },
+      "short": "partitions of 229",
+      "text": "In how many ways can 229 be written as a sum of positive integers, where the order of the terms doesn't matter (the partition number p(229))?"
+    },
+    {
+      "q": 48,
+      "family": "lis",
+      "kind": "statistical",
+      "params": {
+        "n": 156,
+        "seed": 3713970186
+      },
+      "short": "longest increasing subsequence, n = 156",
+      "text": "What is the average length of the longest increasing subsequence of a uniformly random permutation of 156 elements? (Settled by averaging 1,000 random permutations.)"
+    },
+    {
+      "q": 49,
+      "family": "primes_in_range",
+      "kind": "statistical",
+      "params": {
+        "a": 203866,
+        "b": 205144
+      },
+      "short": "primes in [203,866, 205,144]",
+      "text": "How many primes p satisfy 203,866 ≤ p ≤ 205,144?"
+    },
+    {
+      "q": 50,
+      "family": "multiply",
+      "kind": "calculation",
+      "params": {
+        "a": 156899,
+        "b": 30667
+      },
+      "short": "156,899 × 30,667",
+      "text": "What is 156,899 × 30,667?"
+    },
+    {
+      "q": 51,
+      "family": "friday13",
+      "kind": "calculation",
+      "params": {
+        "first": 2295,
+        "last": 2567
+      },
+      "short": "Friday the 13ths in 2295–2567",
+      "text": "How many Friday the 13ths are there from January 1, 2295 to December 31, 2567, in the Gregorian calendar?"
+    },
+    {
+      "q": 52,
+      "family": "rect_distance",
+      "kind": "statistical",
+      "params": {
+        "b": 2.74,
+        "seed": 2350545563
+      },
+      "short": "mean distance in a 1 × 2.74 rectangle",
+      "text": "Two points are chosen independently and uniformly at random in a 1 × 2.74 rectangle. What is the expected distance between them? (Settled by averaging 400,000 random pairs.)"
+    },
+    {
+      "q": 53,
+      "family": "birthday",
+      "kind": "exact",
+      "params": {
+        "d": 9424
+      },
+      "short": "draws until a repeat, d = 9,424",
+      "text": "Integers are drawn uniformly at random from 1 to 9,424, with replacement, until some value appears for the second time. What is the expected number of draws, counting the repeat?"
+    },
+    {
+      "q": 54,
+      "family": "stdlib_defs",
+      "kind": "knowledge",
+      "params": {
+        "module": "uuid"
+      },
+      "short": "function definitions in `uuid`",
+      "text": "How many function definitions (def and async def, counting methods and nested functions) are in the source file of the standard-library module `uuid` in Python 3.13?"
+    },
+    {
+      "q": 55,
+      "family": "birthday",
+      "kind": "exact",
+      "params": {
+        "d": 1449835
+      },
+      "short": "draws until a repeat, d = 1,449,835",
+      "text": "Integers are drawn uniformly at random from 1 to 1,449,835, with replacement, until some value appears for the second time. What is the expected number of draws, counting the repeat?"
+    },
+    {
+      "q": 56,
+      "family": "module_all",
+      "kind": "knowledge",
+      "params": {
+        "module": "zipapp"
+      },
+      "short": "names in `zipapp.__all__`",
+      "text": "How many names are listed in `zipapp.__all__` in Python 3.13?"
+    },
+    {
+      "q": 57,
+      "family": "digit_sum_pow2",
+      "kind": "statistical",
+      "params": {
+        "n": 2312
+      },
+      "short": "digit sum of 2^2312",
+      "text": "What is the sum of the decimal digits of 2^2312?"
+    },
+    {
+      "q": 58,
+      "family": "primes_in_range",
+      "kind": "statistical",
+      "params": {
+        "a": 2973871,
+        "b": 2977273
+      },
+      "short": "primes in [2,973,871, 2,977,273]",
+      "text": "How many primes p satisfy 2,973,871 ≤ p ≤ 2,977,273?"
+    },
+    {
+      "q": 59,
+      "family": "friday13",
+      "kind": "calculation",
+      "params": {
+        "first": 2041,
+        "last": 2047
+      },
+      "short": "Friday the 13ths in 2041–2047",
+      "text": "How many Friday the 13ths are there from January 1, 2041 to December 31, 2047, in the Gregorian calendar?"
+    },
+    {
+      "q": 60,
+      "family": "multiply",
+      "kind": "calculation",
+      "params": {
+        "a": 34718,
+        "b": 1419
+      },
+      "short": "34,718 × 1,419",
+      "text": "What is 34,718 × 1,419?"
+    },
+    {
+      "q": 61,
+      "family": "rect_distance",
+      "kind": "statistical",
+      "params": {
+        "b": 3.73,
+        "seed": 3025098960
+      },
+      "short": "mean distance in a 1 × 3.73 rectangle",
+      "text": "Two points are chosen independently and uniformly at random in a 1 × 3.73 rectangle. What is the expected distance between them? (Settled by averaging 400,000 random pairs.)"
+    },
+    {
+      "q": 62,
+      "family": "collatz_steps",
+      "kind": "statistical",
+      "params": {
+        "n": 720780470611
+      },
+      "short": "Collatz steps from 720,780,470,611",
+      "text": "Starting from 720,780,470,611, how many steps does the Collatz process (halve if even, 3n + 1 if odd) take to reach 1?"
+    },
+    {
+      "q": 63,
+      "family": "factorial_digits",
+      "kind": "calculation",
+      "params": {
+        "n": 206
+      },
+      "short": "digits of 206!",
+      "text": "How many decimal digits does 206! (the factorial of 206) have?"
+    },
+    {
+      "q": 64,
+      "family": "walk_max",
+      "kind": "statistical",
+      "params": {
+        "n": 1243,
+        "seed": 878317904
+      },
+      "short": "highest point of a 1,243-step walk",
+      "text": "A simple random walk on the integers starts at 0 and takes 1,243 steps of +1 or −1, each with probability ½. What is the expected highest position it reaches (0 if it never rises above the start)? (Settled by averaging 4,000 random walks.)"
+    },
+    {
+      "q": 65,
+      "family": "stdlib_lines",
+      "kind": "knowledge",
+      "params": {
+        "module": "configparser"
+      },
+      "short": "lines in `configparser`",
+      "text": "How many lines are in the source file of the standard-library module `configparser` in Python 3.13 (every line, blank or not)?"
+    },
+    {
+      "q": 66,
+      "family": "days_between",
+      "kind": "calculation",
+      "params": {
+        "start": "1748-02-09",
+        "end": "1752-09-26"
+      },
+      "short": "days from 1748-02-09 to 1752-09-26",
+      "text": "How many days are there from February 9, 1748 to September 26, 1752, in the Gregorian calendar? (From one day to the next counts as 1.)"
+    },
+    {
+      "q": 67,
+      "family": "stdlib_defs",
+      "kind": "knowledge",
+      "params": {
+        "module": "mailbox"
+      },
+      "short": "function definitions in `mailbox`",
+      "text": "How many function definitions (def and async def, counting methods and nested functions) are in the source file of the standard-library module `mailbox` in Python 3.13?"
+    },
+    {
+      "q": 68,
+      "family": "unicode_category",
+      "kind": "knowledge",
+      "params": {
+        "category": "Lt"
+      },
+      "short": "code points in category Lt",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have the general category Lt (titlecase letters)?"
+    },
+    {
+      "q": 69,
+      "family": "lis",
+      "kind": "statistical",
+      "params": {
+        "n": 406,
+        "seed": 4282493830
+      },
+      "short": "longest increasing subsequence, n = 406",
+      "text": "What is the average length of the longest increasing subsequence of a uniformly random permutation of 406 elements? (Settled by averaging 1,000 random permutations.)"
+    },
+    {
+      "q": 70,
+      "family": "partitions",
+      "kind": "calculation",
+      "params": {
+        "n": 387
+      },
+      "short": "partitions of 387",
+      "text": "In how many ways can 387 be written as a sum of positive integers, where the order of the terms doesn't matter (the partition number p(387))?"
+    },
+    {
+      "q": 71,
+      "family": "unicode_word",
+      "kind": "knowledge",
+      "params": {
+        "word": "FRACTION"
+      },
+      "short": "Unicode names with the word FRACTION",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have a name containing the whole word FRACTION? (Names are split into words at spaces and hyphens.)"
+    },
+    {
+      "q": 72,
+      "family": "unicode_block",
+      "kind": "knowledge",
+      "params": {
+        "lo": 77824,
+        "hi": 78895
+      },
+      "short": "assigned in the Egyptian Hieroglyphs block",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points in U+13000–U+1342F (the Egyptian Hieroglyphs block) are assigned, that is, have a category other than Cn?"
+    },
+    {
+      "q": 73,
+      "family": "unicode_word",
+      "kind": "knowledge",
+      "params": {
+        "word": "SMALL"
+      },
+      "short": "Unicode names with the word SMALL",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have a name containing the whole word SMALL? (Names are split into words at spaces and hyphens.)"
+    },
+    {
+      "q": 74,
+      "family": "rect_distance",
+      "kind": "statistical",
+      "params": {
+        "b": 7.69,
+        "seed": 4063727394
+      },
+      "short": "mean distance in a 1 × 7.69 rectangle",
+      "text": "Two points are chosen independently and uniformly at random in a 1 × 7.69 rectangle. What is the expected distance between them? (Settled by averaging 400,000 random pairs.)"
+    },
+    {
+      "q": 75,
+      "family": "factorial_digits",
+      "kind": "calculation",
+      "params": {
+        "n": 86588
+      },
+      "short": "digits of 86,588!",
+      "text": "How many decimal digits does 86,588! (the factorial of 86,588) have?"
+    },
+    {
+      "q": 76,
+      "family": "partitions",
+      "kind": "calculation",
+      "params": {
+        "n": 134
+      },
+      "short": "partitions of 134",
+      "text": "In how many ways can 134 be written as a sum of positive integers, where the order of the terms doesn't matter (the partition number p(134))?"
+    },
+    {
+      "q": 77,
+      "family": "unicode_category",
+      "kind": "knowledge",
+      "params": {
+        "category": "Ll"
+      },
+      "short": "code points in category Ll",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have the general category Ll (lowercase letters)?"
+    },
+    {
+      "q": 78,
+      "family": "days_between",
+      "kind": "calculation",
+      "params": {
+        "start": "1735-03-13",
+        "end": "1738-03-23"
+      },
+      "short": "days from 1735-03-13 to 1738-03-23",
+      "text": "How many days are there from March 13, 1735 to March 23, 1738, in the Gregorian calendar? (From one day to the next counts as 1.)"
+    },
+    {
+      "q": 79,
+      "family": "module_all",
+      "kind": "knowledge",
+      "params": {
+        "module": "fnmatch"
+      },
+      "short": "names in `fnmatch.__all__`",
+      "text": "How many names are listed in `fnmatch.__all__` in Python 3.13?"
+    },
+    {
+      "q": 80,
+      "family": "walk_max",
+      "kind": "statistical",
+      "params": {
+        "n": 1783,
+        "seed": 1509048173
+      },
+      "short": "highest point of a 1,783-step walk",
+      "text": "A simple random walk on the integers starts at 0 and takes 1,783 steps of +1 or −1, each with probability ½. What is the expected highest position it reaches (0 if it never rises above the start)? (Settled by averaging 4,000 random walks.)"
+    },
+    {
+      "q": 81,
+      "family": "stdlib_lines",
+      "kind": "knowledge",
+      "params": {
+        "module": "timeit"
+      },
+      "short": "lines in `timeit`",
+      "text": "How many lines are in the source file of the standard-library module `timeit` in Python 3.13 (every line, blank or not)?"
+    },
+    {
+      "q": 82,
+      "family": "birthday",
+      "kind": "exact",
+      "params": {
+        "d": 6507924
+      },
+      "short": "draws until a repeat, d = 6,507,924",
+      "text": "Integers are drawn uniformly at random from 1 to 6,507,924, with replacement, until some value appears for the second time. What is the expected number of draws, counting the repeat?"
+    },
+    {
+      "q": 83,
+      "family": "stdlib_defs",
+      "kind": "knowledge",
+      "params": {
+        "module": "shlex"
+      },
+      "short": "function definitions in `shlex`",
+      "text": "How many function definitions (def and async def, counting methods and nested functions) are in the source file of the standard-library module `shlex` in Python 3.13?"
+    },
+    {
+      "q": 84,
+      "family": "friday13",
+      "kind": "calculation",
+      "params": {
+        "first": 2246,
+        "last": 2329
+      },
+      "short": "Friday the 13ths in 2246–2329",
+      "text": "How many Friday the 13ths are there from January 1, 2246 to December 31, 2329, in the Gregorian calendar?"
+    },
+    {
+      "q": 85,
+      "family": "primes_in_range",
+      "kind": "statistical",
+      "params": {
+        "a": 2647606,
+        "b": 2665661
+      },
+      "short": "primes in [2,647,606, 2,665,661]",
+      "text": "How many primes p satisfy 2,647,606 ≤ p ≤ 2,665,661?"
+    },
+    {
+      "q": 86,
+      "family": "collatz_steps",
+      "kind": "statistical",
+      "params": {
+        "n": 823122992864
+      },
+      "short": "Collatz steps from 823,122,992,864",
+      "text": "Starting from 823,122,992,864, how many steps does the Collatz process (halve if even, 3n + 1 if odd) take to reach 1?"
+    },
+    {
+      "q": 87,
+      "family": "unicode_block",
+      "kind": "knowledge",
+      "params": {
+        "lo": 3584,
+        "hi": 3711
+      },
+      "short": "assigned in the Thai block",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points in U+0E00–U+0E7F (the Thai block) are assigned, that is, have a category other than Cn?"
+    },
+    {
+      "q": 88,
+      "family": "multiply",
+      "kind": "calculation",
+      "params": {
+        "a": 2025,
+        "b": 311373
+      },
+      "short": "2,025 × 311,373",
+      "text": "What is 2,025 × 311,373?"
+    },
+    {
+      "q": 89,
+      "family": "lis",
+      "kind": "statistical",
+      "params": {
+        "n": 803,
+        "seed": 3171690067
+      },
+      "short": "longest increasing subsequence, n = 803",
+      "text": "What is the average length of the longest increasing subsequence of a uniformly random permutation of 803 elements? (Settled by averaging 1,000 random permutations.)"
+    },
+    {
+      "q": 90,
+      "family": "digit_sum_pow2",
+      "kind": "statistical",
+      "params": {
+        "n": 9436
+      },
+      "short": "digit sum of 2^9436",
+      "text": "What is the sum of the decimal digits of 2^9436?"
+    },
+    {
+      "q": 91,
+      "family": "stdlib_defs",
+      "kind": "knowledge",
+      "params": {
+        "module": "numbers"
+      },
+      "short": "function definitions in `numbers`",
+      "text": "How many function definitions (def and async def, counting methods and nested functions) are in the source file of the standard-library module `numbers` in Python 3.13?"
+    },
+    {
+      "q": 92,
+      "family": "multiply",
+      "kind": "calculation",
+      "params": {
+        "a": 61640,
+        "b": 5178
+      },
+      "short": "61,640 × 5,178",
+      "text": "What is 61,640 × 5,178?"
+    },
+    {
+      "q": 93,
+      "family": "lis",
+      "kind": "statistical",
+      "params": {
+        "n": 105,
+        "seed": 4005132822
+      },
+      "short": "longest increasing subsequence, n = 105",
+      "text": "What is the average length of the longest increasing subsequence of a uniformly random permutation of 105 elements? (Settled by averaging 1,000 random permutations.)"
+    },
+    {
+      "q": 94,
+      "family": "stdlib_lines",
+      "kind": "knowledge",
+      "params": {
+        "module": "warnings"
+      },
+      "short": "lines in `warnings`",
+      "text": "How many lines are in the source file of the standard-library module `warnings` in Python 3.13 (every line, blank or not)?"
+    },
+    {
+      "q": 95,
+      "family": "partitions",
+      "kind": "calculation",
+      "params": {
+        "n": 507
+      },
+      "short": "partitions of 507",
+      "text": "In how many ways can 507 be written as a sum of positive integers, where the order of the terms doesn't matter (the partition number p(507))?"
+    },
+    {
+      "q": 96,
+      "family": "days_between",
+      "kind": "calculation",
+      "params": {
+        "start": "2193-08-10",
+        "end": "2194-03-25"
+      },
+      "short": "days from 2193-08-10 to 2194-03-25",
+      "text": "How many days are there from August 10, 2193 to March 25, 2194, in the Gregorian calendar? (From one day to the next counts as 1.)"
+    },
+    {
+      "q": 97,
+      "family": "primes_in_range",
+      "kind": "statistical",
+      "params": {
+        "a": 730012,
+        "b": 731622
+      },
+      "short": "primes in [730,012, 731,622]",
+      "text": "How many primes p satisfy 730,012 ≤ p ≤ 731,622?"
+    },
+    {
+      "q": 98,
+      "family": "unicode_block",
+      "kind": "knowledge",
+      "params": {
+        "lo": 384,
+        "hi": 591
+      },
+      "short": "assigned in the Latin Extended-B block",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points in U+0180–U+024F (the Latin Extended-B block) are assigned, that is, have a category other than Cn?"
+    },
+    {
+      "q": 99,
+      "family": "digit_sum_pow2",
+      "kind": "statistical",
+      "params": {
+        "n": 8194
+      },
+      "short": "digit sum of 2^8194",
+      "text": "What is the sum of the decimal digits of 2^8194?"
+    },
+    {
+      "q": 100,
+      "family": "collatz_steps",
+      "kind": "statistical",
+      "params": {
+        "n": 142916784243
+      },
+      "short": "Collatz steps from 142,916,784,243",
+      "text": "Starting from 142,916,784,243, how many steps does the Collatz process (halve if even, 3n + 1 if odd) take to reach 1?"
+    },
+    {
+      "q": 101,
+      "family": "walk_max",
+      "kind": "statistical",
+      "params": {
+        "n": 1174,
+        "seed": 983710869
+      },
+      "short": "highest point of a 1,174-step walk",
+      "text": "A simple random walk on the integers starts at 0 and takes 1,174 steps of +1 or −1, each with probability ½. What is the expected highest position it reaches (0 if it never rises above the start)? (Settled by averaging 4,000 random walks.)"
+    },
+    {
+      "q": 102,
+      "family": "rect_distance",
+      "kind": "statistical",
+      "params": {
+        "b": 1.22,
+        "seed": 4206504266
+      },
+      "short": "mean distance in a 1 × 1.22 rectangle",
+      "text": "Two points are chosen independently and uniformly at random in a 1 × 1.22 rectangle. What is the expected distance between them? (Settled by averaging 400,000 random pairs.)"
+    },
+    {
+      "q": 103,
+      "family": "module_all",
+      "kind": "knowledge",
+      "params": {
+        "module": "typing"
+      },
+      "short": "names in `typing.__all__`",
+      "text": "How many names are listed in `typing.__all__` in Python 3.13?"
+    },
+    {
+      "q": 104,
+      "family": "birthday",
+      "kind": "exact",
+      "params": {
+        "d": 528
+      },
+      "short": "draws until a repeat, d = 528",
+      "text": "Integers are drawn uniformly at random from 1 to 528, with replacement, until some value appears for the second time. What is the expected number of draws, counting the repeat?"
+    },
+    {
+      "q": 105,
+      "family": "friday13",
+      "kind": "calculation",
+      "params": {
+        "first": 1810,
+        "last": 1860
+      },
+      "short": "Friday the 13ths in 1810–1860",
+      "text": "How many Friday the 13ths are there from January 1, 1810 to December 31, 1860, in the Gregorian calendar?"
+    },
+    {
+      "q": 106,
+      "family": "factorial_digits",
+      "kind": "calculation",
+      "params": {
+        "n": 133
+      },
+      "short": "digits of 133!",
+      "text": "How many decimal digits does 133! (the factorial of 133) have?"
+    },
+    {
+      "q": 107,
+      "family": "unicode_word",
+      "kind": "knowledge",
+      "params": {
+        "word": "DIGIT"
+      },
+      "short": "Unicode names with the word DIGIT",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have a name containing the whole word DIGIT? (Names are split into words at spaces and hyphens.)"
+    },
+    {
+      "q": 108,
+      "family": "unicode_category",
+      "kind": "knowledge",
+      "params": {
+        "category": "Mn"
+      },
+      "short": "code points in category Mn",
+      "text": "In Python's Unicode database (Unicode 15.1.0), how many code points have the general category Mn (nonspacing marks)?"
+    }
+  ]
+}

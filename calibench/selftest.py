@@ -396,9 +396,16 @@ def check_run(tmp):
     table = report.compare([load("naive"), load("naive2")], ["naive", "naive2"])
     check("compare shows test–retest for two runs of one model",
           "## Runs of the same model" in table and "| mock:naive (naive) / mock:naive (naive2) | same | 0.000" in table)
+    first, second = load("naive"), load("naive2")
+    for rep, cap in ((first, 32_000), (second, 128_000)):
+        rep["meta"]["settings"] = {"effort": {"instinct": "low", "worked": "high"},
+                                   "max_tokens": {"instinct": 8_000, "worked": cap}}
+    table = report.compare([first, second], ["naive", "naive2"])
+    check("compare says when two runs of one model differ in their settings, so they aren't read as test–retest",
+          "| mock:naive (naive) / mock:naive (naive2) | worked token cap 32,000 / 128,000 | 0.000" in table)
     quiet(runner.run, models.NaiveModel(), "mock:naive", seed, count, FAST, tmp / "naive-alt", 3, None, "alt")
     table = report.compare([load("naive"), load("naive-alt")], ["naive", "naive-alt"])
-    check("compare marks runs with other prompts", "[alt prompts]" in table and "| standard / alt |" in table)
+    check("compare marks runs with other prompts", "[alt prompts]" in table and "| standard / alt prompts |" in table)
     check("a run with other prompts is refused in the same directory",
           raises(quiet, runner.run, models.NaiveModel(), "mock:naive", seed, count, FAST, tmp / "naive", 3, None, "alt"))
     check("the report shows where answers fell, and each family",
