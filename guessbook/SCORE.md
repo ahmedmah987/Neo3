@@ -40,22 +40,22 @@ The interval score is the main measure: an interval's width plus a penalty of 2/
 
 | | Instinct | Worked |
 |---|---|---|
-| Interval score, 50% intervals | 21.96% | 6.45% |
-| Interval score, 90% intervals | 43.92% | 14.86% |
-| 50% intervals that contain the answer | 40 of 48 (83%) | 40 of 48 (83%) |
-| … leaving out single-number intervals | 38 of 46 (83%) | 32 of 40 (80%) |
-| 90% intervals that contain the answer | 46 of 48 (96%) | 46 of 48 (96%) |
+| Interval score, 50% intervals | 21.10% | 6.80% |
+| Interval score, 90% intervals | 40.56% | 17.13% |
+| 50% intervals that contain the answer | 45 of 60 (75%) | 46 of 60 (77%) |
+| … leaving out single-number intervals | 43 of 58 (74%) | 36 of 50 (72%) |
+| 90% intervals that contain the answer | 57 of 60 (95%) | 56 of 60 (93%) |
 | Median error of the estimate | 1.3% | 0.3% |
-| Estimate closer to the answer | 7 | 31 |
-| Ties | 10 | 10 |
+| Estimate closer to the answer | 11 | 37 |
+| Ties | 12 | 12 |
 
 Worked answers by kind of question: knowledge means recalling, statistical means modelling noise or irregularity, exact means evaluating a known formula.
 
 | Kind | Questions | 50% hits | … leaving out single numbers | 90% hits | Interval score 50% / 90% |
 |---|---|---|---|---|---|
-| exact | 4 | 4 of 4 (100%) | 4 of 4 (100%) | 4 of 4 (100%) | 0.00% / 0.01% |
-| knowledge | 18 | 18 of 18 (100%) | 12 of 12 (100%) | 18 of 18 (100%) | 7.17% / 21.65% |
-| statistical | 26 | 18 of 26 (69%) | 16 of 24 (67%) | 24 of 26 (92%) | 6.94% / 12.44% |
+| exact | 5 | 5 of 5 (100%) | 5 of 5 (100%) | 5 of 5 (100%) | 0.00% / 0.01% |
+| knowledge | 23 | 22 of 23 (96%) | 15 of 16 (94%) | 22 of 23 (96%) | 9.41% / 29.23% |
+| statistical | 32 | 19 of 32 (59%) | 16 of 29 (55%) | 29 of 32 (91%) | 5.99% / 11.10% |
 
 ### 2026-10-16-e4e1ad0a
 
@@ -78,18 +78,18 @@ Worked answers by kind of question: knowledge means recalling, statistical means
 
 | # | Question | Answer | Instinct | Worked |
 |---|---|---|---|---|
-| 1 | highest point of a 1,362-step walk | pending | 28.95 | 28.95 |
-| 2 | assigned in the Mongolian block | pending | 158 | 158 |
-| 3 | longest increasing subsequence, n = 185 | pending | 23.5 | 23.51 |
-| 4 | names in `inspect.__all__` | pending | 90 | 99 |
-| 5 | Collatz steps from 772,456,875,771 | pending | 285 | 337 |
-| 6 | mean distance in a 1 × 3.2 rectangle | pending | 1.17 | 1.174 |
-| 7 | draws until a repeat, d = 1,190,973 | pending | 1,368 | 1,368 |
-| 8 | function definitions in `argparse` | pending | 180 | 140 |
-| 9 | Unicode names with the word SMALL | pending | 3,500 | 2,710 |
-| 10 | lines in `shutil` | pending | 1,600 | 1,600 |
-| 11 | digit sum of 2^8832 | pending | 11,965 | 11,966 |
-| 12 | primes in [314,525, 387,797] | pending | 5,770 | 5,766 |
+| 1 | highest point of a 1,362-step walk | 28.57 | 28.95 (50✗ 90✓) | 28.95 (50✗ 90✓) |
+| 2 | assigned in the Mongolian block | 158 | 158 (50✓ 90✓) | 158 (50✓ 90✓) |
+| 3 | longest increasing subsequence, n = 185 | 23.4 | 23.5 (50✗ 90✓) | 23.51 (50✗ 90✓) |
+| 4 | names in `inspect.__all__` | 104 | 90 (50✗ 90✓) | 99 (50✓ 90✓) |
+| 5 | Collatz steps from 772,456,875,771 | 337 | 285 (50✗ 90✓) | 337 (50✓ 90✓) |
+| 6 | mean distance in a 1 × 3.2 rectangle | 1.175 | 1.17 (50✓ 90✓) | 1.174 (50✗ 90✓) |
+| 7 | draws until a repeat, d = 1,190,973 | 1,368 | 1,368 (50✓ 90✓) | 1,368 (50✓ 90✓) |
+| 8 | function definitions in `argparse` | 140 | 180 (50✗ 90✗) | 140 (50✓ 90✓) |
+| 9 | Unicode names with the word SMALL | 3,296 | 3,500 (50✓ 90✓) | 2,710 (50✗ 90✗) |
+| 10 | lines in `shutil` | 1,569 | 1,600 (50✓ 90✓) | 1,600 (50✓ 90✓) |
+| 11 | digit sum of 2^8832 | 11,800 | 11,965 (50✗ 90✓) | 11,966 (50✗ 90✓) |
+| 12 | primes in [314,525, 387,797] | 5,736 | 5,770 (50✗ 90✓) | 5,766 (50✗ 90✗) |
 
 ### 2026-10-17-61dc17e5
 

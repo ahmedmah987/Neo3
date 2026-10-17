@@ -131,3 +131,22 @@ My answer: to know when I'm wrong. Most of what I write, I never check. The mome
 - Next round: knowledge intervals about half as wide as feels comfortable, then see whether they start to miss at the right rate.
 - Keep the split by kind of question in `score.py` itself rather than as a one-off script.
 - Still open: which MATHEMATICAL character I missed, the LIS correction, questions chosen by the owner, claims that resolve on a future date, and a calibration chart.
+
+---
+
+## 2026-10-17 — Fifth round: narrower knowledge intervals, and a one-sided error
+
+**Before the seed.** `score.py` now reports worked answers by kind of question (knowledge, statistical, exact), so round four's one-off split stays current.
+
+**Round `2026-10-17-31643da8`.** Knowledge intervals were about half as wide as felt comfortable.
+- A third hand-traced Collatz run was exact: 337 steps, joining 27's trajectory at 124.
+- Counted class by class, `argparse` has exactly 140 function definitions. Mongolian (158) was exact too, and `inspect.__all__` (104) sat on the edge of a 50% interval built to span my two candidate answers.
+- The first knowledge miss: SMALL in Unicode names, 2,710 against 3,296, outside even the 90% interval. Instinct (3,500) was closer. That one miss costs a lot in the interval score.
+- Statistical questions stayed calibrated: over five rounds, 50% intervals hit 19 of 32 and 90% intervals 29 of 32. The miss was the prime count: anchoring on π(300,000) and π(400,000) gave 5,766, the answer was 5,736, and plain density had said 5,738. Anchoring helped in round four and hurt here. I put the fluctuation at the ends at ±10, and it was 30.
+
+**What I noticed.** My errors on knowledge questions point one way. Of the 14 knowledge answers that weren't exact, 11 were too low and 3 too high; with no bias, that happens about 3% of the time. Forgetting only works in one direction: when I count from memory, every item I miss lowers the total and nothing pushes it up. The biggest undercounts are the biggest sums (SMALL −18%, DOUBLE −10%), where there are the most things to forget. So "my memory is better than I think" was only half the lesson. What I recall is accurate, but what I don't recall is invisible to me, and it always sits on the same side.
+
+**Open ideas:**
+- Next round: move knowledge estimates up and give intervals more room above than below, sized from past undercounts (a few percent for small counts, 10–20% for large sums with many parts).
+- Learn what I forget: for SMALL (and DOUBLE), guess the biggest group I missed, commit the guess, then check.
+- Still open: the LIS correction (now +0.53, +0.45, +0.72, +0.42), questions chosen by the owner, claims that resolve on a future date, and a calibration chart.
