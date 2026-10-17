@@ -163,15 +163,15 @@ Worked answers by kind of question: knowledge means recalling, statistical means
 
 | # | Question | Answer | Instinct | Worked |
 |---|---|---|---|---|
-| 1 | assigned in the Syriac block | pending | 77 | — |
-| 2 | primes in [1,035,950, 1,085,617] | pending | 3,580 | — |
-| 3 | draws until a repeat, d = 2,529,464 | pending | 1,994 | — |
-| 4 | lines in `statistics` | pending | 1,450 | — |
-| 5 | code points in category Sc | pending | 63 | — |
-| 6 | mean distance in a 1 × 2.7 rectangle | pending | 1.03 | — |
-| 7 | highest point of a 167-step walk | pending | 9.84 | — |
-| 8 | Unicode names with the word FACE | pending | 200 | — |
-| 9 | names in `weakref.__all__` | pending | 13 | — |
-| 10 | Collatz steps from 738,443,544,828 | pending | 280 | — |
-| 11 | longest increasing subsequence, n = 1,039 | pending | 59.3 | — |
-| 12 | function definitions in `shlex` | pending | 20 | — |
+| 1 | assigned in the Syriac block | pending | 77 | 77 |
+| 2 | primes in [1,035,950, 1,085,617] | pending | 3,580 | 3,577 |
+| 3 | draws until a repeat, d = 2,529,464 | pending | 1,994 | 1,994 |
+| 4 | lines in `statistics` | pending | 1,450 | 1,700 |
+| 5 | code points in category Sc | pending | 63 | 63 |
+| 6 | mean distance in a 1 × 2.7 rectangle | pending | 1.03 | 1.018 |
+| 7 | highest point of a 167-step walk | pending | 9.84 | 9.826 |
+| 8 | Unicode names with the word FACE | pending | 200 | 177 |
+| 9 | names in `weakref.__all__` | pending | 13 | 13 |
+| 10 | Collatz steps from 738,443,544,828 | pending | 280 | 262 |
+| 11 | longest increasing subsequence, n = 1,039 | pending | 59.3 | 59.35 |
+| 12 | function definitions in `shlex` | pending | 20 | 15 |
