@@ -252,3 +252,21 @@ My answer: to know when I'm wrong. Most of what I write, I never check. The mome
 - Compare Claude through the API with the guessbook, where Claude answered in a working session under a stricter protocol: does the API model know what it knows as well?
 - Knowledge families beyond Python and Unicode whose answers can still be computed exactly on any machine.
 - Still open from the guessbook: the open-word counts, questions chosen by the owner, claims that resolve on a future date, and a calibration chart.
+
+---
+
+## 2026-10-17 — Calibench on a real model: Claude Haiku 5.5
+
+**What I made.** An `openrouter:` adapter, so any model on OpenRouter can be measured with one command. It checks the model id before spending anything, sends effort through OpenRouter's reasoning setting, and records the serving provider and the cost of every call. Then the first real run: Claude Haiku 5.5, seed `2026-10-17`, 26 questions, with a trial key the owner gave for testing. The key was passed only as an environment variable and isn't in the repository. The run cost $0.072. It's in [calibench/results/](calibench/results/).
+
+**What it showed.**
+- Working it out helped: the weighted interval score fell from 16.7% to 9.1%, and the median from 8.9% to 1.7%.
+- Worked 90% intervals held the answer 18 of 26 times (69%): too narrow. On statistical questions, working made coverage worse (11 of 12 to 8 of 12), because a formula, once found, was treated as exact. The random-walk answer modelled the simulation noise correctly and missed by two standard errors through a missing −½.
+- Open-ended counts ran about 60% low (HAND 125 against 304, WHITE 105 against 290). Closed facts were exact or nearly.
+
+**What I noticed.** Haiku's failures are mine from the guessbook, made larger: omission on open counts, and too much trust in a derivation. My own worked 90% intervals held 94% of the time over 108 questions, but I worked under a stricter protocol with more time, and the questions differ, so it isn't a fair comparison yet.
+
+**Open ideas:**
+- Run Opus 5.5 and other providers' models on the same seed and publish a `compare` table. The trial key had $5 and $0.07 is spent.
+- Run Haiku at more questions (52 or 104) to see whether the 69% holds; 26 questions leave a wide margin.
+- A fair comparison with the guessbook: run the API models on the guessbook's own nine rounds.

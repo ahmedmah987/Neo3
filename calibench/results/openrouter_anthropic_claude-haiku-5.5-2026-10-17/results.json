@@ -1,0 +1,136 @@
+{
+  "python": "3.13.16",
+  "unicode": "15.1.0",
+  "results": [
+    {
+      "q": 1,
+      "answer": 0.9227871958275549,
+      "seconds": 0.13
+    },
+    {
+      "q": 2,
+      "answer": 20.587,
+      "seconds": 0.05
+    },
+    {
+      "q": 3,
+      "answer": 358,
+      "seconds": 0.0
+    },
+    {
+      "q": 4,
+      "answer": 15.557535738249731,
+      "seconds": 0.0
+    },
+    {
+      "q": 5,
+      "answer": 150,
+      "seconds": 0.0
+    },
+    {
+      "q": 6,
+      "answer": 304,
+      "seconds": 0.38
+    },
+    {
+      "q": 7,
+      "answer": 17.5565,
+      "seconds": 0.12
+    },
+    {
+      "q": 8,
+      "answer": 385,
+      "seconds": 0.0
+    },
+    {
+      "q": 9,
+      "answer": 127,
+      "seconds": 0.03
+    },
+    {
+      "q": 10,
+      "answer": 790,
+      "seconds": 0.0
+    },
+    {
+      "q": 11,
+      "answer": 915,
+      "seconds": 0.16
+    },
+    {
+      "q": 12,
+      "answer": 4879,
+      "seconds": 0.0
+    },
+    {
+      "q": 13,
+      "answer": 7,
+      "seconds": 0.0
+    },
+    {
+      "q": 14,
+      "answer": 83,
+      "seconds": 0.0
+    },
+    {
+      "q": 15,
+      "answer": 367,
+      "seconds": 0.0
+    },
+    {
+      "q": 16,
+      "answer": 290,
+      "seconds": 0.43
+    },
+    {
+      "q": 17,
+      "answer": 200,
+      "seconds": 0.0
+    },
+    {
+      "q": 18,
+      "answer": 497,
+      "seconds": 0.0
+    },
+    {
+      "q": 19,
+      "answer": 104.374,
+      "seconds": 1.24
+    },
+    {
+      "q": 20,
+      "answer": 16.12,
+      "seconds": 0.1
+    },
+    {
+      "q": 21,
+      "answer": 11252,
+      "seconds": 0.0
+    },
+    {
+      "q": 22,
+      "answer": 667.5854521044604,
+      "seconds": 0.0
+    },
+    {
+      "q": 23,
+      "answer": 70,
+      "seconds": 0.02
+    },
+    {
+      "q": 24,
+      "answer": 17,
+      "seconds": 0.13
+    },
+    {
+      "q": 25,
+      "answer": 23,
+      "seconds": 0.0
+    },
+    {
+      "q": 26,
+      "answer": 1.3107777939141796,
+      "seconds": 0.07
+    }
+  ]
+}

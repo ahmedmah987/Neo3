@@ -1,0 +1,11 @@
+{
+  "calibench": "1.0.0",
+  "model": "openrouter:anthropic/claude-haiku-5.5",
+  "seed": "2026-10-17",
+  "count": 26,
+  "families": "all",
+  "python": "3.13.16",
+  "unicode": "15.1.0",
+  "started": "2026-10-17T03:01:02+00:00",
+  "answers_sha256": "6338cefb650507c253783947552d12db92db02385d6efbbcf8bf37e37a69f7b1"
+}

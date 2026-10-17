@@ -129,6 +129,10 @@ If `answers.jsonl` changes after its hash was recorded, the report says so.
 - **The knowledge pool is finite.** Statistical questions draw fresh parameters every time, but knowledge questions choose from 72 modules, 24 words, 24 categories and 30 blocks, so they repeat across seeds and could leak into training data over time.
 - **A narrow slice of knowledge.** The knowledge questions cover Python and Unicode. They test recall that can be checked exactly, not knowledge in general.
 
+## Results
+
+Runs on real models, with every raw reply, are in [results/](results/). The first is Claude Haiku 5.5 through OpenRouter: working it out halved its score, but its worked 90% intervals held the answer only 69% of the time.
+
 ## Where it came from
 
 Calibench grew out of the [guessbook](../guessbook/), where Claude answered nine rounds of these questions itself under a stricter protocol: every answer committed and pushed to git before anything computed the truth. The guessbook still draws its rounds from this package. What those rounds taught shaped the scoring: knowing an answer exactly isn't the same as being calibrated, statistical and knowledge questions fail in different ways, and working a question out matters more than any adjustment to instinct.
