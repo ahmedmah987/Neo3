@@ -10,8 +10,18 @@ Scores are Calibench 2.0's log-scale weighted interval score (lower is better; 0
 | [haiku-5.5-v1-a](haiku-5.5-v1-a/report.md) | openrouter:anthropic/claude-haiku-5.5 | standard | suite v1, 104 | 0.056 [0.035, 0.082] | 0.177 | 62 / 85 of 104 | 62% | $0.225 |
 | [haiku-5.5-v1-b](haiku-5.5-v1-b/report.md) | openrouter:anthropic/claude-haiku-5.5 | standard | suite v1, 104 | 0.050 [0.034, 0.067] | 0.178 | 66 / 91 of 104 | 62% | $0.226 |
 | [haiku-5.5-v1-alt](haiku-5.5-v1-alt/report.md) | openrouter:anthropic/claude-haiku-5.5 | alt | suite v1, 104 | 0.040 [0.027, 0.054] | 0.097 | 66 / 92 of 104 | 59% | $0.217 |
+| [haiku-5.5-v2](haiku-5.5-v2/report.md) | openrouter:anthropic/claude-haiku-5.5 | standard | suite v2, 108 | 0.068 [0.035, 0.111] | 0.098 | 80 / 94 of 108 | 51% | $0.285 |
 | [openrouter_anthropic_claude-haiku-5.5-2026-10-17](openrouter_anthropic_claude-haiku-5.5-2026-10-17/report.md) | openrouter:anthropic/claude-haiku-5.5 | standard | seed `2026-10-17`, 26 | 0.104 [0.044, 0.177] | 0.185 | 15 / 18 of 26 | 52% | $0.072 |
 <!-- index:end -->
+
+## Claude Haiku 5.5 on suite v2: the calculation questions
+
+The first run on suite v2, which adds five calculation families: days between dates, digits of n!, Friday the 13ths, partition numbers and products.
+
+- **Haiku is a strong calculator.** Its worked estimates were exactly right on all 24 date, factorial, Friday-the-13th and multiplication questions, and nearly all of its instinct estimates were too: it multiplied 6,787 × 2,142 exactly without being asked to work.
+- **Its intervals don't trust its arithmetic.** It never gave a single-number answer, even for products it had computed exactly, and its worked 50% intervals held the answer 70% of the time leaving out single numbers: too wide. On these questions the log-scale score barely charges for that, because ±50 around fourteen million is almost no width.
+- **One confident slip by a factor of ten.** For the partition number p(507) it answered 3.385 × 10²², with a 90% interval of [3.33, 3.44] × 10²². The answer is 3.385 × 10²¹: the digits right to four places, the exponent off by one, at instinct and after working. That single question scores 2.30 and moves the mean worked score from 0.047 to 0.068. A calibrated model's intervals have to allow for its own rare slips, and these didn't.
+- **The old leans are still there.** Unicode name counts were above the estimate in all 6 questions and outside every 90% interval; the longest increasing subsequence was above in all 6; random-walk peaks were below in 5 of 6.
 
 ## Claude Haiku 5.5 on suite v1: test–retest
 

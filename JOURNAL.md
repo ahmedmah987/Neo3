@@ -327,3 +327,27 @@ My answer: to know when I'm wrong. Most of what I write, I never check. The mome
 - New families in a new kind: questions whose answer is exact but laborious to compute in one's head (days between two dates, digits of n!, Friday the 13ths in a span of years), to measure whether a model knows when its mental arithmetic can be trusted. They'd go in a suite v2, leaving v1 as it is.
 - General knowledge, the largest gap: it can't be computed on any machine, so it would need a curated, cited dataset. That changes the project's principle, so it's for the owner to decide.
 - Other models, when the owner approves them.
+
+---
+
+## 2026-10-17 — Calibench 2.1: calculation questions
+
+**What I made.** The owner chose the first of the two directions I proposed: questions computable on any machine, rather than a curated general-knowledge dataset.
+- Five calculation families, whose answers are exact but take long, careful arithmetic: days between two dates, digits of n!, Friday the 13ths in a span of years, partition numbers p(n), and products of two numbers. They need nothing from the running Python, so they're the same on every machine. Each is checked against known values.
+- Suite v2: 108 questions, all eighteen families 6 times, with its own fingerprint. Suite v1 and the guessbook are unchanged.
+- `CITATION.cff`, validated against the schema, with a check that its version matches the code's.
+- A run of Haiku on v2, $0.28. Total spent on the trial key: $1.03 of $5.
+
+**What it showed.**
+- Haiku calculates exactly: 24 of 24 worked estimates on dates, factorials, Friday the 13ths and products were right, and most instinct estimates too. Its intervals stayed wide around answers it had computed exactly, and it never once gave a single number.
+- Then p(507): 3.385 × 10²² with a 90% interval of a few percent, against a true 3.385 × 10²¹. The digits were right, the exponent off by one, at instinct and after working. That one answer is a third of the whole run's score.
+
+**What I noticed.**
+- The new kind didn't measure what I expected. I thought arithmetic would be the uncertainty; for this model it almost isn't. What it measured instead is the gap between being nearly always right and allowing for being wrong: the intervals were too wide where Haiku was right and far too narrow on its one slip. A model can be underconfident and overconfident on the same kind of question, and an average hides both.
+- An order-of-magnitude slip with four correct digits looks like retrieval, not calculation: a remembered mantissa attached to a miscounted exponent. I can't tell which from the reply alone.
+- I started the v2 run before bumping the version, so its records would have said 2.0.0 for a suite that only exists in 2.1.0. I stopped it after 35 calls (half a cent) and started again rather than edit the records afterwards.
+
+**Open ideas:**
+- Harder calculation questions, where even a strong model can't be exact: products of larger numbers, p(n) for larger n, digits of n! for much larger n.
+- A per-question view of confident misses (a large score with a narrow interval) in the report, since one of them can dominate a run.
+- General knowledge remains the largest gap, and the owner's decision.

@@ -114,7 +114,8 @@ When publishing a result, report: the suite (or seed, count and families), the C
 7. **Prompt wording.** Measured on one model: the worked score moved by about 0.01, the instinct score by 0.08. See Reliability.
 8. **One sample per question.** Model outputs are stochastic. Test–retest measures the resulting variation.
 9. **Simulated answers.** Three families are settled by simulation. Their noise is stated and part of the question, but it is part of what is scored.
-10. **The know-nothing convention.** Scoring unanswered questions as a fixed naive answer is a convention. It penalises refusal on most questions, but it is gentler on questions whose answer happens to be near 100.
+10. **Calculation questions can be nearly solved.** A capable model may compute most of them exactly, as Claude Haiku 5.5 did. Their information is then in rare confident slips, which cost a great deal, and in interval width, which on a log scale costs little when the answer is large.
+11. **The know-nothing convention.** Scoring unanswered questions as a fixed naive answer is a convention. It penalises refusal on most questions, but it is gentler on questions whose answer happens to be near 100.
 
 ## Reliability
 
