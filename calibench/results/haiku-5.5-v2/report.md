@@ -46,6 +46,32 @@ The estimate and the two intervals are five quantiles of the model's belief, so 
 
 ![Where the true answers fell](calibration.svg)
 
+## Where the score comes from
+
+A few large misses can carry a mean. This shows how much of each score its largest questions carry, and the worked answers whose 90% interval missed, costliest first.
+
+| | Instinct | Worked |
+|---|---|---|
+| Share of the score from the largest question | 21% | 31% |
+| Share from the five largest | 49% | 61% |
+| Mean score without the largest question | 0.079 | 0.047 |
+
+**Worked answers outside their 90% interval.** *Outside by* is the factor between the true answer and the nearer end of the interval; *width* is the ratio of the interval's ends, so a narrow interval that misses by a wide factor is a confident miss.
+
+| # | Question | True answer | Estimate [90% interval] | Width | Outside by | Score | Share of score |
+|---|---|---|---|---|---|---|---|
+| 95 | partitions of 507 | 3,384,893,356,244,349,844,341 | 3.385e+22 [3.33e+22, 3.44e+22] | ×1.03 | ×9.84 below | 2.296 | 31% |
+| 71 | Unicode names with the word FRACTION | 98 | 48 [41, 55] | ×1.33 | ×1.77 above | 0.644 | 9% |
+| 3 | lines in `statistics` | 1,817 | 980 [860, 1,120] | ×1.3 | ×1.62 above | 0.556 | 8% |
+| 29 | Unicode names with the word SIGN | 3,393 | 1,950 [1,700, 2,220] | ×1.31 | ×1.53 above | 0.497 | 7% |
+| 37 | Unicode names with the word STAR | 61 | 30 [20, 50] | ×2.43 | ×1.22 above | 0.460 | 6% |
+| 73 | Unicode names with the word SMALL | 3,296 | 2,280 [2,120, 2,460] | ×1.16 | ×1.34 above | 0.335 | 5% |
+| 94 | lines in `warnings` | 735 | 565 [490, 660] | ×1.35 | ×1.11 above | 0.194 | 3% |
+| 107 | Unicode names with the word DIGIT | 898 | 750 [735, 785] | ×1.07 | ×1.14 above | 0.160 | 2% |
+| 7 | Unicode names with the word LATIN | 1,567 | 1,365 [1,290, 1,450] | ×1.12 | ×1.08 above | 0.111 | 2% |
+| 101 | highest point of a 1,174-step walk | 26.55 | 27.33 [26.8, 27.9] | ×1.04 | ×1.01 below | 0.020 | 0% |
+| | 4 more | | | | | | |
+
 ## By kind of question
 
 Knowledge questions ask what is known (the Python standard library, the Unicode database); statistical ones need noise or irregularity modelled; exact ones have a closed-form answer that must be evaluated; calculation ones have an exact answer that takes long, careful arithmetic.

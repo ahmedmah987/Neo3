@@ -160,6 +160,9 @@
   },
   "kinds": {
     "instinct": {
+      "calculation": {
+        "n": 0
+      },
       "exact": {
         "n": 8,
         "score_mean": 0.1016833187767219,
@@ -318,6 +321,9 @@
       }
     },
     "worked": {
+      "calculation": {
+        "n": 0
+      },
       "exact": {
         "n": 8,
         "score_mean": 0.015291317828107885,
@@ -6219,6 +6225,427 @@
     ],
     "worked_better": 76
   },
+  "concentration": {
+    "instinct": {
+      "top1_share": 0.14248588131887624,
+      "top5_share": 0.4304700471549114,
+      "mean_without_top": 0.08377736766912122,
+      "misses": [
+        {
+          "q": 16,
+          "short": "Unicode names with the word FRACTION",
+          "answer": 98,
+          "estimate": 21,
+          "p90": [
+            19,
+            25
+          ],
+          "factor": 3.8076923076923075,
+          "width": 1.3,
+          "score": 1.4338195209925966,
+          "share": 0.14248588131887624,
+          "side": "above"
+        },
+        {
+          "q": 38,
+          "short": "names in `locale.__all__`",
+          "answer": 23,
+          "estimate": 100,
+          "p90": [
+            65,
+            140
+          ],
+          "factor": 2.75,
+          "width": 2.1363636363636362,
+          "score": 1.2476774807845998,
+          "share": 0.1239880074503651,
+          "side": "below"
+        },
+        {
+          "q": 89,
+          "short": "Unicode names with the word DIGIT",
+          "answer": 898,
+          "estimate": 450,
+          "p90": [
+            330,
+            600
+          ],
+          "factor": 1.4958402662229617,
+          "width": 1.8157099697885197,
+          "score": 0.5671031508840478,
+          "share": 0.05635590188958129,
+          "side": "above"
+        },
+        {
+          "q": 75,
+          "short": "lines in `statistics`",
+          "answer": 1817,
+          "estimate": 960,
+          "p90": [
+            820,
+            1150
+          ],
+          "factor": 1.579496090356212,
+          "width": 1.4019488428745432,
+          "score": 0.5592844602646062,
+          "share": 0.05557891914708135,
+          "side": "above"
+        },
+        {
+          "q": 68,
+          "short": "Unicode names with the word FACE",
+          "answer": 179,
+          "estimate": 90,
+          "p90": [
+            60,
+            130
+          ],
+          "factor": 1.3740458015267176,
+          "width": 2.1475409836065573,
+          "score": 0.5238874272246836,
+          "share": 0.05206133734900734,
+          "side": "above"
+        },
+        {
+          "q": 54,
+          "short": "function definitions in `webbrowser`",
+          "answer": 25,
+          "estimate": 45,
+          "p90": [
+            28,
+            68
+          ],
+          "factor": 1.1153846153846154,
+          "width": 2.3793103448275863,
+          "score": 0.35589497907965667,
+          "share": 0.0353670800325153,
+          "side": "below"
+        },
+        {
+          "q": 28,
+          "short": "assigned in the Playing Cards block",
+          "answer": 82,
+          "estimate": 59,
+          "p90": [
+            55,
+            64
+          ],
+          "factor": 1.2769230769230768,
+          "width": 1.1607142857142858,
+          "score": 0.29218159533456783,
+          "share": 0.029035559571389126,
+          "side": "above"
+        },
+        {
+          "q": 15,
+          "short": "assigned in the Thai block",
+          "answer": 87,
+          "estimate": 119,
+          "p90": [
+            113,
+            121
+          ],
+          "factor": 1.2954545454545454,
+          "width": 1.0701754385964912,
+          "score": 0.2867818072621494,
+          "share": 0.028498955381552834,
+          "side": "below"
+        },
+        {
+          "q": 31,
+          "short": "Unicode names with the word CAPITAL",
+          "answer": 2032,
+          "estimate": 1300,
+          "p90": [
+            700,
+            2000
+          ],
+          "factor": 1.015992003998001,
+          "width": 2.854493580599144,
+          "score": 0.2784655456217749,
+          "share": 0.027672526495798218,
+          "side": "above"
+        },
+        {
+          "q": 102,
+          "short": "lines in `reprlib`",
+          "answer": 230,
+          "estimate": 170,
+          "p90": [
+            135,
+            215
+          ],
+          "factor": 1.0694444444444444,
+          "width": 1.588235294117647,
+          "score": 0.20051650374764313,
+          "share": 0.019926336848645965,
+          "side": "above"
+        },
+        {
+          "q": 100,
+          "short": "Unicode names with the word CYRILLIC",
+          "answer": 507,
+          "estimate": 420,
+          "p90": [
+            385,
+            465
+          ],
+          "factor": 1.090128755364807,
+          "width": 1.2072538860103628,
+          "score": 0.1419379871202531,
+          "share": 0.014105094045208634,
+          "side": "above"
+        },
+        {
+          "q": 44,
+          "short": "mean distance in a 1 × 4.51 rectangle",
+          "answer": 1.5900454196314202,
+          "estimate": 1.77,
+          "p90": [
+            1.68,
+            1.86
+          ],
+          "factor": 1.0565735917087398,
+          "width": 1.1071428571428572,
+          "score": 0.08493069939748667,
+          "share": 0.008439992186953859,
+          "side": "below"
+        },
+        {
+          "q": 26,
+          "short": "digit sum of 2^1219",
+          "answer": 1550,
+          "estimate": 1650,
+          "p90": [
+            1560,
+            1740
+          ],
+          "factor": 1.006447453255964,
+          "width": 1.1153106982703396,
+          "score": 0.03790381657652168,
+          "share": 0.003766693528147751,
+          "side": "below"
+        },
+        {
+          "q": 3,
+          "short": "highest point of a 426-step walk",
+          "answer": 15.79525,
+          "estimate": 16.45,
+          "p90": [
+            15.8,
+            17.1
+          ],
+          "factor": 1.0003007233187193,
+          "width": 1.0822784810126582,
+          "score": 0.02298542461633514,
+          "share": 0.0022841776360248175,
+          "side": "below"
+        },
+        {
+          "q": 11,
+          "short": "primes in [3,164,661, 3,229,443]",
+          "answer": 4399,
+          "estimate": 4325,
+          "p90": [
+            4270,
+            4380
+          ],
+          "factor": 1.0043369093814198,
+          "width": 1.0257550924841958,
+          "score": 0.011495947780298721,
+          "share": 0.0011424103432053218,
+          "side": "above"
+        }
+      ]
+    },
+    "worked": {
+      "top1_share": 0.12572209633250228,
+      "top5_share": 0.40972751043065536,
+      "mean_without_top": 0.035338853601108305,
+      "misses": [
+        {
+          "q": 53,
+          "short": "lines in `glob`",
+          "answer": 572,
+          "estimate": 310,
+          "p90": [
+            250,
+            380
+          ],
+          "factor": 1.5039370078740157,
+          "width": 1.5179282868525896,
+          "score": 0.5234217838771645,
+          "share": 0.12572209633250228,
+          "side": "above"
+        },
+        {
+          "q": 75,
+          "short": "lines in `statistics`",
+          "answer": 1817,
+          "estimate": 1050,
+          "p90": [
+            900,
+            1200
+          ],
+          "factor": 1.5137385512073271,
+          "width": 1.332963374028857,
+          "score": 0.48859674819606236,
+          "share": 0.11735737666368956,
+          "side": "above"
+        },
+        {
+          "q": 68,
+          "short": "Unicode names with the word FACE",
+          "answer": 179,
+          "estimate": 128,
+          "p90": [
+            118,
+            140
+          ],
+          "factor": 1.2765957446808511,
+          "width": 1.184873949579832,
+          "score": 0.29415021265026753,
+          "share": 0.07065273649314073,
+          "side": "above"
+        },
+        {
+          "q": 103,
+          "short": "function definitions in `base64`",
+          "answer": 28,
+          "estimate": 21,
+          "p90": [
+            18,
+            24
+          ],
+          "factor": 1.16,
+          "width": 1.3157894736842106,
+          "score": 0.2219252377304787,
+          "share": 0.053304824094047326,
+          "side": "above"
+        },
+        {
+          "q": 102,
+          "short": "lines in `reprlib`",
+          "answer": 230,
+          "estimate": 183,
+          "p90": [
+            165,
+            205
+          ],
+          "factor": 1.1213592233009708,
+          "width": 1.2409638554216869,
+          "score": 0.177734274227107,
+          "share": 0.04269047684727548,
+          "side": "above"
+        },
+        {
+          "q": 16,
+          "short": "Unicode names with the word FRACTION",
+          "answer": 98,
+          "estimate": 74,
+          "p90": [
+            56,
+            96
+          ],
+          "factor": 1.0206185567010309,
+          "width": 1.7017543859649122,
+          "score": 0.1647680773827611,
+          "share": 0.03957609089899481,
+          "side": "above"
+        },
+        {
+          "q": 89,
+          "short": "Unicode names with the word DIGIT",
+          "answer": 898,
+          "estimate": 775,
+          "p90": [
+            720,
+            835
+          ],
+          "factor": 1.075358851674641,
+          "width": 1.159500693481276,
+          "score": 0.11650814860062564,
+          "share": 0.02798440785820795,
+          "side": "above"
+        },
+        {
+          "q": 1,
+          "short": "Unicode names with the word MUSICAL",
+          "answer": 518,
+          "estimate": 464,
+          "p90": [
+            445,
+            480
+          ],
+          "factor": 1.079002079002079,
+          "width": 1.0784753363228698,
+          "score": 0.0952980111568469,
+          "share": 0.022889887482727835,
+          "side": "above"
+        },
+        {
+          "q": 26,
+          "short": "digit sum of 2^1219",
+          "answer": 1550,
+          "estimate": 1650,
+          "p90": [
+            1560,
+            1740
+          ],
+          "factor": 1.006447453255964,
+          "width": 1.1153106982703396,
+          "score": 0.03808951760380671,
+          "share": 0.00914882442601611,
+          "side": "below"
+        },
+        {
+          "q": 3,
+          "short": "highest point of a 426-step walk",
+          "answer": 15.79525,
+          "estimate": 16.46,
+          "p90": [
+            15.8,
+            17.1
+          ],
+          "factor": 1.0003007233187193,
+          "width": 1.0822784810126582,
+          "score": 0.023106968223843696,
+          "share": 0.005550125299469573,
+          "side": "below"
+        },
+        {
+          "q": 86,
+          "short": "longest increasing subsequence, n = 121",
+          "answer": 18.593,
+          "estimate": 18.05,
+          "p90": [
+            17.6,
+            18.5
+          ],
+          "factor": 1.005027027027027,
+          "width": 1.0511363636363635,
+          "score": 0.01913862309974384,
+          "share": 0.004596957733005086,
+          "side": "above"
+        },
+        {
+          "q": 56,
+          "short": "longest increasing subsequence, n = 452",
+          "answer": 38.193,
+          "estimate": 37.6,
+          "p90": [
+            37.1,
+            38.1
+          ],
+          "factor": 1.0024409448818896,
+          "width": 1.0269541778975741,
+          "score": 0.009837874836060143,
+          "share": 0.0023629858098082363,
+          "side": "above"
+        }
+      ]
+    }
+  },
   "served_models": [
     "anthropic/claude-haiku-5.5 via Claude Platform on AWS"
   ],
@@ -6230,7 +6657,7 @@
   "cost": 0.217023,
   "answers_changed_after_run": false,
   "scored_with": {
-    "calibench": "2.0.0",
+    "calibench": "2.1.0",
     "scoring": "log-wis-1"
   }
 }

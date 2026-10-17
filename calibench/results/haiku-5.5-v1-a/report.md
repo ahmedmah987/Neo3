@@ -1,6 +1,6 @@
 # Calibench report: openrouter:anthropic/claude-haiku-5.5
 
-Seed `calibench-v1`, 104 questions, Calibench 2.0.0, Python 3.13.16 (Unicode 15.1.0), started 2026-10-17T03:18:44+00:00.
+Seed `calibench-v1`, 104 questions, Calibench 2.0.0, Python 3.13.16 (Unicode 15.1.0), started 2026-10-17T03:18:44+00:00. Scored with Calibench 2.1.0 (log-wis-1).
 
 **Standard suite v1.**
 
@@ -46,9 +46,35 @@ The estimate and the two intervals are five quantiles of the model's belief, so 
 
 ![Where the true answers fell](calibration.svg)
 
+## Where the score comes from
+
+A few large misses can carry a mean. This shows how much of each score its largest questions carry, and the worked answers whose 90% interval missed, costliest first.
+
+| | Instinct | Worked |
+|---|---|---|
+| Share of the score from the largest question | 12% | 20% |
+| Share from the five largest | 37% | 48% |
+| Mean score without the largest question | 0.157 | 0.045 |
+
+**Worked answers outside their 90% interval.** *Outside by* is the factor between the true answer and the nearer end of the interval; *width* is the ratio of the interval's ends, so a narrow interval that misses by a wide factor is a confident miss.
+
+| # | Question | True answer | Estimate [90% interval] | Width | Outside by | Score | Share of score |
+|---|---|---|---|---|---|---|---|
+| 16 | Unicode names with the word FRACTION | 98 | 28 [26, 31] | ×1.19 | ×3.09 above | 1.192 | 20% |
+| 53 | lines in `glob` | 572 | 300 [240, 400] | ×1.66 | ×1.43 above | 0.519 | 9% |
+| 75 | lines in `statistics` | 1,817 | 1,050 [880, 1,260] | ×1.43 | ×1.44 above | 0.469 | 8% |
+| 95 | names in `mailbox.__all__` | 17 | 12 [11, 13] | ×1.17 | ×1.29 above | 0.299 | 5% |
+| 28 | assigned in the Playing Cards block | 82 | 60 [56, 62] | ×1.11 | ×1.32 above | 0.299 | 5% |
+| 102 | lines in `reprlib` | 230 | 169 [154, 186] | ×1.21 | ×1.24 above | 0.267 | 5% |
+| 68 | Unicode names with the word FACE | 179 | 135 [124, 146] | ×1.18 | ×1.22 above | 0.247 | 4% |
+| 83 | function definitions in `weakref` | 65 | 90 [72, 110] | ×1.52 | ×1.11 below | 0.226 | 4% |
+| 89 | Unicode names with the word DIGIT | 898 | 770 [735, 820] | ×1.12 | ×1.1 above | 0.125 | 2% |
+| 31 | Unicode names with the word CAPITAL | 2,032 | 1,730 [1,600, 1,880] | ×1.17 | ×1.08 above | 0.123 | 2% |
+| | 9 more | | | | | | |
+
 ## By kind of question
 
-Knowledge questions ask what is known (the Python standard library, the Unicode database); statistical ones need noise or irregularity modelled; exact ones have a closed-form answer that must be evaluated.
+Knowledge questions ask what is known (the Python standard library, the Unicode database); statistical ones need noise or irregularity modelled; exact ones have a closed-form answer that must be evaluated; calculation ones have an exact answer that takes long, careful arithmetic.
 
 | Kind | Phase | Questions | Score | 50% hits | 90% hits |
 |---|---|---|---|---|---|

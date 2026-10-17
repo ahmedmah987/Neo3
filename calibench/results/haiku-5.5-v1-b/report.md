@@ -1,6 +1,6 @@
 # Calibench report: openrouter:anthropic/claude-haiku-5.5
 
-Seed `calibench-v1`, 104 questions, Calibench 2.0.0, Python 3.13.16 (Unicode 15.1.0), started 2026-10-17T03:18:44+00:00.
+Seed `calibench-v1`, 104 questions, Calibench 2.0.0, Python 3.13.16 (Unicode 15.1.0), started 2026-10-17T03:18:44+00:00. Scored with Calibench 2.1.0 (log-wis-1).
 
 **Standard suite v1.**
 
@@ -46,9 +46,35 @@ The estimate and the two intervals are five quantiles of the model's belief, so 
 
 ![Where the true answers fell](calibration.svg)
 
+## Where the score comes from
+
+A few large misses can carry a mean. This shows how much of each score its largest questions carry, and the worked answers whose 90% interval missed, costliest first.
+
+| | Instinct | Worked |
+|---|---|---|
+| Share of the score from the largest question | 12% | 12% |
+| Share from the five largest | 37% | 44% |
+| Mean score without the largest question | 0.158 | 0.044 |
+
+**Worked answers outside their 90% interval.** *Outside by* is the factor between the true answer and the nearer end of the interval; *width* is the ratio of the interval's ends, so a narrow interval that misses by a wide factor is a confident miss.
+
+| # | Question | True answer | Estimate [90% interval] | Width | Outside by | Score | Share of score |
+|---|---|---|---|---|---|---|---|
+| 53 | lines in `glob` | 572 | 290 [242, 345] | ×1.42 | ×1.66 above | 0.601 | 12% |
+| 47 | Collatz steps from 189,630,655,112 | 291 | 169 [130, 210] | ×1.61 | ×1.38 above | 0.449 | 9% |
+| 68 | Unicode names with the word FACE | 179 | 116 [109, 123] | ×1.13 | ×1.45 above | 0.407 | 8% |
+| 83 | function definitions in `weakref` | 65 | 105 [88, 125] | ×1.42 | ×1.35 below | 0.398 | 8% |
+| 75 | lines in `statistics` | 1,817 | 1,100 [850, 1,400] | ×1.65 | ×1.3 above | 0.396 | 8% |
+| 102 | lines in `reprlib` | 230 | 165 [143, 196] | ×1.37 | ×1.17 above | 0.252 | 5% |
+| 8 | code points in category Po | 628 | 790 [735, 845] | ×1.15 | ×1.17 below | 0.198 | 4% |
+| 45 | function definitions in `csv` | 17 | 22 [19, 25] | ×1.3 | ×1.11 below | 0.185 | 4% |
+| 89 | Unicode names with the word DIGIT | 898 | 790 [745, 832] | ×1.12 | ×1.08 above | 0.106 | 2% |
+| 1 | Unicode names with the word MUSICAL | 518 | 470 [448, 490] | ×1.09 | ×1.06 above | 0.079 | 2% |
+| | 3 more | | | | | | |
+
 ## By kind of question
 
-Knowledge questions ask what is known (the Python standard library, the Unicode database); statistical ones need noise or irregularity modelled; exact ones have a closed-form answer that must be evaluated.
+Knowledge questions ask what is known (the Python standard library, the Unicode database); statistical ones need noise or irregularity modelled; exact ones have a closed-form answer that must be evaluated; calculation ones have an exact answer that takes long, careful arithmetic.
 
 | Kind | Phase | Questions | Score | 50% hits | 90% hits |
 |---|---|---|---|---|---|

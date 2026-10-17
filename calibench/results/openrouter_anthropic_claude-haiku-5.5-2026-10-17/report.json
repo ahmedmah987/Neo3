@@ -143,6 +143,9 @@
   },
   "kinds": {
     "instinct": {
+      "calculation": {
+        "n": 0
+      },
       "exact": {
         "n": 2,
         "score_mean": 0.11004618248432219,
@@ -301,6 +304,9 @@
       }
     },
     "worked": {
+      "calculation": {
+        "n": 0
+      },
       "exact": {
         "n": 2,
         "score_mean": 0.11176171134846978,
@@ -2926,6 +2932,232 @@
     ],
     "worked_better": 19
   },
+  "concentration": {
+    "instinct": {
+      "top1_share": 0.23784428361876234,
+      "top5_share": 0.7053740424519469,
+      "mean_without_top": 0.14700994019957278,
+      "misses": [
+        {
+          "q": 6,
+          "short": "Unicode names with the word HAND",
+          "answer": 304,
+          "estimate": 75,
+          "p90": [
+            40,
+            130
+          ],
+          "factor": 2.3282442748091605,
+          "width": 3.1951219512195124,
+          "score": 1.1469268405419402,
+          "share": 0.23784428361876234,
+          "side": "above"
+        },
+        {
+          "q": 16,
+          "short": "Unicode names with the word WHITE",
+          "answer": 290,
+          "estimate": 80,
+          "p90": [
+            40,
+            140
+          ],
+          "factor": 2.0638297872340425,
+          "width": 3.4390243902439024,
+          "score": 1.0440096950895057,
+          "share": 0.2165018109631779,
+          "side": "above"
+        },
+        {
+          "q": 25,
+          "short": "names in `locale.__all__`",
+          "answer": 23,
+          "estimate": 60,
+          "p90": [
+            30,
+            110
+          ],
+          "factor": 1.2916666666666667,
+          "width": 3.5806451612903225,
+          "score": 0.6248924371926804,
+          "share": 0.12958724899370824,
+          "side": "below"
+        },
+        {
+          "q": 11,
+          "short": "code points in category No",
+          "answer": 915,
+          "estimate": 1400,
+          "p90": [
+            1100,
+            1750
+          ],
+          "factor": 1.2019650655021834,
+          "width": 1.5903723887375114,
+          "score": 0.31401603265133415,
+          "share": 0.0651191651382679,
+          "side": "below"
+        },
+        {
+          "q": 14,
+          "short": "assigned in the Lao block",
+          "answer": 83,
+          "estimate": 67,
+          "p90": [
+            56,
+            80
+          ],
+          "factor": 1.037037037037037,
+          "width": 1.4210526315789473,
+          "score": 0.14147128222751232,
+          "share": 0.029337647864384413,
+          "side": "above"
+        },
+        {
+          "q": 12,
+          "short": "digit sum of 2^3432",
+          "answer": 4879,
+          "estimate": 4653,
+          "p90": [
+            4502,
+            4804
+          ],
+          "factor": 1.015608740894901,
+          "width": 1.0670664001776593,
+          "score": 0.03327356612484479,
+          "share": 0.006900115350570903,
+          "side": "above"
+        }
+      ]
+    },
+    "worked": {
+      "top1_share": 0.33228177788129387,
+      "top5_share": 0.8092786392716544,
+      "mean_without_top": 0.07224936863101751,
+      "misses": [
+        {
+          "q": 16,
+          "short": "Unicode names with the word WHITE",
+          "answer": 290,
+          "estimate": 105,
+          "p90": [
+            84,
+            135
+          ],
+          "factor": 2.139705882352941,
+          "width": 1.6,
+          "score": 0.8988502883499081,
+          "share": 0.33228177788129387,
+          "side": "above"
+        },
+        {
+          "q": 6,
+          "short": "Unicode names with the word HAND",
+          "answer": 304,
+          "estimate": 125,
+          "p90": [
+            40,
+            240
+          ],
+          "factor": 1.2655601659751037,
+          "width": 5.878048780487805,
+          "score": 0.6098788319979332,
+          "share": 0.22545648058973658,
+          "side": "above"
+        },
+        {
+          "q": 5,
+          "short": "Collatz steps from 492,058,289,036",
+          "answer": 150,
+          "estimate": 275,
+          "p90": [
+            175,
+            400
+          ],
+          "factor": 1.1655629139072847,
+          "width": 2.278409090909091,
+          "score": 0.4061872458555089,
+          "share": 0.15015695267044693,
+          "side": "below"
+        },
+        {
+          "q": 11,
+          "short": "code points in category No",
+          "answer": 915,
+          "estimate": 1050,
+          "p90": [
+            960,
+            1180
+          ],
+          "factor": 1.0491266375545851,
+          "width": 1.2289281997918835,
+          "score": 0.09880170061232828,
+          "share": 0.036524441458909075,
+          "side": "below"
+        },
+        {
+          "q": 14,
+          "short": "assigned in the Lao block",
+          "answer": 83,
+          "estimate": 76,
+          "p90": [
+            68,
+            81
+          ],
+          "factor": 1.024390243902439,
+          "width": 1.1884057971014492,
+          "score": 0.06157940535969161,
+          "share": 0.02276431855115096,
+          "side": "above"
+        },
+        {
+          "q": 12,
+          "short": "digit sum of 2^3432",
+          "answer": 4879,
+          "estimate": 4651,
+          "p90": [
+            4500,
+            4800
+          ],
+          "factor": 1.0164549052280776,
+          "width": 1.0666518551433015,
+          "score": 0.03389753005758443,
+          "share": 0.012531042932629109,
+          "side": "above"
+        },
+        {
+          "q": 20,
+          "short": "highest point of a 427-step walk",
+          "answer": 16.12,
+          "estimate": 16.5,
+          "p90": [
+            16.15,
+            16.85
+          ],
+          "factor": 1.0018610421836227,
+          "width": 1.0433436532507743,
+          "score": 0.014964224458606363,
+          "share": 0.005531887981978165,
+          "side": "below"
+        },
+        {
+          "q": 7,
+          "short": "highest point of a 508-step walk",
+          "answer": 17.5565,
+          "estimate": 17.97,
+          "p90": [
+            17.62,
+            18.33
+          ],
+          "factor": 1.003616894027853,
+          "width": 1.0402951191827468,
+          "score": 0.01468678510110662,
+          "share": 0.005429325804317305,
+          "side": "below"
+        }
+      ]
+    }
+  },
   "served_models": [
     "anthropic/claude-haiku-5.5 via Claude Platform on AWS"
   ],
@@ -2937,7 +3169,7 @@
   "cost": 0.072024,
   "answers_changed_after_run": false,
   "scored_with": {
-    "calibench": "2.0.0",
+    "calibench": "2.1.0",
     "scoring": "log-wis-1"
   }
 }

@@ -109,6 +109,7 @@ Every true answer is positive, so answers are scored on a log scale: questions o
 - **Coverage**: how often each interval contains the answer, with a 90% Wilson interval and a verdict of *too narrow*, *too wide* or *consistent with calibrated* at about two standard errors. Verdicts leave out single-number intervals, which claim exact knowledge; those are counted on their own line with how often they were exactly right.
 - **Instinct against worked**: how much working a question out improves the score, with a 90% interval.
 - **Where the true answers fell**: the estimate and intervals are five quantiles, so they split the belief into six bins that should hold 5%, 20%, 25%, 25%, 20% and 5% of the true answers. This shows the shape of any miscalibration, and whether the model leans high or low.
+- **Where the score comes from**: how much of the score the largest questions carry, the mean without the largest one, and every worked answer outside its 90% interval, with how narrow the interval was and how far outside the answer fell. One confident miss can carry a run, and this shows it.
 - **By kind and by family**: the same scores for knowledge, statistical and exact questions, and for each family, which tend to fail in different ways.
 - **Unanswered questions** (refused, unreadable or failed) count as if the model had given the answer of a model that knows nothing, so refusing hard questions can't improve a score.
 

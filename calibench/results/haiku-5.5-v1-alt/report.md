@@ -1,6 +1,6 @@
 # Calibench report: openrouter:anthropic/claude-haiku-5.5
 
-Seed `calibench-v1`, 104 questions, Calibench 2.0.0, Python 3.13.16 (Unicode 15.1.0), started 2026-10-17T03:46:01+00:00.
+Seed `calibench-v1`, 104 questions, Calibench 2.0.0, Python 3.13.16 (Unicode 15.1.0), started 2026-10-17T03:46:01+00:00. Scored with Calibench 2.1.0 (log-wis-1).
 
 **Standard suite v1.**
 
@@ -48,9 +48,35 @@ The estimate and the two intervals are five quantiles of the model's belief, so 
 
 ![Where the true answers fell](calibration.svg)
 
+## Where the score comes from
+
+A few large misses can carry a mean. This shows how much of each score its largest questions carry, and the worked answers whose 90% interval missed, costliest first.
+
+| | Instinct | Worked |
+|---|---|---|
+| Share of the score from the largest question | 14% | 13% |
+| Share from the five largest | 43% | 41% |
+| Mean score without the largest question | 0.084 | 0.035 |
+
+**Worked answers outside their 90% interval.** *Outside by* is the factor between the true answer and the nearer end of the interval; *width* is the ratio of the interval's ends, so a narrow interval that misses by a wide factor is a confident miss.
+
+| # | Question | True answer | Estimate [90% interval] | Width | Outside by | Score | Share of score |
+|---|---|---|---|---|---|---|---|
+| 53 | lines in `glob` | 572 | 310 [250, 380] | ×1.52 | ×1.5 above | 0.523 | 13% |
+| 75 | lines in `statistics` | 1,817 | 1,050 [900, 1,200] | ×1.33 | ×1.51 above | 0.489 | 12% |
+| 68 | Unicode names with the word FACE | 179 | 128 [118, 140] | ×1.18 | ×1.28 above | 0.294 | 7% |
+| 103 | function definitions in `base64` | 28 | 21 [18, 24] | ×1.32 | ×1.16 above | 0.222 | 5% |
+| 102 | lines in `reprlib` | 230 | 183 [165, 205] | ×1.24 | ×1.12 above | 0.178 | 4% |
+| 16 | Unicode names with the word FRACTION | 98 | 74 [56, 96] | ×1.7 | ×1.02 above | 0.165 | 4% |
+| 89 | Unicode names with the word DIGIT | 898 | 775 [720, 835] | ×1.16 | ×1.08 above | 0.117 | 3% |
+| 1 | Unicode names with the word MUSICAL | 518 | 464 [445, 480] | ×1.08 | ×1.08 above | 0.095 | 2% |
+| 26 | digit sum of 2^1219 | 1,550 | 1,650 [1,560, 1,740] | ×1.12 | ×1.01 below | 0.038 | 1% |
+| 3 | highest point of a 426-step walk | 15.8 | 16.46 [15.8, 17.1] | ×1.08 | ×1 below | 0.023 | 1% |
+| | 2 more | | | | | | |
+
 ## By kind of question
 
-Knowledge questions ask what is known (the Python standard library, the Unicode database); statistical ones need noise or irregularity modelled; exact ones have a closed-form answer that must be evaluated.
+Knowledge questions ask what is known (the Python standard library, the Unicode database); statistical ones need noise or irregularity modelled; exact ones have a closed-form answer that must be evaluated; calculation ones have an exact answer that takes long, careful arithmetic.
 
 | Kind | Phase | Questions | Score | 50% hits | 90% hits |
 |---|---|---|---|---|---|

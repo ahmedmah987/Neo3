@@ -303,6 +303,15 @@ def check_run(tmp):
     (tmp / "naive" / "report.json").write_text(json.dumps(stored))
     check("index refuses a report that doesn't match its answers", raises(quiet, cli, ["index", str(tmp)]))
     quiet(runner.finish, tmp / "naive")
+    from .report import miss_factor
+    check("a miss factor measures how far beyond the nearer end the answer fell",
+          miss_factor([10, 20], 40, 0) == 2 and miss_factor([10, 20], 5, 0) == 2 and miss_factor([10, 20], 15, 0) == 1
+          and miss_factor([0, 1], 3, 1) == 2)
+    naive = json.loads((tmp / "naive" / "report.json").read_text())
+    conc = naive["concentration"]["worked"]
+    check("the report says where the score comes from, with every 90% miss listed",
+          "## Where the score comes from" in md and 0 < conc["top1_share"] <= conc["top5_share"] <= 1
+          and len(conc["misses"]) == sum(not r["worked"]["hits"]["p90"] for r in naive["questions"]))
     import xml.etree.ElementTree as ElementTree
     svg = ElementTree.parse(tmp / "naive" / "calibration.svg").getroot()
     check("the calibration chart is valid SVG with a bar per bin and series",

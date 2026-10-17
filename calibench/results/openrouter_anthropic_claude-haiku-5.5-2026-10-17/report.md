@@ -1,6 +1,6 @@
 # Calibench report: openrouter:anthropic/claude-haiku-5.5
 
-Seed `2026-10-17`, 26 questions, Calibench 1.0.0, Python 3.13.16 (Unicode 15.1.0), started 2026-10-17T03:01:02+00:00. Scored with Calibench 2.0.0 (log-wis-1).
+Seed `2026-10-17`, 26 questions, Calibench 1.0.0, Python 3.13.16 (Unicode 15.1.0), started 2026-10-17T03:01:02+00:00. Scored with Calibench 2.1.0 (log-wis-1).
 
 Served by: anthropic/claude-haiku-5.5 via Claude Platform on AWS.
 
@@ -44,9 +44,32 @@ The estimate and the two intervals are five quantiles of the model's belief, so 
 
 ![Where the true answers fell](calibration.svg)
 
+## Where the score comes from
+
+A few large misses can carry a mean. This shows how much of each score its largest questions carry, and the worked answers whose 90% interval missed, costliest first.
+
+| | Instinct | Worked |
+|---|---|---|
+| Share of the score from the largest question | 24% | 33% |
+| Share from the five largest | 71% | 81% |
+| Mean score without the largest question | 0.147 | 0.072 |
+
+**Worked answers outside their 90% interval.** *Outside by* is the factor between the true answer and the nearer end of the interval; *width* is the ratio of the interval's ends, so a narrow interval that misses by a wide factor is a confident miss.
+
+| # | Question | True answer | Estimate [90% interval] | Width | Outside by | Score | Share of score |
+|---|---|---|---|---|---|---|---|
+| 16 | Unicode names with the word WHITE | 290 | 105 [84, 135] | ×1.6 | ×2.14 above | 0.899 | 33% |
+| 6 | Unicode names with the word HAND | 304 | 125 [40, 240] | ×5.88 | ×1.27 above | 0.610 | 23% |
+| 5 | Collatz steps from 492,058,289,036 | 150 | 275 [175, 400] | ×2.28 | ×1.17 below | 0.406 | 15% |
+| 11 | code points in category No | 915 | 1,050 [960, 1,180] | ×1.23 | ×1.05 below | 0.099 | 4% |
+| 14 | assigned in the Lao block | 83 | 76 [68, 81] | ×1.19 | ×1.02 above | 0.062 | 2% |
+| 12 | digit sum of 2^3432 | 4,879 | 4,651 [4,500, 4,800] | ×1.07 | ×1.02 above | 0.034 | 1% |
+| 20 | highest point of a 427-step walk | 16.12 | 16.5 [16.15, 16.85] | ×1.04 | ×1 below | 0.015 | 1% |
+| 7 | highest point of a 508-step walk | 17.56 | 17.97 [17.62, 18.33] | ×1.04 | ×1 below | 0.015 | 1% |
+
 ## By kind of question
 
-Knowledge questions ask what is known (the Python standard library, the Unicode database); statistical ones need noise or irregularity modelled; exact ones have a closed-form answer that must be evaluated.
+Knowledge questions ask what is known (the Python standard library, the Unicode database); statistical ones need noise or irregularity modelled; exact ones have a closed-form answer that must be evaluated; calculation ones have an exact answer that takes long, careful arithmetic.
 
 | Kind | Phase | Questions | Score | 50% hits | 90% hits |
 |---|---|---|---|---|---|

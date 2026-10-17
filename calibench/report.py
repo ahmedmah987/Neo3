@@ -85,10 +85,39 @@ def build(meta, questions, records, results):
         "gain_ci": bootstrap_mean(gains),
         "worked_better": sum(g > 0 for g in gains),
     }
+    report["concentration"] = {phase: concentration(report["questions"], phase) for phase in PHASES}
     report["served_models"] = sorted(served)
     report["tokens"] = {k: v for k, v in tokens.items() if v}
     report["cost"] = round(cost, 6) if cost else None
     return report
+
+
+def miss_factor(interval, x, shift):
+    """How far outside an interval the answer fell, as a factor beyond the nearer end (1 if inside)."""
+    lo, hi = (max(v + shift, 1e-3) for v in interval)
+    t = x + shift
+    return t / hi if t > hi else lo / t if t < lo else 1.0
+
+
+def concentration(rows, phase):
+    """How much of a phase's score its largest questions carry, and the misses that cost most."""
+    scores = sorted((r[phase]["score"] for r in rows), reverse=True)
+    total = sum(scores)
+    out = {"top1_share": scores[0] / total if total else None,
+           "top5_share": sum(scores[:5]) / total if total else None,
+           "mean_without_top": statistics.fmean(scores[1:]) if len(scores) > 1 else None,
+           "misses": []}
+    for r in rows:
+        c = r[phase]
+        if c["status"] == "ok" and not c["hits"]["p90"]:
+            shift = offset(r["family"])
+            out["misses"].append({"q": r["q"], "short": r["short"], "answer": r["answer"], "estimate": c["estimate"],
+                                  "p90": c["p90"], "factor": miss_factor(c["p90"], r["answer"], shift),
+                                  "width": (max(c["p90"][1] + shift, 1e-3) / max(c["p90"][0] + shift, 1e-3)),
+                                  "score": c["score"], "share": c["score"] / total if total else None,
+                                  "side": "above" if r["answer"] > c["p90"][1] else "below"})
+    out["misses"].sort(key=lambda m: -m["score"])
+    return out
 
 
 def sc(x):
@@ -196,6 +225,31 @@ def render(report):
         cells = [f"{f['above'] / f['n']:.0%}{ci(f['above_ci'], pct)}" if f and f["n"] else "—" for f in fell.values()]
         lines.append(f"| **above the estimate**, with 90% interval | 50% | {cells[0]} | {cells[1]} |")
         lines += ["", "![Where the true answers fell](calibration.svg)"]
+
+    conc = report.get("concentration")
+    if conc:
+        lines += ["", "## Where the score comes from", "",
+                  "A few large misses can carry a mean. This shows how much of each score its largest questions "
+                  "carry, and the worked answers whose 90% interval missed, costliest first.", "",
+                  "| | Instinct | Worked |", "|---|---|---|",
+                  "| Share of the score from the largest question | "
+                  + " | ".join(pct(conc[p]["top1_share"]) for p in PHASES) + " |",
+                  "| Share from the five largest | " + " | ".join(pct(conc[p]["top5_share"]) for p in PHASES) + " |",
+                  "| Mean score without the largest question | "
+                  + " | ".join(sc(conc[p]["mean_without_top"]) for p in PHASES) + " |"]
+        misses = conc["worked"]["misses"]
+        if misses:
+            lines += ["", "**Worked answers outside their 90% interval.** *Outside by* is the factor between the "
+                      "true answer and the nearer end of the interval; *width* is the ratio of the interval's ends, "
+                      "so a narrow interval that misses by a wide factor is a confident miss.", "",
+                      "| # | Question | True answer | Estimate [90% interval] | Width | Outside by | Score | Share of score |",
+                      "|---|---|---|---|---|---|---|---|"]
+            for m in misses[:10]:
+                lines.append(f"| {m['q']} | {m['short']} | {num(m['answer'])} | {num(m['estimate'])} "
+                             f"[{num(m['p90'][0])}, {num(m['p90'][1])}] | ×{m['width']:.3g} "
+                             f"| ×{m['factor']:.3g} {m['side']} | {sc(m['score'])} | {pct(m['share'])} |")
+            if len(misses) > 10:
+                lines.append(f"| | {len(misses) - 10} more | | | | | | |")
 
     lines += ["", "## By kind of question", "",
               "Knowledge questions ask what is known (the Python standard library, the Unicode database); statistical "

@@ -7016,6 +7016,352 @@
     ],
     "worked_better": 88
   },
+  "concentration": {
+    "instinct": {
+      "top1_share": 0.20619405247538927,
+      "top5_share": 0.4941650899165444,
+      "mean_without_top": 0.07858908683717257,
+      "misses": [
+        {
+          "q": 95,
+          "short": "partitions of 507",
+          "answer": 3384893356244349844341,
+          "estimate": 3.4e+22,
+          "p90": [
+            2.6e+22,
+            4.5e+22
+          ],
+          "factor": 7.681187341407959,
+          "width": 1.7307692307692306,
+          "score": 2.184277468572393,
+          "share": 0.20619405247538927,
+          "side": "below"
+        },
+        {
+          "q": 107,
+          "short": "Unicode names with the word DIGIT",
+          "answer": 898,
+          "estimate": 300,
+          "p90": [
+            200,
+            420
+          ],
+          "factor": 2.1353919239904986,
+          "width": 2.0945273631840795,
+          "score": 0.9508788461725335,
+          "share": 0.08976220536376367,
+          "side": "above"
+        },
+        {
+          "q": 29,
+          "short": "Unicode names with the word SIGN",
+          "answer": 3393,
+          "estimate": 1100,
+          "p90": [
+            600,
+            2000
+          ],
+          "factor": 1.696151924037981,
+          "width": 3.329450915141431,
+          "score": 0.8643411558586729,
+          "share": 0.08159311635634127,
+          "side": "above"
+        },
+        {
+          "q": 73,
+          "short": "Unicode names with the word SMALL",
+          "answer": 3296,
+          "estimate": 1400,
+          "p90": [
+            800,
+            2200
+          ],
+          "factor": 1.497955474784189,
+          "width": 2.747815230961298,
+          "score": 0.6612403324918799,
+          "share": 0.0624205604729268,
+          "side": "above"
+        },
+        {
+          "q": 83,
+          "short": "function definitions in `shlex`",
+          "answer": 15,
+          "estimate": 35,
+          "p90": [
+            20,
+            60
+          ],
+          "factor": 1.3125,
+          "width": 2.9047619047619047,
+          "score": 0.574106067042782,
+          "share": 0.054195155248123364,
+          "side": "below"
+        },
+        {
+          "q": 3,
+          "short": "lines in `statistics`",
+          "answer": 1817,
+          "estimate": 1000,
+          "p90": [
+            700,
+            1500
+          ],
+          "factor": 1.2111925383077948,
+          "width": 2.1412268188302424,
+          "score": 0.4242570296390705,
+          "share": 0.0400495255255397,
+          "side": "above"
+        },
+        {
+          "q": 94,
+          "short": "lines in `warnings`",
+          "answer": 735,
+          "estimate": 1200,
+          "p90": [
+            900,
+            1600
+          ],
+          "factor": 1.2241847826086956,
+          "width": 1.776914539400666,
+          "score": 0.357960762897328,
+          "share": 0.03379121077379541,
+          "side": "below"
+        },
+        {
+          "q": 99,
+          "short": "digit sum of 2^8194",
+          "answer": 10843,
+          "estimate": 11100,
+          "p90": [
+            10950,
+            11250
+          ],
+          "factor": 1.0098672076724455,
+          "width": 1.0273947584695462,
+          "score": 0.017617136977353454,
+          "share": 0.0016630436923147458,
+          "side": "below"
+        }
+      ]
+    },
+    "worked": {
+      "top1_share": 0.31206305824251257,
+      "top5_share": 0.6054310549919514,
+      "mean_without_top": 0.047299988667974455,
+      "misses": [
+        {
+          "q": 95,
+          "short": "partitions of 507",
+          "answer": 3384893356244349844341,
+          "estimate": 3.385e+22,
+          "p90": [
+            3.33e+22,
+            3.44e+22
+          ],
+          "factor": 9.837828402649423,
+          "width": 1.033033033033033,
+          "score": 2.295823744617491,
+          "share": 0.31206305824251257,
+          "side": "below"
+        },
+        {
+          "q": 71,
+          "short": "Unicode names with the word FRACTION",
+          "answer": 98,
+          "estimate": 48,
+          "p90": [
+            41,
+            55
+          ],
+          "factor": 1.7678571428571428,
+          "width": 1.3333333333333333,
+          "score": 0.6441315004441026,
+          "share": 0.0875544764314716,
+          "side": "above"
+        },
+        {
+          "q": 3,
+          "short": "lines in `statistics`",
+          "answer": 1817,
+          "estimate": 980,
+          "p90": [
+            860,
+            1120
+          ],
+          "factor": 1.6217662801070474,
+          "width": 1.3019744483159117,
+          "score": 0.5562578036561786,
+          "share": 0.07561012111107498,
+          "side": "above"
+        },
+        {
+          "q": 29,
+          "short": "Unicode names with the word SIGN",
+          "answer": 3393,
+          "estimate": 1950,
+          "p90": [
+            1700,
+            2220
+          ],
+          "factor": 1.5281404772624945,
+          "width": 1.30570252792475,
+          "score": 0.49742171406268554,
+          "share": 0.06761274322149533,
+          "side": "above"
+        },
+        {
+          "q": 37,
+          "short": "Unicode names with the word STAR",
+          "answer": 61,
+          "estimate": 30,
+          "p90": [
+            20,
+            50
+          ],
+          "factor": 1.2156862745098038,
+          "width": 2.4285714285714284,
+          "score": 0.46047460731730805,
+          "share": 0.06259065598539695,
+          "side": "above"
+        },
+        {
+          "q": 73,
+          "short": "Unicode names with the word SMALL",
+          "answer": 3296,
+          "estimate": 2280,
+          "p90": [
+            2120,
+            2460
+          ],
+          "factor": 1.3396993092238927,
+          "width": 1.1603017444601602,
+          "score": 0.33503994772719264,
+          "share": 0.04554077418455267,
+          "side": "above"
+        },
+        {
+          "q": 94,
+          "short": "lines in `warnings`",
+          "answer": 735,
+          "estimate": 565,
+          "p90": [
+            490,
+            660
+          ],
+          "factor": 1.113464447806354,
+          "width": 1.3462321792260692,
+          "score": 0.19396406492106655,
+          "share": 0.026364837209444433,
+          "side": "above"
+        },
+        {
+          "q": 107,
+          "short": "Unicode names with the word DIGIT",
+          "answer": 898,
+          "estimate": 750,
+          "p90": [
+            735,
+            785
+          ],
+          "factor": 1.143765903307888,
+          "width": 1.0679347826086956,
+          "score": 0.15980529142465527,
+          "share": 0.021721758075824178,
+          "side": "above"
+        },
+        {
+          "q": 7,
+          "short": "Unicode names with the word LATIN",
+          "answer": 1567,
+          "estimate": 1365,
+          "p90": [
+            1290,
+            1450
+          ],
+          "factor": 1.0806340454858718,
+          "width": 1.1239349341595661,
+          "score": 0.1111101632306685,
+          "share": 0.015102804568895222,
+          "side": "above"
+        },
+        {
+          "q": 101,
+          "short": "highest point of a 1,174-step walk",
+          "answer": 26.54775,
+          "estimate": 27.33,
+          "p90": [
+            26.8,
+            27.9
+          ],
+          "factor": 1.0095017468523697,
+          "width": 1.0410447761194028,
+          "score": 0.02031391566706118,
+          "share": 0.0027611974407032646,
+          "side": "below"
+        },
+        {
+          "q": 64,
+          "short": "highest point of a 1,243-step walk",
+          "answer": 27.397,
+          "estimate": 28.14,
+          "p90": [
+            27.55,
+            28.75
+          ],
+          "factor": 1.0055845530532541,
+          "width": 1.043557168784029,
+          "score": 0.01748553202605277,
+          "share": 0.002376745432588315,
+          "side": "below"
+        },
+        {
+          "q": 93,
+          "short": "longest increasing subsequence, n = 105",
+          "answer": 17.167,
+          "estimate": 16.7,
+          "p90": [
+            16.2,
+            17.15
+          ],
+          "factor": 1.000991253644315,
+          "width": 1.058641975308642,
+          "score": 0.01630385436512478,
+          "share": 0.002216124241353321,
+          "side": "above"
+        },
+        {
+          "q": 12,
+          "short": "longest increasing subsequence, n = 600",
+          "answer": 44.304,
+          "estimate": 43.4,
+          "p90": [
+            42.8,
+            44.0
+          ],
+          "factor": 1.006909090909091,
+          "width": 1.0280373831775702,
+          "score": 0.014303524925206493,
+          "share": 0.0019442266603752843,
+          "side": "above"
+        },
+        {
+          "q": 99,
+          "short": "digit sum of 2^8194",
+          "answer": 10843,
+          "estimate": 11100,
+          "p90": [
+            10866,
+            11336
+          ],
+          "factor": 1.0021209885651052,
+          "width": 1.0432502070488636,
+          "score": 0.014022028401654082,
+          "share": 0.0019059638511198479,
+          "side": "below"
+        }
+      ]
+    }
+  },
   "served_models": [
     "anthropic/claude-haiku-5.5 via Claude Platform on AWS"
   ],
