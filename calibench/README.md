@@ -7,7 +7,7 @@ A model is asked numeric questions it can't look up. For each one it gives an es
 - **Fresh questions every time.** Questions are drawn from a seed, so there's no fixed answer key to memorise, and two models given the same seed get the same questions.
 - **Every answer is computed.** Calibench settles each question itself, exactly or by a seeded simulation, and only after every answer has been recorded.
 - **Proper scores.** The main score can't be improved by stating intervals other than the ones the model believes.
-- **Any model.** Claude, any OpenAI-compatible API, local models, any command-line program, replies collected by your own harness, or a chat window.
+- **Any model.** Claude, OpenRouter's hundreds of models, any OpenAI-compatible API, local models, any command-line program, replies collected by your own harness, or a chat window.
 - **No dependencies** beyond Python 3.11 or later. The Claude adapter needs the official `anthropic` SDK.
 
 ## Quick start
@@ -32,6 +32,10 @@ calibench run --model mock:naive --seed demo
 pip install anthropic
 export ANTHROPIC_API_KEY=...
 python3 -m calibench run --model anthropic:claude-opus-5-5 --seed october
+
+# Any model on OpenRouter (see https://openrouter.ai/models for ids)
+export OPENROUTER_API_KEY=...
+python3 -m calibench run --model openrouter:anthropic/claude-opus-5.5 --seed october
 
 # Any OpenAI-compatible API
 export OPENAI_API_KEY=...
@@ -115,6 +119,8 @@ If `answers.jsonl` changes after its hash was recorded, the report says so.
 - **No fallbacks.** Some APIs can quietly retry a refused request on a different model. Calibench leaves that off, because it would let one model answer under another's name. A refusal is recorded as a refusal, and every call records the model that actually served it.
 - **Refusals and failures aren't scored.** They're counted on the report's *Answered* line, and `compare` only uses questions every run answered. Check that line before reading the scores.
 - **Instinct versus worked.** The two phases use different prompts, and with the Claude adapter different effort levels (`--instinct-effort`, default `low`; `--worked-effort`, default `high`; pass `none` for models that don't take an effort setting). Some models always think before answering, Claude Opus 5.5 among them, so for them "instinct" means little thinking, not none.
+- **OpenRouter.** The adapter checks the model id before asking anything, sends the effort through OpenRouter's `reasoning` setting to models that support it (and then only to providers that honour it), and records the model, the provider and the cost of every call. The report adds up the cost. OpenRouter can route a model to different providers, which may serve it differently; the provider is recorded so that's visible.
+- **Keys stay in the environment.** API keys are read from environment variables and sent only to the API they belong to. They're never written into a run directory, and `.env` files are ignored by git.
 - **Knowledge depends on the machine.** Knowledge questions are settled against the Python and Unicode data of the machine running Calibench, and the question names the Python version. `compare` warns when runs used different versions.
 
 ## Limits

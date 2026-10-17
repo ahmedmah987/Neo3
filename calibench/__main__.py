@@ -14,6 +14,7 @@ from .scoring import PHASES
 MODEL_HELP = """model to test:
   anthropic:<model id>      Claude through the official SDK (pip install anthropic); default claude-opus-5-5
   openai-compat:<model id>  any OpenAI-compatible server: hosted APIs, Ollama, vLLM, llama.cpp, LM Studio
+  openrouter:<model id>     any model on OpenRouter, e.g. openrouter:anthropic/claude-opus-5.5 (key in OPENROUTER_API_KEY)
   cmd:<shell command>       any program that reads the prompt on stdin and prints the reply
   replies:<file.jsonl>      replies you collected yourself: the lines of `export`, each with a "reply" added
   manual                    paste each reply yourself, for models you can only reach through a chat window
@@ -117,9 +118,12 @@ def main(argv=None):
     p.add_argument("--out", help="run directory (default: calibench-runs/<model>-<seed>)")
     p.add_argument("--workers", type=int, default=4, help="questions asked at once (default 4)")
     p.add_argument("--base-url", help="API base URL (openai-compat default: $OPENAI_BASE_URL or https://api.openai.com/v1)")
-    p.add_argument("--api-key-env", help="environment variable holding the API key (openai-compat default: OPENAI_API_KEY)")
-    p.add_argument("--instinct-effort", default="low", help="anthropic: effort for instinct answers (default low; none to omit)")
-    p.add_argument("--worked-effort", default="high", help="anthropic: effort for worked answers (default high; none to omit)")
+    p.add_argument("--api-key-env", help="environment variable holding the API key "
+                   "(default: OPENAI_API_KEY for openai-compat, OPENROUTER_API_KEY for openrouter)")
+    p.add_argument("--instinct-effort", default="low",
+                   help="anthropic and openrouter: effort for instinct answers (default low; none to omit)")
+    p.add_argument("--worked-effort", default="high",
+                   help="anthropic and openrouter: effort for worked answers (default high; none to omit)")
     p.add_argument("--timeout", type=float, default=600, help="seconds per call (default 600)")
     p.set_defaults(func=cmd_run)
 

@@ -27,7 +27,7 @@ def build(meta, questions, records, results):
         }
 
     closer = {"instinct": 0, "worked": 0, "tie": 0}
-    served, tokens = set(), collections.Counter()
+    served, tokens, cost = set(), collections.Counter(), 0.0
     for q in questions:
         row = {"q": q["q"], "key": question_key(q), "family": q["family"], "kind": q["kind"],
                "short": q["short"], "answer": truth[q["q"]]}
@@ -36,9 +36,10 @@ def build(meta, questions, records, results):
             cell = {"status": r["status"] if r else "missing"}
             for attempt in (r or {}).get("attempts", []):
                 if attempt.get("served_model"):
-                    served.add(attempt["served_model"])
-                for name in ("input_tokens", "output_tokens", "prompt_tokens", "completion_tokens"):
+                    served.add(attempt["served_model"] + (f" via {attempt['provider']}" if attempt.get("provider") else ""))
+                for name in ("input_tokens", "output_tokens", "prompt_tokens", "completion_tokens", "reasoning_tokens"):
                     tokens[name] += attempt.get(name) or 0
+                cost += attempt.get("cost") or 0
             if r and r["status"] == "ok":
                 a = r["answer"]
                 cell.update(a)
@@ -60,6 +61,7 @@ def build(meta, questions, records, results):
     }
     report["served_models"] = sorted(served)
     report["tokens"] = {k: v for k, v in tokens.items() if v}
+    report["cost"] = round(cost, 6) if cost else None
     return report
 
 
@@ -91,6 +93,8 @@ def render(report):
         lines += ["", f"Served by: {', '.join(report['served_models'])}."]
     if report["tokens"]:
         lines += ["", "Tokens: " + ", ".join(f"{k.replace('_', ' ')} {v:,}" for k, v in report["tokens"].items()) + "."]
+    if report.get("cost"):
+        lines += ["", f"Cost reported by the API: {report['cost']:.4f} (US dollars on OpenRouter)."]
     if report.get("answers_changed_after_run"):
         lines += ["", "**Warning:** answers.jsonl was changed after the run recorded its hash."]
 

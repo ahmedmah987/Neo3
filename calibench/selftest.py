@@ -218,7 +218,8 @@ class FakeServer:
         class Handler(http.server.BaseHTTPRequestHandler):
             def do_POST(self):
                 body = self.rfile.read(int(self.headers.get("Content-Length", 0)))
-                server.requests.append({"path": self.path, "headers": dict(self.headers), "body": json.loads(body)})
+                server.requests.append({"path": self.path, "headers": dict(self.headers),
+                                        "body": json.loads(body) if body else None})
                 status, headers, payload = server.queue.pop(0)
                 self.send_response(status)
                 for k, v in headers.items():
@@ -226,6 +227,8 @@ class FakeServer:
                 self.send_header("Content-Length", str(len(payload)))
                 self.end_headers()
                 self.wfile.write(payload)
+
+            do_GET = do_POST
 
             def log_message(self, *args):
                 pass
@@ -288,6 +291,46 @@ def check_openai_compat():
                   reply == ANSWER and info.get("refused"))
             server.json(400, {"error": "bad request"})
             check("openai-compat: a 400 is an error, not retried", raises(model.ask, "PROMPT", "worked"))
+    finally:
+        server.close()
+
+
+def check_openrouter():
+    server = FakeServer()
+    listing = {"data": [{"id": "maker/model-a", "supported_parameters": ["max_tokens", "reasoning"],
+                         "top_provider": {"max_completion_tokens": 10_000}},
+                        {"id": "maker/model-b", "supported_parameters": ["max_tokens"], "top_provider": {}}]}
+    try:
+        with environ_and_sleep(), environment(OPENROUTER_API_KEY="router-secret"):
+            server.json(200, listing)
+            check("openrouter: an unknown model id fails before anything is asked",
+                  raises(models.make_model, "openrouter:maker/model-c", server.url))
+            server.json(200, listing)
+            model = models.make_model("openrouter:maker/model-a", server.url, instinct_effort="low", worked_effort="high")
+            check("openrouter: looks the model up first", server.requests[-1]["path"] == "/models")
+            server.json(200, {"model": "maker/model-a", "provider": "SomeHost",
+                              "choices": [{"message": {"content": ANSWER}, "finish_reason": "stop"}],
+                              "usage": {"prompt_tokens": 9, "completion_tokens": 30, "cost": 0.0012,
+                                        "completion_tokens_details": {"reasoning_tokens": 20}}})
+            reply, info = model.ask("PROMPT", "worked")
+            sent = server.requests[-1]
+            check("openrouter: sends the key, effort, a capped token limit and its attribution",
+                  sent["path"] == "/chat/completions" and sent["headers"].get("Authorization") == "Bearer router-secret"
+                  and sent["body"]["reasoning"] == {"effort": "high", "exclude": True}
+                  and sent["body"]["provider"] == {"require_parameters": True}
+                  and sent["body"]["max_tokens"] == 10_000 and sent["headers"].get("X-Title") == "Calibench")
+            check("openrouter: records the provider, reasoning tokens and cost",
+                  reply == ANSWER and info["provider"] == "SomeHost" and info["cost"] == 0.0012
+                  and info["reasoning_tokens"] == 20)
+            server.json(200, {"choices": [{"message": {"content": ""}, "finish_reason": "error",
+                                           "error": {"message": "provider failed"}}]})
+            check("openrouter: an error in the reply is an error", raises(model.ask, "PROMPT", "instinct"))
+            server.json(200, listing)
+            plain = models.make_model("openrouter:maker/model-b", server.url)
+            server.json(200, {"choices": [{"message": {"content": ANSWER}, "finish_reason": "stop"}]})
+            plain.ask("PROMPT", "worked")
+            check("openrouter: no effort for a model without reasoning",
+                  "reasoning" not in server.requests[-1]["body"] and "provider" not in server.requests[-1]["body"])
     finally:
         server.close()
 
@@ -389,6 +432,7 @@ def main():
         check_run(tmp)
         print("\nModel adapters\n")
         check_openai_compat()
+        check_openrouter()
         check_anthropic()
         check_other_adapters(tmp)
     print(f"\n{'all checks passed' if not failures else f'{len(failures)} failure(s)'} in {time.time() - start:.0f} s")

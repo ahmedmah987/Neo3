@@ -3,11 +3,13 @@
 Specs:
   anthropic:<model id>      Claude through the official SDK (pip install anthropic)
   openai-compat:<model id>  any server with an OpenAI-compatible /chat/completions endpoint
+  openrouter:<model id>     any model on OpenRouter, with the key in OPENROUTER_API_KEY
   cmd:<shell command>       any program that reads the prompt on stdin and writes the reply
   replies:<file.jsonl>      replies you collected yourself, one per line of `calibench export`
   manual                    you paste each reply yourself (for chat-only models)
   mock:naive                a built-in model that knows nothing, as a floor to compare against
 """
+import difflib
 import json
 import os
 import subprocess
@@ -69,8 +71,9 @@ class AnthropicModel(Model):
         return text, info
 
 
-def _post_json(url, payload, headers, timeout, attempts=3):
-    body = json.dumps(payload).encode()
+def _request_json(url, payload, headers, timeout, attempts=3):
+    """POST a JSON payload, or GET if there is none, retrying rate limits, server errors and lost connections."""
+    body = json.dumps(payload).encode() if payload is not None else None
     for attempt in range(attempts):
         request = urllib.request.Request(url, data=body, headers={"Content-Type": "application/json", **headers})
         try:
@@ -99,20 +102,74 @@ class OpenAICompatModel(Model):
         self.api_key = os.environ.get(api_key_env or "OPENAI_API_KEY", "")
         self.timeout = timeout
 
+    def payload(self, prompt, phase):
+        return {"model": self.model_id, "messages": [{"role": "user", "content": prompt}]}
+
+    def headers(self):
+        return {"Authorization": f"Bearer {self.api_key}"} if self.api_key else {}
+
     def ask(self, prompt, phase):
-        headers = {"Authorization": f"Bearer {self.api_key}"} if self.api_key else {}
-        data = _post_json(self.url, {"model": self.model_id, "messages": [{"role": "user", "content": prompt}]},
-                          headers, self.timeout)
+        data = _request_json(self.url, self.payload(prompt, phase), self.headers(), self.timeout)
         choice = data["choices"][0]
+        if choice.get("finish_reason") == "error":
+            raise RuntimeError(f"the server reported an error: {json.dumps(choice.get('error'))[:500]}")
         content = choice["message"].get("content") or ""
         if isinstance(content, list):          # some servers return content as a list of parts
             content = "".join(part.get("text", "") for part in content if isinstance(part, dict))
         info = {"served_model": data.get("model"), "stop_reason": choice.get("finish_reason")}
+        if data.get("provider"):
+            info["provider"] = data["provider"]
         if choice.get("finish_reason") == "content_filter":
             info["refused"] = True
         usage = data.get("usage") or {}
-        info.update({k: usage[k] for k in ("prompt_tokens", "completion_tokens") if k in usage})
+        info.update({k: usage[k] for k in ("prompt_tokens", "completion_tokens", "cost") if usage.get(k) is not None})
+        reasoning = (usage.get("completion_tokens_details") or {}).get("reasoning_tokens")
+        if reasoning:
+            info["reasoning_tokens"] = reasoning
         return content, info
+
+
+class OpenRouterModel(OpenAICompatModel):
+    """Any model on OpenRouter. The key is read from OPENROUTER_API_KEY and sent only to OpenRouter;
+    without one no Authorization header is sent, for setups where a proxy adds it.
+
+    The model is looked up first, so a mistyped id fails before anything is spent. Effort is sent
+    through OpenRouter's reasoning setting to models that support it, and then only providers that
+    honour it are used. OpenRouter never swaps in a different model unless asked to, and Calibench
+    doesn't ask; each call records the model and provider that served it, and its cost.
+    """
+    BASE_URL = "https://openrouter.ai/api/v1"
+
+    def __init__(self, model_id, efforts, base_url=None, api_key_env=None, timeout=600):
+        if not model_id:
+            sys.exit("openrouter: needs a model id, for example openrouter:anthropic/claude-opus-5.5")
+        base = (base_url or self.BASE_URL).rstrip("/")
+        super().__init__(model_id, base, api_key_env or "OPENROUTER_API_KEY", timeout)
+        self.efforts = efforts
+        try:
+            listing = _request_json(base + "/models", None, {}, timeout)["data"]
+        except (RuntimeError, KeyError, ValueError) as error:
+            sys.exit(f"openrouter: couldn't list models: {error}")
+        found = {m["id"]: m for m in listing}
+        if model_id not in found:
+            close = difflib.get_close_matches(model_id, list(found), n=5, cutoff=0.6)
+            sys.exit(f"openrouter: no model {model_id!r}" + (f"; did you mean one of: {', '.join(close)}" if close else
+                     "; see https://openrouter.ai/models"))
+        info = found[model_id]
+        self.reasoning = "reasoning" in (info.get("supported_parameters") or [])
+        self.max_output = (info.get("top_provider") or {}).get("max_completion_tokens")
+
+    def payload(self, prompt, phase):
+        data = super().payload(prompt, phase)
+        data["max_tokens"] = min(MAX_TOKENS[phase], self.max_output or MAX_TOKENS[phase])
+        effort = self.efforts.get(phase)
+        if self.reasoning and effort not in (None, "", "none"):
+            data["reasoning"] = {"effort": effort, "exclude": True}
+            data["provider"] = {"require_parameters": True}
+        return data
+
+    def headers(self):
+        return {**super().headers(), "HTTP-Referer": "https://github.com/ahmedmah987/Neo3", "X-Title": "Calibench"}
 
 
 class CommandModel(Model):
@@ -182,6 +239,8 @@ def make_model(spec, base_url=None, api_key_env=None, instinct_effort="low", wor
         return AnthropicModel(rest, {"instinct": instinct_effort, "worked": worked_effort}, base_url, timeout)
     if scheme == "openai-compat":
         return OpenAICompatModel(rest, base_url, api_key_env, timeout)
+    if scheme == "openrouter":
+        return OpenRouterModel(rest, {"instinct": instinct_effort, "worked": worked_effort}, base_url, api_key_env, timeout)
     if scheme == "cmd":
         return CommandModel(rest, timeout)
     if scheme == "replies":
