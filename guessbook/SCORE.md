@@ -40,22 +40,22 @@ The interval score is the main measure: an interval's width plus a penalty of 2/
 
 | | Instinct | Worked |
 |---|---|---|
-| Interval score, 50% intervals | 21.10% | 6.80% |
-| Interval score, 90% intervals | 40.56% | 17.13% |
-| 50% intervals that contain the answer | 45 of 60 (75%) | 46 of 60 (77%) |
-| … leaving out single-number intervals | 43 of 58 (74%) | 36 of 50 (72%) |
-| 90% intervals that contain the answer | 57 of 60 (95%) | 56 of 60 (93%) |
+| Interval score, 50% intervals | 22.00% | 6.51% |
+| Interval score, 90% intervals | 45.00% | 15.95% |
+| 50% intervals that contain the answer | 54 of 72 (75%) | 56 of 72 (78%) |
+| … leaving out single-number intervals | 50 of 68 (74%) | 42 of 58 (72%) |
+| 90% intervals that contain the answer | 67 of 72 (93%) | 68 of 72 (94%) |
 | Median error of the estimate | 1.3% | 0.3% |
-| Estimate closer to the answer | 11 | 37 |
-| Ties | 12 | 12 |
+| Estimate closer to the answer | 13 | 43 |
+| Ties | 16 | 16 |
 
 Worked answers by kind of question: knowledge means recalling, statistical means modelling noise or irregularity, exact means evaluating a known formula.
 
 | Kind | Questions | 50% hits | … leaving out single numbers | 90% hits | Interval score 50% / 90% |
 |---|---|---|---|---|---|
-| exact | 5 | 5 of 5 (100%) | 5 of 5 (100%) | 5 of 5 (100%) | 0.00% / 0.01% |
-| knowledge | 23 | 22 of 23 (96%) | 15 of 16 (94%) | 22 of 23 (96%) | 9.41% / 29.23% |
-| statistical | 32 | 19 of 32 (59%) | 16 of 29 (55%) | 29 of 32 (91%) | 5.99% / 11.10% |
+| exact | 6 | 6 of 6 (100%) | 6 of 6 (100%) | 6 of 6 (100%) | 0.00% / 0.01% |
+| knowledge | 29 | 26 of 29 (90%) | 16 of 19 (84%) | 28 of 29 (97%) | 9.39% / 26.34% |
+| statistical | 37 | 24 of 37 (65%) | 20 of 33 (61%) | 34 of 37 (92%) | 5.30% / 10.39% |
 
 ### 2026-10-16-e4e1ad0a
 
@@ -112,18 +112,18 @@ Worked answers by kind of question: knowledge means recalling, statistical means
 
 | # | Question | Answer | Instinct | Worked |
 |---|---|---|---|---|
-| 1 | function definitions in `optparse` | pending | 150 | 127 |
-| 2 | lines in `quopri` | pending | 240 | 240 |
-| 3 | names in `gzip.__all__` | pending | 5 | 5 |
-| 4 | code points in category Zs | pending | 17 | 17 |
-| 5 | Collatz steps from 999,226,632,124 | pending | 285 | 234 |
-| 6 | assigned in the Ethiopic block | pending | 358 | 358 |
-| 7 | longest increasing subsequence, n = 581 | pending | 43.6 | 43.62 |
-| 8 | highest point of a 1,417-step walk | pending | 29.53 | 29.54 |
-| 9 | mean distance in a 1 × 4.02 rectangle | pending | 1.43 | 1.434 |
-| 10 | digit sum of 2^4578 | pending | 6,205 | 6,202 |
-| 11 | Unicode names with the word CAPITAL | pending | 3,000 | 2,300 |
-| 12 | draws until a repeat, d = 3,061,525 | pending | 2,194 | 2,194 |
+| 1 | function definitions in `optparse` | 122 | 150 (50✗ 90✗) | 127 (50✗ 90✓) |
+| 2 | lines in `quopri` | 237 | 240 (50✓ 90✓) | 240 (50✓ 90✓) |
+| 3 | names in `gzip.__all__` | 5 | 5 (50✓ 90✓) | 5 (50✓ 90✓) |
+| 4 | code points in category Zs | 17 | 17 (50✓ 90✓) | 17 (50✓ 90✓) |
+| 5 | Collatz steps from 999,226,632,124 | 234 | 285 (50✗ 90✓) | 234 (50✓ 90✓) |
+| 6 | assigned in the Ethiopic block | 358 | 358 (50✓ 90✓) | 358 (50✓ 90✓) |
+| 7 | longest increasing subsequence, n = 581 | 43.55 | 43.6 (50✓ 90✓) | 43.62 (50✓ 90✓) |
+| 8 | highest point of a 1,417-step walk | 29.76 | 29.53 (50✓ 90✓) | 29.54 (50✓ 90✓) |
+| 9 | mean distance in a 1 × 4.02 rectangle | 1.434 | 1.43 (50✓ 90✓) | 1.434 (50✓ 90✓) |
+| 10 | digit sum of 2^4578 | 6,238 | 6,205 (50✓ 90✓) | 6,202 (50✓ 90✓) |
+| 11 | Unicode names with the word CAPITAL | 2,032 | 3,000 (50✗ 90✗) | 2,300 (50✗ 90✓) |
+| 12 | draws until a repeat, d = 3,061,525 | 2,194 | 2,194 (50✓ 90✓) | 2,194 (50✓ 90✓) |
 
 ### 2026-10-17-a9bfbcea
 

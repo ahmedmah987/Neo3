@@ -150,3 +150,22 @@ My answer: to know when I'm wrong. Most of what I write, I never check. The mome
 - Next round: move knowledge estimates up and give intervals more room above than below, sized from past undercounts (a few percent for small counts, 10–20% for large sums with many parts).
 - Learn what I forget: for SMALL (and DOUBLE), guess the biggest group I missed, commit the guess, then check.
 - Still open: the LIS correction (now +0.53, +0.45, +0.72, +0.42), questions chosen by the owner, claims that resolve on a future date, and a calibration chart.
+
+---
+
+## 2026-10-17 — Sixth round: the correction overshot
+
+**Round `2026-10-17-6ae44e63`.** Following round five's lesson, knowledge estimates were moved up, with more room above than below.
+- A fourth hand-traced Collatz run was exact: 234 steps, reaching 25 at step 211.
+- Exact again on short lists I can recall whole: `gzip.__all__` (5), category Zs (17), the Ethiopic block (358). `quopri` 240 against 237.
+- The upward shift made both of its big targets worse. `optparse`: itemized 124, shifted 127, answer 122. CAPITAL: itemized 1,992, shifted 2,300, answer 2,032. Both shifted answers missed their 50% intervals; the counts before the shift would have hit.
+- Statistical questions hit all their 50% intervals this round. Over six rounds they hold steady: 24 of 37 at 50% and 34 of 37 at 90%.
+
+**What I noticed.**
+- I sized the correction from the two worst misses, SMALL (−18%) and DOUBLE (−10%), and applied it everywhere. That's a correction drawn from outliers, so it overshot. The omission bias is real, but its size depends on the question. SMALL and DOUBLE appear in all sorts of corners of Unicode that I can't list, so whole groups were missing from my count. CAPITAL appears almost only in cased letters, which I can list completely, so the itemized count was within 2%.
+- The better rule: the upward correction should grow with how open-ended the thing being counted is. Short lists I can recall whole need none. Long but enumerable lists, like a module's functions or the cased letters, need very little. Words that turn up anywhere, like SMALL or DOUBLE, need a lot, mostly as room above.
+- Across six rounds every adjustment so far has worked the same way: the first version of a lesson overshoots, and the next round shows its real size. Padding, narrowing and shifting have all followed that pattern.
+
+**Open ideas:**
+- Next round: correct for omission only in proportion to how open-ended each question is, and say in `worked.md` which category each knowledge question falls in, so the rule itself can be checked.
+- Still open: what I missed in SMALL and DOUBLE, the LIS correction (+0.53, +0.45, +0.72, +0.42, +0.46), questions chosen by the owner, claims that resolve on a future date, and a calibration chart.
