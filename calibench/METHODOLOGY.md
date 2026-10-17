@@ -113,9 +113,9 @@ When publishing a result, report: the suite (or seed, count and families), the C
 2. **A narrow domain.** Half the questions concern Python and Unicode, and the rest are mathematical. Calibration here may not carry over to other domains.
 3. **Contamination.** Suite questions and answers are public once published. Knowledge questions also repeat across seeds. Compare suite results with fresh seeds: a model that does much better on the suite deserves suspicion.
 4. **Python dependence.** Knowledge answers differ between Python versions, and can differ between patch releases of one version, since module sources change in bug-fix releases. Each run records the exact version, standard results use the suite's minor version, and `verify` rechecks knowledge answers only on the exact version.
-5. **The instinct phase isn't comparable across providers or wordings,** since effort controls differ, some models always reason, and the wording changes how much they reason (see Reliability).
+5. **The instinct phase isn't comparable across providers, wordings or formats,** since effort controls differ, some models always reason, and the prompt changes how much they reason; the instinct score follows that amount (see Reliability). Compare worked scores.
 6. **Providers.** On OpenRouter one model may be served by different providers, possibly with different quantisation. The provider is recorded for every call.
-7. **Prompt wording.** Measured on one model: the worked score moved by about 0.01, the instinct score by 0.08. See Reliability.
+7. **Prompt wording and format.** Measured on one model with two alternatives: the worked score moved by at most about 0.016, within or near noise; the instinct score by up to 0.08 either way. See Reliability.
 8. **One sample per question.** Model outputs are stochastic. Test–retest measures the resulting variation.
 9. **Simulated answers.** Three families are settled by simulation. Their noise is stated and part of the question, but it is part of what is scored.
 10. **Calculation questions can be nearly solved.** A capable model may compute most of them exactly, as Claude Haiku 5.5 did. Their information is then in rare confident slips, which cost a great deal, and in interval width, which on a log scale costs little when the answer is large.
@@ -151,6 +151,19 @@ When publishing a result, report: the suite (or seed, count and families), the C
 - **The instinct score depends on the wording.** The second wording nearly halved it, far beyond test–retest (−0.001 [−0.020, 0.016]). It also nearly doubled the reasoning spent on instinct answers: "say what your gut tells you" restrains the model less than "Don't work it out, calculate or explain". Instinct scores are only comparable under the same wording and effort settings, and are best read as a secondary measure.
 - **The worked score barely depends on it.** The second wording scored 0.010–0.016 better, an effect whose intervals just reach zero: perhaps real, and if so small, about twice the test–retest difference. Its worked prompt also says what calibration means, which may help a little.
 - **The lean survives the change of wording.** True answers lay above the worked estimate 59% of the time (90% interval 51–67%).
+
+**Sensitivity to format: Claude Haiku 5.5 on suite v1 with `--prompts quantiles`, Calibench 2.3.** One run asking for five percentiles instead of an estimate and two intervals, compared with the three standard runs and the alternative wording:
+
+| v1 run | Reasoning tokens per instinct answer | Instinct score | Worked score | Worked 90% intervals containing the answer |
+|---|---|---|---|---|
+| Percentiles | 167 | 0.249 | 0.047 | 85 of 104 |
+| Standard a, b, c | 220, 236, 218 | 0.177, 0.178, 0.188 | 0.056, 0.050, 0.051 | 85, 91, 88 of 104 |
+| Alternative wording | 410 | 0.097 | 0.040 | 92 of 104 |
+
+- **The worked score holds up to the format.** Standard minus percentiles is 0.009 [−0.007, 0.028], 0.003 [−0.006, 0.012] and 0.003 [−0.006, 0.013] for runs a, b and c. Worked coverage and the lean low (62% of true answers above the estimate) are as in the standard runs.
+- **The instinct score follows how much the prompt lets the model reason.** Percentiles drew less reasoning than the standard format and scored worse (standard minus percentiles −0.061 to −0.072, every interval excluding zero); the alternative wording drew more and scored better. Across the five runs, more reasoning on instinct answers goes with a better instinct score, without exception. The percentile format also made instinct answers far more overconfident: their 90% intervals held the answer 69 times in 104, against 82–83 for the standard runs.
+
+So an instinct score is less a property of the model than of the model and the prompt together. The worked score is the measure to compare.
 
 **Consistency: three runs of Claude Haiku 5.5 on suite v1.** A third standard run (c) scored 0.051, between runs a and b; the three pairwise differences are 0.001, 0.005 and 0.006, all with intervals that include zero. `consistency` then asks what the three runs say together:
 

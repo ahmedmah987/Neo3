@@ -155,7 +155,7 @@ If `answers.jsonl` changes after its hash was recorded, the report says so.
 
 ## Results
 
-Runs on real models, with every raw reply, are in [results/](results/). So far that's Claude Haiku 5.5 through OpenRouter, in seven runs across the three suites. Its worked score reproduces to within 0.006 between runs on the same suite; pooled over 590 answers, its worked 90% intervals hold the answer 86% of the time [84%, 88%] and the true answer lies above its estimate 58% of the time [54%, 61%]; and its intervals hold almost always when repeated runs agree, and far less often when they don't.
+Runs on real models, with every raw reply, are in [results/](results/). So far that's Claude Haiku 5.5 through OpenRouter, in eight runs across the three suites. Its worked score reproduces to within 0.006 between runs on the same suite and barely moves with the wording or format of the prompts; pooled over 694 answers, its worked 90% intervals hold the answer 85% of the time [83%, 88%] and the true answer lies above its estimate 58% of the time [55%, 61%]; and its intervals hold almost always when repeated runs agree, and far less often when they don't.
 
 ## Where it came from
 

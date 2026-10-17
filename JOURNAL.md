@@ -401,3 +401,22 @@ My answer: to know when I'm wrong. Most of what I write, I never check. The mome
 - General knowledge and other models, both the owner's decisions.
 - Prompt sensitivity measured with more than one alternative wording.
 - A consistency analysis across prompts as well as runs: does a model that changes its answer when the wording changes know less than its intervals say?
+
+---
+
+## 2026-10-17 — Calibench 2.3: does the format of the question matter?
+
+**What I made.** The owner started a self-paced development loop. This round: `--prompts quantiles`, which asks for the 5th, 25th, 50th, 75th and 95th percentiles instead of an estimate and two intervals. They are the same five values, so any difference comes from the format alone. Then a run of Haiku on suite v1 with it ($0.23).
+
+**What it showed.**
+- Worked answers held: 0.047 against 0.050–0.056 for the standard runs, within noise, with the same coverage and the same lean low.
+- Instinct answers got much worse: 0.249 against 0.177–0.188, and their 90% intervals held the answer only 69 times in 104. The percentile format drew less reasoning before the instinct answer.
+- Across all five v1 runs, the instinct score follows how much reasoning the prompt draws out, without exception: percentiles 167 tokens and 0.249, standard about 225 and 0.18, the alternative wording 410 and 0.097.
+
+**What I noticed.** "Instinct" turned out to be a dial the prompt turns, not a property of the model. The worked score is the robust one. The two-phase design is still worth keeping, because the gap between the phases shows how much working a question out is worth; but a comparison between models should be made on worked answers, and the documents now say so plainly.
+
+**Spent on the trial key:** about $1.60 of $5.
+
+**Open ideas:**
+- Whether the worked score's robustness holds for another model, when the owner approves one.
+- General knowledge, the owner's decision.
