@@ -37,10 +37,33 @@ Question: {text}
 Then give three things: your best single guess (the middle of what you believe), a range you'd bet is 50% likely to contain the true value, and a range you'd bet is 90% likely to contain it. Calibration matters more than precision: a well-calibrated forecaster's 90% ranges contain the truth about nine times in ten. Finish with this JSON on its own line:
 {{"estimate": <number>, "p50": [<low>, <high>], "p90": [<low>, <high>]}}"""
 
+# The same information asked for as five percentiles, to measure whether the format of the question
+# (an estimate and two intervals, or percentiles) moves the results. The 5th and 95th percentiles bound
+# the 90% interval, the 25th and 75th the 50% interval, and the 50th is the estimate.
+INSTINCT_QUANTILES = """You are taking part in a calibration test. Answer the question below with your immediate best guess. Don't work it out, calculate or explain: give the numbers that first come to mind.
+
+Give five percentiles of your belief about the answer: the 5th, 25th, 50th, 75th and 95th. The 5th percentile is a value you think the answer has only a 5% chance of being below, the 50th a value it is as likely to be above as below, and so on.
+
+Question: {text}
+
+Reply with only this JSON object and nothing else:
+{{"q05": <number>, "q25": <number>, "q50": <number>, "q75": <number>, "q95": <number>}}"""
+
+WORKED_QUANTILES = """You are taking part in a calibration test. Take the time to work the question below out as carefully as you can: recall what you know and calculate where you can. You have no tools. Write as much or as little working as you like.
+
+Then give five percentiles of your belief about the answer: the 5th, 25th, 50th, 75th and 95th. The 5th percentile is a value you think the answer has only a 5% chance of being below, the 50th a value it is as likely to be above as below, and so on. Make them honest: the answer should fall below your 5th percentile about one time in twenty, and above your 95th about one time in twenty.
+
+Question: {text}
+
+End your reply with this JSON object on its own line:
+{{"q05": <number>, "q25": <number>, "q50": <number>, "q75": <number>, "q95": <number>}}"""
+
 PROMPT_SETS = {
     "standard": {"instinct": INSTINCT, "worked": WORKED},
     "alt": {"instinct": INSTINCT_ALT, "worked": WORKED_ALT},
+    "quantiles": {"instinct": INSTINCT_QUANTILES, "worked": WORKED_QUANTILES},
 }
+QUANTILE_KEYS = ("q05", "q25", "q50", "q75", "q95")
 PROMPTS = PROMPT_SETS["standard"]
 
 RETRY = ("\n\nYour previous reply didn't end with a valid JSON object of that form. "
@@ -70,13 +93,21 @@ def _interval(value):
 def parse_answer(reply):
     """The last JSON object in the reply that has an estimate, with intervals as sorted pairs.
 
-    An estimate outside its own intervals is accepted; each interval is scored on its own.
+    An estimate outside its own intervals is accepted; each interval is scored on its own. An object
+    of five percentiles is read as the same thing: the median is the estimate, the 25th and 75th
+    percentiles the 50% interval, the 5th and 95th the 90% interval.
     """
     for candidate in reversed(JSON_OBJECT.findall(reply or "")):
         try:
             data = json.loads(candidate)
         except json.JSONDecodeError:
             continue
+        if isinstance(data, dict) and "q50" in data and "estimate" not in data:
+            try:
+                q = {key: _number(data[key]) for key in QUANTILE_KEYS}
+                return {"estimate": q["q50"], "p50": sorted([q["q25"], q["q75"]]), "p90": sorted([q["q05"], q["q95"]])}
+            except (KeyError, TypeError, ValueError):
+                continue
         if isinstance(data, dict) and "estimate" in data:
             try:
                 return {"estimate": _number(data["estimate"]),

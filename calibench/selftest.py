@@ -138,9 +138,13 @@ def check_core():
     check("a reply with no usable answer is refused",
           raises(parse_answer, "about 12") and raises(parse_answer, '{"estimate": 5, "p50": [4]}')
           and raises(parse_answer, '{"estimate": NaN, "p50": [1, 2], "p90": [0, 3]}') and raises(parse_answer, None))
-    check("every prompt carries the question and the answer format",
-          all("Q?" in p.format(text="Q?") and '"p90"' in p.format(text="Q?")
+    check("every prompt carries the question and an answer format",
+          all("Q?" in p.format(text="Q?") and ('"p90"' in p.format(text="Q?") or '"q95"' in p.format(text="Q?"))
               for prompts in PROMPT_SETS.values() for p in prompts.values()))
+    check("five percentiles are read as an estimate and two intervals",
+          parse_answer('Working.\n{"q05": 10, "q25": "1,200", "q50": 15, "q75": 18, "q95": 30}')
+          == {"estimate": 15, "p50": [18, 1200], "p90": [10, 30]}
+          and raises(parse_answer, '{"q05": 10, "q50": 15, "q95": 30}'))
 
     check("relative interval score (the guessbook's): width over the answer, plus 2/alpha times a miss",
           abs(interval_score([10, 20], 15, 0.1) - 10 / 15) < 1e-12 and abs(interval_score([10, 20], 25, 0.1) - 110 / 25) < 1e-12)

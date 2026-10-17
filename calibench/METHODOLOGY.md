@@ -1,6 +1,6 @@
 # Calibench methodology
 
-This document describes what Calibench measures, how, and where the measurement can mislead. It describes Calibench 2.2.1 with scoring `log-wis-1`.
+This document describes what Calibench measures, how, and where the measurement can mislead. It describes Calibench 2.3.0 with scoring `log-wis-1`.
 
 ## What is measured
 
@@ -57,7 +57,7 @@ The worked prompt:
 
 The worked prompt allows written working rather than demanding it, because some current models decline prompts that ask them to reproduce their internal reasoning.
 
-**A second wording.** `--prompts alt` asks for the same thing in different words, to measure how much the wording moves the results. It drops the "calibration test" framing, asks for ranges "you'd bet" on, and in the worked prompt says what calibration means ("a well-calibrated forecaster's 90% ranges contain the truth about nine times in ten"). The texts are in `prompts.py`. Standard results use the standard wording.
+**A second wording.** `--prompts alt` asks for the same thing in different words, to measure how much the wording moves the results. It drops the "calibration test" framing, asks for ranges "you'd bet" on, and in the worked prompt says what calibration means ("a well-calibrated forecaster's 90% ranges contain the truth about nine times in ten"). `--prompts quantiles` (Calibench 2.3) asks instead for the 5th, 25th, 50th, 75th and 95th percentiles of the model's belief, which are exactly the five values the standard format elicits: the median is the estimate, the 25th and 75th percentiles the 50% interval, the 5th and 95th the 90% interval. It measures whether the format of the question, rather than its wording, moves the results. The texts are in `prompts.py`. Standard results use the standard wording.
 
 **Effort.** Where the API allows it, the instinct call uses low reasoning effort and the worked call high (Claude through the official SDK: `output_config.effort`; OpenRouter: `reasoning.effort`, and then only providers that honour the parameter). Models that always reason, such as Claude Opus 5.5, still reason a little on instinct calls, so instinct is "little reasoning", not "none", and isn't comparable across providers.
 

@@ -69,7 +69,7 @@ python3 -m calibench compare calibench-runs/*-calibench-v2
 
 To compare models, use `--suite v2`: 108 questions, all eighteen families 6 times, settled on Python 3.13. Suite `v1` (104 questions from the original thirteen families) is kept so earlier results stay comparable, and suite `calc1` (40 questions) probes the four harder calculation families on their own. A seed you choose is for exploring; a comparison on a seed someone chose can be cherry-picked.
 
-`--prompts alt` asks the same questions in a second wording, to measure how much the wording matters.
+`--prompts alt` asks the same questions in a second wording, and `--prompts quantiles` asks for five percentiles (5th, 25th, 50th, 75th, 95th) instead of an estimate and two intervals: the same information in a different format. Both measure how much the way of asking matters.
 
 A run asks every family twice by default (44 questions), each in two phases, so 88 calls. Use `--count` for more or fewer, `--families` to limit the kinds of question, and `--workers` for how many calls run at once. If a run is interrupted or some calls fail, run the same command again: answers already recorded are kept, and only the rest are asked. If the first three calls all fail, which usually means a wrong key, address or model name, the run stops and shows the error.
 
