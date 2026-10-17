@@ -232,6 +232,27 @@ def render(report):
     return "\n".join(lines) + "\n"
 
 
+def index(runs):
+    """A table of runs, newest suite runs first: (directory name, report) pairs, read from report.json."""
+    def where(meta):
+        return f"suite {meta['suite']}" if meta.get("suite") else f"seed `{meta['seed']}`"
+
+    rows = sorted(runs, key=lambda r: (not r[1]["meta"].get("suite"), r[1]["meta"]["started"], r[0]))
+    lines = ["| Run | Model | Prompts | Questions | Score, worked [90% interval] | Score, instinct "
+             "| Worked 50% / 90% hits | Worked answers above the estimate | Cost |",
+             "|---|---|---|---|---|---|---|---|---|"]
+    for name, rep in rows:
+        meta, worked, instinct = rep["meta"], rep["phases"]["worked"], rep["phases"]["instinct"]
+        fell = worked.get("fell") or {}
+        above = f"{fell['above'] / fell['n']:.0%}" if fell.get("n") else "—"
+        hits = f"{worked['p50']['hits']} / {worked['p90']['hits']} of {worked['n']}" if worked["n"] else "—"
+        cost = f"${rep['cost']:.3f}" if rep.get("cost") else "—"
+        lines.append(f"| [{name}]({name}/report.md) | {meta['model']} | {meta.get('prompts', 'standard')} "
+                     f"| {where(meta)}, {meta['count']} | {sc(worked['all']['score_mean'])}{ci(worked['all']['score_ci'])} "
+                     f"| {sc(instinct['all']['score_mean'])} | {hits} | {above} | {cost} |")
+    return "\n".join(lines) + "\n"
+
+
 def compare(reports, names=None):
     """Compare runs on the same questions. Unanswered questions score as the know-nothing answer."""
     names = names or [rep["meta"]["model"] for rep in reports]

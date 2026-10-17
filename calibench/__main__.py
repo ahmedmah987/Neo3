@@ -119,6 +119,40 @@ def cmd_compare(args):
     print(compare(reports, [pathlib.Path(d).name for d in args.dirs]), end="")
 
 
+def cmd_index(args):
+    from .report import index
+
+    from .report import build
+    from .runner import load_records, read_json
+
+    root = pathlib.Path(args.dir)
+    runs, stale = [], []
+    for d in sorted(root.iterdir()):
+        if not (d / "report.json").exists():
+            continue
+        stored = read_json(d / "report.json")
+        fresh = build(read_json(d / "run.json"), read_json(d / "questions.json")["questions"],
+                      load_records(d / "answers.jsonl"), read_json(d / "results.json")["results"])
+        if json.loads(json.dumps(fresh["phases"])) != stored["phases"]:
+            stale.append(d)
+        runs.append((d.name, stored))
+    if stale:
+        sys.exit("these reports don't match their answers under the current scoring; re-score them with "
+                 "`python3 -m calibench report <dir>` first:\n  " + "\n  ".join(map(str, stale)))
+    table = index(runs)
+    if not args.write:
+        print(table, end="")
+        return
+    path = pathlib.Path(args.write)
+    text = path.read_text(encoding="utf-8")
+    start, end = "<!-- index:start -->", "<!-- index:end -->"
+    if start not in text or end not in text:
+        sys.exit(f"{path} needs the markers {start} and {end} around the table")
+    before, rest = text.split(start, 1)
+    path.write_text(f"{before}{start}\n{table}{end}{rest.split(end, 1)[1]}", encoding="utf-8")
+    print(f"updated the table in {path} with {len(runs)} runs", file=sys.stderr)
+
+
 def cmd_families(args):
     for name in sorted(FAMILIES, key=lambda n: (KINDS[n], n)):
         print(f"{KINDS[name]:<12} {name}")
@@ -168,6 +202,11 @@ def main(argv=None):
     p = sub.add_parser("compare", help="compare runs on the questions they share")
     p.add_argument("dirs", nargs="+")
     p.set_defaults(func=cmd_compare)
+
+    p = sub.add_parser("index", help="a table of every run in a directory, from their reports")
+    p.add_argument("dir")
+    p.add_argument("--write", help="replace the table between <!-- index:start --> and <!-- index:end --> in this file")
+    p.set_defaults(func=cmd_index)
 
     p = sub.add_parser("families", help="list the question families")
     p.set_defaults(func=cmd_families)

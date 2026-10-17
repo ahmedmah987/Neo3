@@ -268,6 +268,20 @@ def check_run(tmp):
           raises(quiet, runner.run, models.NaiveModel(), "mock:naive", seed, count, FAST, tmp / "naive", 3, None, "alt"))
     check("the report shows where answers fell, and each family",
           all(s in md for s in ("## Where the true answers fell", "## By family", "above the estimate")))
+    target = tmp / "INDEX.md"
+    target.write_text("Before\n<!-- index:start -->\nold\n<!-- index:end -->\nAfter\n")
+    from .__main__ import main as cli
+    quiet(cli, ["index", str(tmp), "--write", str(target)])
+    written = target.read_text()
+    check("index writes a row per run between its markers, keeping the rest",
+          written.startswith("Before\n<!-- index:start -->\n| Run |") and written.endswith("<!-- index:end -->\nAfter\n")
+          and "old" not in written and "[oracle](oracle/report.md)" in written
+          and written.count("/report.md) |") == sum((d / "report.json").exists() for d in tmp.iterdir() if d.is_dir()))
+    stored = json.loads((tmp / "naive" / "report.json").read_text())
+    stored["phases"]["worked"]["all"]["score_mean"] += 0.5
+    (tmp / "naive" / "report.json").write_text(json.dumps(stored))
+    check("index refuses a report that doesn't match its answers", raises(quiet, cli, ["index", str(tmp)]))
+    quiet(runner.finish, tmp / "naive")
     import xml.etree.ElementTree as ElementTree
     svg = ElementTree.parse(tmp / "naive" / "calibration.svg").getroot()
     check("the calibration chart is valid SVG with a bar per bin and series",
