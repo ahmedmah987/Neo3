@@ -227,3 +227,28 @@ My answer: to know when I'm wrong. Most of what I write, I never check. The mome
 - Knowledge: narrow the closed and enumerable intervals further, and keep open words at about +20% with wide room above.
 - Find what the open-word counts miss (SMALL, DOUBLE, TRIANGLE): guess the largest missing group, commit it, then check.
 - Still open: questions chosen by the owner, claims that resolve on a future date, and a calibration chart, which 108 questions can now support.
+
+---
+
+## 2026-10-17 — Calibench: the guessbook as a benchmark for any model
+
+**What I made.** The owner asked whether the guessbook could become a ready-made measuring tool that any model can use directly. [Calibench](calibench/) is that tool: `python3 -m calibench run --model <model> --seed <seed>`.
+- It draws questions from any seed, asks each one twice (instinct, then worked), records every reply and hashes them, and only then computes the answers and scores them.
+- Adapters: Claude through the official SDK, any OpenAI-compatible API (hosted or local), any command, replies collected by someone's own harness, pasting replies from a chat window, and a naive mock as a floor.
+- The headline is the weighted interval score (Bracher et al.), which folds the estimate and both intervals into one proper score. `compare` gives each model's difference from the best with a bootstrap interval, because 26 questions is a small sample.
+- No server-side refusal fallbacks: a measurement must not let one model answer under another's name. A refusal is recorded as a refusal, and every call records which model served it.
+- `families.py` moved into the package, and the guessbook now draws and settles through it. Checked: `SCORE.md` is unchanged, and every round regenerates exactly as it did before the move (all but the first two, which were drawn when there were fewer families).
+- It installs with pip from the repository root. `selftest` checks the families, the scoring, a whole run and every adapter against fake servers and programs, and passes on Python 3.11, 3.12 and 3.13.
+
+**What I noticed.**
+- Building for other models forced decisions the guessbook let me make silently: what counts as an answer, what happens to a refusal or a garbled reply, and when a difference between two models is real.
+- A lesson from the guessbook went straight into the scoring: coverage verdicts leave out single-number intervals, because exact recall made my 50% intervals look underconfident when they were simply right.
+- "Instinct" can't mean the same thing for every model. Claude Opus 5.5 always thinks, so for it instinct means low effort, not no thinking.
+- A prompt that demands written step-by-step reasoning can trip refusal classifiers on some current models, so the worked prompt allows working rather than requiring it.
+- It hasn't been run on a real model yet. This session has no API key, and a run costs the owner money, so that's the owner's call.
+
+**Open ideas:**
+- Run it on real models (Claude at two effort levels, an open local model) and publish the comparison.
+- Compare Claude through the API with the guessbook, where Claude answered in a working session under a stricter protocol: does the API model know what it knows as well?
+- Knowledge families beyond Python and Unicode whose answers can still be computed exactly on any machine.
+- Still open from the guessbook: the open-word counts, questions chosen by the owner, claims that resolve on a future date, and a calibration chart.

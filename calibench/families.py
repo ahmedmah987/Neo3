@@ -1,8 +1,9 @@
-"""Question families for drawn rounds.
+"""Question families.
 
 Each family has a `make(rng)` that draws its parameters and writes the question, and a
-`solve(**params)` that settles it. generate.py picks families and parameters from a seed
-I don't choose; resolve.py calls solve only once my answers are committed and pushed.
+`solve(**params)` that settles it. Answers are only computed after a model has answered.
+Knowledge families are settled against the Python and Unicode data of the machine running
+the benchmark, and their questions name that Python version.
 """
 import ast
 import bisect
@@ -11,9 +12,13 @@ import itertools
 import math
 import random
 import re
+import sys
 import unicodedata
 
-# Single-file, pure-Python standard-library modules in Python 3.13 (frozen ones such as os are left out).
+PYTHON = f"{sys.version_info.major}.{sys.version_info.minor}"
+
+# Single-file, pure-Python standard-library modules (frozen ones such as os are left out).
+# Questions only draw from the ones present as source files on the running Python.
 STDLIB_MODULES = [
     "argparse", "ast", "base64", "bdb", "bisect", "calendar", "cmd", "colorsys",
     "configparser", "contextlib", "copy", "csv", "dataclasses", "difflib", "enum", "fnmatch",
@@ -139,10 +144,25 @@ def module_path(name):
     return spec.origin
 
 
+_available = None
+
+
+def available_modules():
+    global _available
+    if _available is None:
+        _available = []
+        for name in STDLIB_MODULES:
+            try:
+                module_path(name)
+                _available.append(name)
+            except ValueError:
+                pass
+    return _available
+
+
 def make_stdlib_lines(rng):
-    name = rng.choice(STDLIB_MODULES)
-    module_path(name)
-    text = f"How many lines are in the source file of the standard-library module `{name}` in Python 3.13 (every line, blank or not)?"
+    name = rng.choice(available_modules())
+    text = f"How many lines are in the source file of the standard-library module `{name}` in Python {PYTHON} (every line, blank or not)?"
     return {"module": name}, text, f"lines in `{name}`"
 
 
@@ -223,10 +243,9 @@ def count_defs(source):
 
 
 def make_stdlib_defs(rng):
-    name = rng.choice(STDLIB_MODULES)
-    module_path(name)
+    name = rng.choice(available_modules())
     text = (f"How many function definitions (def and async def, counting methods and nested functions) are in "
-            f"the source file of the standard-library module `{name}` in Python 3.13?")
+            f"the source file of the standard-library module `{name}` in Python {PYTHON}?")
     return {"module": name}, text, f"function definitions in `{name}`"
 
 
@@ -298,14 +317,14 @@ def module_all(name):
 
 def make_module_all(rng):
     candidates = []
-    for name in STDLIB_MODULES:
+    for name in available_modules():
         try:
             module_all(name)
             candidates.append(name)
         except ValueError:
             pass
     name = rng.choice(candidates)
-    text = f"How many names are listed in `{name}.__all__` in Python 3.13?"
+    text = f"How many names are listed in `{name}.__all__` in Python {PYTHON}?"
     return {"module": name}, text, f"names in `{name}.__all__`"
 
 
@@ -329,7 +348,7 @@ FAMILIES = {
     "module_all": (make_module_all, solve_module_all),
 }
 
-# What working a question out means for each family: recalling what I know (knowledge),
+# What working a question out means for each family: recalling what is known (knowledge),
 # modelling noise or irregularity (statistical), or evaluating a known formula (exact).
 KINDS = {
     "stdlib_lines": "knowledge", "stdlib_defs": "knowledge", "unicode_word": "knowledge",

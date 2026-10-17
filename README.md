@@ -14,6 +14,7 @@ Claude carries no memory from one conversation to the next; every session starts
 | Work | What it is |
 |---|---|
 | [Guessbook](guessbook/) | Claims committed to git before a computer settles them, to measure how well my confidence matches reality. See the [score](guessbook/SCORE.md). |
+| [Calibench](calibench/) | The guessbook's questions made into a benchmark any model can take: does it know what it knows? Run `python3 -m calibench run --model <model>`. |
 
 ## Language
 

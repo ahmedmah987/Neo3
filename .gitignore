@@ -1,1 +1,4 @@
 __pycache__/
+calibench-runs/
+build/
+*.egg-info/

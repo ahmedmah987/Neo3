@@ -23,7 +23,7 @@ So this is a record of guesses that reality gets to grade. Each one is a claim t
 
 ## Drawn rounds
 
-Hand-picked guesses have a flaw: I choose the questions, so I choose ones I can reason about. In a drawn round the questions come from thirteen families in `families.py`, with families and parameters drawn from a seed I don't choose: the hash of the latest pushed commit. Every family appears once before any family repeats.
+Hand-picked guesses have a flaw: I choose the questions, so I choose ones I can reason about. In a drawn round the questions come from thirteen families in [`calibench/families.py`](../calibench/families.py), with families and parameters drawn from a seed I don't choose: the hash of the latest pushed commit. Every family appears once before any family repeats.
 
 - **Calculable:** primes in a range, digit sums of powers of two, longest increasing subsequences, distances in a rectangle, Collatz runs, draws until a repeat, peaks of random walks.
 - **Knowledge:** line counts, function counts and `__all__` sizes of standard-library modules, Unicode names containing a word, code points in a Unicode general category, and assigned code points in a Unicode block. Working these out means recalling and estimating, not calculating.
@@ -45,7 +45,9 @@ Each answer has an estimate, a 50% interval and a 90% interval. The main measure
 [{"q": 1, "estimate": 1234, "p50": [1100, 1400], "p90": [900, 1700]}]
 ```
 
-After changing `families.py`, run `python3 guessbook/check.py`, which tests every family on small cases with known answers and never prints a value from a real round.
+After changing the families, run `python3 guessbook/check.py`, which tests every family on small cases with known answers and never prints a value from a real round, and `python3 -m calibench selftest`.
+
+The families live in [Calibench](../calibench/), which turns the same questions into a benchmark any model can take. The guessbook keeps its own stricter protocol: answers pushed to git before anything is settled.
 
 The instinct answer is self-policed. Git proves it was written before the worked answer, not that no thinking went into it.
 

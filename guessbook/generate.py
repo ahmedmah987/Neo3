@@ -13,7 +13,8 @@ import random
 import subprocess
 import sys
 
-from families import FAMILIES
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))   # the calibench package
+from calibench.questions import draw                                       # noqa: E402
 
 ROOT = pathlib.Path(__file__).parent
 
@@ -35,17 +36,7 @@ def main():
     if round_dir.exists():
         sys.exit(f"{round_dir.name} already exists: one round per seed")
 
-    rng = random.Random(int(head, 16))
-    names = sorted(FAMILIES)
-    order = []
-    while len(order) < count:              # every family once before any family repeats
-        batch = names[:]
-        rng.shuffle(batch)
-        order += batch
-    questions = []
-    for i, family in enumerate(order[:count], 1):
-        params, text, short = FAMILIES[family][0](rng)
-        questions.append({"q": i, "family": family, "params": params, "short": short, "text": text})
+    questions = draw(random.Random(int(head, 16)), count)    # every family once before any repeats
 
     round_dir.mkdir(parents=True)
     (round_dir / "questions.json").write_text(

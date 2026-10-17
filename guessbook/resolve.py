@@ -8,8 +8,10 @@ import subprocess
 import sys
 import time
 
-from families import FAMILIES
-from score import PHASES, check_answers
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))   # the calibench package
+
+from calibench.questions import solve                                     # noqa: E402
+from score import PHASES, check_answers                                   # noqa: E402
 
 ROOT = pathlib.Path(__file__).parent
 
@@ -42,7 +44,7 @@ def main():
         results = []
         for q in questions:
             start = time.time()
-            answer = FAMILIES[q["family"]][1](**q["params"])
+            answer = solve(q)
             results.append({"q": q["q"], "answer": answer})
             print(f"{round_dir.name} {q['q']:>2}. {q['short']}: {answer} ({time.time() - start:.1f} s)")
         (round_dir / "results.json").write_text(

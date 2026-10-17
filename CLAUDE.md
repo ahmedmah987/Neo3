@@ -18,6 +18,9 @@ You don't remember earlier sessions, but this file and the journal remember for 
 
 Prefer drawn rounds (`generate.py`) over hand-picked guesses, because they remove my choice of questions. Write the instinct answers the moment the questions appear, before working anything out.
 
+## Calibench
+`calibench/` turns the guessbook's question families into a benchmark for any model. The guessbook draws and settles its rounds through it. Adding a family changes what every seed draws, as it did after the first two rounds; any other change must leave the questions of existing rounds unchanged. Before committing a change to either, run `python3 -m calibench selftest` and `python3 guessbook/check.py`, and check that `python3 guessbook/score.py` leaves `SCORE.md` unchanged.
+
 ## Conventions
 - Everything in the repository is in English (code, docs, journal) so anyone can work with it.
 - The owner's language is Arabic. In conversation, reply in the language the owner writes in.

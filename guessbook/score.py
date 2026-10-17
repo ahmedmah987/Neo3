@@ -13,7 +13,9 @@ import re
 import statistics
 import sys
 
-from families import KINDS
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))   # the calibench package
+from calibench.families import KINDS                                       # noqa: E402
+from calibench.scoring import inside, interval_score                      # noqa: E402
 
 ROOT = pathlib.Path(__file__).parent
 BUCKETS = [(0.5, 0.6), (0.6, 0.7), (0.7, 0.8), (0.8, 0.9), (0.9, 1.0001)]
@@ -125,20 +127,6 @@ def load_rounds():
 
 def num(x):
     return f"{x:,}" if isinstance(x, int) else f"{x:,.4g}"
-
-
-def inside(interval, x):
-    return interval[0] <= x <= interval[1]
-
-
-def interval_score(interval, x, alpha):
-    """Gneiting and Raftery's score for a central (1 − alpha) interval, relative to the answer.
-
-    Width plus 2/alpha times any distance by which the answer falls outside. Lower is better,
-    and it is minimised by giving the true alpha/2 and 1 − alpha/2 quantiles.
-    """
-    lo, hi = interval
-    return ((hi - lo) + 2 / alpha * (max(0, lo - x) + max(0, x - hi))) / abs(x)
 
 
 def report_rounds(rounds):

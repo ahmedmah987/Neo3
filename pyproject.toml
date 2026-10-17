@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "calibench"
+dynamic = ["version"]
+description = "Does a model know what it knows? A calibration benchmark with endless fresh questions that are settled by computation."
+readme = "calibench/README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+anthropic = ["anthropic"]
+
+[project.scripts]
+calibench = "calibench.__main__:main"
+
+[tool.setuptools]
+packages = ["calibench"]
+
+[tool.setuptools.dynamic]
+version = {attr = "calibench.__version__"}
