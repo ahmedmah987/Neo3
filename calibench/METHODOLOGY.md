@@ -1,6 +1,6 @@
 # Calibench methodology
 
-This document describes what Calibench measures, how, and where the measurement can mislead. It describes Calibench 2.6.1 with scoring `log-wis-2`.
+This document describes what Calibench measures, how, and where the measurement can mislead. It describes Calibench 2.6.2 with scoring `log-wis-2`.
 
 ## What is measured
 

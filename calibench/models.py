@@ -116,6 +116,9 @@ class OpenAICompatModel(Model):
 
     def ask(self, prompt, phase):
         data = _request_json(self.url, self.payload(prompt, phase), self.headers(), self.timeout)
+        if not data.get("choices"):    # OpenRouter reports an error that comes after the headers in a 200 reply
+            problem = data.get("error") or data
+            raise RuntimeError(f"the server reported an error: {json.dumps(problem)[:500]}")
         choice = data["choices"][0]
         if choice.get("finish_reason") == "error":
             raise RuntimeError(f"the server reported an error: {json.dumps(choice.get('error'))[:500]}")

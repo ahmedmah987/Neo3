@@ -613,6 +613,14 @@ def check_openrouter():
             server.json(200, {"choices": [{"message": {"content": ""}, "finish_reason": "error",
                                            "error": {"message": "provider failed"}}]})
             check("openrouter: an error in the reply is an error", raises(model.ask, "PROMPT", "instinct"))
+            server.json(200, {"error": {"code": 502, "message": "upstream died"}})
+            try:
+                model.ask("PROMPT", "worked")
+                message = ""
+            except RuntimeError as error:
+                message = str(error)
+            check("openrouter: an error sent in place of the choices is an error that says what it was",
+                  "upstream died" in message)
             server.json(200, listing)
             plain = models.make_model("openrouter:maker/model-b", server.url)
             server.json(200, {"choices": [{"message": {"content": ANSWER}, "finish_reason": "stop"}]})
