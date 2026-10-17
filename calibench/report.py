@@ -534,6 +534,72 @@ def settings_difference(a, b):
     return out or ["other settings differ"]
 
 
+def configuration(meta):
+    """What must match for runs to be repeats of one another: model, prompts and settings."""
+    return meta["model"], meta.get("prompts", "standard"), json.dumps(meta.get("settings") or {}, sort_keys=True)
+
+
+def combine(reports, names):
+    """Repeat runs combined: runs of one model with the same prompts and settings become one entry, each
+    question's worked score averaged over them, and entries are compared on those averages."""
+    keys = [[r["key"] for r in rep["questions"]] for rep in reports]
+    if any(sorted(k) != sorted(keys[0]) for k in keys):
+        return ("These runs weren't asked the same questions. Run every model with the same --suite, "
+                "or the same --seed, --count and --families, on the same Python.\n")
+    order, n = keys[0], len(keys[0])
+    groups = {}
+    for rep, name in zip(reports, names):
+        groups.setdefault(configuration(rep["meta"]), []).append((rep, name))
+    models = [config[0] for config in groups]
+    entries = []
+    for (model, prompts, settings), runs in groups.items():
+        rows = [[{r["key"]: r for r in rep["questions"]}[k] for k in order] for rep, _ in runs]
+        label = model + (f" [{prompts} prompts]" if prompts != "standard" else "")
+        if models.count(model) > 1 and json.loads(settings):
+            caps = json.loads(settings).get("max_tokens") or {}
+            effort = json.loads(settings).get("effort") or {}
+            label += (f" [effort {effort.get('instinct')} / {effort.get('worked')}, "
+                      f"caps {caps.get('instinct', 0):,} / {caps.get('worked', 0):,}]")
+        entries.append({
+            "label": label,
+            "runs": [name for _, name in runs],
+            "finished": [sum(r["worked"]["status"] == "ok" for r in run) for run in rows],
+            "scores": [statistics.fmean(run[i]["worked"]["score"] for run in rows) for i in range(n)],
+            "instinct": statistics.fmean(statistics.fmean(run[i]["instinct"]["score"] for run in rows) for i in range(n)),
+        })
+    entries.sort(key=lambda e: statistics.fmean(e["scores"]))
+    best = entries[0]
+    lines = ["# Calibench comparison, repeat runs combined", "",
+             f"{n} questions, the same for every run. Runs of one model with the same prompts and settings are "
+             "combined: each question's worked score is averaged over them, which averages out part of the "
+             "run-to-run variation. Scores and the rules for unanswered questions are as in `compare`; lower is "
+             "better.", "",
+             "| Model | Runs | Worked answers finished, by run | Score [90% interval] | Instinct score "
+             "| Difference from the best [90% interval] | Questions needed to separate it |",
+             "|---|---|---|---|---|---|---|"]
+    for e in entries:
+        if e is best:
+            diff, needed = "best", ""
+        else:
+            d = [a - b for a, b in zip(e["scores"], best["scores"])]
+            diff = f"+{sc(statistics.fmean(d))}{ci(bootstrap_mean(d))}"
+            k = questions_needed(d)
+            needed = "—" if k is None else f"about {k:,}"
+        lines.append(f"| {e['label']} | {len(e['runs'])}: {', '.join(e['runs'])} "
+                     f"| {', '.join(str(f) for f in e['finished'])} of {n} "
+                     f"| {sc(statistics.fmean(e['scores']))}{ci(bootstrap_mean(e['scores']))} | {sc(e['instinct'])} "
+                     f"| {diff} | {needed} |")
+    lines += ["", "Intervals are bootstraps over questions of the averaged scores. Each question's average carries "
+              "the run-to-run variation on that question, so the intervals include it as long as runs vary "
+              "independently from question to question. Variation shared by a whole run, such as a change of "
+              "provider, isn't covered; the test–retest table of `compare` shows whether repeat runs differ by more "
+              "than their questions explain."]
+    if any(len(e["runs"]) == 1 for e in entries) and any(len(e["runs"]) > 1 for e in entries):
+        lines += ["", "**Note:** some entries have a single run, so their scores carry all of their run-to-run "
+                  "variation, and their intervals are wider for it."]
+    return "\n".join(lines) + "\n"
+
+
 def compare(reports, names=None):
     """Compare runs on the same questions. A worked answer that wasn't given is scored by the instinct answer,
     and a question with neither as UNANSWERED."""

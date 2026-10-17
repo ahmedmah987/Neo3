@@ -119,7 +119,7 @@ def cmd_report(args):
 
 
 def cmd_compare(args):
-    from .report import compare
+    from .report import combine, compare
 
     reports = []
     for d in args.dirs:
@@ -127,7 +127,8 @@ def cmd_compare(args):
         if not path.exists():
             sys.exit(f"{path} not found; run `python3 -m calibench report {d}` first")
         reports.append(json.loads(path.read_text(encoding="utf-8")))
-    print(compare(reports, [pathlib.Path(d).name for d in args.dirs]), end="")
+    names = [pathlib.Path(d).name for d in args.dirs]
+    print((combine if args.combine else compare)(reports, names), end="")
 
 
 def cmd_index(args):
@@ -264,6 +265,8 @@ def main(argv=None):
 
     p = sub.add_parser("compare", help="compare runs on the questions they share")
     p.add_argument("dirs", nargs="+")
+    p.add_argument("--combine", action="store_true", help="combine runs of one model with the same prompts and "
+                   "settings, averaging each question's score over them")
     p.set_defaults(func=cmd_compare)
 
     p = sub.add_parser("index", help="a table of every run in a directory, from their reports")

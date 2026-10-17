@@ -24,7 +24,7 @@ from . import families as F
 from . import models, report, runner
 from .prompts import PROMPT_SETS, parse_answer
 from .questions import ORIGINAL_FAMILIES, SUITES, draw, fingerprint, rng_from_seed, solve
-from .scoring import (UNANSWERED, bin_weights, interval_score, log_interval_score, log_wis, offset,
+from .scoring import (UNANSWERED, bin_weights, bootstrap_mean, interval_score, log_interval_score, log_wis, offset,
                       questions_needed, spearman, verdict, where_answers_fell, wilson)
 
 failures = []
@@ -221,6 +221,22 @@ def check_core():
           and verdict(15, 26, 0.9) == "too narrow (overconfident)" and verdict(26, 26, 0.5) == "too wide (underconfident)"
           and verdict(2, 3, 0.9) == "too few to tell")
 
+    def coverage(shared_sd, trials=200, n=108):
+        """How often a run's bootstrap interval holds the true mean score, when a quarter of the answers go
+        unfinished at random and score 0.4, and a whole run may shift by an effect shared by its questions."""
+        rng = random.Random(1)
+        true_mean = 0.75 * math.exp(-3 + 1.2 ** 2 / 2) + 0.25 * 0.4
+        held = 0
+        for t in range(trials):
+            shared = rng.gauss(0, shared_sd)
+            scores = [(0.4 if rng.random() < 0.25 else rng.lognormvariate(-3, 1.2)) + shared for _ in range(n)]
+            lo, hi = bootstrap_mean(scores, samples=1000, seed=t)
+            held += lo <= true_mean <= hi
+        return held / trials
+    independent, shared = coverage(0), coverage(0.03)
+    check(f"a run's interval includes answers unfinished at random ({independent:.0%} of 200 simulated runs held the "
+          f"true mean), but not an effect shared by the whole run ({shared:.0%})", independent >= 0.8 and shared <= 0.75)
+
 
 # ---- a whole run ---------------------------------------------------------------------------
 
@@ -411,6 +427,19 @@ def check_run(tmp):
     quiet(runner.run, models.NaiveModel(), "mock:naive", seed, count, FAST, tmp / "naive-alt", 3, None, "alt")
     table = report.compare([load("naive"), load("naive-alt")], ["naive", "naive-alt"])
     check("compare marks runs with other prompts", "[alt prompts]" in table and "| standard / alt prompts |" in table)
+    combined = report.combine([load("naive"), load("naive2"), load("naive-alt"), load("oracle")],
+                                                  ["naive", "naive2", "naive-alt", "oracle"])
+    naive_mean = load("naive")["phases"]["worked"]["all"]["score_mean"]
+    check("compare --combine makes repeat runs one entry, keeps other prompts apart, and averages scores",
+          f"| mock:naive | 2: naive, naive2 | {count}, {count} of {count} | {naive_mean:.3f}" in combined
+          and "| mock:naive [alt prompts] | 1: naive-alt |" in combined
+          and combined.index("| oracle |") < combined.index("| mock:naive |"))
+    shifted = load("naive2")
+    for r in shifted["questions"]:
+        r["worked"]["score"] += 0.2
+    combined = report.combine([load("naive"), shifted], ["naive", "naive2"])
+    check("a combined score is the mean over questions of each question's mean over runs",
+          f"| {naive_mean + 0.1:.3f} [" in combined)
     check("a run with other prompts is refused in the same directory",
           raises(quiet, runner.run, models.NaiveModel(), "mock:naive", seed, count, FAST, tmp / "naive", 3, None, "alt"))
     check("the report shows where answers fell, and each family",
