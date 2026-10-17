@@ -1,0 +1,19 @@
+{
+  "calibench": "2.2.0",
+  "model": "openrouter:anthropic/claude-haiku-5.5",
+  "seed": "calibench-calc1",
+  "count": 40,
+  "families": [
+    "days_between_far",
+    "factorial_digits_big",
+    "multiply_big",
+    "partitions_big"
+  ],
+  "suite": "calc1",
+  "prompts": "standard",
+  "scoring": "log-wis-1",
+  "python": "3.13.16",
+  "unicode": "15.1.0",
+  "started": "2026-10-17T04:26:45+00:00",
+  "answers_sha256": "203314f7d38c2c3618cf47478ebb3854f8dbc0f91d6d35bc11ae7ab3acb18a8a"
+}

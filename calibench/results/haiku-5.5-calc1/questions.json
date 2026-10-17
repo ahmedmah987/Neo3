@@ -1,0 +1,426 @@
+{
+  "seed": "calibench-calc1",
+  "model": "openrouter:anthropic/claude-haiku-5.5",
+  "questions": [
+    {
+      "q": 1,
+      "family": "factorial_digits_big",
+      "kind": "calculation",
+      "params": {
+        "n": 167185710
+      },
+      "short": "digits of 167,185,710!",
+      "text": "How many decimal digits does 167,185,710! (the factorial of 167,185,710) have?"
+    },
+    {
+      "q": 2,
+      "family": "days_between_far",
+      "kind": "calculation",
+      "params": {
+        "start": "0456-12-28",
+        "end": "1030-03-20"
+      },
+      "short": "days from 0456-12-28 to 1030-03-20",
+      "text": "How many days are there from December 28, 456 to March 20, 1030, in the proleptic Gregorian calendar (the Gregorian calendar extended to all years)? (From one day to the next counts as 1.)"
+    },
+    {
+      "q": 3,
+      "family": "multiply_big",
+      "kind": "calculation",
+      "params": {
+        "a": 713084725,
+        "b": 3768541855
+      },
+      "short": "713,084,725 × 3,768,541,855",
+      "text": "What is 713,084,725 × 3,768,541,855?"
+    },
+    {
+      "q": 4,
+      "family": "partitions_big",
+      "kind": "calculation",
+      "params": {
+        "n": 1116
+      },
+      "short": "partitions of 1,116",
+      "text": "In how many ways can 1,116 be written as a sum of positive integers, where the order of the terms doesn't matter (the partition number p(1,116))?"
+    },
+    {
+      "q": 5,
+      "family": "multiply_big",
+      "kind": "calculation",
+      "params": {
+        "a": 572060307,
+        "b": 27074580
+      },
+      "short": "572,060,307 × 27,074,580",
+      "text": "What is 572,060,307 × 27,074,580?"
+    },
+    {
+      "q": 6,
+      "family": "days_between_far",
+      "kind": "calculation",
+      "params": {
+        "start": "0457-09-05",
+        "end": "1319-10-29"
+      },
+      "short": "days from 0457-09-05 to 1319-10-29",
+      "text": "How many days are there from September 5, 457 to October 29, 1319, in the proleptic Gregorian calendar (the Gregorian calendar extended to all years)? (From one day to the next counts as 1.)"
+    },
+    {
+      "q": 7,
+      "family": "partitions_big",
+      "kind": "calculation",
+      "params": {
+        "n": 789
+      },
+      "short": "partitions of 789",
+      "text": "In how many ways can 789 be written as a sum of positive integers, where the order of the terms doesn't matter (the partition number p(789))?"
+    },
+    {
+      "q": 8,
+      "family": "factorial_digits_big",
+      "kind": "calculation",
+      "params": {
+        "n": 4673662
+      },
+      "short": "digits of 4,673,662!",
+      "text": "How many decimal digits does 4,673,662! (the factorial of 4,673,662) have?"
+    },
+    {
+      "q": 9,
+      "family": "factorial_digits_big",
+      "kind": "calculation",
+      "params": {
+        "n": 279555
+      },
+      "short": "digits of 279,555!",
+      "text": "How many decimal digits does 279,555! (the factorial of 279,555) have?"
+    },
+    {
+      "q": 10,
+      "family": "partitions_big",
+      "kind": "calculation",
+      "params": {
+        "n": 2856
+      },
+      "short": "partitions of 2,856",
+      "text": "In how many ways can 2,856 be written as a sum of positive integers, where the order of the terms doesn't matter (the partition number p(2,856))?"
+    },
+    {
+      "q": 11,
+      "family": "multiply_big",
+      "kind": "calculation",
+      "params": {
+        "a": 3723202,
+        "b": 173868257
+      },
+      "short": "3,723,202 × 173,868,257",
+      "text": "What is 3,723,202 × 173,868,257?"
+    },
+    {
+      "q": 12,
+      "family": "days_between_far",
+      "kind": "calculation",
+      "params": {
+        "start": "2692-10-03",
+        "end": "3280-12-11"
+      },
+      "short": "days from 2692-10-03 to 3280-12-11",
+      "text": "How many days are there from October 3, 2692 to December 11, 3280, in the proleptic Gregorian calendar (the Gregorian calendar extended to all years)? (From one day to the next counts as 1.)"
+    },
+    {
+      "q": 13,
+      "family": "multiply_big",
+      "kind": "calculation",
+      "params": {
+        "a": 120325733182,
+        "b": 1223588048
+      },
+      "short": "120,325,733,182 × 1,223,588,048",
+      "text": "What is 120,325,733,182 × 1,223,588,048?"
+    },
+    {
+      "q": 14,
+      "family": "days_between_far",
+      "kind": "calculation",
+      "params": {
+        "start": "0712-10-15",
+        "end": "1174-07-21"
+      },
+      "short": "days from 0712-10-15 to 1174-07-21",
+      "text": "How many days are there from October 15, 712 to July 21, 1174, in the proleptic Gregorian calendar (the Gregorian calendar extended to all years)? (From one day to the next counts as 1.)"
+    },
+    {
+      "q": 15,
+      "family": "factorial_digits_big",
+      "kind": "calculation",
+      "params": {
+        "n": 467864
+      },
+      "short": "digits of 467,864!",
+      "text": "How many decimal digits does 467,864! (the factorial of 467,864) have?"
+    },
+    {
+      "q": 16,
+      "family": "partitions_big",
+      "kind": "calculation",
+      "params": {
+        "n": 2363
+      },
+      "short": "partitions of 2,363",
+      "text": "In how many ways can 2,363 be written as a sum of positive integers, where the order of the terms doesn't matter (the partition number p(2,363))?"
+    },
+    {
+      "q": 17,
+      "family": "days_between_far",
+      "kind": "calculation",
+      "params": {
+        "start": "0947-09-27",
+        "end": "1997-08-13"
+      },
+      "short": "days from 0947-09-27 to 1997-08-13",
+      "text": "How many days are there from September 27, 947 to August 13, 1997, in the proleptic Gregorian calendar (the Gregorian calendar extended to all years)? (From one day to the next counts as 1.)"
+    },
+    {
+      "q": 18,
+      "family": "factorial_digits_big",
+      "kind": "calculation",
+      "params": {
+        "n": 4800202
+      },
+      "short": "digits of 4,800,202!",
+      "text": "How many decimal digits does 4,800,202! (the factorial of 4,800,202) have?"
+    },
+    {
+      "q": 19,
+      "family": "partitions_big",
+      "kind": "calculation",
+      "params": {
+        "n": 1263
+      },
+      "short": "partitions of 1,263",
+      "text": "In how many ways can 1,263 be written as a sum of positive integers, where the order of the terms doesn't matter (the partition number p(1,263))?"
+    },
+    {
+      "q": 20,
+      "family": "multiply_big",
+      "kind": "calculation",
+      "params": {
+        "a": 8212263,
+        "b": 5018745
+      },
+      "short": "8,212,263 × 5,018,745",
+      "text": "What is 8,212,263 × 5,018,745?"
+    },
+    {
+      "q": 21,
+      "family": "factorial_digits_big",
+      "kind": "calculation",
+      "params": {
+        "n": 11357052
+      },
+      "short": "digits of 11,357,052!",
+      "text": "How many decimal digits does 11,357,052! (the factorial of 11,357,052) have?"
+    },
+    {
+      "q": 22,
+      "family": "multiply_big",
+      "kind": "calculation",
+      "params": {
+        "a": 175491463,
+        "b": 1368547974
+      },
+      "short": "175,491,463 × 1,368,547,974",
+      "text": "What is 175,491,463 × 1,368,547,974?"
+    },
+    {
+      "q": 23,
+      "family": "days_between_far",
+      "kind": "calculation",
+      "params": {
+        "start": "0980-08-26",
+        "end": "4921-08-13"
+      },
+      "short": "days from 0980-08-26 to 4921-08-13",
+      "text": "How many days are there from August 26, 980 to August 13, 4921, in the proleptic Gregorian calendar (the Gregorian calendar extended to all years)? (From one day to the next counts as 1.)"
+    },
+    {
+      "q": 24,
+      "family": "partitions_big",
+      "kind": "calculation",
+      "params": {
+        "n": 1749
+      },
+      "short": "partitions of 1,749",
+      "text": "In how many ways can 1,749 be written as a sum of positive integers, where the order of the terms doesn't matter (the partition number p(1,749))?"
+    },
+    {
+      "q": 25,
+      "family": "partitions_big",
+      "kind": "calculation",
+      "params": {
+        "n": 682
+      },
+      "short": "partitions of 682",
+      "text": "In how many ways can 682 be written as a sum of positive integers, where the order of the terms doesn't matter (the partition number p(682))?"
+    },
+    {
+      "q": 26,
+      "family": "factorial_digits_big",
+      "kind": "calculation",
+      "params": {
+        "n": 450563
+      },
+      "short": "digits of 450,563!",
+      "text": "How many decimal digits does 450,563! (the factorial of 450,563) have?"
+    },
+    {
+      "q": 27,
+      "family": "multiply_big",
+      "kind": "calculation",
+      "params": {
+        "a": 333810293178,
+        "b": 1900590
+      },
+      "short": "333,810,293,178 × 1,900,590",
+      "text": "What is 333,810,293,178 × 1,900,590?"
+    },
+    {
+      "q": 28,
+      "family": "days_between_far",
+      "kind": "calculation",
+      "params": {
+        "start": "1703-07-25",
+        "end": "2077-05-08"
+      },
+      "short": "days from 1703-07-25 to 2077-05-08",
+      "text": "How many days are there from July 25, 1703 to May 8, 2077, in the proleptic Gregorian calendar (the Gregorian calendar extended to all years)? (From one day to the next counts as 1.)"
+    },
+    {
+      "q": 29,
+      "family": "days_between_far",
+      "kind": "calculation",
+      "params": {
+        "start": "1006-01-21",
+        "end": "2029-11-07"
+      },
+      "short": "days from 1006-01-21 to 2029-11-07",
+      "text": "How many days are there from January 21, 1006 to November 7, 2029, in the proleptic Gregorian calendar (the Gregorian calendar extended to all years)? (From one day to the next counts as 1.)"
+    },
+    {
+      "q": 30,
+      "family": "multiply_big",
+      "kind": "calculation",
+      "params": {
+        "a": 3655489107,
+        "b": 2463411911
+      },
+      "short": "3,655,489,107 × 2,463,411,911",
+      "text": "What is 3,655,489,107 × 2,463,411,911?"
+    },
+    {
+      "q": 31,
+      "family": "partitions_big",
+      "kind": "calculation",
+      "params": {
+        "n": 3947
+      },
+      "short": "partitions of 3,947",
+      "text": "In how many ways can 3,947 be written as a sum of positive integers, where the order of the terms doesn't matter (the partition number p(3,947))?"
+    },
+    {
+      "q": 32,
+      "family": "factorial_digits_big",
+      "kind": "calculation",
+      "params": {
+        "n": 18848744
+      },
+      "short": "digits of 18,848,744!",
+      "text": "How many decimal digits does 18,848,744! (the factorial of 18,848,744) have?"
+    },
+    {
+      "q": 33,
+      "family": "factorial_digits_big",
+      "kind": "calculation",
+      "params": {
+        "n": 278273
+      },
+      "short": "digits of 278,273!",
+      "text": "How many decimal digits does 278,273! (the factorial of 278,273) have?"
+    },
+    {
+      "q": 34,
+      "family": "days_between_far",
+      "kind": "calculation",
+      "params": {
+        "start": "0158-11-05",
+        "end": "3449-08-04"
+      },
+      "short": "days from 0158-11-05 to 3449-08-04",
+      "text": "How many days are there from November 5, 158 to August 4, 3449, in the proleptic Gregorian calendar (the Gregorian calendar extended to all years)? (From one day to the next counts as 1.)"
+    },
+    {
+      "q": 35,
+      "family": "partitions_big",
+      "kind": "calculation",
+      "params": {
+        "n": 2217
+      },
+      "short": "partitions of 2,217",
+      "text": "In how many ways can 2,217 be written as a sum of positive integers, where the order of the terms doesn't matter (the partition number p(2,217))?"
+    },
+    {
+      "q": 36,
+      "family": "multiply_big",
+      "kind": "calculation",
+      "params": {
+        "a": 298168204490,
+        "b": 27147301085
+      },
+      "short": "298,168,204,490 × 27,147,301,085",
+      "text": "What is 298,168,204,490 × 27,147,301,085?"
+    },
+    {
+      "q": 37,
+      "family": "factorial_digits_big",
+      "kind": "calculation",
+      "params": {
+        "n": 5063616
+      },
+      "short": "digits of 5,063,616!",
+      "text": "How many decimal digits does 5,063,616! (the factorial of 5,063,616) have?"
+    },
+    {
+      "q": 38,
+      "family": "days_between_far",
+      "kind": "calculation",
+      "params": {
+        "start": "1834-01-10",
+        "end": "2320-07-21"
+      },
+      "short": "days from 1834-01-10 to 2320-07-21",
+      "text": "How many days are there from January 10, 1834 to July 21, 2320, in the proleptic Gregorian calendar (the Gregorian calendar extended to all years)? (From one day to the next counts as 1.)"
+    },
+    {
+      "q": 39,
+      "family": "partitions_big",
+      "kind": "calculation",
+      "params": {
+        "n": 1100
+      },
+      "short": "partitions of 1,100",
+      "text": "In how many ways can 1,100 be written as a sum of positive integers, where the order of the terms doesn't matter (the partition number p(1,100))?"
+    },
+    {
+      "q": 40,
+      "family": "multiply_big",
+      "kind": "calculation",
+      "params": {
+        "a": 187795187996,
+        "b": 100691899
+      },
+      "short": "187,795,187,996 × 100,691,899",
+      "text": "What is 187,795,187,996 × 100,691,899?"
+    }
+  ]
+}

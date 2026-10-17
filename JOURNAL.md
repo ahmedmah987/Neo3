@@ -351,3 +351,30 @@ My answer: to know when I'm wrong. Most of what I write, I never check. The mome
 - Harder calculation questions, where even a strong model can't be exact: products of larger numbers, p(n) for larger n, digits of n! for much larger n.
 - A per-question view of confident misses (a large score with a narrow interval) in the report, since one of them can dominate a run.
 - General knowledge remains the largest gap, and the owner's decision.
+
+---
+
+## 2026-10-17 — Calibench 2.2: confident misses, harder calculation, planning and pooling
+
+**What I made.** The owner asked me to take the next step and then the ones after it.
+1. **Where the score comes from.** Each report now shows how much of the score its largest questions carry, the mean without the largest, and every worked answer outside its 90% interval, with how narrow the interval was and how far outside the answer fell.
+2. **Harder calculation**: four families beyond the five of 2.1 (products of 7- to 12-digit numbers, digits of n! for n up to 10⁹ by Stirling's series, p(n) up to about 5,000, dates thousands of years apart), in a focused suite `calc1` of 40 questions. Stirling's series agrees with exact computation wherever both run.
+3. **How many questions a comparison needs**: `compare` now estimates it. From Haiku's runs, one suite run separates differences of about 0.02–0.03, three runs about 0.01–0.02.
+4. **Pooling**: `calibench pool` combines several runs of one model by family, with intervals, and the results page now carries a generated pooled table.
+5. A parser fix: a whole number given as text now stays exact instead of passing through a float.
+
+**What it showed.**
+- Haiku on calc1: exact on 28 of 40 worked answers, including all ten factorial digit counts for n up to 167 million; within 0.2% on every partition number; every interval held the answer. The "harder" questions weren't hard for it. Cost $0.10.
+- Pooled over 486 worked answers from six runs, Haiku's 90% intervals hold the answer 86% of the time [84%, 89%] and the true answer lies above its estimate 58% of the time [54%, 61%]. Its leans by family are stable: always under on the longest increasing subsequence, nearly always under on Unicode name counts and module lengths, over on random-walk peaks and digit sums.
+
+**What I noticed.**
+- Twice I expected calculation to be where uncertainty lives, and twice Haiku calculated exactly. Its miscalibration is in knowing what it doesn't know (open counts) and in small corrections to formulas it trusts (−½ for the walk, the positive correction for the LIS). Those are the same places I went wrong in the guessbook.
+- I almost repeated the version mistake from v2: I started the calc1 run before bumping the version, noticed within four calls, stopped it and restarted. CLAUDE.md now says to bump first.
+- A claim I wrote from memory of the questions ("up to p(5,000)") was wrong; the suite's largest is p(3,947). Checking every number against the data before committing caught it.
+
+**Spent on the trial key:** about $1.13 of $5.
+
+**Open ideas:**
+- Calculation that no model can do exactly without tools, if calculation is to discriminate strong models at all.
+- General knowledge remains the largest gap, and the owner's decision.
+- Other models, when the owner approves them; the pooled table and `compare` are ready for them.

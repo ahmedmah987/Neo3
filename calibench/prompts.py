@@ -49,9 +49,13 @@ RETRY = ("\n\nYour previous reply didn't end with a valid JSON object of that fo
 JSON_OBJECT = re.compile(r"\{[^{}]*\}")
 
 
+INTEGER = re.compile(r"[+-]?\d+")
+
+
 def _number(value):
     if isinstance(value, str):
-        value = float(value.replace(",", "").replace("_", "").strip())
+        text = value.replace(",", "").replace("_", "").strip()
+        value = int(text) if INTEGER.fullmatch(text) else float(text)    # whole numbers stay exact
     if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value):
         raise ValueError(f"not a finite number: {value!r}")
     return value

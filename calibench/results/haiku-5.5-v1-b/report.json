@@ -6747,7 +6747,7 @@
   "cost": 0.226471,
   "answers_changed_after_run": false,
   "scored_with": {
-    "calibench": "2.1.0",
+    "calibench": "2.2.0",
     "scoring": "log-wis-1"
   }
 }

@@ -130,6 +130,9 @@ def check_core():
     check("numbers given as strings with commas are read",
           parse_answer('{"estimate": "1,200", "p50": ["1,000", 1400], "p90": [900, "2,000"]}')
           == {"estimate": 1200.0, "p50": [1000.0, 1400], "p90": [900, 2000.0]})
+    check("a large whole number given as text stays exact",
+          parse_answer('{"estimate": "8,094,462,021,263,878,871,650", "p50": [1, 2], "p90": [1, 3]}')["estimate"]
+          == 8_094_462_021_263_878_871_650)
     check("reversed interval ends are put in order",
           parse_answer('{"estimate": 5, "p50": [6, 4], "p90": [9, 1]}')["p90"] == [1, 9])
     check("a reply with no usable answer is refused",

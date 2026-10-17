@@ -1,0 +1,2443 @@
+{
+  "meta": {
+    "calibench": "2.2.0",
+    "model": "openrouter:anthropic/claude-haiku-5.5",
+    "seed": "calibench-calc1",
+    "count": 40,
+    "families": [
+      "days_between_far",
+      "factorial_digits_big",
+      "multiply_big",
+      "partitions_big"
+    ],
+    "suite": "calc1",
+    "prompts": "standard",
+    "scoring": "log-wis-1",
+    "python": "3.13.16",
+    "unicode": "15.1.0",
+    "started": "2026-10-17T04:26:45+00:00",
+    "answers_sha256": "203314f7d38c2c3618cf47478ebb3854f8dbc0f91d6d35bc11ae7ab3acb18a8a"
+  },
+  "suite": "standard suite calc1",
+  "phases": {
+    "instinct": {
+      "asked": 40,
+      "statuses": {
+        "ok": 40
+      },
+      "all": {
+        "score_mean": 0.01889587939248097,
+        "score_median": 0.000425503169130792,
+        "score_ci": [
+          0.008642128140122069,
+          0.03141919316549399
+        ]
+      },
+      "n": 40,
+      "score_mean": 0.01889587939248097,
+      "score_median": 0.000425503169130792,
+      "score_ci": [
+        0.008642128140122069,
+        0.03141919316549399
+      ],
+      "p50": {
+        "level": 0.5,
+        "interval_score": 0.09212066710757223,
+        "hits": 34,
+        "hits_ci": [
+          0.7352442592684723,
+          0.9204009336521988
+        ],
+        "ranged": 40,
+        "ranged_hits": 34,
+        "verdict": "too wide (underconfident)"
+      },
+      "p90": {
+        "level": 0.9,
+        "interval_score": 0.31129724191741903,
+        "hits": 39,
+        "hits_ci": [
+          0.8954007657181365,
+          0.9944034246742027
+        ],
+        "ranged": 40,
+        "ranged_hits": 39,
+        "verdict": "consistent with calibrated"
+      },
+      "certain": 0,
+      "certain_right": 0,
+      "median_error": 2.669455701316252e-06,
+      "fell": {
+        "n": 40,
+        "bins": [
+          1.0,
+          2.0,
+          18.5,
+          15.055555555555555,
+          3.4444444444444446,
+          0.0
+        ],
+        "above": 18.5,
+        "above_ci": [
+          0.32789797260816245,
+          0.5784384284031703
+        ]
+      }
+    },
+    "worked": {
+      "asked": 40,
+      "statuses": {
+        "ok": 40
+      },
+      "all": {
+        "score_mean": 0.00027715766703027443,
+        "score_median": 7.2991009902523274e-06,
+        "score_ci": [
+          0.00011967025774713226,
+          0.00047252107725941436
+        ]
+      },
+      "n": 40,
+      "score_mean": 0.00027715766703027443,
+      "score_median": 7.2991009902523274e-06,
+      "score_ci": [
+        0.00011967025774713226,
+        0.00047252107725941436
+      ],
+      "p50": {
+        "level": 0.5,
+        "interval_score": 0.0013388826611451243,
+        "hits": 40,
+        "hits_ci": [
+          0.9366359898866731,
+          1.0
+        ],
+        "ranged": 39,
+        "ranged_hits": 39,
+        "verdict": "too wide (underconfident)"
+      },
+      "p90": {
+        "level": 0.9,
+        "interval_score": 0.006378912245376123,
+        "hits": 40,
+        "hits_ci": [
+          0.9366359898866731,
+          1.0
+        ],
+        "ranged": 40,
+        "ranged_hits": 40,
+        "verdict": "too wide (underconfident)"
+      },
+      "certain": 0,
+      "certain_right": 0,
+      "median_error": 0.0,
+      "fell": {
+        "n": 40,
+        "bins": [
+          0.0,
+          0.6666666666666667,
+          18.190476190476193,
+          20.634920634920636,
+          0.507936507936508,
+          0.0
+        ],
+        "above": 21.0,
+        "above_ci": [
+          0.39770229906839394,
+          0.6491295004259398
+        ]
+      }
+    }
+  },
+  "kinds": {
+    "instinct": {
+      "calculation": {
+        "n": 40,
+        "score_mean": 0.01889587939248097,
+        "score_median": 0.000425503169130792,
+        "score_ci": [
+          0.008642128140122069,
+          0.03141919316549399
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.09212066710757223,
+          "hits": 34,
+          "hits_ci": [
+            0.7352442592684723,
+            0.9204009336521988
+          ],
+          "ranged": 40,
+          "ranged_hits": 34,
+          "verdict": "too wide (underconfident)"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.31129724191741903,
+          "hits": 39,
+          "hits_ci": [
+            0.8954007657181365,
+            0.9944034246742027
+          ],
+          "ranged": 40,
+          "ranged_hits": 39,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 2.669455701316252e-06,
+        "fell": {
+          "n": 40,
+          "bins": [
+            1.0,
+            2.0,
+            18.5,
+            15.055555555555555,
+            3.4444444444444446,
+            0.0
+          ],
+          "above": 18.5,
+          "above_ci": [
+            0.32789797260816245,
+            0.5784384284031703
+          ]
+        }
+      },
+      "exact": {
+        "n": 0
+      },
+      "knowledge": {
+        "n": 0
+      },
+      "statistical": {
+        "n": 0
+      }
+    },
+    "worked": {
+      "calculation": {
+        "n": 40,
+        "score_mean": 0.00027715766703027443,
+        "score_median": 7.2991009902523274e-06,
+        "score_ci": [
+          0.00011967025774713226,
+          0.00047252107725941436
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.0013388826611451243,
+          "hits": 40,
+          "hits_ci": [
+            0.9366359898866731,
+            1.0
+          ],
+          "ranged": 39,
+          "ranged_hits": 39,
+          "verdict": "too wide (underconfident)"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.006378912245376123,
+          "hits": 40,
+          "hits_ci": [
+            0.9366359898866731,
+            1.0
+          ],
+          "ranged": 40,
+          "ranged_hits": 40,
+          "verdict": "too wide (underconfident)"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.0,
+        "fell": {
+          "n": 40,
+          "bins": [
+            0.0,
+            0.6666666666666667,
+            18.190476190476193,
+            20.634920634920636,
+            0.507936507936508,
+            0.0
+          ],
+          "above": 21.0,
+          "above_ci": [
+            0.39770229906839394,
+            0.6491295004259398
+          ]
+        }
+      },
+      "exact": {
+        "n": 0
+      },
+      "knowledge": {
+        "n": 0
+      },
+      "statistical": {
+        "n": 0
+      }
+    }
+  },
+  "families": {
+    "instinct": {
+      "days_between_far": {
+        "n": 10,
+        "score_mean": 0.00018821042240638875,
+        "score_median": 4.053065562221292e-05,
+        "score_ci": [
+          3.361746004020461e-05,
+          0.00047507870420556846
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.000853238426724623,
+          "hits": 9,
+          "hits_ci": [
+            0.6522548907904218,
+            0.9773676701599938
+          ],
+          "ranged": 10,
+          "ranged_hits": 9,
+          "verdict": "too wide (underconfident)"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.00338662667111862,
+          "hits": 9,
+          "hits_ci": [
+            0.6522548907904218,
+            0.9773676701599938
+          ],
+          "ranged": 10,
+          "ranged_hits": 9,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.0,
+        "fell": {
+          "n": 10,
+          "bins": [
+            1.0,
+            0.0,
+            4.0,
+            5.0,
+            0.0,
+            0.0
+          ],
+          "above": 5.0,
+          "above_ci": [
+            0.26925566160142683,
+            0.7307443383985732
+          ]
+        }
+      },
+      "factorial_digits_big": {
+        "n": 10,
+        "score_mean": 7.460452340868784e-06,
+        "score_median": 5.246310279627409e-06,
+        "score_ci": [
+          4.13661271517185e-06,
+          1.1200058328341812e-05
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 4.1837055168869594e-05,
+          "hits": 7,
+          "hits_ci": [
+            0.4416781333357615,
+            0.8731331471394461
+          ],
+          "ranged": 10,
+          "ranged_hits": 7,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.00013161999447088845,
+          "hits": 10,
+          "hits_ci": [
+            0.7870282011880192,
+            1.0
+          ],
+          "ranged": 10,
+          "ranged_hits": 10,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 2.1859152684459345e-06,
+        "fell": {
+          "n": 10,
+          "bins": [
+            0.0,
+            2.0,
+            3.5,
+            3.0555555555555554,
+            1.4444444444444444,
+            0.0
+          ],
+          "above": 4.5,
+          "above_ci": [
+            0.19421393174129786,
+            0.6483804280210985
+          ]
+        }
+      },
+      "multiply_big": {
+        "n": 10,
+        "score_mean": 0.004117265627618891,
+        "score_median": 0.0034577134221560617,
+        "score_ci": [
+          0.0025482872488531284,
+          0.005905349557661381
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.01877396696440776,
+          "hits": 10,
+          "hits_ci": [
+            0.7870282011880192,
+            1.0
+          ],
+          "ranged": 10,
+          "ranged_hits": 10,
+          "verdict": "too wide (underconfident)"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.11195051506730672,
+          "hits": 10,
+          "hits_ci": [
+            0.7870282011880192,
+            1.0
+          ],
+          "ranged": 10,
+          "ranged_hits": 10,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 4.26571985789741e-08,
+        "fell": {
+          "n": 10,
+          "bins": [
+            0.0,
+            0.0,
+            5.0,
+            5.0,
+            0.0,
+            0.0
+          ],
+          "above": 5.0,
+          "above_ci": [
+            0.26925566160142683,
+            0.7307443383985732
+          ]
+        }
+      },
+      "partitions_big": {
+        "n": 10,
+        "score_mean": 0.07127058106755772,
+        "score_median": 0.053956020053857544,
+        "score_ci": [
+          0.04264641041843051,
+          0.11124647577541266
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.3488136259839877,
+          "hits": 8,
+          "hits_ci": [
+            0.5407687136381664,
+            0.9314482070746452
+          ],
+          "ranged": 10,
+          "ranged_hits": 8,
+          "verdict": "consistent with calibrated"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 1.12972020593678,
+          "hits": 10,
+          "hits_ci": [
+            0.7870282011880192,
+            1.0
+          ],
+          "ranged": 10,
+          "ranged_hits": 10,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.027691861114709657,
+        "fell": {
+          "n": 10,
+          "bins": [
+            0.0,
+            0.0,
+            6.0,
+            2.0,
+            2.0,
+            0.0
+          ],
+          "above": 4.0,
+          "above_ci": [
+            0.19421393174129786,
+            0.6483804280210985
+          ]
+        }
+      }
+    },
+    "worked": {
+      "days_between_far": {
+        "n": 10,
+        "score_mean": 7.719980793041259e-06,
+        "score_median": 7.2991009902523274e-06,
+        "score_ci": [
+          5.233715461354649e-06,
+          1.0194010511206386e-05
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 3.156275387503626e-05,
+          "hits": 10,
+          "hits_ci": [
+            0.7870282011880192,
+            1.0
+          ],
+          "ranged": 10,
+          "ranged_hits": 10,
+          "verdict": "too wide (underconfident)"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.00022255785576561494,
+          "hits": 10,
+          "hits_ci": [
+            0.7870282011880192,
+            1.0
+          ],
+          "ranged": 10,
+          "ranged_hits": 10,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.0,
+        "fell": {
+          "n": 10,
+          "bins": [
+            0.0,
+            0.4444444444444445,
+            5.055555555555555,
+            4.5,
+            0.0,
+            0.0
+          ],
+          "above": 4.5,
+          "above_ci": [
+            0.19421393174129786,
+            0.6483804280210985
+          ]
+        }
+      },
+      "factorial_digits_big": {
+        "n": 10,
+        "score_mean": 1.050141390628312e-07,
+        "score_median": 1.9254322261019752e-08,
+        "score_ci": [
+          4.2751731214707435e-08,
+          1.743434220067286e-07
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 4.0550090538715724e-07,
+          "hits": 10,
+          "hits_ci": [
+            0.7870282011880192,
+            1.0
+          ],
+          "ranged": 10,
+          "ranged_hits": 10,
+          "verdict": "too wide (underconfident)"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 3.2232024262057735e-06,
+          "hits": 10,
+          "hits_ci": [
+            0.7870282011880192,
+            1.0
+          ],
+          "ranged": 10,
+          "ranged_hits": 10,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.0,
+        "fell": {
+          "n": 10,
+          "bins": [
+            0.0,
+            0.0,
+            4.857142857142857,
+            4.857142857142857,
+            0.28571428571428575,
+            0.0
+          ],
+          "above": 5.0,
+          "above_ci": [
+            0.26925566160142683,
+            0.7307443383985732
+          ]
+        }
+      },
+      "multiply_big": {
+        "n": 10,
+        "score_mean": 4.6608304356404064e-05,
+        "score_median": 9.408063010063472e-06,
+        "score_ci": [
+          1.4869714917331579e-05,
+          8.342850682304716e-05
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 8.64838483767727e-05,
+          "hits": 10,
+          "hits_ci": [
+            0.7870282011880192,
+            1.0
+          ],
+          "ranged": 9,
+          "ranged_hits": 9,
+          "verdict": "too wide (underconfident)"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.0018979959759363395,
+          "hits": 10,
+          "hits_ci": [
+            0.7870282011880192,
+            1.0
+          ],
+          "ranged": 10,
+          "ranged_hits": 10,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.0,
+        "fell": {
+          "n": 10,
+          "bins": [
+            0.0,
+            0.22222222222222224,
+            5.277777777777778,
+            4.277777777777778,
+            0.22222222222222224,
+            0.0
+          ],
+          "above": 4.5,
+          "above_ci": [
+            0.19421393174129786,
+            0.6483804280210985
+          ]
+        }
+      },
+      "partitions_big": {
+        "n": 10,
+        "score_mean": 0.0010541973688325897,
+        "score_median": 0.000566473665773941,
+        "score_ci": [
+          0.0005810630116961022,
+          0.0016264878616884602
+        ],
+        "p50": {
+          "level": 0.5,
+          "interval_score": 0.005237078541423301,
+          "hits": 10,
+          "hits_ci": [
+            0.7870282011880192,
+            1.0
+          ],
+          "ranged": 10,
+          "ranged_hits": 10,
+          "verdict": "too wide (underconfident)"
+        },
+        "p90": {
+          "level": 0.9,
+          "interval_score": 0.023391871947376332,
+          "hits": 10,
+          "hits_ci": [
+            0.7870282011880192,
+            1.0
+          ],
+          "ranged": 10,
+          "ranged_hits": 10,
+          "verdict": "consistent with calibrated"
+        },
+        "certain": 0,
+        "certain_right": 0,
+        "median_error": 0.00012365924407665312,
+        "fell": {
+          "n": 10,
+          "bins": [
+            0.0,
+            0.0,
+            3.0,
+            7.0,
+            0.0,
+            0.0
+          ],
+          "above": 7.0,
+          "above_ci": [
+            0.4416781333357615,
+            0.8731331471394461
+          ]
+        }
+      }
+    }
+  },
+  "questions": [
+    {
+      "q": 1,
+      "key": "factorial_digits_big {\"n\": 167185710}",
+      "family": "factorial_digits_big",
+      "kind": "calculation",
+      "short": "digits of 167,185,710!",
+      "answer": 1302193563,
+      "instinct": {
+        "status": "ok",
+        "estimate": 1302193605,
+        "p50": [
+          1302100000,
+          1302300000
+        ],
+        "p90": [
+          1302000000,
+          1302400000
+        ],
+        "score": 2.1508524130098296e-05,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 1302193563,
+        "p50": [
+          1302193561,
+          1302193565
+        ],
+        "p90": [
+          1302193553,
+          1302193572
+        ],
+        "score": 5.989893736568775e-10,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 2,
+      "key": "days_between_far {\"end\": \"1030-03-20\", \"start\": \"0456-12-28\"}",
+      "family": "days_between_far",
+      "kind": "calculation",
+      "short": "days from 0456-12-28 to 1030-03-20",
+      "answer": 209365,
+      "instinct": {
+        "status": "ok",
+        "estimate": 209730,
+        "p50": [
+          209700,
+          209760
+        ],
+        "p90": [
+          209600,
+          209850
+        ],
+        "score": 0.001489055586288579,
+        "hits": {
+          "p50": false,
+          "p90": false
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 209365,
+        "p50": [
+          209364,
+          209366
+        ],
+        "p90": [
+          209340,
+          209390
+        ],
+        "score": 5.731589679243143e-06,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 3,
+      "key": "multiply_big {\"a\": 713084725, \"b\": 3768541855}",
+      "family": "multiply_big",
+      "kind": "calculation",
+      "short": "713,084,725 × 3,768,541,855",
+      "answer": 2687289632323664875,
+      "instinct": {
+        "status": "ok",
+        "estimate": 2687289658000000000,
+        "p50": [
+          2600000000000000000,
+          2780000000000000000
+        ],
+        "p90": [
+          2400000000000000000,
+          3000000000000000000
+        ],
+        "score": 0.011156821204741759,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 2687289632323664875,
+        "p50": [
+          2687000000000000000,
+          2687600000000000000
+        ],
+        "p90": [
+          2680000000000000000,
+          2694000000000000000
+        ],
+        "score": 0.00012653291235835694,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 4,
+      "key": "partitions_big {\"n\": 1116}",
+      "family": "partitions_big",
+      "kind": "calculation",
+      "short": "partitions of 1,116",
+      "answer": 2094902753439183950276117590000925,
+      "instinct": {
+        "status": "ok",
+        "estimate": 2.1e+33,
+        "p50": [
+          1.9e+33,
+          2.4e+33
+        ],
+        "p90": [
+          1.2e+33,
+          3.8e+33
+        ],
+        "score": 0.046901117484671316,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 2.0949e+33,
+        "p50": [
+          2.0935e+33,
+          2.0965e+33
+        ],
+        "p90": [
+          2.088e+33,
+          2.101e+33
+        ],
+        "score": 0.0002675960225394647,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 5,
+      "key": "multiply_big {\"a\": 572060307, \"b\": 27074580}",
+      "family": "multiply_big",
+      "kind": "calculation",
+      "short": "572,060,307 × 27,074,580",
+      "answer": 15488292546696060,
+      "instinct": {
+        "status": "ok",
+        "estimate": 15488292550000000,
+        "p50": [
+          15400000000000000,
+          15580000000000000
+        ],
+        "p90": [
+          15000000000000000,
+          16000000000000000
+        ],
+        "score": 0.002452823567717246,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 15488292546696060,
+        "p50": [
+          15488292546690000,
+          15488292546700000
+        ],
+        "p90": [
+          15488000000000000,
+          15488600000000000
+        ],
+        "score": 7.74778445844504e-07,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 6,
+      "key": "days_between_far {\"end\": \"1319-10-29\", \"start\": \"0457-09-05\"}",
+      "family": "days_between_far",
+      "kind": "calculation",
+      "short": "days from 0457-09-05 to 1319-10-29",
+      "answer": 314892,
+      "instinct": {
+        "status": "ok",
+        "estimate": 314892,
+        "p50": [
+          314880,
+          314905
+        ],
+        "p90": [
+          314800,
+          314990
+        ],
+        "score": 2.000666875595414e-05,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 314892,
+        "p50": [
+          314884,
+          314900
+        ],
+        "p90": [
+          314860,
+          314925
+        ],
+        "score": 9.209470965636513e-06,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 7,
+      "key": "partitions_big {\"n\": 789}",
+      "family": "partitions_big",
+      "kind": "calculation",
+      "short": "partitions of 789",
+      "answer": 3523527577258789108163787100,
+      "instinct": {
+        "status": "ok",
+        "estimate": 3.3e+27,
+        "p50": [
+          3.1e+27,
+          3.5e+27
+        ],
+        "p90": [
+          2.5e+27,
+          4.3e+27
+        ],
+        "score": 0.03877047467668092,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 3.525e+27,
+        "p50": [
+          3.52e+27,
+          3.53e+27
+        ],
+        "p90": [
+          3.505e+27,
+          3.545e+27
+        ],
+        "score": 0.0005942000921899648,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 8,
+      "key": "factorial_digits_big {\"n\": 4673662}",
+      "family": "factorial_digits_big",
+      "kind": "calculation",
+      "short": "digits of 4,673,662!",
+      "answer": 29141982,
+      "instinct": {
+        "status": "ok",
+        "estimate": 29141798,
+        "p50": [
+          29141740,
+          29141860
+        ],
+        "p90": [
+          29141600,
+          29142000
+        ],
+        "score": 3.6236498817032727e-06,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 29141982,
+        "p50": [
+          29141981,
+          29141983
+        ],
+        "p90": [
+          29141970,
+          29141995
+        ],
+        "score": 2.4020327842322333e-08,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 9,
+      "key": "factorial_digits_big {\"n\": 279555}",
+      "family": "factorial_digits_big",
+      "kind": "calculation",
+      "short": "digits of 279,555!",
+      "answer": 1401182,
+      "instinct": {
+        "status": "ok",
+        "estimate": 1401171,
+        "p50": [
+          1401160,
+          1401182
+        ],
+        "p90": [
+          1401100,
+          1401240
+        ],
+        "score": 5.138550702774581e-06,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 1401182,
+        "p50": [
+          1401181,
+          1401183
+        ],
+        "p90": [
+          1401179,
+          1401185
+        ],
+        "score": 2.2837844880996273e-07,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 10,
+      "key": "partitions_big {\"n\": 2856}",
+      "family": "partitions_big",
+      "kind": "calculation",
+      "short": "partitions of 2,856",
+      "answer": 17154138971402239702344322970918807628851636631855206215,
+      "instinct": {
+        "status": "ok",
+        "estimate": 1.67e+55,
+        "p50": [
+          1.55e+55,
+          1.8e+55
+        ],
+        "p90": [
+          1.35e+55,
+          2e+55
+        ],
+        "score": 0.02818017806167091,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 1.7154e+55,
+        "p50": [
+          1.714e+55,
+          1.717e+55
+        ],
+        "p90": [
+          1.71e+55,
+          1.72e+55
+        ],
+        "score": 0.00029311485347164993,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 11,
+      "key": "multiply_big {\"a\": 3723202, \"b\": 173868257}",
+      "family": "multiply_big",
+      "kind": "calculation",
+      "short": "3,723,202 × 173,868,257",
+      "answer": 647346642198914,
+      "instinct": {
+        "status": "ok",
+        "estimate": 647346600000000,
+        "p50": [
+          640000000000000,
+          655000000000000
+        ],
+        "p90": [
+          600000000000000,
+          690000000000000
+        ],
+        "score": 0.005111957813157915,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 647346642198914,
+        "p50": [
+          647346642198900,
+          647346642198930
+        ],
+        "p90": [
+          647346642000000,
+          647346642400000
+        ],
+        "score": 1.2363159385131441e-11,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 12,
+      "key": "days_between_far {\"end\": \"3280-12-11\", \"start\": \"2692-10-03\"}",
+      "family": "days_between_far",
+      "kind": "calculation",
+      "short": "days from 2692-10-03 to 3280-12-11",
+      "answer": 214832,
+      "instinct": {
+        "status": "ok",
+        "estimate": 214832,
+        "p50": [
+          214800,
+          214865
+        ],
+        "p90": [
+          214700,
+          214960
+        ],
+        "score": 5.4461064950288575e-05,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 214832,
+        "p50": [
+          214826,
+          214838
+        ],
+        "p90": [
+          214805,
+          214860
+        ],
+        "score": 1.0705978346905452e-05,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 13,
+      "key": "multiply_big {\"a\": 120325733182, \"b\": 1223588048}",
+      "family": "multiply_big",
+      "kind": "calculation",
+      "short": "120,325,733,182 × 1,223,588,048",
+      "answer": 147229128988332208736,
+      "instinct": {
+        "status": "ok",
+        "estimate": 1.4722912e+20,
+        "p50": [
+          1.47e+20,
+          1.48e+20
+        ],
+        "p90": [
+          1.3e+20,
+          1.65e+20
+        ],
+        "score": 0.0054462013774301005,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 147229128988332208736,
+        "p50": [
+          1.4722e+20,
+          1.4724e+20
+        ],
+        "p90": [
+          1.47e+20,
+          1.475e+20
+        ],
+        "score": 8.14959680485572e-05,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 14,
+      "key": "days_between_far {\"end\": \"1174-07-21\", \"start\": \"0712-10-15\"}",
+      "family": "days_between_far",
+      "kind": "calculation",
+      "short": "days from 0712-10-15 to 1174-07-21",
+      "answer": 168656,
+      "instinct": {
+        "status": "ok",
+        "estimate": 168655,
+        "p50": [
+          168640,
+          168670
+        ],
+        "p90": [
+          168500,
+          168800
+        ],
+        "score": 5.454996489433484e-05,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 168656,
+        "p50": [
+          168655,
+          168657
+        ],
+        "p90": [
+          168640,
+          168670
+        ],
+        "score": 4.7433759588955125e-06,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 15,
+      "key": "factorial_digits_big {\"n\": 467864}",
+      "family": "factorial_digits_big",
+      "kind": "calculation",
+      "short": "digits of 467,864!",
+      "answer": 2449658,
+      "instinct": {
+        "status": "ok",
+        "estimate": 2449653,
+        "p50": [
+          2449600,
+          2449710
+        ],
+        "p90": [
+          2449400,
+          2449900
+        ],
+        "score": 8.980861085490233e-06,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 2449658,
+        "p50": [
+          2449657,
+          2449659
+        ],
+        "p90": [
+          2449654,
+          2449662
+        ],
+        "score": 1.4695922978091858e-07,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 16,
+      "key": "partitions_big {\"n\": 2363}",
+      "family": "partitions_big",
+      "kind": "calculation",
+      "short": "partitions of 2,363",
+      "answer": 86037204799060994583504133500298291142599767525961,
+      "instinct": {
+        "status": "ok",
+        "estimate": 8.9e+49,
+        "p50": [
+          7.5e+49,
+          1.05e+50
+        ],
+        "p90": [
+          5e+49,
+          1.4e+50
+        ],
+        "score": 0.06101092262304377,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 8.604e+49,
+        "p50": [
+          8.596e+49,
+          8.612e+49
+        ],
+        "p90": [
+          8.56e+49,
+          8.65e+49
+        ],
+        "score": 0.0004016402387640028,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 17,
+      "key": "days_between_far {\"end\": \"1997-08-13\", \"start\": \"0947-09-27\"}",
+      "family": "days_between_far",
+      "kind": "calculation",
+      "short": "days from 0947-09-27 to 1997-08-13",
+      "answer": 383460,
+      "instinct": {
+        "status": "ok",
+        "estimate": 383459,
+        "p50": [
+          383440,
+          383480
+        ],
+        "p90": [
+          383300,
+          383600
+        ],
+        "score": 2.6600246294137262e-05,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 383460,
+        "p50": [
+          383455,
+          383465
+        ],
+        "p90": [
+          383400,
+          383520
+        ],
+        "score": 8.866612301261512e-06,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 18,
+      "key": "factorial_digits_big {\"n\": 4800202}",
+      "family": "factorial_digits_big",
+      "kind": "calculation",
+      "short": "digits of 4,800,202!",
+      "answer": 29986698,
+      "instinct": {
+        "status": "ok",
+        "estimate": 29986700,
+        "p50": [
+          29986680,
+          29986720
+        ],
+        "p90": [
+          29986600,
+          29986800
+        ],
+        "score": 2.801241792127485e-07,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 29986698,
+        "p50": [
+          29986697,
+          29986699
+        ],
+        "p90": [
+          29986694,
+          29986702
+        ],
+        "score": 1.2005322744812474e-08,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 19,
+      "key": "partitions_big {\"n\": 1263}",
+      "family": "partitions_big",
+      "kind": "calculation",
+      "short": "partitions of 1,263",
+      "answer": 439519180314644983035319377172158032,
+      "instinct": {
+        "status": "ok",
+        "estimate": 4.4e+35,
+        "p50": [
+          3.5e+35,
+          5.5e+35
+        ],
+        "p90": [
+          1.5e+35,
+          1.2e+36
+        ],
+        "score": 0.08700601711246918,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 4.395e+35,
+        "p50": [
+          4.39e+35,
+          4.4e+35
+        ],
+        "p90": [
+          4.37e+35,
+          4.42e+35
+        ],
+        "score": 0.00046379317620278467,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 20,
+      "key": "multiply_big {\"a\": 8212263, \"b\": 5018745}",
+      "family": "multiply_big",
+      "kind": "calculation",
+      "short": "8,212,263 × 5,018,745",
+      "answer": 41215253869935,
+      "instinct": {
+        "status": "ok",
+        "estimate": 41215254870000,
+        "p50": [
+          41000000000000,
+          41430000000000
+        ],
+        "p90": [
+          40500000000000,
+          41900000000000
+        ],
+        "score": 0.0017230008476995806,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 41215253869935,
+        "p50": [
+          41215000000000,
+          41216000000000
+        ],
+        "p90": [
+          41200000000000,
+          41230000000000
+        ],
+        "score": 1.698407893620413e-05,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 21,
+      "key": "factorial_digits_big {\"n\": 11357052}",
+      "family": "factorial_digits_big",
+      "kind": "calculation",
+      "short": "digits of 11,357,052!",
+      "answer": 75194718,
+      "instinct": {
+        "status": "ok",
+        "estimate": 75195387,
+        "p50": [
+          75195000,
+          75195800
+        ],
+        "p90": [
+          75193500,
+          75197300
+        ],
+        "score": 5.354069856480237e-06,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 75194718,
+        "p50": [
+          75194717,
+          75194719
+        ],
+        "p90": [
+          75194716,
+          75194720
+        ],
+        "score": 3.7236659977679666e-09,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 22,
+      "key": "multiply_big {\"a\": 175491463, \"b\": 1368547974}",
+      "family": "multiply_big",
+      "kind": "calculation",
+      "short": "175,491,463 × 1,368,547,974",
+      "answer": 240168486142945962,
+      "instinct": {
+        "status": "ok",
+        "estimate": 2.4016e+17,
+        "p50": [
+          2.35e+17,
+          2.45e+17
+        ],
+        "p90": [
+          2.2e+17,
+          2.6e+17
+        ],
+        "score": 0.007515418282868609,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 240168486142945962,
+        "p50": [
+          240168000000000000,
+          240169000000000000
+        ],
+        "p90": [
+          240160000000000000,
+          240177000000000000
+        ],
+        "score": 1.8320470839228166e-06,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 23,
+      "key": "days_between_far {\"end\": \"4921-08-13\", \"start\": \"0980-08-26\"}",
+      "family": "days_between_far",
+      "kind": "calculation",
+      "short": "days from 0980-08-26 to 4921-08-13",
+      "answer": 1439407,
+      "instinct": {
+        "status": "ok",
+        "estimate": 1439407,
+        "p50": [
+          1439300,
+          1439520
+        ],
+        "p90": [
+          1439000,
+          1439800
+        ],
+        "score": 2.639976463438387e-05,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 1439407,
+        "p50": [
+          1439400,
+          1439414
+        ],
+        "p90": [
+          1439370,
+          1439450
+        ],
+        "score": 2.0841878506772105e-06,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 24,
+      "key": "partitions_big {\"n\": 1749}",
+      "family": "partitions_big",
+      "kind": "calculation",
+      "short": "partitions of 1,749",
+      "answer": 3169458542208911724615579730356050273697000,
+      "instinct": {
+        "status": "ok",
+        "estimate": 3.2e+42,
+        "p50": [
+          2.5e+42,
+          4e+42
+        ],
+        "p90": [
+          1.5e+42,
+          7e+42
+        ],
+        "score": 0.07972727241947723,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 3.17e+42,
+        "p50": [
+          3.165e+42,
+          3.175e+42
+        ],
+        "p90": [
+          3.1e+42,
+          3.24e+42
+        ],
+        "score": 0.001233046333776997,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 25,
+      "key": "partitions_big {\"n\": 682}",
+      "family": "partitions_big",
+      "kind": "calculation",
+      "short": "partitions of 682",
+      "answer": 25744258930034131533263392,
+      "instinct": {
+        "status": "ok",
+        "estimate": 2.5e+25,
+        "p50": [
+          2.3e+25,
+          2.7e+25
+        ],
+        "p90": [
+          2e+25,
+          3e+25
+        ],
+        "score": 0.030010731811709233,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 2.57e+25,
+        "p50": [
+          2.55e+25,
+          2.6e+25
+        ],
+        "p90": [
+          2.48e+25,
+          2.67e+25
+        ],
+        "score": 0.003762338065848354,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 26,
+      "key": "factorial_digits_big {\"n\": 450563}",
+      "family": "factorial_digits_big",
+      "kind": "calculation",
+      "short": "digits of 450,563!",
+      "answer": 2351700,
+      "instinct": {
+        "status": "ok",
+        "estimate": 2351689,
+        "p50": [
+          2351600,
+          2351780
+        ],
+        "p90": [
+          2351300,
+          2352100
+        ],
+        "score": 1.53931481293057e-05,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 2351700,
+        "p50": [
+          2351699,
+          2351701
+        ],
+        "p90": [
+          2351690,
+          2351710
+        ],
+        "score": 2.551344748624729e-07,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 27,
+      "key": "multiply_big {\"a\": 333810293178, \"b\": 1900590}",
+      "family": "multiply_big",
+      "kind": "calculation",
+      "short": "333,810,293,178 × 1,900,590",
+      "answer": 634436505111175020,
+      "instinct": {
+        "status": "ok",
+        "estimate": 634436500000000000,
+        "p50": [
+          630000000000000000,
+          638000000000000000
+        ],
+        "p90": [
+          600000000000000000,
+          670000000000000000
+        ],
+        "score": 0.0034688091505466903,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 634436505111175020,
+        "p50": [
+          634436505111175020,
+          634436505111175020
+        ],
+        "p90": [
+          634000000000000000,
+          635000000000000000
+        ],
+        "score": 3.152088910937323e-05,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 28,
+      "key": "days_between_far {\"end\": \"2077-05-08\", \"start\": \"1703-07-25\"}",
+      "family": "days_between_far",
+      "kind": "calculation",
+      "short": "days from 1703-07-25 to 2077-05-08",
+      "answer": 136524,
+      "instinct": {
+        "status": "ok",
+        "estimate": 136525,
+        "p50": [
+          136500,
+          136550
+        ],
+        "p90": [
+          136400,
+          136650
+        ],
+        "score": 7.471106005827011e-05,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 136524,
+        "p50": [
+          136520,
+          136528
+        ],
+        "p90": [
+          136500,
+          136550
+        ],
+        "score": 1.3184344895122991e-05,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 29,
+      "key": "days_between_far {\"end\": \"2029-11-07\", \"start\": \"1006-01-21\"}",
+      "family": "days_between_far",
+      "kind": "calculation",
+      "short": "days from 1006-01-21 to 2029-11-07",
+      "answer": 373934,
+      "instinct": {
+        "status": "ok",
+        "estimate": 373934,
+        "p50": [
+          373920,
+          373950
+        ],
+        "p90": [
+          373850,
+          374020
+        ],
+        "score": 1.7115228435180542e-05,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 373934,
+        "p50": [
+          373920,
+          373950
+        ],
+        "p90": [
+          373850,
+          374020
+        ],
+        "score": 1.7115228435180542e-05,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 30,
+      "key": "multiply_big {\"a\": 3655489107, \"b\": 2463411911}",
+      "family": "multiply_big",
+      "kind": "calculation",
+      "short": "3,655,489,107 × 2,463,411,911",
+      "answer": 9004975406714553477,
+      "instinct": {
+        "status": "ok",
+        "estimate": 9.005e+18,
+        "p50": [
+          8.95e+18,
+          9.06e+18
+        ],
+        "p90": [
+          8.5e+18,
+          9.5e+18
+        ],
+        "score": 0.003446617693765433,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 9004975406714553477,
+        "p50": [
+          9004975000000000000,
+          9004976000000000000
+        ],
+        "p90": [
+          9004900000000000000,
+          9005100000000000000
+        ],
+        "score": 4.5530263946602646e-07,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 31,
+      "key": "partitions_big {\"n\": 3947}",
+      "family": "partitions_big",
+      "kind": "calculation",
+      "short": "partitions of 3,947",
+      "answer": 353027000364262881227812119247460821586403326543022806746808032364,
+      "instinct": {
+        "status": "ok",
+        "estimate": 2.2e+65,
+        "p50": [
+          1.5e+65,
+          3.2e+65
+        ],
+        "p90": [
+          5e+64,
+          7e+65
+        ],
+        "score": 0.2624225345494199,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 3.53e+65,
+        "p50": [
+          3.52e+65,
+          3.54e+65
+        ],
+        "p90": [
+          3.48e+65,
+          3.58e+65
+        ],
+        "score": 0.0011484809578786326,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 32,
+      "key": "factorial_digits_big {\"n\": 18848744}",
+      "family": "factorial_digits_big",
+      "kind": "calculation",
+      "short": "digits of 18,848,744!",
+      "answer": 128944035,
+      "instinct": {
+        "status": "ok",
+        "estimate": 128944036,
+        "p50": [
+          128944020,
+          128944050
+        ],
+        "p90": [
+          128943950,
+          128944120
+        ],
+        "score": 5.118499572631663e-08,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 128944035,
+        "p50": [
+          128944034,
+          128944036
+        ],
+        "p90": [
+          128944020,
+          128944050
+        ],
+        "score": 6.204241884688599e-09,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 33,
+      "key": "factorial_digits_big {\"n\": 278273}",
+      "family": "factorial_digits_big",
+      "kind": "calculation",
+      "short": "digits of 278,273!",
+      "answer": 1394200,
+      "instinct": {
+        "status": "ok",
+        "estimate": 1394200,
+        "p50": [
+          1394150,
+          1394250
+        ],
+        "p90": [
+          1394000,
+          1394400
+        ],
+        "score": 1.2910620534043461e-05,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 1394200,
+        "p50": [
+          1394199,
+          1394200
+        ],
+        "p90": [
+          1394190,
+          1394210
+        ],
+        "score": 3.5862837265199233e-07,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 34,
+      "key": "days_between_far {\"end\": \"3449-08-04\", \"start\": \"0158-11-05\"}",
+      "family": "days_between_far",
+      "kind": "calculation",
+      "short": "days from 0158-11-05 to 3449-08-04",
+      "answer": 1201920,
+      "instinct": {
+        "status": "ok",
+        "estimate": 1201920,
+        "p50": [
+          1201905,
+          1201935
+        ],
+        "p90": [
+          1201800,
+          1202050
+        ],
+        "score": 6.655994211186568e-06,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 1201920,
+        "p50": [
+          1201919,
+          1201921
+        ],
+        "p90": [
+          1201900,
+          1201940
+        ],
+        "score": 8.320014377360964e-07,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 35,
+      "key": "partitions_big {\"n\": 2217}",
+      "family": "partitions_big",
+      "kind": "calculation",
+      "short": "partitions of 2,217",
+      "answer": 1830826552374771058174587388568897962322872702465,
+      "instinct": {
+        "status": "ok",
+        "estimate": 1.9e+48,
+        "p50": [
+          1.6e+48,
+          2.2e+48
+        ],
+        "p90": [
+          1e+48,
+          3.5e+48
+        ],
+        "score": 0.06431790314695633,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 1.83e+48,
+        "p50": [
+          1.82e+48,
+          1.84e+48
+        ],
+        "p90": [
+          1.8e+48,
+          1.86e+48
+        ],
+        "score": 0.0018390167082961283,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 36,
+      "key": "multiply_big {\"a\": 298168204490, \"b\": 27147301085}",
+      "family": "multiply_big",
+      "kind": "calculation",
+      "short": "298,168,204,490 × 27,147,301,085",
+      "answer": 8094462021263878871650,
+      "instinct": {
+        "status": "ok",
+        "estimate": 8.0945e+21,
+        "p50": [
+          8.09e+21,
+          8.1e+21
+        ],
+        "p90": [
+          8e+21,
+          8.2e+21
+        ],
+        "score": 0.000618323698552814,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 8.0944620212639e+21,
+        "p50": [
+          8.09446e+21,
+          8.09447e+21
+        ],
+        "p90": [
+          8.0944e+21,
+          8.0945e+21
+        ],
+        "score": 3.7062408779320323e-07,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 37,
+      "key": "factorial_digits_big {\"n\": 5063616}",
+      "family": "factorial_digits_big",
+      "kind": "calculation",
+      "short": "digits of 5,063,616!",
+      "answer": 31749719,
+      "instinct": {
+        "status": "ok",
+        "estimate": 31749793,
+        "p50": [
+          31749770,
+          31749815
+        ],
+        "p90": [
+          31749700,
+          31749880
+        ],
+        "score": 1.3637899138529974e-06,
+        "hits": {
+          "p50": false,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 31749719,
+        "p50": [
+          31749718,
+          31749720
+        ],
+        "p90": [
+          31749712,
+          31749725
+        ],
+        "score": 1.4488316679717173e-08,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 38,
+      "key": "days_between_far {\"end\": \"2320-07-21\", \"start\": \"1834-01-10\"}",
+      "family": "days_between_far",
+      "kind": "calculation",
+      "short": "days from 1834-01-10 to 2320-07-21",
+      "answer": 177700,
+      "instinct": {
+        "status": "ok",
+        "estimate": 177700,
+        "p50": [
+          177650,
+          177750
+        ],
+        "p90": [
+          177450,
+          177950
+        ],
+        "score": 0.00011254864554157253,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 177701,
+        "p50": [
+          177700,
+          177702
+        ],
+        "p90": [
+          177690,
+          177712
+        ],
+        "score": 4.727018059753618e-06,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 39,
+      "key": "partitions_big {\"n\": 1100}",
+      "family": "partitions_big",
+      "kind": "calculation",
+      "short": "partitions of 1,100",
+      "answer": 1147240591519695580043346988281283,
+      "instinct": {
+        "status": "ok",
+        "estimate": 1.16e+33,
+        "p50": [
+          1.12e+33,
+          1.2e+33
+        ],
+        "p90": [
+          1e+33,
+          1.3e+33
+        ],
+        "score": 0.014358658789478512,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 1.147e+33,
+        "p50": [
+          1.1455e+33,
+          1.149e+33
+        ],
+        "p90": [
+          1.142e+33,
+          1.153e+33
+        ],
+        "score": 0.0005387472393579174,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    },
+    {
+      "q": 40,
+      "key": "multiply_big {\"a\": 187795187996, \"b\": 100691899}",
+      "family": "multiply_big",
+      "kind": "calculation",
+      "short": "187,795,187,996 × 100,691,899",
+      "answer": 18909454102379244404,
+      "instinct": {
+        "status": "ok",
+        "estimate": 1.8909454e+19,
+        "p50": [
+          1.89e+19,
+          1.892e+19
+        ],
+        "p90": [
+          1.885e+19,
+          1.897e+19
+        ],
+        "score": 0.00023268263970877,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      },
+      "worked": {
+        "status": "ok",
+        "estimate": 18909454102379244404,
+        "p50": [
+          1.8905e+19,
+          1.8914e+19
+        ],
+        "p90": [
+          1.885e+19,
+          1.9e+19
+        ],
+        "score": 0.0002061164304913632,
+        "hits": {
+          "p50": true,
+          "p90": true
+        }
+      }
+    }
+  ],
+  "paired": {
+    "n": 40,
+    "closer": {
+      "instinct": 1,
+      "worked": 33,
+      "tie": 6
+    },
+    "score_instinct": 0.01889587939248097,
+    "score_worked": 0.00027715766703027443,
+    "gain_ci": [
+      0.008429207969589212,
+      0.031109864137376375
+    ],
+    "worked_better": 39
+  },
+  "concentration": {
+    "instinct": {
+      "top1_share": 0.3471954507894494,
+      "top5_share": 0.7336052457976716,
+      "mean_without_top": 0.01265160618332869,
+      "misses": [
+        {
+          "q": 2,
+          "short": "days from 0456-12-28 to 1030-03-20",
+          "answer": 209365,
+          "estimate": 209730,
+          "p90": [
+            209600,
+            209850
+          ],
+          "factor": 1.00112243630771,
+          "width": 1.001192742401038,
+          "score": 0.001489055586288579,
+          "share": 0.001970079766281085,
+          "side": "below"
+        }
+      ]
+    },
+    "worked": {
+      "top1_share": 0.3393680306737994,
+      "top5_share": 0.7736645218850456,
+      "mean_without_top": 0.0001877940670605801,
+      "misses": []
+    }
+  },
+  "served_models": [
+    "anthropic/claude-haiku-5.5 via Claude Platform on AWS"
+  ],
+  "tokens": {
+    "prompt_tokens": 19320,
+    "completion_tokens": 197018,
+    "reasoning_tokens": 166890
+  },
+  "cost": 0.100441,
+  "answers_changed_after_run": false,
+  "scored_with": {
+    "calibench": "2.2.0",
+    "scoring": "log-wis-1"
+  }
+}
