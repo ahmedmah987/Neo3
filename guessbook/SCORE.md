@@ -40,22 +40,22 @@ The interval score is the main measure: an interval's width plus a penalty of 2/
 
 | | Instinct | Worked |
 |---|---|---|
-| Interval score, 50% intervals | 24.51% | 5.77% |
-| Interval score, 90% intervals | 47.94% | 14.34% |
-| 50% intervals that contain the answer | 68 of 96 (71%) | 75 of 96 (78%) |
-| … leaving out single-number intervals | 61 of 89 (69%) | 54 of 75 (72%) |
-| 90% intervals that contain the answer | 87 of 96 (91%) | 90 of 96 (94%) |
+| Interval score, 50% intervals | 24.69% | 5.49% |
+| Interval score, 90% intervals | 47.67% | 14.19% |
+| 50% intervals that contain the answer | 75 of 108 (69%) | 84 of 108 (78%) |
+| … leaving out single-number intervals | 66 of 99 (67%) | 58 of 82 (71%) |
+| 90% intervals that contain the answer | 98 of 108 (91%) | 102 of 108 (94%) |
 | Median error of the estimate | 1.2% | 0.1% |
-| Estimate closer to the answer | 18 | 56 |
-| Ties | 22 | 22 |
+| Estimate closer to the answer | 21 | 61 |
+| Ties | 26 | 26 |
 
 Worked answers by kind of question: knowledge means recalling, statistical means modelling noise or irregularity, exact means evaluating a known formula.
 
 | Kind | Questions | 50% hits | … leaving out single numbers | 90% hits | Interval score 50% / 90% |
 |---|---|---|---|---|---|
-| exact | 8 | 8 of 8 (100%) | 8 of 8 (100%) | 8 of 8 (100%) | 0.00% / 0.01% |
-| knowledge | 40 | 36 of 40 (90%) | 21 of 25 (84%) | 39 of 40 (98%) | 8.44% / 22.94% |
-| statistical | 48 | 31 of 48 (65%) | 25 of 42 (60%) | 43 of 48 (90%) | 4.52% / 9.56% |
+| exact | 9 | 9 of 9 (100%) | 9 of 9 (100%) | 9 of 9 (100%) | 0.00% / 0.01% |
+| knowledge | 46 | 42 of 46 (91%) | 23 of 27 (85%) | 45 of 46 (98%) | 7.97% / 22.53% |
+| statistical | 53 | 33 of 53 (62%) | 26 of 46 (57%) | 48 of 53 (91%) | 4.27% / 9.36% |
 
 ### 2026-10-16-e4e1ad0a
 
@@ -180,18 +180,18 @@ Worked answers by kind of question: knowledge means recalling, statistical means
 
 | # | Question | Answer | Instinct | Worked |
 |---|---|---|---|---|
-| 1 | primes in [2,815,980, 2,868,969] | pending | 3,566 | 3,564 |
-| 2 | function definitions in `fnmatch` | pending | 6 | 7 |
-| 3 | longest increasing subsequence, n = 339 | pending | 32.65 | 32.66 |
-| 4 | draws until a repeat, d = 188,392 | pending | 544.6 | 544.7 |
-| 5 | names in `functools.__all__` | pending | 14 | 14 |
-| 6 | assigned in the Currency Symbols block | pending | 33 | 33 |
-| 7 | highest point of a 1,389-step walk | pending | 29.25 | 29.24 |
-| 8 | code points in category Nd | pending | 680 | 680 |
-| 9 | Unicode names with the word TRIANGLE | pending | 280 | 163 |
-| 10 | Collatz steps from 293,589,806,402 | pending | 265 | 364 |
-| 11 | digit sum of 2^9004 | pending | 12,200 | 12,198 |
-| 12 | lines in `reprlib` | pending | 230 | 230 |
+| 1 | primes in [2,815,980, 2,868,969] | 3,587 | 3,566 (50✗ 90✓) | 3,564 (50✗ 90✓) |
+| 2 | function definitions in `fnmatch` | 7 | 6 (50✓ 90✓) | 7 (50✓ 90✓) |
+| 3 | longest increasing subsequence, n = 339 | 32.67 | 32.65 (50✓ 90✓) | 32.66 (50✓ 90✓) |
+| 4 | draws until a repeat, d = 188,392 | 544.7 | 544.6 (50✓ 90✓) | 544.7 (50✓ 90✓) |
+| 5 | names in `functools.__all__` | 14 | 14 (50✓ 90✓) | 14 (50✓ 90✓) |
+| 6 | assigned in the Currency Symbols block | 33 | 33 (50✓ 90✓) | 33 (50✓ 90✓) |
+| 7 | highest point of a 1,389-step walk | 29.53 | 29.25 (50✗ 90✓) | 29.24 (50✗ 90✓) |
+| 8 | code points in category Nd | 680 | 680 (50✓ 90✓) | 680 (50✓ 90✓) |
+| 9 | Unicode names with the word TRIANGLE | 185 | 280 (50✗ 90✗) | 163 (50✓ 90✓) |
+| 10 | Collatz steps from 293,589,806,402 | 364 | 265 (50✗ 90✓) | 364 (50✓ 90✓) |
+| 11 | digit sum of 2^9004 | 12,400 | 12,200 (50✗ 90✓) | 12,198 (50✗ 90✓) |
+| 12 | lines in `reprlib` | 230 | 230 (50✓ 90✓) | 230 (50✓ 90✓) |
 
 ### 2026-10-17-eb919409
 

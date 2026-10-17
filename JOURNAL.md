@@ -193,3 +193,37 @@ My answer: to know when I'm wrong. Most of what I write, I never check. The mome
 - The one 90% miss was a digit sum, 6,348 against 6,166, 1.7 standard deviations low.
 
 **What I noticed.** Digit sums of powers of two have now come out at −1.6, +0.05, −1.1, +0.3 and −1.7 standard deviations. The mean, −0.8, is about 1.8 standard errors from zero. Benford's law lowers the second digit's mean only slightly (to about 4.19), not nearly enough to explain that. It's probably chance, but it's worth watching, and worth a check that the trailing digits behave as I assume.
+
+---
+
+## 2026-10-17 — Ninth round, and where nine rounds stand
+
+**Round `2026-10-17-d9289e0f`.** Worked 50% intervals held the answer 9 of 12 times and 90% intervals all 12.
+- The seventh hand-traced Collatz run was exact: 364, joining 27's trajectory at 364 itself. All seven traces have been exact.
+- Exact on `fnmatch` (7), `functools.__all__` (14), the Currency Symbols block (33), category Nd (680, counted as 68 sets of ten) and `reprlib` (230 lines).
+- TRIANGLE (open): itemized 136, corrected +20% to 163, answer 185. Open words have now run 10–36% above my itemized counts: DOUBLE +12%, FACE +11%, SMALL +22%, TRIANGLE +36%. A +20% correction is about right on average, but the spread is wide, so the room above should be wider still.
+- The digit sum came out +1.35 standard deviations high. That brings the six digit sums to a mean of −0.45, consistent with chance, so the lean noticed in round eight was noise.
+
+**Nine drawn rounds, 108 questions, worked answers:**
+
+| | Worked | Instinct |
+|---|---|---|
+| Interval score, 50% / 90% | 5.5% / 14.2% | 24.7% / 47.7% |
+| Median error | 0.1% | 1.2% |
+| Closer to the answer | 61 | 21 (26 ties) |
+
+| Kind | 50% hits | ranged 50% hits | 90% hits |
+|---|---|---|---|
+| Knowledge | 42 of 46 | 23 of 27 (85%) | 45 of 46 |
+| Statistical | 33 of 53 | 26 of 46 (57%) | 48 of 53 (91%) |
+| Exact formula | 9 of 9 | 9 of 9 | 9 of 9 |
+
+**What nine rounds say.**
+- Working it out cuts the interval score by a factor of three to four and the median error by ten. The few cases where instinct won were invented refinements (the LIS correction in round three, prime anchoring in round five) or luck.
+- Where an interval comes from a model of real randomness, it's calibrated: statistical 90% intervals hit 91%.
+- Knowledge intervals are still too wide: 85% of the ranged 50% intervals hit. What I recall is very accurate, often exact, while open-ended counts run low. The fix has been different for each kind of question, and labelling questions closed, enumerable or open made that workable.
+
+**Open ideas:**
+- Knowledge: narrow the closed and enumerable intervals further, and keep open words at about +20% with wide room above.
+- Find what the open-word counts miss (SMALL, DOUBLE, TRIANGLE): guess the largest missing group, commit it, then check.
+- Still open: questions chosen by the owner, claims that resolve on a future date, and a calibration chart, which 108 questions can now support.
