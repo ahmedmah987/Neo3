@@ -69,7 +69,7 @@ The worked prompt allows written working rather than demanding it, because some 
 
 ## Scoring
 
-Let *y* be the true answer, *m* the estimate, and [*l*, *u*] a central (1 − α) interval. Every value *v* is transformed to *g*(*v*) = log(*v* + *c*) before scoring, with *c* = 1 for the nine families whose answer is a count (which can be 0) and *c* = 0 for the four with continuous answers. A transformed argument below 0.001 is raised to 0.001.
+Let *y* be the true answer, *m* the estimate, and [*l*, *u*] a central (1 − α) interval. Every value *v* is transformed to *g*(*v*) = log(*v* + *c*) before scoring, with *c* = 1 for the eighteen families whose answer is a count (which can be 0) and *c* = 0 for the four with continuous answers. A transformed argument below 0.001 is raised to 0.001.
 
 **Interval score on a log scale** (Gneiting and Raftery, 2007, applied to transformed values):
 

@@ -12,7 +12,7 @@ A model is asked numeric questions it can't look up. For each one it gives an es
 - **Any model.** Claude, OpenRouter's hundreds of models, any OpenAI-compatible API, local models, any command-line program, replies collected by your own harness, or a chat window.
 - **No dependencies** beyond Python 3.11 or later. The Claude adapter needs the official `anthropic` SDK.
 
-The full method, its statistics and its known weaknesses are in [METHODOLOGY.md](METHODOLOGY.md); what the benchmark contains, how it was made and what it should and shouldn't be used for are in [DATASHEET.md](DATASHEET.md).
+The full method, its statistics and its known weaknesses are in [METHODOLOGY.md](METHODOLOGY.md); what the benchmark contains, how it was made and what it should and shouldn't be used for are in [DATASHEET.md](DATASHEET.md). The [technical report](REPORT.md) presents the design and the results on three models in the form of a paper.
 
 ## Quick start
 
